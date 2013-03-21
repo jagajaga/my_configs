@@ -352,14 +352,10 @@ alias logh="grc head"
 # запуск программ 
 # 
 # везде 
-alias -s {avi,mpeg,mpg,mov,m2v,flv}=mplayer
-alias -s {zip,fb2}=fbless
 alias -s txt=$PAGER
 alias -s py=python
-alias -s {ogg,mp3,wav,wma}=mplayer
 
 # в иксах 
-alias -s {xls,doc,,rtf,ppt,odt,sxw}=soffice
 alias -s {png,gif,jpg,jpeg}=feh
 alias -s {pdf,djvu}=evince
 
@@ -389,21 +385,9 @@ alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
 
-#конвертим вывод в utf8, а то достало 
-alias -g KU="| iconv -c -f koi8r -t utf8"
-alias -g CU="| iconv -c -f cp1251 -t utf8"
 
-#ну и обратно тоже 
-alias -g UK="| iconv -c -f utf8 -t koi8r"
-alias -g UC="| iconv -c -f utf8 -t cp1251"
-
-# 
-# куча алиасов 
 # 
 # sudo 
-alias spacman="sudo pacman"
-alias pstop="sudo pppoe-stop"
-alias pstart="sudo pppoe-start"
 alias halt="sudo halt"
 alias reboot="sudo reboot"
 alias gparted="sudo gparted"
@@ -415,23 +399,11 @@ alias screen="screen -DR"
 alias ncmpc="ncmpcpp"
 
 # lastfm 
-alias shell-fm="shell-fm lastfm://user/muhas"
+alias shell-fm="shell-fm lastfm://user/tiss93"
 
 # список удаленных файлов с NTFS, FAT, UFS1/2, FFS, Ext2 и Ext3 
 # пакет sleuthkit, утилита icat для восстановления 
 alias fls="fls -rd"
-
-# 
-# хитрожопые алиасы 
-# 
-# пишем диски 
-alias iso2cd="cdrecord -s dev=`cdrecord --devices 2>&1 | grep "\(rw\|dev=\)" | awk {'print $2'} | cut -f'2' -d'=' | head -n1` gracetime=1 driveropts=burnfree -dao -overburn -v"
-
-# nrg2iso 
-alias nrg2iso="dd bs=1k if=$1 of=$2 skip=300"
-
-# ls -l с цифровым видом прав 
-alias lls="ls -l | sed -e 's/--x/1/g' -e 's/-w-/2/g' -e 's/-wx/3/g' -e 's/r--/4/g'  -e 's/r-x/5/g' -e 's/rw-/6/g' -e 's/rwx/7/g' -e 's/---/0/g'"
 
 # показываев дерево директорий 
 alias dirf='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
@@ -442,16 +414,10 @@ alias psgrep='ps aux | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
 # удаляем пустые строки и комментарии 
 alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
 
-# создаем пароль из 6символов 
-alias mkpass="head -c6 /dev/urandom | xxd -ps"
 
 # 
 # команды при запуске zsh 
 # 
-# фортунки с лора, без них скучно =) 
-autoload -U compinit promptinit
-compinit
-promptinit;
 
 if [[ $EUID == 0 ]] 
 then
