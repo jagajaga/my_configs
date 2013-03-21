@@ -1,0 +1,4 @@
+map <F4> iinfo<SPACE>registers<CR><ESC>
+map s :set<SPACE>syntax=asm<CR>
+map <F2> :set<SPACE>winsplit=top_big<CR>
+map <F3> :set<SPACE>winsplit=bottom_big<CR>
