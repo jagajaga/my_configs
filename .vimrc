@@ -22,7 +22,8 @@ command W w
 command Q q
 
 
-autocmd FileType cpp set makeprg=g++\ -Wall\ -std=c++0x\ -o\ %<\ %
+autocmd FileType cpp set makeprg=g++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
+autocmd FileType c set makeprg=gcc\ -Wall\ -g\ -o\ %<\ %
 autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ gcc\ -m32\ -g\ -o\ %<\ %<.o 
 
 autocmd FileType asm set syntax=nasm
