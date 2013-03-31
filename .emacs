@@ -51,3 +51,16 @@
 ;; * This enables even more coding tools such as intellisense mode,
 ;;   decoration mode, and stickyfunc mode (plus regular code helpers)
 (semantic-load-enable-gaudy-code-helpers)
+(setq-default c-basic-offset 4)
+(setq c-default-style "linux"
+	c-basic-offset 4)
+(defun indent-buffer ()
+ "Indents an entire buffer using the default intenting scheme."
+ (interactive)
+ (point-to-register 'o)
+ (delete-trailing-whitespace)
+ (indent-region (point-min) (point-max) nil)
+ (untabify (point-min) (point-max))
+ (jump-to-register 'o))
+
+(global-set-key (kbd "C-S-d") 'indent-buffer)
