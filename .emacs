@@ -14,7 +14,7 @@
 (require 'linum-relative)
 (global-linum-mode t)
 (require 'sr-speedbar)
-(sr-speedbar-open)
+;; (sr-speedbar-open)
 (add-hook 'c-mode-common-hook (lambda ()
   (cppcm-reload-all)
   ; fixed rinari's bug.
@@ -36,3 +36,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(add-to-list 'load-path "~/.emacs.d")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+;; Load CEDET
+(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+(global-cedet-m3-minor-mode 1)
+;; Enable EDE (Project Management) features
+(global-ede-mode 1)
+
+;; * This enables even more coding tools such as intellisense mode,
+;;   decoration mode, and stickyfunc mode (plus regular code helpers)
+(semantic-load-enable-gaudy-code-helpers)
