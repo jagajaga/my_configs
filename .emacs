@@ -71,3 +71,5 @@
 (put 'upcase-region 'disabled nil)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(setq scroll-step            1
+      scroll-conservatively  10000)
