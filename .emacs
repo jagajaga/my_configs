@@ -68,6 +68,7 @@
 
 (global-set-key (kbd "C-S-d") 'indent-buffer)
 (global-set-key (kbd "<f8>") 'compile)
+(global-set-key (kbd "<f9>") 'compile)
 (put 'upcase-region 'disabled nil)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
