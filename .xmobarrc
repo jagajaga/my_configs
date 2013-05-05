@@ -14,7 +14,6 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
                                   "--low"    , "lightblue"] 36000
  
 
-, Run CpuFreq ["-t", " ", "-L", "0", "-H", "2", "-l", "lightblue", "-n","white", "-h", "red"] 50
 , Run MultiCpu ["-L"       , "4"          ,
                                     "-H"       , "50"         , 
                                     "--normal" , "lightgreen" , 
@@ -29,6 +28,7 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
                                    "-t"       , "Batt: <left>%"] 10
 
 , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
+, Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
 
  , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
 ,  Run Network "wlan0" ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
@@ -43,6 +43,6 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
 
 , alignSep = "}{"
 
-, template = "%StdinReader% }{ %multicpu% %cpufreq% %coretemp% %memory% %wlan0% %battery% Vol: %myVolume% Weather: %ULLI% %date%"
+, template = "%StdinReader% }{ %multicpu% %myGov% %coretemp% %memory% %wlan0% %battery% Vol: %myVolume% Weather: %ULLI% %date%"
 
 }

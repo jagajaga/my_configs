@@ -16,6 +16,7 @@ import Graphics.X11.ExtraTypes.XF86
 
 -- actions
 import XMonad.Actions.GridSelect
+import XMonad.Actions.SpawnOn
 
 -- hooks
 import XMonad.Hooks.DynamicLog
@@ -60,8 +61,8 @@ manageHook' = composeAll [ isFullscreen             --> doFullFloat
                          , className =? "mplayer2"  --> doFloat
                          , className =? "Gimp"      --> doFloat
                          , className =? "Vlc"       --> doFloat
-			 , insertPosition Below Newer
-			 , transience'
+						 , insertPosition Below Newer
+						 , transience'
                          ]
 
 
@@ -125,6 +126,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) []) 
     , ((modMask,               xK_r     ), safeSpawn "dmenu_run" []) 
+    , ((modMask,               xK_w     ), safeSpawn "chromium" []) 
     , ((modMask .|. shiftMask, xK_p     ), safeSpawn "gmrun" [])
     , ((modMask, xK_c     ), kill)
 
@@ -142,6 +144,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioPlay             ), safeSpawn "mocp" ["-G"])
     , ((0, xF86XK_AudioNext             ), safeSpawn "mocp" ["-f"])
     , ((0, xF86XK_AudioPrev             ), safeSpawn "mocp" ["-r"])
+    , ((0, xF86XK_Launch6             ), safeSpawn "autocpu" [])
+    , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
 
     -- grid
     , ((modMask,               xK_g     ), goToSelected myGSConfig)
