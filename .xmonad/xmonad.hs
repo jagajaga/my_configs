@@ -8,33 +8,33 @@
 -- Imports --
 -- stuff
 import XMonad
-import qualified XMonad.StackSet as W
-import qualified Data.Map as M
-import System.Exit
-import XMonad.Util.Run (safeSpawn)
-import Graphics.X11.ExtraTypes.XF86
+  import qualified XMonad.StackSet as W
+  import qualified Data.Map as M
+  import System.Exit
+  import XMonad.Util.Run (safeSpawn)
+  import Graphics.X11.ExtraTypes.XF86
 
--- actions
-import XMonad.Actions.GridSelect
-import XMonad.Actions.SpawnOn
+  -- actions
+  import XMonad.Actions.GridSelect
+  import XMonad.Actions.SpawnOn
 
--- hooks
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.UrgencyHook
-import XMonad.Hooks.InsertPosition
+  -- hooks
+  import XMonad.Hooks.DynamicLog
+  import XMonad.Hooks.ManageHelpers
+  import XMonad.Hooks.UrgencyHook
+  import XMonad.Hooks.InsertPosition
 
--- layouts
-import XMonad.Layout.NoBorders
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.Renamed
-import XMonad.Layout.Tabbed
+  -- layouts
+  import XMonad.Layout.NoBorders
+  import XMonad.Layout.ResizableTile
+  import XMonad.Layout.Renamed
+  import XMonad.Layout.Tabbed
 
--------------------------------------------------------------------------------
--- Main --
-main :: IO ()
-main = xmonad =<< statusBar cmd pp kb conf
-  where 
+  -------------------------------------------------------------------------------
+  -- Main --
+  main :: IO ()
+          main = xmonad =<< statusBar cmd pp kb conf
+  where
     uhook = withUrgencyHookC NoUrgencyHook urgentConfig
     cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
     pp = customPP
@@ -72,7 +72,7 @@ manageHook' = composeAll [ isFullscreen             --> doFullFloat
 customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"
                      , ppHidden = xmobarColor "#C98F0A" ""
                      , ppHiddenNoWindows = xmobarColor "#C9A34E" ""
-                     , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]" 
+                     , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]"
                      , ppLayout = xmobarColor "#C9A34E" ""
                      , ppTitle =  xmobarColor "#C9A34E" "" . shorten 80
                      , ppSep = xmobarColor "#429942" "" " | "
@@ -106,7 +106,7 @@ layoutHook' = tile ||| mtile ||| tab ||| full
     tile = renamed [Replace "[]="] $ smartBorders rt
     mtile = renamed [Replace "M[]="] $ smartBorders $ Mirror rt
     tab = renamed [Replace "T"] $ noBorders $ tabbed shrinkText tabTheme1
-    full = renamed [Replace "[]"] $ noBorders Full 
+    full = renamed [Replace "[]"] $ noBorders Full
 
 -------------------------------------------------------------------------------
 -- Terminal --
@@ -124,9 +124,9 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
-    [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) []) 
-    , ((modMask,               xK_r     ), safeSpawn "dmenu_run" []) 
-    , ((modMask,               xK_w     ), safeSpawn "chromium" []) 
+    [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
+    , ((modMask,               xK_r     ), safeSpawn "dmenu_run" [])
+    , ((modMask,               xK_w     ), safeSpawn "chromium" [])
     , ((modMask .|. shiftMask, xK_p     ), safeSpawn "gmrun" [])
     , ((modMask, xK_c     ), kill)
 
@@ -199,4 +199,3 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -------------------------------------------------------------------------------
-

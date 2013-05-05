@@ -1,43 +1,28 @@
 Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
-
-, bgColor = "black"
-
-, fgColor = "grey"
-
-, position = TopW L 95
-
-, commands = [ Run Weather "ULLI" 
-                                  ["-t"      , "SPb <tempC>°C"         , 
-                                  "-L"       , "8"                     , 
-                                  "-H"       , "20"                    , 
-                                  "--high"   , "orange"                , 
-                                  "--low"    , "lightblue"] 36000
- 
-
-, Run MultiCpu ["-L"       , "4"          ,
-                                    "-H"       , "50"         , 
-                                    "--normal" , "lightgreen" , 
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 95
+       , commands = [ Run Weather "ULLI"
+                      ["-t"      , "SPb <tempC>°C"         ,
+                       "-L"       , "8"                     ,
+                       "-H"       , "20"                    ,
+                       "--high"   , "orange"                ,
+                       "--low"    , "lightblue"] 36000
+                    , Run MultiCpu ["-L"       , "4"          ,
+                                    "-H"       , "50"         ,
+                                    "--normal" , "lightgreen" ,
                                     "--high"   , "orange"] 10
-
-, Run CoreTemp ["-t", "Temp: <core0>C"] 10
-
+                    , Run CoreTemp ["-t", "Temp: <core0>C"] 10
                     , Run Battery ["-t","<left>% / <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 10
-, Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
-, Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
-
- , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-,  Run Network "wlan0" ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
-, Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
+                    , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
+                    , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    ,  Run Network "wlan0" ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
-
-, Run StdinReader
-
-]
-
-, sepChar = "%"
-
-, alignSep = "}{"
-
-, template = "%StdinReader% }{ %multicpu% %myGov% %coretemp% %memory% %wlan0% Battery: %battery% Vol: %myVolume% Weather: %ULLI% %date%"
-
-}
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %multicpu% %myGov% %coretemp% %memory% %wlan0% Battery: %battery% Vol: %myVolume% Weather: %ULLI% %date%"
+       }
