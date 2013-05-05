@@ -28,6 +28,7 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Renamed
+import XMonad.Layout.Minimize
 import XMonad.Layout.Tabbed
 
 -------------------------------------------------------------------------------
@@ -60,7 +61,8 @@ manageHook' = composeAll [ isFullscreen             --> doFullFloat
                          , className =? "MPlayer"   --> doFloat
                          , className =? "mplayer2"  --> doFloat
                          , className =? "Gimp"      --> doFloat
-                         , className =? "Vlc"       --> doFloat
+		                 , className =? "Skype"     --> doShift "IM"
+                         , className =? "Vlc"       --> doFloat
 						 , insertPosition Below Newer
 						 , transience'
                          ]
@@ -100,7 +102,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
 workspaces' = ["All", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
 
 -- layouts
-layoutHook' = tile ||| mtile ||| tab ||| full
+layoutHook' = minimize (tile ||| mtile ||| tab ||| full)
   where
     rt = ResizableTall 1 (2/100) (1/2) []
     tile = renamed [Replace "[]="] $ smartBorders rt
@@ -156,14 +158,14 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
 
-    -- refresh
-    , ((modMask,               xK_n     ), refresh)
 
     -- focus
     , ((modMask,               xK_Tab   ), windows W.focusDown)
     , ((modMask,               xK_j     ), windows W.focusDown)
     , ((modMask,               xK_k     ), windows W.focusUp)
     , ((modMask,               xK_m     ), windows W.focusMaster)
+	, ((modMask,               xK_n     ), withFocused minimizeWindow)
+    , ((modMask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin)
 
     -- swapping
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
