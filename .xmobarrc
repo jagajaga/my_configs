@@ -3,11 +3,11 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
        , fgColor = "grey"
        , position = TopW L 95
        , commands = [ Run Weather "ULLI"["-t"      , "SPB <tempC>°C"         ,
-										 "-L"       , "3"                     ,
-										 "-H"       , "20"                    ,
-										 "--high"   , "orange"                ,
-										 "--normal" , "lightgreen" ,
-										 "--low"    , "lightblue"] 36000
+					 "-L"       , "3"                     ,
+					 "-H"       , "20"                    ,
+					 "--high"   , "orange"                ,
+					 "--normal" , "lightgreen" ,
+					 "--low"    , "lightblue"] 36000
                     , Run MultiCpu ["-L"       , "4"          ,
                                     "-H"       , "65"         ,
                                     "--normal" , "lightgreen" ,
@@ -16,28 +16,28 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
                                     "-H"       , "57"         ,
                                     "--normal" , "lightgreen" ,
                                     "--high"   , "red",
-									"--low"    , "lightblue",
-									"-t", "<core0>°C"] 10
-                    , Run Battery ["-t","<left>% ⌛ <fc=lightgreen><timeleft></fc>",
-									"-L","20",
-									"-H","90",
-									"-h","green",
+				    "--low"    , "lightblue",
+				    "-t", "<core0>°C"] 10
+                    , Run Battery [ "-t","<left>% ⌛ <fc=lightgreen><timeleft></fc>",
+				    "-L","20",
+				    "-H","90",
+				    "-h","green",
                                     "-n", "lightgreen",
-									"-l","red"] 10
+				    "-l","red"] 10
                     , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
                     , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 10
-                    , Run Network "wlan0" ["-L", "8", 
-										   "-H", "32", 
-										   "-l", "#C9A34E", 
-										   "-n", "#429942" ,
-										   "-h", "#A36666", 
-										   "-t", "<rx> : <tx>"] 10
-                    , Run Memory ["-L","3",
-								  "-H","85",
-								  "--normal","lightgreen",
-								  "--high","red",
-								  "-t","Ram: <usedratio>%"] 10
+                    , Run Network "wlan0" [ "-L", "8", 
+					    "-H", "32", 
+					    "-l", "#C9A34E", 
+					    "-n", "#429942" ,
+					    "-h", "#A36666", 
+					    "-t", "<rx> : <tx>"] 10
+                    , Run Memory [  "-L","3",
+				    "-H","85",
+				    "--normal","lightgreen",
+				    "--high","red",
+				    "-t","Ram: <usedratio>%"] 10
                     , Run StdinReader
                     ]
        , sepChar = "%"

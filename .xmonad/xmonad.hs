@@ -61,8 +61,8 @@ manageHook' = composeAll [ isFullscreen             --> doFullFloat
                          , className =? "MPlayer"   --> doFloat
                          , className =? "mplayer2"  --> doFloat
                          , className =? "Gimp"      --> doFloat
-		                 , className =? "Skype"     --> doShift "IM"
-                         , className =? "Vlc"       --> doFloat
+                         , className =? "Skype"     --> doShift "IM"
+                         , className =? "Vlc"       --> doFloat
 						 , insertPosition Below Newer
 						 , transience'
                          ]
