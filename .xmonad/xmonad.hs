@@ -79,8 +79,34 @@ customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"
                      , ppTitle =  xmobarColor "#429942" "" . shorten 80
                      , ppSep = xmobarColor "#429942" "" " | "
                      }
+
+
+myGSNavigation:: TwoD a (Maybe a)
+myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
+  where navKeyMap = M.fromList [
+           ((0,xK_Escape), cancel)
+          ,((0,xK_space), select)
+          ,((0,xK_slash) , substringSearch myGSNavigation)
+          ,((0,xK_Left)  , move (-1,0)  >> myGSNavigation)
+          ,((0,xK_h)     , move (-1,0)  >> myGSNavigation)
+          ,((0,xK_Right) , move (1,0)   >> myGSNavigation)
+          ,((0,xK_l)     , move (1,0)   >> myGSNavigation)
+          ,((0,xK_Down)  , move (0,1)   >> myGSNavigation)
+          ,((0,xK_j)     , move (0,1)   >> myGSNavigation)
+          ,((0,xK_Up)    , move (0,-1)  >> myGSNavigation)
+          ,((0,xK_k)     , move (0,-1)   >> myGSNavigation)
+          ,((0,xK_y)     , move (-1,-1) >> myGSNavigation)
+          ,((0,xK_i)     , move (1,-1)  >> myGSNavigation)
+          ,((0,xK_n)     , move (-1,1)  >> myGSNavigation)
+          ,((0,xK_m)     , move (1,-1)  >> myGSNavigation)
+          ]
+        -- The navigation handler ignores unknown key symbols
+        navDefaultHandler = const myGSNavigation
+
 -- GridSelect
-myGSConfig = defaultGSConfig { gs_cellwidth = 160 }
+myGSConfig = defaultGSConfig { gs_cellwidth = 160
+							, gs_navigate = myGSNavigation
+}
 
 -- urgent notification
 urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
@@ -149,6 +175,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
 
     -- grid
+    , ((modMask,               xK_g     ), goToSelected myGSConfig)
     , ((modMask,               xK_g     ), goToSelected myGSConfig)
 
     -- layouts
