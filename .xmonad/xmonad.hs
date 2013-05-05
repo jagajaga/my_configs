@@ -29,6 +29,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Renamed
 import XMonad.Layout.Minimize
+import XMonad.Layout.Maximize
 import XMonad.Layout.Tabbed
 
 -------------------------------------------------------------------------------
@@ -128,11 +129,11 @@ tabTheme1 = defaultTheme { decoHeight = 16
 workspaces' = ["All", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
 
 -- layouts
-layoutHook' = minimize (tile ||| mtile ||| tab ||| full)
+layoutHook' = (tile ||| mtile ||| tab ||| full)
   where
     rt = ResizableTall 1 (2/100) (1/2) []
-    tile = renamed [Replace "[]="] $ smartBorders rt
-    mtile = renamed [Replace "M[]="] $ smartBorders $ Mirror rt
+    tile = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
+    mtile = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
     tab = renamed [Replace "T"] $ noBorders $ tabbed shrinkText tabTheme1
     full = renamed [Replace "[]"] $ noBorders Full
 
@@ -193,6 +194,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_m     ), windows W.focusMaster)
 	, ((modMask,               xK_n     ), withFocused minimizeWindow)
     , ((modMask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin)
+	, ((modMask, xK_m     ), withFocused $ sendMessage . maximizeRestore)
+ 
 
     -- swapping
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
