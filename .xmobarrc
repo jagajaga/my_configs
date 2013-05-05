@@ -1,4 +1,5 @@
-Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
+Config {
+		font = "xft:DejaVu Sans:size=8:antialias=true"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 95
@@ -18,7 +19,7 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
                                     "--high"   , "red",
 				    "--low"    , "lightblue",
 				    "-t", "<core0>°C"] 10
-                    , Run Battery [ "-t","<left>% ⌛ <fc=lightgreen><timeleft></fc>",
+                    , Run Battery [ "-t","<left>% · <fc=lightgreen><timeleft></fc>",
 				    "-L","20",
 				    "-H","90",
 				    "-h","green",
