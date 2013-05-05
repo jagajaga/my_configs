@@ -8,38 +8,39 @@ Config {
 					 "-H"       , "20"                    ,
 					 "--high"   , "orange"                ,
 					 "--normal" , "lightgreen" ,
-					 "--low"    , "lightblue"] 36000
+					 "--low"    , "lightblue"] 10800
                     , Run MultiCpu ["-L"       , "4"          ,
                                     "-H"       , "65"         ,
                                     "--normal" , "lightgreen" ,
-                                    "--high"   , "red"] 10
+									"--low"    , "lightblue",
+                                    "--high"   , "red"] 20
                     , Run CoreTemp ["-L"       , "40"          ,
                                     "-H"       , "57"         ,
                                     "--normal" , "lightgreen" ,
                                     "--high"   , "red",
-				    "--low"    , "lightblue",
-				    "-t", "<core0>°C"] 10
+									"--low"    , "lightblue",
+									"-t", "<core0>°C"] 50
                     , Run Battery [ "-t","<left>% · <fc=lightgreen><timeleft></fc>",
-				    "-L","20",
-				    "-H","90",
-				    "-h","green",
-                                    "-n", "lightgreen",
-				    "-l","red"] 10
-                    , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
-                    , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
-                    , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 10
-                    , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 10
+									"-L","20",
+									"-H","90",
+									"-h","green",
+									"-n", "lightgreen",
+									"-l","red"] 600
+                    , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 20
+                    , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 50
+                    , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 50
+                    , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 600
                     , Run Network "wlan0" ["-L", "8", 
 										   "-H", "32", 
 										   "-l", "#C9A34E", 
 										   "-n", "#429942" ,
 										   "-h", "#A36666", 
-										   "-t", "<rx> : <tx>"] 10
+										   "-t", "<rx> : <tx>"] 20
                     , Run Memory ["-L","3",
 								  "-H","185",
 								  "--normal","lightgreen",
 								  "--high","red",
-								  "-t","Ram: <usedratio>%"] 10
+								  "-t","Ram: <usedratio>%"] 50
                     , Run StdinReader
                     ]
        , sepChar = "%"
