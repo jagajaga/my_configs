@@ -141,9 +141,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioLowerVolume      ), safeSpawn "ponymix" ["decrease", "5"])
     , ((0, xF86XK_AudioMute             ), safeSpawn "ponymix" ["toggle"])
 	--}
-    , ((0, xF86XK_AudioPlay             ), safeSpawn "mocp" ["-G"])
-    , ((0, xF86XK_AudioNext             ), safeSpawn "mocp" ["-f"])
-    , ((0, xF86XK_AudioPrev             ), safeSpawn "mocp" ["-r"])
+    , ((modMask, xK_F3             ), safeSpawn "mocp" ["-G"])
+    , ((modMask, xK_F4             ), safeSpawn "mocp" ["-f"])
     , ((0, xF86XK_Launch6             ), safeSpawn "autocpu" [])
     , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
 
