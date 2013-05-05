@@ -2,27 +2,45 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 95
-       , commands = [ Run Weather "ULLI"
-                      ["-t"      , "SPb <tempC>°C"         ,
-                       "-L"       , "8"                     ,
-                       "-H"       , "20"                    ,
-                       "--high"   , "orange"                ,
-                       "--low"    , "lightblue"] 36000
+       , commands = [ Run Weather "ULLI"["-t"      , "SPB <tempC>°C"         ,
+										 "-L"       , "3"                     ,
+										 "-H"       , "20"                    ,
+										 "--high"   , "orange"                ,
+										 "--normal" , "lightgreen" ,
+										 "--low"    , "lightblue"] 36000
                     , Run MultiCpu ["-L"       , "4"          ,
-                                    "-H"       , "50"         ,
+                                    "-H"       , "65"         ,
                                     "--normal" , "lightgreen" ,
-                                    "--high"   , "orange"] 10
-                    , Run CoreTemp ["-t", "Temp: <core0>C"] 10
-                    , Run Battery ["-t","<left>% / <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 10
+                                    "--high"   , "red"] 10
+                    , Run CoreTemp ["-L"       , "40"          ,
+                                    "-H"       , "57"         ,
+                                    "--normal" , "lightgreen" ,
+                                    "--high"   , "red",
+									"--low"    , "lightblue",
+									"-t", "<core0>°C"] 10
+                    , Run Battery ["-t","<left>% ⌛ <fc=lightgreen><timeleft></fc>",
+									"-L","20",
+									"-H","90",
+									"-h","green",
+                                    "-n", "lightgreen",
+									"-l","red"] 10
                     , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
                     , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    ,  Run Network "wlan0" ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
-                    , Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 10
+                    , Run Network "wlan0" ["-L", "8", 
+										   "-H", "32", 
+										   "-l", "#C9A34E", 
+										   "-n", "#429942" ,
+										   "-h", "#A36666", 
+										   "-t", "<rx> : <tx>"] 10
+                    , Run Memory ["-L","3",
+								  "-H","85",
+								  "--normal","lightgreen",
+								  "--high","red",
+								  "-t","Ram: <usedratio>%"] 10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %multicpu% %myGov% %coretemp% %memory% %wlan0% Battery: %battery% Vol: %myVolume% Weather: %ULLI% %date%"
+       , template = "%StdinReader% }{ <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% </fc><fc=#429942>| </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>%battery% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
        }
