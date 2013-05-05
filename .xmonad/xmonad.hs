@@ -8,38 +8,38 @@
 -- Imports --
 -- stuff
 import XMonad
-  import qualified XMonad.StackSet as W
-  import qualified Data.Map as M
-  import System.Exit
-  import XMonad.Util.Run (safeSpawn)
-  import Graphics.X11.ExtraTypes.XF86
+import qualified XMonad.StackSet as W
+import qualified Data.Map as M
+import System.Exit
+import XMonad.Util.Run (safeSpawn)
+import Graphics.X11.ExtraTypes.XF86
 
-  -- actions
-  import XMonad.Actions.GridSelect
-  import XMonad.Actions.SpawnOn
+-- actions
+import XMonad.Actions.GridSelect
+import XMonad.Actions.SpawnOn
 
-  -- hooks
-  import XMonad.Hooks.DynamicLog
-  import XMonad.Hooks.ManageHelpers
-  import XMonad.Hooks.UrgencyHook
-  import XMonad.Hooks.InsertPosition
+-- hooks
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.InsertPosition
 
-  -- layouts
-  import XMonad.Layout.NoBorders
-  import XMonad.Layout.ResizableTile
-  import XMonad.Layout.Renamed
-  import XMonad.Layout.Tabbed
+-- layouts
+import XMonad.Layout.NoBorders
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Renamed
+import XMonad.Layout.Tabbed
 
-  -------------------------------------------------------------------------------
-  -- Main --
-  main :: IO ()
-          main = xmonad =<< statusBar cmd pp kb conf
-  where
-    uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-    cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
-    pp = customPP
-    kb = toggleStrutsKey
-    conf = uhook myConfig
+-------------------------------------------------------------------------------
+-- Main --
+main :: IO ()
+main = xmonad =<< statusBar cmd pp kb conf
+	where
+		uhook = withUrgencyHookC NoUrgencyHook urgentConfig
+		cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
+		pp = customPP
+		kb = toggleStrutsKey
+		conf = uhook myConfig
 
 -------------------------------------------------------------------------------
 -- Configs --
@@ -71,10 +71,10 @@ manageHook' = composeAll [ isFullscreen             --> doFullFloat
 -- bar
 customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"
                      , ppHidden = xmobarColor "#C98F0A" ""
-                     , ppHiddenNoWindows = xmobarColor "#C9A34E" ""
+                     , ppHiddenNoWindows = xmobarColor "#003347" ""
                      , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]"
-                     , ppLayout = xmobarColor "#C9A34E" ""
-                     , ppTitle =  xmobarColor "#C9A34E" "" . shorten 80
+                     , ppLayout = xmobarColor "#003347" ""
+                     , ppTitle =  xmobarColor "#429942" "" . shorten 80
                      , ppSep = xmobarColor "#429942" "" " | "
                      }
 -- GridSelect
