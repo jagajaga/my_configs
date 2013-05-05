@@ -1,20 +1,48 @@
-Config { font = "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-u"
-       , bgColor = "#000000"
-       , fgColor = "#C9A34E"
-       , border = NoBorder
-       , borderColor = "#000000"
-       , position = Top 
-       , lowerOnStart = True
-       , hideOnStart = False
-       , persistent = True
-       , commands = [ Run Network "wlan0" ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
-                    , Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
+Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
+
+, bgColor = "black"
+
+, fgColor = "grey"
+
+, position = TopW L 95
+
+, commands = [ Run Weather "ULLI" 
+                                  ["-t"      , "SPb <tempC>°C"         , 
+                                  "-L"       , "8"                     , 
+                                  "-H"       , "20"                    , 
+                                  "--high"   , "orange"                , 
+                                  "--low"    , "lightblue"] 36000
+ 
+
+, Run CpuFreq ["-t", " ", "-L", "0", "-H", "2", "-l", "lightblue", "-n","white", "-h", "red"] 50
+, Run MultiCpu ["-L"       , "4"          ,
+                                    "-H"       , "50"         , 
+                                    "--normal" , "lightgreen" , 
+                                    "--high"   , "orange"] 10
+
+, Run CoreTemp ["-t", "Temp: <core0>C"] 10
+ , Run Battery ["-L"       ,"50"                         ,
+                                   "-H"       , "75"                        , 
+                                   "--high"   , "white"                     , 
+                                   "--normal" , "yellow"                    , 
+                                   "--low"    , "red"                       , 
+                                   "-t"       , "Batt: <left>%"] 10
+
+, Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
+
+ , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+,  Run Network "wlan0" ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
+, Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
-    		    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    , Run CoreTemp ["-t", "Temp: <core0>C"] 10
-                    , Run StdinReader
-                    ]
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = " %StdinReader% }{ %coretemp% <fc=#429942>|</fc> %cpu% <fc=#429942>|</fc> %memory% <fc=#429942>|</fc> %wlan0% <fc=#429942>|</fc> %date%"
-       }
+
+, Run StdinReader
+
+]
+
+, sepChar = "%"
+
+, alignSep = "}{"
+
+, template = "%StdinReader% }{ %multicpu% %cpufreq% %coretemp% %memory% %wlan0% %battery% Vol: %myVolume% Weather: %ULLI% %date%"
+
+}
