@@ -20,13 +20,8 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
                                     "--high"   , "orange"] 10
 
 , Run CoreTemp ["-t", "Temp: <core0>C"] 10
- , Run Battery ["-L"       ,"50"                         ,
-                                   "-H"       , "75"                        , 
-                                   "--high"   , "white"                     , 
-                                   "--normal" , "yellow"                    , 
-                                   "--low"    , "red"                       , 
-                                   "-t"       , "Batt: <left>%"] 10
 
+                    , Run Battery ["-t","<left>% / <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 10
 , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 10
 , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 10
 
@@ -43,6 +38,6 @@ Config { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
 
 , alignSep = "}{"
 
-, template = "%StdinReader% }{ %multicpu% %myGov% %coretemp% %memory% %wlan0% %battery% Vol: %myVolume% Weather: %ULLI% %date%"
+, template = "%StdinReader% }{ %multicpu% %myGov% %coretemp% %memory% %wlan0% Battery: %battery% Vol: %myVolume% Weather: %ULLI% %date%"
 
 }
