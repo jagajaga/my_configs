@@ -25,7 +25,7 @@ Config {
 									"-H","90",
 									"-h","green",
 									"-n", "lightgreen",
-									"-l","red"] 600
+									"-l","red"] 100
                     , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 20
                     , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 50
                     , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 50

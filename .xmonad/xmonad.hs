@@ -97,7 +97,7 @@ myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
           ,((0,xK_Down)  , move (0,1)   >> myGSNavigation)
           ,((0,xK_j)     , move (0,1)   >> myGSNavigation)
           ,((0,xK_Up)    , move (0,-1)  >> myGSNavigation)
-          ,((0,xK_k)     , move (0,-1)   >> myGSNavigation)
+          ,((0,xK_k)     , move (0,-1)  >> myGSNavigation)
           ,((0,xK_y)     , move (-1,-1) >> myGSNavigation)
           ,((0,xK_i)     , move (1,-1)  >> myGSNavigation)
           ,((0,xK_n)     , move (-1,1)  >> myGSNavigation)
@@ -121,7 +121,7 @@ focusedBorderColor' = "#AFAF87"
 
 -- tabs
 tabTheme1 = defaultTheme { decoHeight = 16
-                         , activeColor = "#a6c292"
+                         , activeColor = "lightgreen"
                          , activeBorderColor = "#a6c292"
                          , activeTextColor = "#000000"
                          , inactiveBorderColor = "#000000"
@@ -158,13 +158,13 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask,               xK_r     ), safeSpawn "dmenu_run" [])
     , ((modMask,               xK_w     ), safeSpawn "chromium" [])
-    , ((modMask .|. shiftMask, xK_p     ), safeSpawn "gmrun" [])
-    , ((modMask, xK_c     ), kill)
+    , ((modMask,               xK_a     ), safeSpawn (XMonad.terminal conf) ["-x", "mc"])
+    , ((modMask, 			   xK_c     ), kill)
 
     -- multimedia
 -- Alsa mixer bindings
-    , ((0, xF86XK_AudioRaiseVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
-    , ((0, xF86XK_AudioLowerVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "1-"])
+    , ((0, xF86XK_AudioRaiseVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "9+"])
+    , ((0, xF86XK_AudioLowerVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "9-"])
     , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
 --}
 {--
@@ -225,8 +225,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-    -- mod-[w,e] %! switch to twinview screen 1/2
-    -- mod-shift-[w,e] %! move window to screen 1/2
+    -- mod-[d,f] %! switch to twinview screen 1/2
+    -- mod-shift-[w,f] %! move window to screen 1/2
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_d, xK_f] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
