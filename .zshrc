@@ -282,7 +282,7 @@ source ${ZDOTDIR:-$HOME}/.zkbd/konsole-:0
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 # пути где искать бинарники 
 export PATH="$PATH:~/soft/bin/"
-PATH=$PATH:/opt/pycharm/bin:/opt/sublime-text;
+PATH=$PATH:/opt/pycharm/bin:/opt/sublime-text:/home/jaga/.cabal/bin;
 export PATH;
 
 

@@ -70,7 +70,19 @@
 (global-set-key (kbd "<f8>") 'compile)
 (global-set-key (kbd "<f9>") 'compile)
 (put 'upcase-region 'disabled nil)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (setq scroll-step            1
       scroll-conservatively  10000)
+
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
+(require 'haskell-indent)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+(add-hook 'haskell-mode-hook 'haskell-font-lock-symbols t)
+(set 'haskell-font-lock-symbols t)
+(autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
+
+(put 'downcase-region 'disabled nil)
