@@ -86,3 +86,6 @@
 (add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
 
 (put 'downcase-region 'disabled nil)
+
+(load-file (let ((coding-system-for-read 'utf-8))
+                (shell-command-to-string "agda-mode locate")))

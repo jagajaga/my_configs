@@ -32,10 +32,9 @@ Config {
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 600
 					, Run Locks
                     , Run Network "wlan0" ["-L", "8", 
-										   "-H", "32", 
-										   "-l", "#C9A34E", 
+										   "-H", "150", 
 										   "-n", "#429942" ,
-										   "-h", "#A36666", 
+										   "-h", "lightgreen", 
 										   "-t", "<rx> : <tx>"] 20
                     , Run Memory ["-L","3",
 								  "-H","185",

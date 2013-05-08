@@ -11,6 +11,7 @@ import XMonad
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import System.Exit
+import Prelude
 import XMonad.Util.Run (safeSpawn)
 import Graphics.X11.ExtraTypes.XF86
 
@@ -66,6 +67,7 @@ manageHook' = composeAll [ isFullscreen             --> doFullFloat
                          , className =? "Gimp"      --> doFloat
                          , className =? "Skype"     --> doShift "IM"
                          , className =? "Vlc"       --> doFloat
+						 --, elem "mc" (words appName) -> doFloat
 						 , insertPosition Below Newer
 						 , transience'
                          ]
@@ -193,7 +195,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_Tab   ), windows W.focusDown)
     , ((modMask,               xK_j     ), windows W.focusDown)
     , ((modMask,               xK_k     ), windows W.focusUp)
-    , ((modMask,               xK_m     ), windows W.focusMaster)
+    , ((modMask,               xK_y     ), windows W.focusMaster)
 	, ((modMask,               xK_n     ), withFocused minimizeWindow)
     , ((modMask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin)
 	, ((modMask, xK_m     ), withFocused $ sendMessage . maximizeRestore)
