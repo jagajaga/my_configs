@@ -165,8 +165,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- multimedia
 -- Alsa mixer bindings
-    , ((0, xF86XK_AudioRaiseVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "9+"])
-    , ((0, xF86XK_AudioLowerVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "9-"])
+    , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
 --}
 {--

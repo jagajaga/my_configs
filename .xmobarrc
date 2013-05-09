@@ -2,7 +2,7 @@ Config {
 		font = "xft:DejaVu Sans:size=8:antialias=true"
        , bgColor = "black"
        , fgColor = "grey"
-       , position = TopW L 95
+       , position = TopW L 94
        , commands = [ Run Weather "ULLI"["-t"      , "SPB <tempC>°C"         ,
 					 "-L"       , "3"                     ,
 					 "-H"       , "20"                    ,
