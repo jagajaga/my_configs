@@ -19,5 +19,5 @@ then
 		bar="Muted"
 	fi
 		killall xfce4-notifyd
-		notify-send -u critical -t 1050 Volume " $bar"
+		notify-send -t 1050 Volume " $bar"
 fi
