@@ -74,7 +74,7 @@
       scroll-conservatively  10000)
 
 (load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(require 'haskell-indent)
+(require 'haskell-mode)
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
@@ -89,3 +89,4 @@
 
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
+(add-hook 'agda2-mode-hook (lambda () (add-hook 'evil-insert-state-entry-hook (lambda () (set-input-method "Agda")))))

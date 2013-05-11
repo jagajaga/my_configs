@@ -188,7 +188,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
 
     -- floating layer stuff
-    , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modMask .|. shiftMask, xK_f     ), withFocused $ windows . W.sink)
+    , ((modMask,               xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
 
 
     -- focus
@@ -229,8 +230,6 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     -- mod-[d,f] %! switch to twinview screen 1/2
     -- mod-shift-[w,f] %! move window to screen 1/2
-    [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_d, xK_f] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    []
 
 -------------------------------------------------------------------------------
