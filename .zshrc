@@ -418,12 +418,12 @@ alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
 # 
 # команды при запуске zsh 
 # 
-
+PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
 if [[ $EUID == 0 ]] 
 then
-PROMPT=$'%{\e[1;31m%}%n %{\e[1;34m%}%~ #%{\e[0m%} ' # user dir %
+PROMPT+=$' #%{\e[0m%} ' # user dir %
 else
-PROMPT=$'%{\e[1;32m%}%n %{\e[1;34m%}%~ %#%{\e[0m%} ' # root dir #
+PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
 
 alias ls='ls --color=auto'
