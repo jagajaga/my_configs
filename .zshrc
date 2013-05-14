@@ -445,6 +445,7 @@ alias open='xdg-open'
 alias connect='sudo netcfg -r Jaga-Jaga'
 alias showdisk='sudo fdisk -l'
 alias cp='pycp'
+alias :q='exit'
 
 
 unsetopt correct_all

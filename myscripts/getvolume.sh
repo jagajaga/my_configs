@@ -7,7 +7,7 @@ then
 	exit
 fi
 echo "$volume""%"
-if [ $1 == "-s" ]
+if [ "$1" == "-s" ]
 then
 	bar=""
 	if [ $volume == 0 ]
