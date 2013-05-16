@@ -331,7 +331,7 @@ alias rmrf='nocorrect rm -fR'
 alias mkdir='nocorrect mkdir'
 
 # показ файлов в цвете 
-alias ls='ls -F --color=auto'
+alias ls='ls -lhF --color=auto'
 
 # разукрашиваем некоторые команды с помощью grc 
 [[ -f /usr/bin/grc ]] && {
@@ -426,7 +426,8 @@ else
 PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
 
-alias ls='ls --color=auto'
+alias ls='ls -F --group-directories-first --color=auto'
+alias l='ls -lhF --group-directories-first --color=auto'
 alias grep='grep --colour=auto'
 export PATH="/opt/android-sdk/tools:${PATH}"
 export PATH="/opt/android-sdk/platform-tools:${PATH}"
