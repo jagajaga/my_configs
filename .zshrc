@@ -426,7 +426,7 @@ else
 PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
 
-alias ls='ls -F --group-directories-first --color=auto'
+alias ls='ls -F --color=auto'
 alias l='ls -lhF --group-directories-first --color=auto'
 alias grep='grep --colour=auto'
 export PATH="/opt/android-sdk/tools:${PATH}"
