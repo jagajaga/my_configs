@@ -14,12 +14,16 @@ then
 	then
 		bar="Muted"
 	else
-		bar="|"
+		bar=""
 	fi
 	for i in $(seq 1 $(($volume / 10)))
 	do
 		bar=${bar}"|"
 	done
-		killall xfce4-notifyd
-		notify-send -t 1050 Volume " $bar"
+	if [ "$bar" == "" ]
+	then
+		bar="Muted"
+	fi
+	killall xfce4-notifyd
+	notify-send -t 1050 Volume " $bar"
 fi
