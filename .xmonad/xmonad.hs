@@ -18,7 +18,7 @@ import Graphics.X11.ExtraTypes.XF86
 -- actions
 import XMonad.Actions.GridSelect
 import XMonad.Actions.SpawnOn
-
+import XMonad.Actions.WindowGo (runOrRaise)
 -- hooks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers
@@ -57,7 +57,16 @@ myConfig = defaultConfig { workspaces = workspaces'
                          , layoutHook = layoutHook'
                          , manageHook = manageHook'
 						 , handleEventHook    = fullscreenEventHook
+						 , startupHook = startup
                          }
+
+
+startup :: X ()
+startup = do
+	safeSpawn "amixer" ["-q", "set", "Master", "on"]
+	safeSpawn "autocpu" ["-s"]
+	spawnOn "IM" "skype"
+
 
 -------------------------------------------------------------------------------
 -- Window Management --
@@ -167,7 +176,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- Alsa mixer bindings
     , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
-    , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
+    , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
 --}
 {--
     , ((0, xF86XK_AudioRaiseVolume      ), safeSpawn "ponymix" ["increase", "5"])
