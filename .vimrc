@@ -376,3 +376,4 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 set list
 set listchars=tab:▸\ ,eol:¬
 set cursorline
+set undofile
