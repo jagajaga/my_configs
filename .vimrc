@@ -373,3 +373,7 @@ noremap <Left> <nop>
 noremap <Right> <nop>
 set relativenumber
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+set undofile
+set list
+set listchars=tab:▸\ ,eol:¬
+set cursorline
