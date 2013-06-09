@@ -375,9 +375,5 @@ set relativenumber
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 set list
 set listchars=tab:▸\ ,eol:¬
-<<<<<<< HEAD
 " set cursorline
-=======
-set cursorline
 set undofile
->>>>>>> df49428fb2b371272fcd198526637ffe5637e23b
