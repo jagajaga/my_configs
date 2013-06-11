@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 COUNT=`cat /proc/cpuinfo | grep -c ^processor`
+VAR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
 FLAG="false"
 while getopts "sopchn" opt; do
     FLAG="true"
@@ -18,11 +19,9 @@ while getopts "sopchn" opt; do
                 #notify-send performance
                 ;;
         c)      
-                VAR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
                 echo $VAR 
                 ;;
         n)      
-                VAR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
                 echo $VAR 
                 notify-send $VAR
                 ;;
@@ -38,10 +37,10 @@ then
     exit
 fi
 
-VAR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
 if [ "$VAR" == "powersave" ]
 then
-    sudo cpupower frequency-set -g ondemand;
+    #sudo cpupower frequency-set -g ondemand; //ondemand doesn't work
+    sudo cpupower frequency-set -g performance;
     #notify-send ondemand
     exit
 fi
