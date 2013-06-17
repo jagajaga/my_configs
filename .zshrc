@@ -453,3 +453,4 @@ zstyle ':completion:*:processes' command 'ps -au$USER'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;32'
 source /usr/share/doc/pkgfile/command-not-found.zsh
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+cat 2guys.txt
