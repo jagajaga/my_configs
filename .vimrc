@@ -40,6 +40,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'vim-scripts/OmniCppComplete'
 Bundle 'tpope/vim-surround'
 Bundle "rkulla/pydiction"
+Bundle "vim-scripts/a"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 10
 
@@ -98,8 +99,9 @@ $"|endif|endif
 
 map <leader>q :let @+ = system("pastebinit " . expand("%"))<CR>
 
-
 " Fast saving
+"map <C-E> <Esc>:tabedit %<.h<CR>
+imap <F5> <Esc> :tabprev<CR>
 nmap <leader>w :w!<cr>
 map <F2> <Esc>:w !sudo tee %<CR>
 imap <F2> <Esc>:w<CR>
