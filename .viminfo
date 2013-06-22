@@ -1,0 +1,411 @@
+# Этот файл viminfo автоматически создан Vim 7.3.
+# Его можно (осторожно!) редактировать.
+
+# Значение опции 'encoding' в момент записи файла
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~H
+# Last Search Pattern:
+~MSle0~/C-A
+
+# Last Substitute Search Pattern:
+~MSle0&MAXEVENTS
+
+# Последняя строка для замены:
+$MAX_SIZE
+
+# Командная строка, история (начиная от свежего к старому):
+:wq
+:w
+:YcmCompleter 
+:W
+:Wq
+:emenu Exit.quit
+:q!
+::YcmCompleter GoToDefinitionElseDeclaration
+:q
+:BundleInstall
+:ц
+:BundleClean
+:gcc
+:set makeprg=
+:set makeprg=make
+:!make
+:set makeprg
+:й
+:set omnifunc?
+:set filetype
+
+# Строка поиска, история (начиная от свежего к старому):
+?/C-A
+?/C-E
+? \s\+$
+?/98
+?/B
+?/gcc
+?/g++
+?/filety
+?/fylety
+?/all
+?/clang
+?/cmake_in
+?/cmake
+?/down
+?/ctl
+?/sub
+?/subscr
+?/bug
+?/bug\
+?/BUG
+
+# Выражение, история (начиная от свежего к старому):
+
+# Строка ввода, история (начиная от свежего к старому):
+@Y
+
+# Строка ввода, история (начиная от свежего к старому):
+
+# Регистры:
+"0	LINE	0
+	autocmd FileType cpp let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+"1	LINE	0
+	nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"2	LINE	0
+	
+"3	LINE	0
+				fdd.
+"4	LINE	0
+	
+"5	LINE	0
+				epollfd fdd;
+"6	LINE	0
+				std::map<int, int> maap;
+"7	LINE	0
+				maap.at(123);
+"8	LINE	0
+					dlksjad
+"9	LINE	0
+						lsajdlajs
+"h	CHAR	0
+	MAXEVENTS
+"j	CHAR	0
+	jkkjkkjjjjkkkkkkkkkkkkkjjkllllllllllllllllllxxxxxxxxxx:w�k8�k9q
+"w	CHAR	0
+	e
+""-	CHAR	0
+	autocmd FileType cpp 
+
+# Глобальные отметки:
+'0  63  0  ~/.vimrc
+'1  74  12  ~/Dropbox/Programming/OS/aio/aio.cpp
+'2  70  4  ~/Dropbox/Programming/OS/aio/aio.cpp
+'3  2  5  ~/Dropbox/Programming/OS/aio/Makefile
+'4  76  0  ~/Dropbox/Programming/OS/aio/aio.cpp
+'5  75  2  ~/Dropbox/Programming/OS/aio/aio.cpp
+'6  75  2  ~/Dropbox/Programming/OS/aio/aio.cpp
+'7  75  12  ~/Dropbox/Programming/OS/aio/aio.cpp
+'8  74  35  ~/Dropbox/Programming/OS/aio/aio.cpp
+'9  74  0  ~/Dropbox/Programming/OS/aio/aio.cpp
+
+# Список прыжков (сначала более свежие):
+-'  63  0  ~/.vimrc
+-'  1  0  ~/.vimrc
+-'  128  6  ~/.vimrc
+-'  129  6  ~/.vimrc
+-'  77  19  ~/.vimrc
+-'  78  0  ~/.vimrc
+-'  41  0  ~/.vimrc
+-'  74  12  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  1  0  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  70  4  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  2  5  ~/Dropbox/Programming/OS/aio/Makefile
+-'  1  0  ~/Dropbox/Programming/OS/aio/Makefile
+-'  76  12  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  75  2  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  121  8  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  120  8  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  95  14  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  83  59  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  73  8  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  82  21  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  130  16  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  183  1  ~/.cgdb/readline_history.txt
+-'  1  0  ~/.cgdb/readline_history.txt
+-'  43  0  ~/.vimrc
+-'  92  9  ~/ycm_build/Makefile
+-'  51  23  ~/ycm_build/Makefile
+-'  5  16  ~/ycm_build/Makefile
+-'  213  0  ~/ycm_build/Makefile
+-'  1  0  ~/ycm_build/Makefile
+-'  9  0  /tmp/ycm_build.1bjXBW
+-'  8  0  /tmp/ycm_build.gakI50/BoostParts
+-'  8  0  /tmp/ycm_build.gakI50/ycm
+-'  8  0  /tmp/ycm_build.gakI50/ycm/CMakeFiles
+-'  40  0  ~/.vimrc
+-'  183  1  ~/.cgdb/readline_history.txt
+-'  1  0  ~/.cgdb/readline_history.txt
+-'  92  9  ~/ycm_build/Makefile
+-'  51  23  ~/ycm_build/Makefile
+-'  5  16  ~/ycm_build/Makefile
+-'  213  0  ~/ycm_build/Makefile
+-'  1  0  ~/ycm_build/Makefile
+-'  9  0  /tmp/ycm_build.1bjXBW
+-'  8  0  /tmp/ycm_build.gakI50/BoostParts
+-'  8  0  /tmp/ycm_build.gakI50/ycm
+-'  8  0  /tmp/ycm_build.gakI50/ycm/CMakeFiles
+-'  183  1  ~/.cgdb/readline_history.txt
+-'  1  0  ~/.cgdb/readline_history.txt
+-'  92  9  ~/ycm_build/Makefile
+-'  51  23  ~/ycm_build/Makefile
+-'  5  16  ~/ycm_build/Makefile
+-'  213  0  ~/ycm_build/Makefile
+-'  1  0  ~/ycm_build/Makefile
+-'  9  0  /tmp/ycm_build.1bjXBW
+-'  8  0  /tmp/ycm_build.gakI50/BoostParts
+-'  8  0  /tmp/ycm_build.gakI50/ycm
+-'  8  0  /tmp/ycm_build.gakI50/ycm/CMakeFiles
+-'  183  1  ~/.cgdb/readline_history.txt
+-'  1  0  ~/.cgdb/readline_history.txt
+-'  92  9  ~/ycm_build/Makefile
+-'  51  23  ~/ycm_build/Makefile
+-'  5  16  ~/ycm_build/Makefile
+-'  213  0  ~/ycm_build/Makefile
+-'  1  0  ~/ycm_build/Makefile
+-'  9  0  /tmp/ycm_build.1bjXBW
+-'  8  0  /tmp/ycm_build.gakI50/BoostParts
+-'  8  0  /tmp/ycm_build.gakI50/ycm
+-'  8  0  /tmp/ycm_build.gakI50/ycm/CMakeFiles
+-'  15  9  ~/.vimrc
+-'  183  1  ~/.cgdb/readline_history.txt
+-'  1  0  ~/.cgdb/readline_history.txt
+-'  92  9  ~/ycm_build/Makefile
+-'  51  23  ~/ycm_build/Makefile
+-'  5  16  ~/ycm_build/Makefile
+-'  213  0  ~/ycm_build/Makefile
+-'  1  0  ~/ycm_build/Makefile
+-'  9  0  /tmp/ycm_build.1bjXBW
+-'  8  0  /tmp/ycm_build.gakI50/BoostParts
+-'  8  0  /tmp/ycm_build.gakI50/ycm
+-'  8  0  /tmp/ycm_build.gakI50/ycm/CMakeFiles
+-'  183  1  ~/.cgdb/readline_history.txt
+-'  1  0  ~/.cgdb/readline_history.txt
+-'  92  9  ~/ycm_build/Makefile
+-'  51  23  ~/ycm_build/Makefile
+-'  5  16  ~/ycm_build/Makefile
+-'  213  0  ~/ycm_build/Makefile
+-'  97  20  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  1  0  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  74  12  ~/Dropbox/Programming/OS/aio/aio.cpp
+-'  70  4  ~/Dropbox/Programming/OS/aio/aio.cpp
+
+# Список буферов:
+%~/.vimrc	63	0
+
+# История местных отметок (от более свежих к старым):
+
+> ~/.vimrc
+	"	63	0
+	^	63	21
+	.	63	0
+	+	44	0
+	+	39	0
+	+	15	0
+	+	14	0
+	+	15	0
+	+	14	0
+	+	16	0
+	+	39	0
+	+	83	0
+	+	83	36
+	+	83	0
+	+	83	0
+	+	59	89
+	+	83	0
+	+	81	0
+	+	57	78
+	+	58	0
+	+	78	0
+	+	59	0
+	+	62	0
+	+	65	0
+	+	45	28
+	+	46	28
+	+	46	28
+	+	46	28
+	+	46	0
+	+	24	39
+	+	25	35
+	+	39	0
+	+	52	0
+	+	41	6
+	+	23	0
+	+	83	0
+	+	78	0
+	+	77	12
+	+	65	0
+	+	63	20
+	+	64	83
+	+	63	0
+	k	76	0
+
+> ~/Dropbox/Programming/OS/aio/aio.cpp
+	"	97	20
+	.	98	0
+	+	133	23
+	+	133	1
+	+	133	21
+	+	133	0
+	+	133	4
+	+	133	37
+	+	133	0
+	+	133	53
+	+	133	59
+	+	133	23
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	74
+	+	133	0
+	+	133	37
+	+	133	22
+	+	133	1
+	+	133	0
+	+	133	0
+	+	133	50
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	47
+	+	133	2
+	+	133	25
+	+	133	36
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	48
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	28
+	+	133	0
+	+	133	25
+	+	133	1
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	24
+	+	133	48
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	0
+	+	133	8
+	+	133	15
+	+	133	16
+	+	133	12
+	+	133	11
+	+	133	23
+	+	133	9
+	+	133	16
+	+	133	0
+	+	133	8
+	+	133	0
+	+	133	4
+	+	133	15
+	+	133	8
+	+	133	0
+	+	124	0
+	+	74	34
+	+	74	34
+	+	74	37
+	+	75	0
+	+	74	34
+	+	74	34
+	+	74	34
+	+	75	0
+	+	75	18
+	+	75	0
+	+	75	0
+	+	76	0
+	+	77	0
+	+	77	0
+	+	77	0
+	+	74	0
+	+	74	0
+	+	99	0
+	+	99	0
+	+	99	0
+	+	99	0
+	+	95	0
+	+	99	0
+	+	100	0
+	+	98	0
+	+	98	0
+	j	54	4
+	k	86	25
+	n	62	27
+
+> ~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py
+	"	140	1
+	^	59	2
+	.	59	2
+	+	41	0
+	+	53	10
+	+	59	2
+	z	140	1
+
+> ~/.vim/bundle/YouCompleteMe/cpp/ycm/__Tag_List__
+	"	1	0
+	.	1	0
+	+	1	0
+
+> ~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py
+	"	41	0
+	^	41	1
+	.	41	0
+	+	41	0
+	z	41	0
+
+> ~/Dropbox/Programming/OS/aio/__Tag_List__
+	"	21	4
+	.	23	0
+	+	45	0
+	+	23	0
+
+> ~/Dropbox/Programming/OS/aio/[Vundle] Installer
+	"	10	0
+	.	1	0
+	+	27	0
+	+	18	0
+	+	10	0
+	+	1	0
+
+> ~/Dropbox/Programming/OS/aio/[Vundle] clean
+	"	3	0
+	.	1	0
+	+	1	0
+
+> ~/Dropbox/Programming/OS/aio/Makefile
+	"	2	5
+	^	2	6
+	.	2	5
+	+	2	5
+
+> /usr/share/vim/vim73/autoload/ccomplete.vim
+	"	1	0
+	^	1	1
+	.	1	0
+	+	2	0
+	+	1	0

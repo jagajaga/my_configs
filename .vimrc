@@ -13,7 +13,7 @@ set runtimepath+=~/.vim/bundle/taglist.vim/plugin
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
-filetype on
+"filetype on
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 command WQ wq
@@ -21,9 +21,8 @@ command Wq wq
 command W w
 command Q q
 
-
-autocmd FileType cpp set makeprg=g++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
-autocmd FileType c set makeprg=gcc\ -Wall\ -g\ -o\ %<\ %
+autocmd FileType cpp set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
+autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
 autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ gcc\ -m32\ -g\ -o\ %<\ %<.o 
 
 autocmd FileType asm set syntax=nasm
@@ -37,24 +36,51 @@ call vundle#rc()
 filetype plugin indent on
 
 Bundle 'majutsushi/tagbar'
-Bundle 'vim-scripts/OmniCppComplete'
+"Bundle 'vim-scripts/OmniCppComplete'
 Bundle 'tpope/vim-surround'
+Bundle "gmarik/vundle"
 Bundle "rkulla/pydiction"
 Bundle "vim-scripts/a.vim"
+Bundle "Valloric/YouCompleteMe"
+Bundle "scrooloose/syntastic"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 10
 
 set nocp
 filetype plugin on
-set completeopt=menu,menuone
-" -- configs --
-let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
-autocmd FileType c set omnifunc=ccomplete#Complete
+"set completeopt=menu,menuone
+"" -- configs --
+"let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+"let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+"let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+"let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+
+
+
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+autocmd FileType c let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \ }
+nnoremap <C-E> <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+
+
+
+"autocmd FileType c set omnifunc=ccomplete#Complete
 
 " -- ctags --
 " map <ctrl>+F12 to generate ctags for current folder:
@@ -796,3 +822,4 @@ imap <leader>Psi Ψ
 "imap <leader>C Ψ " Shadows ℂ
 imap <leader>Omega Ω
 imap <leader>V Ω
+"INTACTIC
