@@ -177,12 +177,10 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
+    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask, xK_F10), safeSpawn "amixer" ["-q", "set", "Master", "0"])
 --}
-{--
-    , ((0, xF86XK_AudioRaiseVolume      ), safeSpawn "ponymix" ["increase", "5"])
-    , ((0, xF86XK_AudioLowerVolume      ), safeSpawn "ponymix" ["decrease", "5"])
-    , ((0, xF86XK_AudioMute             ), safeSpawn "ponymix" ["toggle"])
-	--}
     , ((modMask, xK_F3             ), safeSpawn "mocp" ["-G"])
     , ((modMask, xK_F4             ), safeSpawn "mocp" ["-f"])
     , ((0, xF86XK_Launch6             ), safeSpawn "autocpu" [])
