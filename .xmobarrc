@@ -27,6 +27,7 @@ Config {
 									"-n", "lightgreen",
 									"-l","red"] 100
                     , Run Com "/home/jaga/myscripts/getvolume.sh" [] "myVolume" 20
+                    , Run Com "/home/jaga/myscripts/currentlayout.sh" [] "myLayout" 20
                     , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 50
                     , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 50
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 600
@@ -45,5 +46,5 @@ Config {
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{%locks% %mocSong% <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% </fc><fc=#429942>| </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>%battery% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
+       , template = "%StdinReader% }{%mocSong% <fc=red>%locks% </fc><fc=orange>%myLayout% </fc>| <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% </fc><fc=#429942>| </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>%battery% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
        }
