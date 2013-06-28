@@ -64,6 +64,7 @@ myConfig = defaultConfig { workspaces = workspaces'
 startup :: X ()
 startup = do
 	safeSpawn "amixer" ["-q", "set", "Master", "on"]
+	safeSpawn "xmodmap" ["-e", "keysym", "Menu", "=", "Super_L"]
 	safeSpawn "autocpu" ["-s"]
 	spawnOn "IM" "skype"
 
