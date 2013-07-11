@@ -46,5 +46,5 @@ Config {
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{%mocSong% <fc=red>%locks% </fc><fc=orange>%myLayout% </fc>| <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% </fc><fc=#429942>| </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>%battery% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
+       , template = "%StdinReader% }{ %mocSong% <fc=red>%locks% </fc><fc=orange>%myLayout% </fc>| <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% </fc><fc=#429942>| </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>%battery% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
        }
