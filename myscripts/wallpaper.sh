@@ -1,7 +1,7 @@
 #!/bin/bash
 
 shopt -s nullglob
-cd ~/.wallpaper
+cd ~/Wallpapers
 
 while true; do
 	files=()
@@ -10,7 +10,7 @@ while true; do
 	done
 	range=${#files[@]}
 
-	((range)) && feh --bg-scale "${files[RANDOM % range]}"
+	((range)) && feh --bg-fill "${files[RANDOM % range]}"
 
 	sleep 15m
 done
