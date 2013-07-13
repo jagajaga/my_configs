@@ -21,13 +21,23 @@ command Wq wq
 command W w
 command Q q
 
-autocmd FileType cpp set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
+autocmd vimenter * cd %:p:h
+autocmd FileType cpp call CppMake()
+function! CppMake()
+   if filereadable("Makefile")
+	   set makeprg=make
+   else
+	   set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
+   endif
+endfunction
 autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
 autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ gcc\ -m32\ -g\ -o\ %<\ %<.o 
 
 autocmd FileType asm set syntax=nasm
 autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+"au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
+"au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
 set nocompatible
 filetype off 
@@ -36,18 +46,24 @@ call vundle#rc()
 filetype plugin indent on
 
 Bundle 'majutsushi/tagbar'
-"Bundle 'vim-scripts/OmniCppComplete'
+Bundle 'Shougo/vimproc.vim'
 Bundle 'tpope/vim-surround'
 Bundle "gmarik/vundle"
 Bundle "rkulla/pydiction"
 Bundle "vim-scripts/a.vim"
 Bundle "Valloric/YouCompleteMe"
 Bundle "scrooloose/syntastic"
+Bundle "scrooloose/nerdcommenter"
+Bundle "scrooloose/nerdtree"
+Bundle "ujihisa/neco-ghc"
+Bundle "eagletmt/ghcmod-vim"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 10
 
 set nocp
 filetype plugin on
+let NERDTreeShowHidden=1
+let g:necoghc_enable_detailed_browse = 1
 "set completeopt=menu,menuone
 "" -- configs --
 "let OmniCpp_MayCompleteDot = 1 " autocomplete with .
@@ -86,9 +102,9 @@ nnoremap <C-E> <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 " map <ctrl>+F12 to generate ctags for current folder:
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
 " add current directory's generated tags file to available tags
-set tags+=./tags
-set tags+=/usr/include/tags
-set tags+=/usr/include/stl/tags
+"set tags+=./tags
+"set tags+=/usr/include/tags
+"set tags+=/usr/include/stl/tags
 "set tags+=/usr/include/boost/tags
 
 
@@ -106,6 +122,8 @@ set iminsert=0
 set imsearch=0
 imap <F10> <Esc>:TlistToggle<CR>
 nmap <F10> <Esc>:TlistToggle<CR>
+imap <F11> <Esc>:NERDTreeToggle<CR>
+nmap <F11> <Esc>:NERDTreeToggle<CR>
 " Num strings
 set nu!
 set ai!
@@ -268,7 +286,7 @@ set noswapfile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-"set expandtab
+set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
@@ -276,6 +294,8 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+set shiftround                  "Round spaces to nearest shiftwidth multiple
+set nojoinspaces                "Don't convert spaces to tabs
 
 " Linebreak on 500 characters
 set lbr
