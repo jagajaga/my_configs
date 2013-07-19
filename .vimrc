@@ -5,7 +5,8 @@
 set history=700
 set confirm
 set cindent
-map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
+autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
+autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -33,9 +34,10 @@ endfunction
 autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
 autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ gcc\ -m32\ -g\ -o\ %<\ %<.o 
 
-autocmd FileType asm set syntax=nasm
+autocmd BufRead *.asm set syntax=nasm
 autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+autocmd BufRead *.hs set makeprg=ghc\ --make\ %
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
@@ -93,7 +95,13 @@ let g:ycm_semantic_triggers =  {
 nnoremap <C-E> <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
-
+autocmd BufRead,BufNewFile ~/.xmonad/* call s:add_xmonad_path()
+function! s:add_xmonad_path()
+  if !exists('b:ghcmod_ghc_options')
+    let b:ghcmod_ghc_options = []
+  endif
+  call add(b:ghcmod_ghc_options, '-i' . expand('~/.xmonad/lib'))
+endfunction
 
 
 "autocmd FileType c set omnifunc=ccomplete#Complete
@@ -140,7 +148,7 @@ set viminfo='10,\"100,:20,%,n~/.viminfo
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm
 $"|endif|endif
 
-map <leader>q :let @+ = system("pastebinit " . expand("%"))<CR>
+map <leader>q :let @+ = system("pastebinit " . " -f " . &filetype . " " . expand("%"))<CR>
 
 " Fast saving
 "map <C-E> <Esc>:tabedit %<.h<CR>
