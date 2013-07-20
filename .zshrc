@@ -223,16 +223,8 @@ pk () {
     fi
 }
 
-# мой cd 
-cdpath=( . ~ /mnt/MLIVE )
-
 # mp3 в нормальную кодировку 
 mp32utf() { find -iname '*.mp3' -print0 | xargs -0 mid3iconv -eCP1251 --remove-v1 }
-
-# конвертируем всякую дурь 
-mpg2flv() { ffmpeg -i $1 -ar 22050 -ab 32 -f flv -s 320x240 `echo $1 | awk -F . '{print $1}'`.flv }
-flv2xvid() { mencoder "$1" -vf scale=320:240  -ovc xvid -xvidencopts bitrate=250:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" }
-flv2divx() { mencoder "$1" --vf scale=320:240  -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=250:mbd=2:v4mv:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" }
 
 # top по имени процесса, правда только по полному 
 pidtop() {top -p `pidof $@ | tr ' ' ','`}
@@ -455,3 +447,7 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 cat 2guys.txt
 alias show_random_file_or_directory='ls | sed -n "$((RANDOM%$(ls | wc -l)+1))p"'
+
+toBackup() {cp "$1" "$1.backup"}
+fromBackup() {cp "$1.backup" "$1"}
+swapBackup() {cp "$1" "$1.backup.temp"; cp "$1.backup" "$1"; mv -f "$1.backup.temp" "$1.backup"}
