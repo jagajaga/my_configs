@@ -406,11 +406,15 @@ alias psgrep='ps aux | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
 # удаляем пустые строки и комментарии 
 alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
 
-
+#source ~/.zsh/git-prompt/zshrc.sh
 # 
 # команды при запуске zsh 
 # 
 PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
+#if [[ $PWD == $HOME ]]; then
+#PROMPT+=$' $(git_super_status)'
+#fi
+
 if [[ $EUID == 0 ]] 
 then
 PROMPT+=$' #%{\e[0m%} ' # user dir %
@@ -451,3 +455,4 @@ alias show_random_file_or_directory='ls | sed -n "$((RANDOM%$(ls | wc -l)+1))p"'
 toBackup() {cp "$1" "$1.backup"}
 fromBackup() {cp "$1.backup" "$1"}
 swapBackup() {cp "$1" "$1.backup.temp"; cp "$1.backup" "$1"; mv -f "$1.backup.temp" "$1.backup"}
+

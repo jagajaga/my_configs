@@ -5,6 +5,7 @@
 set history=700
 set confirm
 set cindent
+set t_Co=256
 autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
 autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
 let Tlist_GainFocus_On_ToggleOpen = 1
@@ -26,7 +27,7 @@ autocmd vimenter * cd %:p:h
 autocmd FileType cpp call CppMake()
 function! CppMake()
    if filereadable("Makefile")
-	   set makeprg=make
+       set makeprg=make\ -s
    else
 	   set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
    endif
@@ -59,13 +60,28 @@ Bundle "scrooloose/nerdcommenter"
 Bundle "scrooloose/nerdtree"
 Bundle "ujihisa/neco-ghc"
 Bundle "eagletmt/ghcmod-vim"
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height = 10
+Bundle 'mbbill/undotree'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-fugitive'
 
 set nocp
 filetype plugin on
 let NERDTreeShowHidden=1
 let g:necoghc_enable_detailed_browse = 1
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 10
+
+let g:airline_enable_fugitive=1
+let g:airline_enable_syntastic=1
+let g:airline_theme='dark'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_linecolumn_prefix = '¶ '
+let g:airline_fugitive_prefix = '⎇ '
+let g:airline_paste_symbol = 'ρ'
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+
 "set completeopt=menu,menuone
 "" -- configs --
 "let OmniCpp_MayCompleteDot = 1 " autocomplete with .
@@ -152,6 +168,7 @@ map <leader>q :let @+ = system("pastebinit " . " -f " . &filetype . " " . expand
 
 " Fast saving
 "map <C-E> <Esc>:tabedit %<.h<CR>
+nnoremap <C-u> :UndotreeToggle<CR>
 imap <F5> <Esc> :tabprev<CR>
 nmap <leader>w :w!<cr>
 map <F2> <Esc>:w !sudo tee %<CR>
@@ -849,4 +866,3 @@ imap <leader>Psi Ψ
 "imap <leader>C Ψ " Shadows ℂ
 imap <leader>Omega Ω
 imap <leader>V Ω
-"INTACTIC
