@@ -7,43 +7,43 @@
 
 -- Imports --
 -- stuff
-import XMonad
-import qualified XMonad.StackSet as W
-import qualified Data.Map as M
-import System.Exit
-import Prelude
-import XMonad.Util.Run (safeSpawn)
-import Graphics.X11.ExtraTypes.XF86
+import qualified Data.Map                     as M
+import           Graphics.X11.ExtraTypes.XF86
+import           Prelude
+import           System.Exit
+import           XMonad
+import qualified XMonad.StackSet              as W
+import           XMonad.Util.Run              (safeSpawn)
 
 -- actions
-import XMonad.Actions.GridSelect
-import XMonad.Actions.SpawnOn
-import XMonad.Actions.WindowGo (runOrRaise)
+import           XMonad.Actions.GridSelect
+import           XMonad.Actions.SpawnOn
+{-import XMonad.Actions.WindowGo (runOrRaise)-}
 -- hooks
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.UrgencyHook
-import XMonad.Hooks.InsertPosition
-import XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.InsertPosition
+import           XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.UrgencyHook
 
 -- layouts
-import XMonad.Layout.NoBorders
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.Renamed
-import XMonad.Layout.Minimize
-import XMonad.Layout.Maximize
-import XMonad.Layout.Tabbed
+import           XMonad.Layout.Maximize
+import           XMonad.Layout.Minimize
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.Renamed
+import           XMonad.Layout.ResizableTile
+import           XMonad.Layout.Tabbed
 
 -------------------------------------------------------------------------------
 -- Main --
 main :: IO ()
 main = xmonad =<< statusBar cmd pp kb conf
-	where
-		uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-		cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
-		pp = customPP
-		kb = toggleStrutsKey
-		conf = uhook myConfig
+    where
+        uhook = withUrgencyHookC NoUrgencyHook urgentConfig
+        cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
+        pp = customPP
+        kb = toggleStrutsKey
+        conf = uhook myConfig
 
 -------------------------------------------------------------------------------
 -- Configs --
@@ -56,37 +56,36 @@ myConfig = defaultConfig { workspaces = workspaces'
                          , keys = keys'
                          , layoutHook = layoutHook'
                          , manageHook = manageHook'
-						 , handleEventHook    = fullscreenEventHook
-						 , startupHook = startup
+                         , handleEventHook    = fullscreenEventHook
+                         , startupHook = startup
                          }
 
 
 startup :: X ()
 startup = do
-	safeSpawn "amixer" ["-q", "set", "Master", "on"]
-	spawn "xmodmap -e keysym Menu Super_L"
-	safeSpawn "autocpu" ["-s"]
-	spawnOn "IM" "skype"
+    safeSpawn "amixer" ["-q", "set", "Master", "on"]
+    spawn "xmodmap -e keysym Menu Super_L"
+    safeSpawn "autocpu" ["-s"]
+    spawnOn "IM" "skype"
 
 
 -------------------------------------------------------------------------------
 -- Window Management --
 manageHook' = composeAll [ isFullscreen             --> doFullFloat
-                         , className =? "MPlayer"   --> doFloat
-                         , className =? "mplayer2"  --> doFloat
                          , className =? "Gimp"      --> doFloat
                          , className =? "Skype"     --> doShift "IM"
-                         , className =? "Vlc"       --> doFloat
-						 --, elem "mc" (words appName) -> doFloat
-						 , insertPosition Below Newer
-						 , transience'
+                         , className =? "Vlc"       --> doCenterFloat
+                         , isDialog --> doFloat
+                         , isDialog --> insertPosition Above Older
+                         {-, insertPosition Below Newer-}
+                         , transience'
                          ]
 
 
 -------------------------------------------------------------------------------
 -- Looks --
 -- bar
-customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"
+customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "⎨" "⎬"
                      , ppHidden = xmobarColor "#C98F0A" ""
                      , ppHiddenNoWindows = xmobarColor "#003347" ""
                      , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]"
@@ -120,7 +119,7 @@ myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
 
 -- GridSelect
 myGSConfig = defaultGSConfig { gs_cellwidth = 160
-							, gs_navigate = myGSNavigation
+                            , gs_navigate = myGSNavigation
 }
 
 -- urgent notification
@@ -140,7 +139,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = ["All", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
+workspaces' = ["General", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
 
 -- layouts
 layoutHook' = (tile ||| mtile ||| tab ||| full)
@@ -171,7 +170,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_r     ), safeSpawn "dmenu_run" [])
     , ((modMask,               xK_w     ), safeSpawn "chromium" [])
     , ((modMask,               xK_a     ), safeSpawn (XMonad.terminal conf) ["-x", "mc"])
-    , ((modMask, 			   xK_c     ), kill)
+    , ((modMask,               xK_c     ), kill)
 
     -- multimedia
 -- Alsa mixer bindings
@@ -186,6 +185,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_F4             ), safeSpawn "mocp" ["-f"])
     , ((0, xF86XK_Launch6             ), safeSpawn "autocpu" [])
     , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
+    , ((modMask, xK_t), safeSpawn "screen-translate" [])
 
     -- grid
     , ((modMask,               xK_g     ), goToSelected myGSConfig)
@@ -205,10 +205,10 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_j     ), windows W.focusDown)
     , ((modMask,               xK_k     ), windows W.focusUp)
     , ((modMask,               xK_y     ), windows W.focusMaster)
-	, ((modMask,               xK_n     ), withFocused minimizeWindow)
+    , ((modMask,               xK_n     ), withFocused minimizeWindow)
     , ((modMask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin)
-	, ((modMask, xK_m     ), withFocused $ sendMessage . maximizeRestore)
- 
+    , ((modMask, xK_m     ), withFocused $ sendMessage . maximizeRestore)
+
 
     -- swapping
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
