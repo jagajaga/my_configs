@@ -40,7 +40,7 @@ main :: IO ()
 main = xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-        cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
+        cmd = "xmobar"
         pp = customPP
         kb = toggleStrutsKey
         conf = uhook myConfig
