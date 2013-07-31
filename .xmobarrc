@@ -30,6 +30,7 @@ Config {
                     , Run Com "/home/jaga/myscripts/currentlayout.sh" [] "myLayout" 20
                     , Run Com "/home/jaga/myscripts/autocpu.sh -c" [] "myGov" 50
                     , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 50
+                    , Run Com "/home/jaga/myscripts/low_battery.sh" [] "checkingBattery" 1200
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M" "date" 600
 					, Run Locks
                     , Run Network "wlan0" ["-L", "8", 

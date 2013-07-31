@@ -49,6 +49,7 @@ call vundle#rc()
 filetype plugin indent on
 
 Bundle 'majutsushi/tagbar'
+Bundle 'travitch/hasksyn'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'tpope/vim-surround'
 Bundle "gmarik/vundle"
@@ -81,6 +82,15 @@ let g:airline_fugitive_prefix = '⎇ '
 let g:airline_paste_symbol = 'ρ'
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
+
+" How many lines should be searched for context
+let g:hasksyn_indent_search_backward = 100
+
+" Should we try to de-indent after a return
+let g:hasksyn_dedent_after_return = 1
+
+" Should we try to de-indent after a catchall case in a case .. of
+let g:hasksyn_dedent_after_catchall_case = 1
 
 "set completeopt=menu,menuone
 "" -- configs --
