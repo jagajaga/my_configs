@@ -40,7 +40,7 @@ main :: IO ()
 main = xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-        cmd = "xmobar"
+        cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
         pp = customPP
         kb = toggleStrutsKey
         conf = uhook myConfig
@@ -179,6 +179,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
     , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
+     , ((modMask, xK_F9), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
+     
     , ((modMask, xK_F10), safeSpawn "amixer" ["-q", "set", "Master", "0"])
 --}
     , ((modMask, xK_F3             ), safeSpawn "mocp" ["-G"])

@@ -3,22 +3,22 @@
       [(1 2)
        nil "Interface to ack-like source code search tools" tar])
  (adaptive-wrap .
-		[(0 2)
+		[(0 5)
 		 nil "Smart line-wrapping with wrap-prefix" single])
  (all .
       [(1 0)
        nil "Edit all lines matching a given regexp" single])
  (auctex .
-	 [(11 86)
+	 [(11 86 1)
 	  nil "Integrated environment for *TeX*" tar])
  (cl-lib .
-	 [(0 2)
+	 [(0 3)
 	  nil "Properly prefixed CL functions and macros" single])
  (coffee-mode .
 	      [(0 4 1)
 	       nil "Major mode for CoffeeScript files" tar])
  (company .
-	  [(0 6 8)
+	  [(0 6 10)
 	   nil "Modular in-buffer completion framework" tar])
  (csv-mode .
 	   [(1 2)
@@ -57,7 +57,7 @@
 			[(1 1)
 			 nil "Parse and browse f90 interfaces" single])
  (ggtags .
-	 [(0 6 3)
+	 [(0 6 6)
 	  nil "GNU Global source code tagging system" single])
  (heap .
        [(0 3)
@@ -69,12 +69,12 @@
 	      [(1 0)
 	       nil "Major mode for Jgraph files" single])
  (js2-mode .
-	   [(20130307)
+	   [(20130619)
 	    ((emacs
 	      (24 1)))
 	    "Improved JavaScript editing mode" single])
  (jumpc .
-	[(2 0)
+	[(3 0)
 	 nil "jump to previous insertion points" single])
  (lex .
       [(1 1)
@@ -110,13 +110,13 @@
 	    [(1 1)
 	     nil "highlight groups of digits in long numbers" single])
  (oauth2 .
-	 [(0 8)
+	 [(0 9)
 	  nil "OAuth 2.0 Authorization Protocol" single])
  (omn-mode .
 	   [(1 0)
 	    nil "Support for OWL Manchester Notation" single])
  (org .
-      [(20130506)
+      [(20130729)
        nil "Outline-based notes management and organizer" tar])
  (quarter-plane .
 		[(0 1)
@@ -146,7 +146,7 @@
 	  [(1 0 4)
 	   nil "Sokoban game for emacs" tar])
  (svg-clock .
-	    [(0 4)
+	    [(0 5)
 	     nil "Analog clock using Scalable Vector Graphics" single])
  (tNFA .
        [(0 1 1)
@@ -167,7 +167,7 @@
 		  [(0 1)
 		   nil "Unicode confusables table" tar])
  (vlf .
-      [(0 2)
+      [(0 9)
        nil "View Large Files" single])
  (windresize .
 	     [(0 1)
