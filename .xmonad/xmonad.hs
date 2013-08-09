@@ -27,9 +27,12 @@ import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.UrgencyHook
 
 -- layouts
+import           XMonad.Layout.Grid
+import           XMonad.Layout.IM
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.NoBorders
+import           XMonad.Layout.PerWorkspace
 import           XMonad.Layout.Renamed
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
@@ -142,9 +145,10 @@ tabTheme1 = defaultTheme { decoHeight = 16
 workspaces' = ["General", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
 
 -- layouts
-layoutHook' = (tile ||| mtile ||| tab ||| full)
+layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
   where
     rt = ResizableTall 1 (2/100) (1/2) []
+    skypeLayout = renamed [Replace "[][]"] $ withIM (18/100) (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) (Tall 1 0.02 0.5)
     tile = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
     mtile = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
     tab = renamed [Replace "T"] $ noBorders $ tabbed shrinkText tabTheme1
@@ -180,7 +184,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
      , ((modMask, xK_F9), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
-     
+
     , ((modMask, xK_F10), safeSpawn "amixer" ["-q", "set", "Master", "0"])
 --}
     , ((modMask, xK_F3             ), safeSpawn "mocp" ["-G"])
