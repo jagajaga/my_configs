@@ -174,7 +174,7 @@ set viminfo='10,\"100,:20,%,n~/.viminfo
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm
 $"|endif|endif
 
-map <leader>q :let @+ = system("pastebinit " . " -f " . &filetype . " " . expand("%"))<CR>
+map <leader>Q :let @+ = system("pastebinit " . " -f " . &filetype . " " . expand("%"))<CR>
 
 " Fast saving
 "map <C-E> <Esc>:tabedit %<.h<CR>
@@ -876,3 +876,7 @@ imap <leader>Psi Ψ
 "imap <leader>C Ψ " Shadows ℂ
 imap <leader>Omega Ω
 imap <leader>V Ω
+augroup vimrc
+  au BufReadPre * setlocal foldmethod=indent
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
