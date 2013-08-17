@@ -49,18 +49,19 @@ call vundle#rc()
 filetype plugin indent on
 
 Bundle 'majutsushi/tagbar'
+Bundle 'tpope/vim-surround'
 Bundle 'travitch/hasksyn'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'tpope/vim-surround'
-Bundle "gmarik/vundle"
-Bundle "rkulla/pydiction"
-Bundle "vim-scripts/a.vim"
-Bundle "Valloric/YouCompleteMe"
-Bundle "scrooloose/syntastic"
-Bundle "scrooloose/nerdcommenter"
-Bundle "scrooloose/nerdtree"
-Bundle "ujihisa/neco-ghc"
-Bundle "eagletmt/ghcmod-vim"
+Bundle 'gmarik/vundle'
+Bundle 'rkulla/pydiction'
+Bundle 'vim-scripts/a.vim'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'crooloose/nerdtree'
+Bundle 'ujihisa/neco-ghc'
+Bundle 'eagletmt/ghcmod-vim'
 Bundle 'mbbill/undotree'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
