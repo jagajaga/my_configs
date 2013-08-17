@@ -8,9 +8,6 @@ set cindent
 set t_Co=256
 autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
 autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Exit_OnlyWindow = 1
 set runtimepath+=~/.vim/bundle/taglist.vim/plugin
 " Enable filetype plugins
 filetype plugin on
@@ -65,10 +62,13 @@ Bundle 'eagletmt/ghcmod-vim'
 Bundle 'mbbill/undotree'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
+Bundle 'godlygeek/tabular'
+Bundle 'Lokaltog/vim-easymotion'
 
 set nocp
 filetype plugin on
 let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
 let g:necoghc_enable_detailed_browse = 1
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 10
@@ -102,7 +102,8 @@ let g:hasksyn_dedent_after_catchall_case = 1
 "let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
 "let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
 
-
+let tagbar_autofocus=1
+let tagbar_autoclose=1
 
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
@@ -135,7 +136,7 @@ endfunction
 
 " -- ctags --
 " map <ctrl>+F12 to generate ctags for current folder:
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
 " add current directory's generated tags file to available tags
 "set tags+=./tags
 "set tags+=/usr/include/tags
@@ -155,8 +156,8 @@ endfunction
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
-imap <F10> <Esc>:TlistToggle<CR>
-nmap <F10> <Esc>:TlistToggle<CR>
+imap <F10> <Esc>:Tagbar<CR>
+nmap <F10> <Esc>:Tagbar<CR>
 imap <F11> <Esc>:NERDTreeToggle<CR>
 nmap <F11> <Esc>:NERDTreeToggle<CR>
 " Num strings
