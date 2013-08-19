@@ -6,36 +6,59 @@
 
 
 # hlsearch on (H) or off (h):
-~H
+~h
 # Last Search Pattern:
-~MSle0~/K
+~MSle0~/import XMonad.Hooks.EwmhDesktops
 
 # Last Substitute Search Pattern:
-~MSle0&
+~MSle0&className
 
 # Last Substitute String:
-$
+$title
 
 # Command Line History (newest to oldest):
 :wq
 :w
 :W
-:'<,'>
-:help surround
-:scriptnames
 :q!
-:BundleInstall
-:q
 :Wq
-:й!
+:цй
+:ц
+:'<,'>Tabularize /=
+:'<,'>Tabularize /move
+:'<,'>Tabularize /^[^=]*\zs,
+:'<,'>Tabularize /^[^,]*\zs,
+:'<,'>Tabularize /[^,]^[^,]*\zs,
+:'<,'>Tabularize /[^,][^,]*\zs,
+:'<,'>Tabularize /^[^,]^[^,]*\zs,
+:'<,'>Tabularize /,
+:'<,'>Tabularize /=/r0
+:'<,'>Tabularize /=/r1
+:'<,'>Tabularize /-->
+:'<,'>Tabularize /'--->'
+:'<,'>Tabularize /---\>
 
 # Search String History (newest to oldest):
-?/K
-?/C-G
-?/bundle
-?/path
-?/j
-?/nore
+?/import XMonad.Hooks.EwmhDesktops
+?/cma
+?/maxim
+?/mini
+? \<layoutHook\>
+?/ratio
+? className
+?/skype
+? шc
+? шс
+?/шс
+?/шся
+?/ш
+? \s\+$
+?/пальчиком
+? cраже
+? сраже
+?/.
+?/венка
+? с
 
 # Expression History (newest to oldest):
 
@@ -44,25 +67,26 @@ $
 # Input Line History (newest to oldest):
 
 # Registers:
-""0	CHAR	0
-	c
+"0	CHAR	0
+	xfce4-terminal --title=cmatrix -e cmatrix --maximize
 "1	LINE	0
-	kjkjk
+	
 "2	LINE	0
-	
+	    spawn "xfce4-terminal --title=cmatrix -e cmatrix --maximize"
 "3	LINE	0
-	
+	                         , title =? "cmatrix"             --> insertPosition Below Newer
 "4	LINE	0
 	
 "5	LINE	0
-	Bundle "eagletmt/ghcmod-vim"
+	
 "6	LINE	0
-	Bundle 'mbbill/undotree'
+	className =? "Xfce4-notifyd" --> 
 "7	LINE	0
-	Bundle 'mbbill/undotree'
-"8	CHAR	0
-	u
-"9	LINE	0
+	
+"8	LINE	0
+	
+"9	CHAR	0
+	doIgnore
 	
 "a@	CHAR	0
 	cs"'
@@ -71,7 +95,7 @@ $
 "e	CHAR	0
 	f}a
 "h	CHAR	0
-	
+	.
 "j	CHAR	0
 	оо
 "k	CHAR	0
@@ -84,149 +108,285 @@ $
 	uuu:w
 "w	CHAR	0
 	f:d$j0
-"-	CHAR	0
-	" "
+""-	CHAR	0
+	0
 
 # File marks:
-'0  62  7  ~/.vimrc
-'1  52  0  ~/.vimrc
-'2  430  0  ~/.zshrc
-'3  1  0  /etc/vimrc.pacnew
-'4  1  0  /tmp/yaourt-tmp-jaga/aur-tox-qt-gui/PKGBUILD
-'5  208  0  ~/temp/vreen/build/Makefile
-'6  56  7  ~/.xmobarrc
-'7  7  25  ~/myscripts/low_battery.sh
-'8  2  0  ~/Dropbox/configuration.nix
-'9  454  4  ~/.vimrc
+'0  75  37  ~/.xmonad/xmonad.hs
+'1  89  70  ~/.xmonad/xmonad.hs
+'2  37  5  ~/Main.hs
+'3  38  0  ~/Main.hs
+'4  18  0  ~/.xinitrc
+'5  2  38  ~/.devilspie/cmatrix.ds
+'6  23  0  ~/.xmonad/xmonad.hs
+'7  4688  2  ~/.zhistory
+'8  1  0  ~/zz
+'9  1  0  ~/.zhistory
 
 # Jumplist (newest first):
--'  62  7  ~/.vimrc
--'  451  201  ~/.vimrc
--'  859  13  ~/.vimrc
--'  68  0  ~/.vimrc
--'  52  0  ~/.vimrc
--'  64  27  ~/.vimrc
--'  63  24  ~/.vimrc
--'  65  0  ~/.vimrc
--'  61  32  ~/.vimrc
--'  60  28  ~/.vimrc
--'  59  30  ~/.vimrc
--'  58  25  ~/.vimrc
--'  56  21  ~/.vimrc
--'  57  24  ~/.vimrc
--'  51  25  ~/.vimrc
--'  49  14  ~/.vimrc
--'  50  3  ~/.vimrc
--'  1  0  ~/.vimrc
--'  454  0  ~/.vimrc
--'  430  0  ~/.zshrc
--'  1  0  ~/.zshrc
--'  1  0  /etc/vimrc.pacnew
--'  1  0  /tmp/yaourt-tmp-jaga/aur-tox-qt-gui/PKGBUILD
+-'  75  37  ~/.xmonad/xmonad.hs
+-'  89  25  ~/.xmonad/xmonad.hs
+-'  1  0  ~/.xmonad/xmonad.hs
+-'  28  0  ~/.xmonad/xmonad.hs
+-'  27  0  ~/.xmonad/xmonad.hs
+-'  37  5  ~/Main.hs
+-'  1  0  ~/Main.hs
+-'  38  3  ~/Main.hs
+-'  18  0  ~/.xinitrc
+-'  1  0  ~/.xinitrc
+-'  2  38  ~/.devilspie/cmatrix.ds
+-'  1  0  ~/.devilspie/cmatrix.ds
+-'  23  0  ~/.xmonad/xmonad.hs
+-'  76  4  ~/.xmonad/xmonad.hs
+-'  236  58  ~/.xmonad/xmonad.hs
+-'  235  58  ~/.xmonad/xmonad.hs
+-'  111  0  ~/.xmonad/xmonad.hs
+-'  162  37  ~/.xmonad/xmonad.hs
+-'  37  31  ~/.xmonad/xmonad.hs
+-'  226  57  ~/.xmonad/xmonad.hs
+-'  224  0  ~/.xmonad/xmonad.hs
+-'  163  50  ~/.xmonad/xmonad.hs
+-'  88  0  ~/.xmonad/xmonad.hs
+-'  2  0  ~/.xmonad/xmonad.hs
+-'  30  8  ~/.xmonad/xmonad.hs
+-'  142  0  ~/.xmonad/xmonad.hs
+-'  259  0  ~/.xmonad/xmonad.hs
+-'  101  0  ~/.xmonad/xmonad.hs
+-'  114  0  ~/.xmonad/xmonad.hs
+-'  50  0  ~/.xmonad/xmonad.hs
+-'  58  0  ~/.xmonad/xmonad.hs
+-'  57  0  ~/.xmonad/xmonad.hs
+-'  84  0  ~/.xmonad/xmonad.hs
+-'  80  0  ~/.xmonad/xmonad.hs
+-'  90  25  ~/.xmonad/xmonad.hs
+-'  4688  2  ~/.zhistory
+-'  4691  0  ~/.zhistory
+-'  1  0  ~/.zhistory
+-'  1  0  ~/zz
+-'  86  11  ~/.xmonad/xmonad.hs
+-'  255  0  ~/.xmonad/xmonad.hs
+-'  83  66  ~/.xmonad/xmonad.hs
+-'  65  27  ~/.xmonad/xmonad.hs
+-'  33  0  ~/.xmonad/xmonad.hs
+-'  92  0  ~/.xmonad/xmonad.hs
+-'  85  45  ~/.xmonad/xmonad.hs
+-'  6  0  ~/.xmonad/xmonad.hs
+-'  142  15  ~/.vim/bundle/tabular/doc/Tabular.txt
+-'  1  0  ~/.vim/bundle/tabular/doc/Tabular.txt
+-'  4688  2  ~/.zhistory
+-'  4691  0  ~/.zhistory
+-'  1  0  ~/.zhistory
+-'  1  0  ~/zz
+-'  82  0  ~/.xmonad/xmonad.hs
+-'  22  31  ~/.xmonad/xmonad.hs
+-'  87  38  ~/.xmonad/xmonad.hs
+-'  253  0  ~/.xmonad/xmonad.hs
+-'  160  36  ~/.xmonad/xmonad.hs
+-'  161  36  ~/.xmonad/xmonad.hs
+-'  81  66  ~/.xmonad/xmonad.hs
+-'  35  0  ~/.xmonad/xmonad.hs
+-'  63  27  ~/.xmonad/xmonad.hs
+-'  74  81  ~/.xmonad/xmonad.hs
+-'  29  0  ~/.xmonad/xmonad.hs
+-'  4688  2  ~/.zhistory
+-'  4691  0  ~/.zhistory
+-'  1  0  ~/.zhistory
+-'  1  0  ~/zz
+-'  142  15  ~/.vim/bundle/tabular/doc/Tabular.txt
+-'  4688  2  ~/.zhistory
+-'  4691  0  ~/.zhistory
+-'  1  0  ~/.zhistory
+-'  37  5  ~/Main.hs
+-'  1  0  ~/Main.hs
+-'  37  5  ~/Main.hs
+-'  1  0  ~/Main.hs
+-'  38  3  ~/Main.hs
+-'  18  0  ~/.xinitrc
+-'  1  0  ~/.xinitrc
+-'  2  38  ~/.devilspie/cmatrix.ds
+-'  1  0  ~/.devilspie/cmatrix.ds
+-'  37  5  ~/Main.hs
+-'  1  0  ~/Main.hs
+-'  38  3  ~/Main.hs
+-'  18  0  ~/.xinitrc
+-'  1  0  ~/.xinitrc
+-'  2  38  ~/.devilspie/cmatrix.ds
+-'  1  0  ~/.devilspie/cmatrix.ds
+-'  37  5  ~/Main.hs
+-'  1  0  ~/Main.hs
+-'  38  3  ~/Main.hs
+-'  18  0  ~/.xinitrc
+-'  1  0  ~/.xinitrc
+-'  2  38  ~/.devilspie/cmatrix.ds
 
 # Buffer list:
-%~/.vimrc	62	7
-%~/[Vundle] Installer	20	0
+%~/.xmonad/xmonad.hs	75	37
 
 # History of marks within files (newest to oldest):
 
-> ~/.vimrc
-	"	62	7
-	^	62	9
-	.	62	7
-	+	52	26
-	+	50	0
-	+	49	9
-	+	52	0
-	+	51	0
-	+	52	0
-	+	52	0
-	+	51	7
-	+	58	0
-	+	57	7
+> ~/.xmonad/xmonad.hs
+	"	75	37
+	^	75	82
+	.	75	81
+	+	89	0
+	+	87	66
+	+	91	0
+	+	87	68
+	+	88	0
+	+	91	0
+	+	90	0
+	+	89	0
+	+	75	81
+	+	87	0
+	+	75	79
+	+	87	0
+	+	88	0
+	+	87	0
+	+	88	0
+	+	88	0
+	+	87	0
+	+	88	0
+	+	88	0
+	+	88	0
+	+	87	101
+	+	32	0
+	+	87	102
+	+	75	0
+	+	76	0
+	+	76	0
+	+	76	0
+	+	75	80
+	+	87	108
+	+	88	0
+	+	87	108
+	+	161	0
+	+	161	0
+	+	88	0
+	+	88	0
+	+	88	0
+	+	22	31
+	+	88	32
+	+	87	120
+	+	88	0
+	+	75	76
+	+	87	0
+	+	88	0
+	+	86	23
+	+	87	0
+	+	91	0
+	+	86	0
+	+	83	0
+	+	83	0
+	+	86	0
+	+	86	0
+	+	1	0
+	+	88	0
+	+	75	0
+	+	75	0
+	+	86	0
+	+	83	0
+	+	86	0
+	+	86	0
+	+	86	0
+	+	83	0
+	+	85	0
+	+	93	0
 	+	57	0
-	+	56	7
-	+	58	7
-	+	59	7
-	+	60	7
-	+	61	7
-	+	62	7
-	+	63	7
-	+	64	7
-	+	63	0
-	+	64	0
-	+	65	0
-	+	65	0
-	+	63	0
-	+	64	0
-	+	65	0
-	+	65	0
-	+	63	7
-	+	64	7
-	+	62	0
-	+	63	0
-	+	63	0
-	+	68	0
-	+	68	0
-	+	68	0
-	+	63	0
-	+	62	7
+	+	57	0
+	+	67	0
+	+	57	0
+	+	57	0
+	+	57	45
+	+	49	0
+	+	49	0
+	+	53	0
+	+	113	0
+	+	113	0
+	+	127	0
+	+	113	0
+	+	127	0
+	+	113	0
+	+	100	0
+	+	100	0
+	+	127	0
+	+	114	24
+	+	143	0
+	+	88	118
+	+	29	8
+	+	88	84
+	+	12	24
+	+	1	0
+	+	88	0
+	+	87	0
+	+	75	0
+	+	57	14
+	+	30	0
+	+	31	0
+	+	30	0
+	+	1	0
+	+	57	11
+	+	27	0
+	+	89	57
+	+	75	81
+	a	82	66
+	k	162	39
 
-> ~/[Vundle] Installer
-	"	20	0
+> ~/Main.hs
+	"	37	5
+	.	38	0
+	+	38	0
+	+	38	0
+	+	38	0
+	+	38	0
+
+> ~/.xinitrc
+	"	18	0
+	^	18	54
+	.	18	53
+	+	18	51
+	+	17	10
+	+	18	53
+
+> ~/.devilspie/cmatrix.ds
+	"	2	38
+	^	2	39
+	.	2	38
+	+	2	38
+
+> ~/temp.sh
+	"	1	0
+	^	1	116
+	.	1	30
+	+	1	0
+	+	1	0
+	+	1	13
+	+	1	16
+	+	1	0
+	+	1	30
+	p	1	0
+	v	1	0
+
+> ~/.vim/bundle/tabular/doc/Tabular.txt
+	"	142	15
+
+> ~/.zhistory
+	"	4688	2
+	^	4688	3
+	.	4688	2
+	+	4688	2
+
+> ~/zz
+	"	1	0
 	.	1	0
-	+	20	0
+	+	4691	0
 	+	1	0
 
-> ~/.vim/bundle/vim-surround/doc/surround.txt
-	"	87	26
-
-> ~/.zshrc
-	"	430	0
-	^	430	30
-	.	430	29
-	+	430	29
-
-> /etc/vimrc
+> ~/.devilspie/DesktopConsole.ds
 	"	1	0
+	.	1	0
+	+	1	0
 
-> /etc/vimrc.pacnew
+> ~/matrix
 	"	1	0
-
-> /tmp/yaourt-tmp-jaga/aur-tox-qt-gui/PKGBUILD
-	"	1	0
-
-> ~/temp/vreen/build/Makefile
-	"	208	0
-
-> ~/.xmobarrc
-	"	56	7
-	^	50	30
-	.	56	0
-	+	46	29
-	+	50	19
-	+	55	220
-	+	42	16
-	+	47	16
-	+	50	29
-	+	33	2
-	+	55	0
-	+	56	0
-	+	56	0
-	+	56	0
-	+	55	47
-	+	56	0
-
-> ~/myscripts/low_battery.sh
-	"	7	25
-	^	7	26
-	.	7	25
-	+	4	58
-	+	5	0
-	+	4	57
-	+	5	16
-	+	4	10
-	+	6	0
-	+	7	27
-	+	9	30
-	+	7	25
+	.	1	0
+	+	1	0
