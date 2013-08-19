@@ -9,6 +9,7 @@
 -- stuff
 import qualified Data.Map                     as M
 import           Graphics.X11.ExtraTypes.XF86
+import           Graphics.X11.Types
 import           Prelude
 import           System.Exit
 import           XMonad
@@ -16,6 +17,7 @@ import qualified XMonad.StackSet              as W
 import           XMonad.Util.Run              (safeSpawn)
 
 -- actions
+import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
 {-import XMonad.Actions.WindowGo (runOrRaise)-}
@@ -24,7 +26,9 @@ import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.InsertPosition
 import           XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.Place
 import           XMonad.Hooks.UrgencyHook
+
 
 -- layouts
 import           XMonad.Layout.Grid
@@ -43,43 +47,48 @@ main :: IO ()
 main = xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-        cmd = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
-        pp = customPP
-        kb = toggleStrutsKey
-        conf = uhook myConfig
+        cmd   = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
+        pp    = customPP
+        kb    = toggleStrutsKey
+        conf  = uhook myConfig
 
 -------------------------------------------------------------------------------
 -- Configs --
-myConfig = defaultConfig { workspaces = workspaces'
-                         , modMask = modMask'
-                         , borderWidth = borderWidth'
-                         , normalBorderColor = normalBorderColor'
+myConfig = defaultConfig { workspaces         = workspaces'
+                         , modMask            = modMask'
+                         , borderWidth        = borderWidth'
+                         , normalBorderColor  = normalBorderColor'
                          , focusedBorderColor = focusedBorderColor'
-                         , terminal = terminal'
-                         , keys = keys'
-                         , layoutHook = layoutHook'
-                         , manageHook = manageHook'
+                         , terminal           = terminal'
+                         , keys               = keys'
+                         , layoutHook         = layoutHook'
+                         , manageHook         = manageHook'
                          , handleEventHook    = fullscreenEventHook
-                         , startupHook = startup
+                         , startupHook        = startup
                          }
 
 
 startup :: X ()
 startup = do
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
-    spawn "xmodmap -e keysym Menu Super_L"
+    spawn "xmodmap -e \"keysym Menu = Super_L\""
+    spawn "xfce4-terminal --title=cmatrix -e cmatrix --maximize --geometry=200x100+0+17"
     safeSpawn "autocpu" ["-s"]
     spawnOn "IM" "skype"
 
 
 -------------------------------------------------------------------------------
 -- Window Management --
-manageHook' = composeAll [ isFullscreen             --> doFullFloat
-                         , className =? "Gimp"      --> doFloat
-                         , className =? "Skype"     --> doShift "IM"
-                         , className =? "Vlc"       --> doCenterFloat
-                         , isDialog --> doFloat
-                         , isDialog --> insertPosition Above Older
+manageHook' = composeAll [ isFullscreen                   --> doFullFloat
+                         , className =? "Gimp"            --> doFloat
+                         , className =? "Skype"           --> doShift "IM"
+                         , className =? "Vlc"             --> doCenterFloat
+                         , className =? "Xfce4-notifyd"   --> doF W.focusDown <+> doF copyToAll
+                         {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
+                         {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
+                         , title =? "cmatrix"             --> doIgnore 
+                         , isDialog                       --> doFloat
+                         , isDialog                       --> insertPosition Above Older
                          {-, insertPosition Below Newer-}
                          , transience'
                          ]
@@ -102,7 +111,7 @@ myGSNavigation:: TwoD a (Maybe a)
 myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
   where navKeyMap = M.fromList [
            ((0,xK_Escape), cancel)
-          ,((0,xK_space), select)
+          ,((0,xK_space) , select)
           ,((0,xK_slash) , substringSearch myGSNavigation)
           ,((0,xK_Left)  , move (-1,0)  >> myGSNavigation)
           ,((0,xK_h)     , move (-1,0)  >> myGSNavigation)
@@ -129,7 +138,7 @@ myGSConfig = defaultGSConfig { gs_cellwidth = 160
 urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
 
 -- borders
-borderWidth' = 1
+borderWidth'        = 1
 normalBorderColor'  = "#333333"
 focusedBorderColor' = "#AFAF87"
 
