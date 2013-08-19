@@ -72,7 +72,7 @@ startup :: X ()
 startup = do
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
     spawn "xmodmap -e \"keysym Menu = Super_L\""
-    spawn "xfce4-terminal --title=cmatrix -e cmatrix --maximize --geometry=200x100+0+17"
+    spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 7\" --maximize --geometry=200x100+0+17"
     safeSpawn "autocpu" ["-s"]
     spawnOn "IM" "skype"
 
