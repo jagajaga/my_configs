@@ -427,7 +427,7 @@ alias l='ls -lhF --group-directories-first --color=auto'
 alias grep='grep --colour=auto'
 export PATH="/opt/android-sdk/tools:${PATH}"
 export PATH="/opt/android-sdk/platform-tools:${PATH}"
-export PATH="~/.gem/ruby/1.9.1/bin:${PATH}"
+export PATH="~/.gem/ruby/2.0.0/bin:${PATH}"
 
 
 alias h='htop'
