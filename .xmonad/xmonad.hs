@@ -72,7 +72,7 @@ startup :: X ()
 startup = do
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
     spawn "xmodmap -e \"keysym Menu = Super_L\""
-    spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 7\" --maximize --geometry=200x100+0+17"
+    {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
     safeSpawn "autocpu" ["-s"]
     spawnOn "IM" "skype"
 
@@ -190,7 +190,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
-    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/mystrixcripts/getvolume.sh -s")
     , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
      , ((modMask, xK_F9), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
