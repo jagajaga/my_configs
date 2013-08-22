@@ -83,7 +83,7 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          , className =? "Gimp"            --> doFloat
                          , className =? "Skype"           --> doShift "IM"
                          , className =? "Vlc"             --> doCenterFloat
-                         , className =? "Xfce4-notifyd"   --> doF W.focusDown <+> doF copyToAll
+                         , className =? "Xfce4-notifyd"   --> doF W.focusDown 
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
                          , title =? "cmatrix"             --> doIgnore 
@@ -190,7 +190,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
-    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/mystrixcripts/getvolume.sh -s")
+    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
      , ((modMask, xK_F9), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
