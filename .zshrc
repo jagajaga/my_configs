@@ -451,6 +451,7 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 cat 2guys.txt
 alias show_random_file_or_directory='ls | sed -n "$((RANDOM%$(ls | wc -l)+1))p"'
+alias vim='vim -p'
 
 toBackup() {cp "$1" "$1.backup"}
 fromBackup() {cp "$1.backup" "$1"}
