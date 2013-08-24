@@ -19,10 +19,10 @@ else
 
 	if [  "$STATE" == "PAUSE" ]
 	then
-		expr substr "(Paused) $Artist - $Song |" 1 200
+		expr substr "◼ $Artist - $Song |" 1 200
 		exit
 	fi
 
-	expr substr "$Artist - $Song |" 2 200
+	expr substr "\► $Artist - $Song |" 2 200
 
 fi
