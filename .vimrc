@@ -26,7 +26,7 @@ function! CppMake()
    if filereadable("Makefile")
        set makeprg=make\ -s
    else
-	   set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
+       set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
    endif
 endfunction
 autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
