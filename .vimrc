@@ -39,6 +39,7 @@ autocmd BufRead *.hs set makeprg=ghc\ --make\ %
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
+" To use vundle just `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 set nocompatible
 filetype off 
 set rtp+=~/.vim/bundle/vundle/
@@ -180,6 +181,7 @@ map <leader>Q :let @+ = system("pastebinit " . " -f " . &filetype . " " . expand
 
 " Fast saving
 "map <C-E> <Esc>:tabedit %<.h<CR>
+vnoremap p "_dP
 nnoremap <C-u> :UndotreeToggle<CR>
 imap <F5> <Esc> :tabprev<CR>
 nmap <leader>w :w!<cr>
