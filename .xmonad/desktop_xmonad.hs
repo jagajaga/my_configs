@@ -73,10 +73,11 @@ startup = do
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
     {-spawn "killall trayer || sleep 1 && trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 8 --transparent true --alpha 0 --tint 0x000000 --height 18" -}
     spawn "xmodmap -e \"keysym Menu = Super_L\""
-    spawn "setxkbmap -layout usρu(winkeys) -option grp:caps_toggle"
+    spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
     safeSpawn "autocpu" ["-s"]
     spawnOn "IM" "skype"
+    spawnOn "Steam" "steam"
 
 
 -------------------------------------------------------------------------------
@@ -84,6 +85,7 @@ startup = do
 manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          , className =? "Gimp"            --> doFloat
                          , className =? "Skype"           --> doShift "IM"
+                         , className =? "Steam"           --> doShift "Steam"
                          , className =? "Vlc"             --> doCenterFloat
                          , className =? "Xfce4-notifyd"   --> doF W.focusDown
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
@@ -153,7 +155,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = ["General", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
+workspaces' = ["General", "Programming", "Work", "IM", "Media", "Steam", "7", "8", "9"]
 
 -- layouts
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
@@ -184,7 +186,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask,               xK_r     ), safeSpawn "dmenu_run" [])
     , ((modMask,               xK_w     ), safeSpawn "chromium" [])
-    , ((modMask,               xK_a     ), safeSpawn (XMonad.terminal conf) ["-x", "mc"])
+    , ((modMask,               xK_a     ), safeSpawn "spacefm" [])
     , ((modMask,               xK_c     ), kill)
 
     -- multimedia
