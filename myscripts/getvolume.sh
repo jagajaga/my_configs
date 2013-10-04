@@ -1,5 +1,5 @@
 #!/bin/bash
-volume=$(amixer get Master | grep % | cut -d ' ' -f 6 | grep -Eo '[0-9]*')
+volume=$(amixer get Master | grep % | cut -d ' ' -f 7 | grep -Eo '[0-9]*')
 state=$(amixer get Master | grep off | cut -d ' ' -f 8 | grep -Eo '[a-z]*')
 if [ "$state" = "off" ]
 then
