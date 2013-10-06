@@ -13,7 +13,7 @@ sudo mount /dev/sda2 &
 mount-tray &
 lastfmsubmitd --no-daemon &
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 6 --transparent true --alpha 0 --tint 0x000000 --height 17 &
-feh --bg-scale ~/Wallpapers/7753-arch-linux-1600x900-computer-wallpaper.jpg
+feh --bg-scale ~/Dropbox/Camera Uploads/etc/haskellwall.jpg
 #devilspie &
 #xfce4-terminal --title=cmatrix -e cmatrix --maximize &
 xmodmap -e keysym Menu = Super_L
