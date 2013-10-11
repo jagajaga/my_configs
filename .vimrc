@@ -880,7 +880,7 @@ imap <leader>Psi Ψ
 "imap <leader>C Ψ " Shadows ℂ
 imap <leader>Omega Ω
 imap <leader>V Ω
-augroup vimrc
-  au BufReadPre * setlocal foldmethod=indent
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
+"augroup vimrc
+  "au BufReadPre * setlocal foldmethod=indent
+  "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+"augroup END
