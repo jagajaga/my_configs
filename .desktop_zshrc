@@ -456,4 +456,4 @@ alias vim='vim -p'
 toBackup() {cp "$1" "$1.backup"}
 fromBackup() {cp "$1.backup" "$1"}
 swapBackup() {cp "$1" "$1.backup.temp"; cp "$1.backup" "$1"; mv -f "$1.backup.temp" "$1.backup"}
-
+alias getstats="cat ~/.zhistory | grep -E '^:\s([0-9]+):([0-9]+);([a-zA-Z]+)(.*)' | sed -r -e 's/^: ([0-9]+):0;([a-zA-Z]+)(.*)/\2/g' | sort | uniq -c | sort -n"
