@@ -35,7 +35,7 @@ autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ g
 autocmd BufRead *.asm set syntax=nasm
 autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-autocmd BufRead *.hs set makeprg=ghc\ --make\ %
+autocmd BufRead *.hs set makeprg=ghc\ -O3\ --make\ %
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
