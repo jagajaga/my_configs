@@ -75,7 +75,6 @@ startup = do
     spawn "xmodmap -e \"keysym Menu = Super_L\""
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
-    safeSpawn "autocpu" ["-s"]
     spawnOn "IM" "skype"
     spawnOn "Steam" "steam"
 
@@ -91,8 +90,8 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
                          , title =? "cmatrix"             --> doIgnore
-                         , isDialog                       --> doFloat
-                         , isDialog                       --> insertPosition Above Older
+                         {-, isDialog                       --> doFloat-}
+                         {-, isDialog                       --> insertPosition Above Older-}
                          {-, insertPosition Below Newer-}
                          , transience'
                          ]
@@ -115,7 +114,7 @@ myGSNavigation:: TwoD a (Maybe a)
 myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
   where navKeyMap = M.fromList [
            ((0,xK_Escape), cancel)
-          ,((0,xK_space) , select)
+          ,((0,xK_Return) , select)
           ,((0,xK_slash) , substringSearch myGSNavigation)
           ,((0,xK_Left)  , move (-1,0)  >> myGSNavigation)
           ,((0,xK_h)     , move (-1,0)  >> myGSNavigation)
@@ -205,10 +204,10 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioPrev), safeSpawn "mocp" ["-r"])
     , ((0, xF86XK_AudioStop), safeSpawn "mocp" ["-s"])
     , ((0, xF86XK_AudioMedia), spawn "xfce4-terminal -e mocp")
-    , ((0, xF86XK_Sleep), spawn "/home/jaga/myscripts/lockandsuspend.sh") --TODO
-    , ((0, xF86XK_Launch6             ), safeSpawn "autocpu" [])
+    , ((0, xF86XK_Sleep), spawn "/home/jaga/myscripts/lockandsuspend.sh")
+    , ((0, xK_Pause), safeSpawn "/home/jaga/myscripts/autocpu.sh" [])
     , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
-    , ((modMask, xK_t), safeSpawn "screen-translate" [])
+    , ((modMask, xK_t), safeSpawn "/home/jaga/myscripts/screen-translate.sh" [])
 
     -- grid
     , ((modMask,               xK_g     ), goToSelected myGSConfig)
