@@ -65,6 +65,8 @@ Bundle          'bling/vim-airline'
 Bundle         'tpope/vim-fugitive'
 Bundle          'godlygeek/tabular'
 Bundle    'Lokaltog/vim-easymotion'
+Bundle 'altercation/vim-colors-solarized'
+"Bundle 'godlygeek/csapprox'
 
 set nocp
 filetype plugin on
@@ -294,7 +296,9 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme desert
+let g:solarized_termcolors=256
+colorscheme solarized "desert
+"colorscheme desert
 set background=dark
 
 " Set extra options when running in GUI mode
