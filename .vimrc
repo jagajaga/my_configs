@@ -66,6 +66,7 @@ Bundle         'tpope/vim-fugitive'
 Bundle          'godlygeek/tabular'
 Bundle    'Lokaltog/vim-easymotion'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'dhruvasagar/vim-table-mode'
 "Bundle 'godlygeek/csapprox'
 
 set nocp
