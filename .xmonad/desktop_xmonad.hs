@@ -154,7 +154,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = ["General", "Programming", "Work", "IM", "Media", "Steam", "7", "8", "9"]
+workspaces' = ["General", "Programming", "Work", "IM", "Media", "Steam", "Game", "8", "9"]
 
 -- layouts
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
@@ -183,73 +183,73 @@ keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
-    , ((modMask,               xK_r     ), safeSpawn "dmenu_run" [])
-    , ((modMask,               xK_w     ), safeSpawn "chromium" [])
-    , ((modMask,               xK_a     ), safeSpawn "spacefm" [])
-    , ((modMask,               xK_c     ), kill)
+    , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
+    , ((modMask                                                  , xK_w     ), safeSpawn "chromium" [])
+    , ((modMask                                                  , xK_a     ), safeSpawn "spacefm" [])
+    , ((modMask                                                  , xK_c     ), kill)
 
     -- multimedia
 -- Alsa mixer bindings
-    , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
-    , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
-    , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
-    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
-    , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
-     , ((modMask, xK_F9), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
+    , ((0                                                        , xF86XK_AudioRaiseVolume ) , spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0                                                        , xF86XK_AudioMute        ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
+    , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_F9                   ) , spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
-    , ((modMask, xK_F10), safeSpawn "amixer" ["-q", "set", "Master", "0"])
+    , ((modMask                                                  , xK_F10                  ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
 --}
-    , ((0, xF86XK_AudioPlay), safeSpawn "mocp" ["-G"])
-    , ((0, xF86XK_AudioNext), safeSpawn "mocp" ["-f"])
-    , ((0, xF86XK_AudioPrev), safeSpawn "mocp" ["-r"])
-    , ((0, xF86XK_AudioStop), safeSpawn "mocp" ["-s"])
-    , ((0, xF86XK_AudioMedia), spawn "xfce4-terminal -e mocp")
-    , ((0, xF86XK_Sleep), spawn "/home/jaga/myscripts/lockandsuspend.sh")
-    , ((0, xK_Pause), safeSpawn "/home/jaga/myscripts/autocpu.sh" [])
-    , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
-    , ((modMask, xK_t), safeSpawn "/home/jaga/myscripts/screen-translate.sh" [])
+    , ((0                                                        , xF86XK_AudioPlay        ) , safeSpawn "mocp" ["-G"])
+    , ((0                                                        , xF86XK_AudioNext        ) , safeSpawn "mocp" ["-f"])
+    , ((0                                                        , xF86XK_AudioPrev        ) , safeSpawn "mocp" ["-r"])
+    , ((0                                                        , xF86XK_AudioStop        ) , safeSpawn "mocp" ["-s"])
+    , ((0                                                        , xF86XK_AudioMedia       ) , spawn "xfce4-terminal -e mocp")
+    , ((0                                                        , xF86XK_Sleep            ) , spawn "/home/jaga/myscripts/lockandsuspend.sh")
+    , ((0                                                        , xK_Pause                ) , safeSpawn "/home/jaga/myscripts/autocpu.sh" [])
+    , ((modMask                                                  , xF86XK_Launch6          ) , safeSpawn "autocpu" ["-n"])
+    , ((modMask                                                  , xK_t                    ) , safeSpawn "/home/jaga/myscripts/screen-translate.sh" [])
 
     -- grid
-    , ((modMask,               xK_g     ), goToSelected myGSConfig)
-    , ((modMask,               xK_g     ), goToSelected myGSConfig)
+    , ((modMask                                                  , xK_g     ), goToSelected myGSConfig)
+    , ((modMask                                                  , xK_g     ), goToSelected myGSConfig)
 
     -- layouts
-    , ((modMask,               xK_space ), sendMessage NextLayout)
-    , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
+    , ((modMask                                                  , xK_space ), sendMessage NextLayout)
+    , ((modMask .|. shiftMask                                    , xK_space ), setLayout $ XMonad.layoutHook conf)
 
     -- floating layer stuff
-    , ((modMask .|. shiftMask, xK_f     ), withFocused $ windows . W.sink)
-    , ((modMask,               xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
+    , ((modMask .|. shiftMask                                    , xK_f     ), withFocused $ windows . W.sink)
+    , ((modMask                                                  , xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
 
 
     -- focus
-    , ((modMask,               xK_Tab   ), windows W.focusDown)
-    , ((modMask,               xK_j     ), windows W.focusDown)
-    , ((modMask,               xK_k     ), windows W.focusUp)
-    , ((modMask,               xK_y     ), windows W.focusMaster)
-    , ((modMask,               xK_n     ), withFocused minimizeWindow)
-    , ((modMask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin)
-    , ((modMask, xK_m     ), withFocused $ sendMessage . maximizeRestore)
+    , ((modMask                                                  , xK_Tab   ), windows W.focusDown)
+    , ((modMask                                                  , xK_j     ), windows W.focusDown)
+    , ((modMask                                                  , xK_k     ), windows W.focusUp)
+    , ((modMask                                                  , xK_y     ), windows W.focusMaster)
+    , ((modMask                                                  , xK_n     ), withFocused minimizeWindow)
+    , ((modMask .|. shiftMask                                    , xK_n     ), sendMessage RestoreNextMinimizedWin)
+    , ((modMask                                                  , xK_m     ), withFocused $ sendMessage . maximizeRestore)
 
 
     -- swapping
-    , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
-    , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
+    , ((modMask .|. shiftMask                                    , xK_Return), windows W.swapMaster)
+    , ((modMask .|. shiftMask                                    , xK_j     ), windows W.swapDown  )
+    , ((modMask .|. shiftMask                                    , xK_k     ), windows W.swapUp    )
 
     -- increase or decrease number of windows in the master area
-    , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modMask                                                  , xK_comma ), sendMessage (IncMasterN 1))
+    , ((modMask                                                  , xK_period), sendMessage (IncMasterN (-1)))
 
     -- resizing
-    , ((modMask,               xK_h     ), sendMessage Shrink)
-    , ((modMask,               xK_l     ), sendMessage Expand)
-    , ((modMask .|. shiftMask, xK_h     ), sendMessage MirrorShrink)
-    , ((modMask .|. shiftMask, xK_l     ), sendMessage MirrorExpand)
+    , ((modMask                                                  , xK_h     ), sendMessage Shrink)
+    , ((modMask                                                  , xK_l     ), sendMessage Expand)
+    , ((modMask .|. shiftMask                                    , xK_h     ), sendMessage MirrorShrink)
+    , ((modMask .|. shiftMask                                    , xK_l     ), sendMessage MirrorExpand)
 
     -- quit, or restart
-    , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modMask              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modMask .|. shiftMask                                    , xK_q     ), io (exitWith ExitSuccess))
+    , ((modMask                                                  , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     ]
     ++
     -- mod-[1..9] %! Switch to workspace N
