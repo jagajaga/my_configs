@@ -274,7 +274,7 @@ source ${ZDOTDIR:-$HOME}/.zkbd/xterm-:0.0
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 # пути где искать бинарники 
 export PATH="$PATH:~/soft/bin/"
-PATH=$PATH:/opt/pycharm/bin:/opt/sublime-text:/home/jaga/.cabal/bin;
+PATH=$PATH:/opt/pycharm/bin:/opt/sublime-text:/home/jaga/.cabal/bin:/home/jaga/.cabal-dev/bin;
 export PATH;
 
 
