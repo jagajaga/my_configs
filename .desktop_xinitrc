@@ -13,6 +13,7 @@ mount-tray &
 lastfmsubmitd --no-daemon &
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 9 --transparent true --alpha 0 --tint 0x000000 --height 19 &
 feh --bg-scale ~/Pictures/5408x3464.png_\#000000_1_1920x1080.png
+pulseaudio --start
 #devilspie &
 #xfce4-terminal --title=cmatrix -e cmatrix --maximize &
 xmodmap -e keysym Menu = Super_L
