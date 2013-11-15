@@ -206,12 +206,12 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0                                                        , xF86XK_AudioMedia       ) , spawn "xfce4-terminal -e mocp")
     , ((0                                                        , xF86XK_Sleep            ) , spawn "/home/jaga/myscripts/lockandsuspend.sh")
     , ((0                                                        , xK_Pause                ) , safeSpawn "/home/jaga/myscripts/autocpu.sh" [])
+    , ((0                                                        , xK_Print                ) , spawn "import -window root /home/jaga/Dropbox/screenshots/`date +%F_%T`.png" )
     , ((modMask                                                  , xF86XK_Launch6          ) , safeSpawn "autocpu" ["-n"])
     , ((modMask                                                  , xK_t                    ) , safeSpawn "/home/jaga/myscripts/screen-translate.sh" [])
 
     -- grid
-    , ((modMask                                                  , xK_g     ), goToSelected myGSConfig)
-    , ((modMask                                                  , xK_g     ), goToSelected myGSConfig)
+    , ((modMask                                                  , xK_s     ), goToSelected myGSConfig)
 
     -- layouts
     , ((modMask                                                  , xK_space ), sendMessage NextLayout)
