@@ -434,7 +434,6 @@ alias h='htop'
 alias n='sudo nethogs wlan0'
 alias io='sudo iotop'
 alias editawesome='vim /etc/xdg/awesome/rc.lua'
-alias update='sudo yaourt -Syua'
 alias screenshot='sleep 10;import -window root myscreen.png'
 alias pacman='sudo pacman'
 alias open='xdg-open'
@@ -452,6 +451,8 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 cat 2guys.txt
 alias show_random_file_or_directory='ls | sed -n "$((RANDOM%$(ls | wc -l)+1))p"'
 alias vim='vim -p'
+alias aura='sudo aura -x'
+alias update='sudo yaourt -Syua'
 
 toBackup() {cp "$1" "$1.backup"}
 fromBackup() {cp "$1.backup" "$1"}

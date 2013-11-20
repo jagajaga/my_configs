@@ -52,7 +52,6 @@ Bundle           'travitch/hasksyn'
 Bundle         'Shougo/vimproc.vim'
 Bundle         'tpope/vim-surround'
 Bundle              'gmarik/vundle'
-Bundle           'rkulla/pydiction'
 Bundle          'vim-scripts/a.vim'
 Bundle     'Valloric/YouCompleteMe'
 Bundle       'scrooloose/syntastic'
@@ -67,15 +66,14 @@ Bundle          'godlygeek/tabular'
 Bundle    'Lokaltog/vim-easymotion'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'dhruvasagar/vim-table-mode'
-"Bundle 'godlygeek/csapprox'
+Bundle 'Twinside/vim-haskellConceal'
+Bundle 'Twinside/vim-hoogle'
 
 set nocp
 filetype plugin on
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 let g:necoghc_enable_detailed_browse = 1
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height = 10
 
 let g:airline_enable_branch=1
 let g:airline_enable_syntastic=1
@@ -96,15 +94,6 @@ let g:hasksyn_dedent_after_return = 1
 
 " Should we try to de-indent after a catchall case in a case .. of
 let g:hasksyn_dedent_after_catchall_case = 1
-
-"set completeopt=menu,menuone
-"" -- configs --
-"let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-"let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-"let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-"let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-"let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
 
 let tagbar_autofocus=1
 let tagbar_autoclose=1
@@ -889,4 +878,3 @@ imap <leader>V Ω
   "au BufReadPre * setlocal foldmethod=indent
   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 "augroup END
-imap (\ (λ
