@@ -68,9 +68,15 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'dhruvasagar/vim-table-mode'
 Bundle 'Twinside/vim-haskellConceal'
 Bundle 'Twinside/vim-hoogle'
+Bundle 'mattn/gist-vim'
+Bundle 'mattn/webapi-vim'
 
 set nocp
 filetype plugin on
+
+let g:gist_clip_command = 'xclip -selection clipboard'
+let g:gist_detect_filetype = 1
+
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 let g:necoghc_enable_detailed_browse = 1
