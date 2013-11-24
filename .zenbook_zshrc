@@ -406,14 +406,14 @@ alias psgrep='ps aux | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
 # удаляем пустые строки и комментарии 
 alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
 
-#source ~/.zsh/git-prompt/zshrc.sh
+source ~/.zsh/git-prompt/zshrc.sh
 # 
 # команды при запуске zsh 
 # 
 PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
-#if [[ $PWD == $HOME ]]; then
-#PROMPT+=$' $(git_super_status)'
-#fi
+if [[ $PWD == $HOME ]]; then
+PROMPT+=$' $(git_super_status)'
+fi
 
 if [[ $EUID == 0 ]] 
 then
