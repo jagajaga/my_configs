@@ -26,6 +26,15 @@ Config {
                     , Run Com "/home/jaga/myscripts/getcurrentgovernmet.sh" [] "myGov" 100
                     , Run Com "/home/jaga/myscripts/getskypemessagescount.py" [] "skypeMessages" 10
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M:%S" "date" 10
+                    , Run DiskIO [("/home", "<read> <write> » <fc=#C98F0A>Home</fc>"), 
+                                  ("sdc1",  "<read> <write> » <fc=#C98F0A>SSD</fc>|")] 
+                                  [  "-L"       , "400"          ,
+                                     "-H"       , "32768"       ,
+                                     "--normal" , "lightgreen" ,
+                                     "--high"   , "red"        ,
+                                     "--low"    , "lightblue"
+                                     ] 10
+
                     , Run Locks
                     , Run Network "wlan0" ["-L", "8", 
                                            "-H", "150", 
@@ -46,5 +55,5 @@ Config {
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %mocSong% <fc=red>%locks%</fc><fc=orange>%myLayout% </fc>| <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% %swap% </fc><fc=#429942>| </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc> <fc=#C98f0A><icon=/home/jaga/.xmonad/skype.xbm/>✉</fc> <fc=lightgreen>%skypeMessages%</fc>"
+       , template = "%StdinReader% }{ %mocSong% <fc=red>%locks%</fc><fc=orange>%myLayout% </fc>| <fc=#C98F0A>%multicpu% [</fc><fc=#C98F0A>%myGov%] </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% %swap% </fc><fc=#429942>| %diskio% | </fc><fc=#C98F0A>%wlan0% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%myVolume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc> <fc=#C98f0A><icon=/home/jaga/.xmonad/skype.xbm/>✉</fc> <fc=lightgreen>%skypeMessages%</fc>"
        }
