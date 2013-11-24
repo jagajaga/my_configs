@@ -3,7 +3,7 @@ Config {
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
-       , commands = [ Run Weather "ULLI"["-t"      , "SPB <tempC>°C"         ,
+       , commands = [ Run Weather "ULLI"["-t"      , "SPB: <tempC>°C"         ,
                      "-L"       , "3"                     ,
                      "-H"       , "20"                    ,
                      "--high"   , "orange"                ,
@@ -40,7 +40,7 @@ Config {
                                            "-H", "150", 
                                            "-n", "#429942" ,
                                            "-h", "lightgreen", 
-                                           "-t", "<rx> : <tx>"] 20
+                                           "-t", "WiFi: <rx> : <tx>"] 20
                     , Run Memory ["-L","3",
                                   "-H","85",
                                   "--normal","lightgreen",
