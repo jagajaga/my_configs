@@ -70,6 +70,7 @@ Bundle 'Twinside/vim-haskellConceal'
 Bundle 'Twinside/vim-hoogle'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/webapi-vim'
+Bundle 'bitc/lushtags'
 
 set nocp
 filetype plugin on
