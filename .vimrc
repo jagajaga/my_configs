@@ -191,7 +191,15 @@ imap <F5> <Esc> :tabprev<CR>
 map <F5> :tabprev<CR>
 imap <F6> <Esc> :tabnext<CR>
 map <F6> :tabnext <CR>
-"nnoremap <silent> <F7> :TlistToggle<CR>
+function! GAC()
+    call inputsave()
+    let commit = input('Commit message: ')
+    call inputrestore()
+    let aaa = system("git add " . expand("%") . " && git commit -m \"" . commit . "\"")
+    echom aaa
+    "exec "!git status"
+endfunction
+map <F7> :call GAC() <CR>
 let Tlist_Exit_OnlyWindow = 1
 " put from clipboard
 nmap <leader>p "+p
@@ -884,3 +892,5 @@ imap <leader>V Ω
   "au BufReadPre * setlocal foldmethod=indent
   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 "augroup END
+
+
