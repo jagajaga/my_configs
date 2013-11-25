@@ -197,7 +197,6 @@ function! GAC()
     call inputrestore()
     let aaa = system("git add " . expand("%") . " && git commit -m \"" . commit . "\"")
     echom aaa
-    "exec "!git status"
 endfunction
 map <F7> :call GAC() <CR>
 let Tlist_Exit_OnlyWindow = 1
