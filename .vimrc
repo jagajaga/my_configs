@@ -156,6 +156,7 @@ endfunction
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
+map <F12> <Esc>:read !/home/jaga/myscripts/getmocpinfo.sh<CR>$x0<leader>cc
 imap <F10> <Esc>:Tagbar<CR>
 nmap <F10> <Esc>:Tagbar<CR>
 imap <F11> <Esc>:NERDTreeToggle<CR>
