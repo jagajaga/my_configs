@@ -9,6 +9,7 @@ set t_Co=256
 autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
 autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
 set runtimepath+=~/.vim/bundle/taglist.vim/plugin
+" Enable filetype plugins
 filetype plugin on
 filetype indent on
 "filetype on
