@@ -2,21 +2,18 @@
 xsetroot -cursor_name left_ptr
 
 #skype &
-dropboxd &
+dropbox &
 wicd-client --tray &
 #~/myscripts/wallpaper.sh &
 #autocpu -s
 #sh /home/jaga/myscripts/brightness.sh
 #smbnetfs /media/samba &
 #devmon &
-mount-tray &
-lastfmsubmitd --no-daemon &
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 9 --transparent true --alpha 0 --tint 0x000000 --height 19 &
 feh --bg-scale ~/Pictures/5408x3464.png_\#000000_1_1920x1080.png
 #pulseaudio --start
-echo $PATH > /tmp/path
 #devilspie &
 #xfce4-terminal --title=cmatrix -e cmatrix --maximize &
 xmodmap -e keysym Menu = Super_L
-setxkbmap -layout usρu\(winkeys\) -option grp:caps_toggle
+#setxkbmap -layout usρu\(winkeys\) -option grp:caps_toggle
 exec xmonad 

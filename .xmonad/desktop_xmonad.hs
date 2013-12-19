@@ -76,7 +76,6 @@ startup = do
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
     spawnOn "IM" "skype"
-    spawnOn "Steam" "steam"
 
 
 -------------------------------------------------------------------------------
@@ -190,8 +189,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- multimedia
 -- Alsa mixer bindings
-    , ((0                                                        , xF86XK_AudioRaiseVolume ) , spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
-    , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0                                                        , xF86XK_AudioRaiseVolume ) , spawn "amixer -q set Master 6553+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 6553- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0                                                        , xF86XK_AudioMute        ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
     , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
@@ -204,11 +203,11 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0                                                        , xF86XK_AudioPrev        ) , safeSpawn "mocp" ["-r"])
     , ((0                                                        , xF86XK_AudioStop        ) , safeSpawn "mocp" ["-s"])
     , ((0                                                        , xF86XK_AudioMedia       ) , spawn "xfce4-terminal -e mocp")
-    , ((0                                                        , xF86XK_Sleep            ) , spawn "/home/jaga/myscripts/lockandsuspend.sh")
-    , ((0                                                        , xK_Pause                ) , safeSpawn "/home/jaga/myscripts/autocpu.sh" [])
+    , ((0                                                        , xF86XK_Sleep            ) , spawn "bash /home/jaga/myscripts/lockandsuspend.sh")
+    , ((0                                                        , xK_Pause                ) , safeSpawn "bash /home/jaga/myscripts/autocpu.sh" [])
     , ((0                                                        , xK_Print                ) , spawn "import -window root /home/jaga/Dropbox/screenshots/`date +%F_%T`.png" )
     , ((modMask                                                  , xF86XK_Launch6          ) , safeSpawn "autocpu" ["-n"])
-    , ((modMask                                                  , xK_t                    ) , safeSpawn "/home/jaga/myscripts/screen-translate.sh" [])
+    , ((modMask                                                  , xK_t                    ) , spawn "bash /home/jaga/myscripts/screen-translate.sh")
 
     -- grid
     , ((modMask                                                  , xK_s     ), goToSelected myGSConfig)

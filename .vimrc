@@ -8,7 +8,7 @@ set cindent
 set t_Co=256
 autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
 autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
-set runtimepath+=~/.vim/bundle/taglist.vim/plugin
+for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc"] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -46,17 +46,17 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 filetype plugin indent on
 
-Bundle          'majutsushi/tagbar'
+"Bundle          'majutsushi/tagbar'
 Bundle         'tpope/vim-surround'
 Bundle           'travitch/hasksyn'
-Bundle         'Shougo/vimproc.vim'
+"Bundle         'Shougo/vimproc.vim'
 Bundle         'tpope/vim-surround'
 Bundle              'gmarik/vundle'
 Bundle          'vim-scripts/a.vim'
-Bundle     'Valloric/YouCompleteMe'
-Bundle       'scrooloose/syntastic'
+"Bundle     'Valloric/YouCompleteMe'
+"Bundle       'scrooloose/syntastic'
 Bundle   'scrooloose/nerdcommenter'
-Bundle         'crooloose/nerdtree'
+Bundle         'scrooloose/nerdtree'
 Bundle           'ujihisa/neco-ghc'
 Bundle        'eagletmt/ghcmod-vim'
 Bundle            'mbbill/undotree'
@@ -74,6 +74,18 @@ Bundle 'bitc/lushtags'
 
 set nocp
 filetype plugin on
+
+set nocompatible
+set hidden
+filetype indent plugin on | syn on
+fun ActivateAddons()
+    let g:vim_addon_manager = {}
+    let g:vim_addon_manager.log_to_buf =1
+    set runtimepath+=~/.vim/vim-addons/vim-addon-manager
+    call vam#ActivateAddons(["vim-addon-nix"])
+endf
+call ActivateAddons()
+""vim-surround", "hasksyn", "vim-surround", "a.vim", "nerdcommenter", "nerdtree", "neco-ghc", "ghcmod-vim"
 
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
@@ -153,12 +165,11 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 " Set Russian key to understand
-set keymap=russian-jcukenwin
+"set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
-map <F12> <Esc>:read !/home/jaga/myscripts/getmocpinfo.sh<CR>$x0<leader>cc
-imap <F10> <Esc>:Tagbar<CR>
-nmap <F10> <Esc>:Tagbar<CR>
+imap <F10> <Esc>:TagbarToggle<CR>
+nmap <F10> <Esc>:TagbarToggle<CR>
 imap <F11> <Esc>:NERDTreeToggle<CR>
 nmap <F11> <Esc>:NERDTreeToggle<CR>
 " Num strings
