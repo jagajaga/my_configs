@@ -1,5 +1,4 @@
 #!/bin/bash
-# translate-selection.sh - google translation of selected text
 # needs xsel to read from clipboard
 
 query=$(xsel)
