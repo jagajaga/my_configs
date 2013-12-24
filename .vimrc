@@ -905,4 +905,14 @@ imap <leader>V Ω
   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 "augroup END
 
+function! SearchForTODO()
+    let current_ft = "*" . expand ("%:e")
+    "echom current_ft
+    execute "silent grep \"TODO\" " . l:current_ft
+    execute "redraw! "
+    cw
+    call feedkeys("\<C-W>L")
+    call feedkeys("20\<C-W><")
+endfunction
 
+command! -nargs=0 TODOS call SearchForTODO()
