@@ -89,7 +89,7 @@ in
     udisks2.enable         = true;
     openssh.enable         = true;
     printing.enable        = true;
-    ntp.enable             = true;
+    openntpd.enable        = true;
     mysql = {
       enable  = true;
       package = pkgs.mysql;
