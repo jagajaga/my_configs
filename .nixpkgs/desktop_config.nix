@@ -23,7 +23,7 @@
       {
         name = "de-env";
         paths = with pkgs;
-        [ haskellPackages.xmobar skype dropbox haskellPackages.yeganesh dmenu trayer moc gimp libreoffice transmission_gtk transmission_remote_gtk firefoxWrapper tor chromiumDevWrapper ];
+        [ haskellPackages.xmobar skype dropbox haskellPackages.yeganesh dmenu trayer moc gimp libreoffice transmission_gtk transmission_remote_gtk firefoxWrapper tor chromiumDevWrapper p7zip unrar mc vlc imagemagick spaceFM ];
       };
 
    };

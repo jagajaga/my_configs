@@ -421,6 +421,7 @@ PROMPT+=$' #%{\e[0m%} ' # user dir %
 else
 PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
+RPROMPT=$'%{\e[1;36m%}{%D{%H:%M:%S}}%{\e[0m' 
 
 alias ls='ls -F --color=auto'
 alias l='ls -lhF --group-directories-first --color=auto'

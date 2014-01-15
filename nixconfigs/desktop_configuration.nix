@@ -143,27 +143,21 @@
    cmake
    haskellPackages.cabalInstall_1_18_0_2 
 
-   mc
    androidsdk_4_1 #todo
    stdenv
    dejavu_fonts
 
    (pkgs.haskellPackages.ghcWithPackages (self : [
       self.ghc
-      self.ghcMod
       self.xmonad
       self.xmonadContrib
       self.AgdaExecutable
     ]))
 
-    emacs24
-    emacs24Packages.haskellMode
+    /*emacs24*/
+    /*emacs24Packages.haskellMode*/
     vimHugeX
 
-    p7zip
-    unrar
-    vlc
-    imagemagick
     xsel
 
   ];
