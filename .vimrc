@@ -71,6 +71,8 @@ Bundle 'Twinside/vim-hoogle'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'bitc/lushtags'
+Bundle 'itchyny/calendar.vim'
+Bundle 'itchyny/thumbnail.vim'
 
 set nocp
 filetype plugin on
@@ -86,6 +88,9 @@ fun ActivateAddons()
 endf
 call ActivateAddons()
 ""vim-surround", "hasksyn", "vim-surround", "a.vim", "nerdcommenter", "nerdtree", "neco-ghc", "ghcmod-vim"
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
 
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
