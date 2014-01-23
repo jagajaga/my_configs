@@ -3,7 +3,7 @@ Config {
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
-       , commands = [ Run Weather "ULLI"["-t"      , "SPB: <tempC>°C"         ,
+       , commands = [ Run Weather "ULLI"["-t"      , "SPB: <tempC>°C" ,
                      "-L"       , "3"                     ,
                      "-H"       , "20"                    ,
                      "--high"   , "orange"                ,
@@ -24,7 +24,7 @@ Config {
                     , Run Com "bash" ["/home/jaga/myscripts/getmocpinfo.sh"] "mocSong" 10
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M:%S" "date" 10
                     , Run DiskIO [("/home", "<fc=#C98F0A>Home</fc> » <read> <write>"), 
-                                  ("/dev/md126p",  "<fc=#C98F0A>SSD</fc> » <read> <write>|")] 
+                                  ("/dev/md126p1",  "<fc=#C98F0A>SSD</fc> » <read> <write>|")] 
                                   [  "-L"       , "400"          ,
                                      "-H"       , "32768"       ,
                                      "--normal" , "lightgreen" ,
