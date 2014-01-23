@@ -73,6 +73,8 @@ Bundle 'mattn/webapi-vim'
 Bundle 'bitc/lushtags'
 Bundle 'itchyny/calendar.vim'
 Bundle 'itchyny/thumbnail.vim'
+Bundle 'xuhdev/vim-latex-live-preview'
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
 
 set nocp
 filetype plugin on
