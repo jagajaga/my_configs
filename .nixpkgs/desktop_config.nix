@@ -19,11 +19,18 @@
         [ zlib freeglut bzip2 xlibs.libX11 mesa ];
       };
 
-      deEnv= pkgs.buildEnv
+      hugeEnv = pkgs.buildEnv
+      {
+        name = "huge-env";
+        paths = with pkgs;
+        [ gimp libreoffice ];
+      };
+
+      deEnv = pkgs.buildEnv
       {
         name = "de-env";
         paths = with pkgs;
-        [ haskellPackages.xmobar skype dropbox haskellPackages.yeganesh dmenu trayer moc gimp libreoffice transmission_gtk transmission_remote_gtk firefoxWrapper tor chromiumDevWrapper p7zip unrar mc vlc imagemagick spaceFM ];
+        [ haskellPackages.xmobar skype dropbox haskellPackages.yeganesh dmenu trayer moc transmission_gtk transmission_remote_gtk firefoxWrapper tor chromiumDevWrapper p7zip unrar mc vlc imagemagick spaceFM bc darcs dropbox-cli evince file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  steam steamChrootEnv unetbootin ];
       };
 
    };
