@@ -94,11 +94,14 @@
     uid = 1000;
   };
 
+  services.mesa = {
+    videoDrivers = [ "nvidia" ];
+    driSupport32Bit = true;
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
-    driSupport32Bit = true;
     layout = "us,ru(winkeys)";
     xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";
@@ -127,7 +130,7 @@
    pmutils
    wget
 
-   gcc47
+   gcc
    automake
    pkgconfig
    gnumake

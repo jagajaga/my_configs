@@ -17,21 +17,17 @@ import qualified XMonad.StackSet              as W
 import           XMonad.Util.Run              (safeSpawn)
 
 -- actions
-import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
 {-import XMonad.Actions.WindowGo (runOrRaise)-}
 -- hooks
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
-import           XMonad.Hooks.InsertPosition
 import           XMonad.Hooks.ManageHelpers
-import           XMonad.Hooks.Place
 import           XMonad.Hooks.UrgencyHook
 
 
 -- layouts
-import           XMonad.Layout.Grid
 import           XMonad.Layout.IM
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
@@ -40,6 +36,11 @@ import           XMonad.Layout.PerWorkspace
 import           XMonad.Layout.Renamed
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
+
+
+import           XMonad.Prompt
+import           XMonad.Prompt.Input
+import           XMonad.Layout.LayoutCombinators (JumpToLayout (..))
 
 -------------------------------------------------------------------------------
 -- Main --
@@ -102,15 +103,15 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
 customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "⎨" "⎬"
                      , ppHidden = xmobarColor "#C98F0A" ""
                      , ppHiddenNoWindows = xmobarColor "#003347" ""
-                     , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]"
+                     , ppUrgent = xmobarColor "#FFFF00" "" . wrap "[" "]"
                      , ppLayout = xmobarColor "#003347" ""
                      , ppTitle =  xmobarColor "#429942" "" . shorten 80
                      , ppSep = xmobarColor "#429942" "" " | "
                      }
 
 
-myGSNavigation:: TwoD a (Maybe a)
-myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
+myGSNavigation :: TwoD a (Maybe a)
+myGSNavigation = makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
   where navKeyMap = M.fromList [
            ((0,xK_Escape), cancel)
           ,((0,xK_Return) , select)
@@ -132,11 +133,13 @@ myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
         navDefaultHandler = const myGSNavigation
 
 -- GridSelect
+myGSConfig :: HasColorizer a => GSConfig a
 myGSConfig = defaultGSConfig { gs_cellwidth = 160
                             , gs_navigate = myGSNavigation
 }
 
 -- urgent notification
+urgentConfig :: UrgencyConfig
 urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
 
 -- borders
@@ -145,6 +148,7 @@ normalBorderColor'  = "#333333"
 focusedBorderColor' = "#AFAF87"
 
 -- tabs
+tabTheme1 :: Theme
 tabTheme1 = defaultTheme { decoHeight = 16
                          , activeColor = "lightgreen"
                          , activeBorderColor = "#a6c292"
@@ -154,6 +158,8 @@ tabTheme1 = defaultTheme { decoHeight = 16
 
 -- workspaces
 workspaces' = ["General", "Programming", "Work", "IM", "Media", "Steam", "Game", "8", "9"]
+
+myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "chromium"]) ?+ (\r -> spawn $ "pkill -x " ++ r) 
 
 -- layouts
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
@@ -186,14 +192,15 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask                                                  , xK_w     ), safeSpawn "chromium" [])
     , ((modMask                                                  , xK_a     ), safeSpawn "spacefm" [])
     , ((modMask                                                  , xK_c     ), kill)
+    , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)
 
     -- multimedia
 -- Alsa mixer bindings
     , ((0                                                        , xF86XK_AudioRaiseVolume ) , spawn "amixer -q set Master 3+ && /home/jaga/myscripts/getvolume.sh -s")
     , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 3- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0                                                        , xF86XK_AudioMute        ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
-    , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
-    , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && bash /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && bash \"/home/jaga/myscripts/getvolume.sh -s\"")
     , ((modMask                                                  , xK_F9                   ) , spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
     , ((modMask                                                  , xK_F10                  ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])

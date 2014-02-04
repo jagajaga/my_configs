@@ -46,35 +46,37 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 filetype plugin indent on
 
-"Bundle          'majutsushi/tagbar'
-Bundle         'tpope/vim-surround'
-Bundle           'travitch/hasksyn'
 "Bundle         'Shougo/vimproc.vim'
-Bundle         'tpope/vim-surround'
-Bundle              'gmarik/vundle'
-Bundle          'vim-scripts/a.vim'
+"Bundle      'majutsushi/tagbar'
 "Bundle     'Valloric/YouCompleteMe'
 "Bundle       'scrooloose/syntastic'
-Bundle   'scrooloose/nerdcommenter'
-Bundle         'scrooloose/nerdtree'
-Bundle           'ujihisa/neco-ghc'
-Bundle        'eagletmt/ghcmod-vim'
-Bundle            'mbbill/undotree'
-Bundle          'bling/vim-airline'
-Bundle         'tpope/vim-fugitive'
-Bundle          'godlygeek/tabular'
-Bundle    'Lokaltog/vim-easymotion'
+Bundle               'tpope/vim-surround'
+Bundle                 'travitch/hasksyn'
+Bundle               'tpope/vim-surround'
+Bundle                    'gmarik/vundle'
+Bundle                'vim-scripts/a.vim'
+Bundle         'scrooloose/nerdcommenter'
+Bundle              'scrooloose/nerdtree'
+Bundle                 'ujihisa/neco-ghc'
+Bundle              'eagletmt/ghcmod-vim'
+Bundle                  'mbbill/undotree'
+Bundle                'bling/vim-airline'
+Bundle               'tpope/vim-fugitive'
+Bundle          'Lokaltog/vim-easymotion'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'dhruvasagar/vim-table-mode'
-Bundle 'Twinside/vim-haskellConceal'
-Bundle 'Twinside/vim-hoogle'
-Bundle 'mattn/gist-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'bitc/lushtags'
-Bundle 'itchyny/calendar.vim'
-Bundle 'itchyny/thumbnail.vim'
-Bundle 'xuhdev/vim-latex-live-preview'
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
+Bundle       'dhruvasagar/vim-table-mode'
+Bundle      'Twinside/vim-haskellConceal'
+Bundle              'Twinside/vim-hoogle'
+Bundle                   'mattn/gist-vim'
+Bundle                 'mattn/webapi-vim'
+Bundle                    'bitc/lushtags'
+Bundle             'itchyny/calendar.vim'
+Bundle            'itchyny/thumbnail.vim'
+Bundle    'xuhdev/vim-latex-live-preview'
+Bundle         'LaTeX-Box-Team/LaTeX-Box'
+Bundle          'junegunn/vim-easy-align'
+Bundle           'airblade/vim-gitgutter'
+Bundle               'takac/vim-hardtime'
 
 set nocp
 filetype plugin on
@@ -90,6 +92,15 @@ fun ActivateAddons()
 endf
 call ActivateAddons()
 ""vim-surround", "hasksyn", "vim-surround", "a.vim", "nerdcommenter", "nerdtree", "neco-ghc", "ghcmod-vim"
+
+
+" Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+nmap s <Plug>(easymotion-s2)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
