@@ -9,7 +9,7 @@
       hsEnv = pkgs.buildEnv
       { name = "hs-env";
         paths = with pkgs.haskellPackages;
-          [ haskellPlatform gtk Chart cairo gloss lens zlib alsaCore alsaPcm ];
+          [ haskellPlatform gtk Chart cairo gloss lens zlib alsaCore alsaPcm cabal2nix ];
       };
 
       developmentEnv = pkgs.buildEnv
@@ -23,14 +23,14 @@
       {
         name = "huge-env";
         paths = with pkgs;
-        [ gimp libreoffice ];
+        [ gimp libreoffice chromiumDevWrapper ];
       };
 
       deEnv = pkgs.buildEnv
       {
         name = "de-env";
         paths = with pkgs;
-        [ haskellPackages.xmobar skype dropbox haskellPackages.yeganesh dmenu trayer moc transmission_gtk transmission_remote_gtk firefoxWrapper tor chromiumDevWrapper p7zip unrar mc vlc imagemagick spaceFM bc darcs dropbox-cli evince file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  steam steamChrootEnv unetbootin ];
+        [ haskellPackages.xmobar skype dropbox haskellPackages.yeganesh dmenu trayer moc transmission_gtk transmission_remote_gtk firefoxWrapper tor p7zip unrar mc vlc imagemagick spaceFM bc darcs dropbox-cli evince file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  steam steamChrootEnv unetbootin ];
       };
 
    };
