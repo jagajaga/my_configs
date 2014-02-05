@@ -5,6 +5,12 @@
 
 { config, pkgs, ... }:
 
+let mySlimTheme = pkgs.fetchurl {
+      url = https://github.com/jagajaga/nixos-slim-theme/raw/master/nixos-slim-theme.tar.gz;
+      sha256 = "62da019ccf69be29cb1f75944628d01badb792807ff4f15da5d0f2aaeba8c72e";
+    }; 
+in
+
 {
   require =
     [ 
@@ -109,6 +115,10 @@
       enable = true;
       autoLogin = true;
       defaultUser = "jaga"; 
+      theme = mySlimTheme;      
+      package = pkgs.slim.override { 
+        theme = mySlimTheme; 
+      };
     };
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
