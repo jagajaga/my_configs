@@ -107,6 +107,8 @@ let g:calendar_google_task = 1
 
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
+let g:gist_use_password_in_gitconfig = 1
+
 
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
