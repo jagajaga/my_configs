@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # needs xsel to read from clipboard
 
 query=$(xsel)

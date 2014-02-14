@@ -461,3 +461,13 @@ alias getstats="cat ~/.zhistory | grep -E '^:\s([0-9]+):([0-9]+);([a-zA-Z]+)(.*)
 export NIXPKGS_ALL=/home/jaga/nixpkgs
 query(){ nix-env -qa \* -P -f $NIXPKGS_ALL | grep -i "$1"; }
 export TERM=xterm-256color  
+
+
+function ghc-pkg-clean() {
+    for p in `ghc-pkg check $* 2>&1  | grep problems | awk '{print $6}' | sed -e 's/:$//'`
+    do
+        echo unregistering $p; ghc-pkg $* unregister $p
+    done
+}
+
+unset SSH_ASKPASS

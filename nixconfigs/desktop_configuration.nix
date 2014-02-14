@@ -127,6 +127,10 @@ in
   };
 
   time.timeZone = "Europe/Moscow";
+
+
+  /*nixpkgs.config.cabal.libraryProfiling = true;*/
+
   environment.systemPackages = with pkgs; [
    zsh
    bash
@@ -160,16 +164,9 @@ in
    stdenv
    dejavu_fonts
 
-   (pkgs.haskellPackages.ghcWithPackages (self : [
-      self.ghc
-      self.xmonad
-      self.xmonadContrib
-      self.AgdaExecutable
-    ]))
-
-    /*emacs24*/
-    /*emacs24Packages.haskellMode*/
-    vimHugeX
+   /*emacs24*/
+   /*emacs24Packages.haskellMode*/
+   vimHugeX
 
     xsel
 
