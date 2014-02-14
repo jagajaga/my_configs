@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # notify if battery is low
 
 battery_int=$(cat /sys/class/power_supply/BAT0/capacity)

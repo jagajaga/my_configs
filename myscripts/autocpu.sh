@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash -e
 
 COUNT=`cat /proc/cpuinfo | grep -c ^processor`
 currentGov=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
