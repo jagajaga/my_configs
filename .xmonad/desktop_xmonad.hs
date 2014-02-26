@@ -7,14 +7,14 @@
 
 -- Imports --
 -- stuff
-import qualified Data.Map                     as M
+import qualified Data.Map                        as M
 import           Graphics.X11.ExtraTypes.XF86
 import           Graphics.X11.Types
 import           Prelude
 import           System.Exit
 import           XMonad
-import qualified XMonad.StackSet              as W
-import           XMonad.Util.Run              (safeSpawn)
+import qualified XMonad.StackSet                 as W
+import           XMonad.Util.Run                 (safeSpawn)
 
 -- actions
 import           XMonad.Actions.GridSelect
@@ -38,9 +38,9 @@ import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
 
 
+import           XMonad.Layout.LayoutCombinators (JumpToLayout (..))
 import           XMonad.Prompt
 import           XMonad.Prompt.Input
-import           XMonad.Layout.LayoutCombinators (JumpToLayout (..))
 
 -------------------------------------------------------------------------------
 -- Main --
@@ -145,7 +145,7 @@ urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
 -- borders
 borderWidth'        = 1
 normalBorderColor'  = "#333333"
-focusedBorderColor' = "#AFAF87"
+focusedBorderColor' = "#00FF00"
 
 -- tabs
 tabTheme1 :: Theme
@@ -159,7 +159,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
 -- workspaces
 workspaces' = ["General", "Programming", "Work", "IM", "Media", "Steam", "Game", "8", "9"]
 
-myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "chromium"]) ?+ (\r -> spawn $ "pkill -x " ++ r) 
+myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
 -- layouts
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
@@ -189,7 +189,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
-    , ((modMask                                                  , xK_w     ), safeSpawn "chromium" [])
+    , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
     , ((modMask                                                  , xK_a     ), safeSpawn "spacefm" [])
     , ((modMask                                                  , xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)

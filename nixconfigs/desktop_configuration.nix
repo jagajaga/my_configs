@@ -1,4 +1,3 @@
-
 # Edit this configuration file to define what should be installed on
 # the system.  Help is available in the configuration.nix(5) man page
 # or the NixOS manual available on virtual console 8 (Alt+F8).
@@ -40,10 +39,11 @@ in
 
   networking = {
     hostName = "nixos"; # Define your hostname.
-    interfaceMonitor.enable = false;
-    wireless.enable = false; # Don't run wpa_supplicant (wicd will do it when necessary)
-    useDHCP = false; # Don't run dhclient on wlan0
-    wicd.enable = true;
+    networkmanager.enable = true;
+    /*interfaceMonitor.enable = false;*/
+    /*wireless.enable = false; # Don't run wpa_supplicant (wicd will do it when necessary)*/
+    /*useDHCP = false; # Don't run dhclient on wlan0*/
+    /*wicd.enable = true;*/
   };
 
 
@@ -95,7 +95,7 @@ in
     createHome = true;
     home = "/home/jaga";
     group = "users";
-    extraGroups = [ "wheel"];
+    extraGroups = [ "wheel" "networkmanager" ];
     shell = "${pkgs.zsh}/bin/zsh";
     uid = 1000;
   };
@@ -127,9 +127,6 @@ in
   };
 
   time.timeZone = "Europe/Moscow";
-
-
-  /*nixpkgs.config.cabal.libraryProfiling = true;*/
 
   environment.systemPackages = with pkgs; [
    zsh
@@ -164,11 +161,11 @@ in
    stdenv
    dejavu_fonts
 
-   /*emacs24*/
-   /*emacs24Packages.haskellMode*/
    vimHugeX
 
-    xsel
+   xsel
+
+   networkmanagerapplet
 
   ];
   fonts = {
