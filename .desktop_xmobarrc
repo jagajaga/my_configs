@@ -34,7 +34,7 @@ Config {
                                      ] 10
 
                     , Run Locks
-                    , Run Network "wlp0s26u1u1" ["-L", "8", 
+                    , Run Network "wlp3s0" ["-L", "8", 
                                            "-H", "150", 
                                            "-n", "#429942" ,
                                            "-h", "lightgreen", 
@@ -54,5 +54,5 @@ Config {
                     ]
        , alignSep = "}{"
        , sepChar = "%"
-       , template = "%StdinReader% }{ %mocSong% <fc=red>%locks%</fc><fc=orange>%kbd% </fc>| <fc=#C98F0A>%multicpu% </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% %swap% </fc><fc=#429942>| %diskio% | </fc><fc=#C98F0A>%wlp0s26u1u1% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%volume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
+       , template = "%StdinReader% }{ %mocSong% <fc=red>%locks%</fc><fc=orange>%kbd% </fc>| <fc=#C98F0A>%multicpu% </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% %swap% </fc><fc=#429942>| %diskio% | </fc><fc=#C98F0A>%wlp3s0% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%volume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
        }
