@@ -32,8 +32,8 @@ world-file: /home/jaga/.cabal/world
 -- user-install: True
 -- package-db:
 -- flags:
--- extra-include-dirs: /home/jaga/.nix-profile/include/
--- extra-lib-dirs: /home/jaga/.nix-profile/lib/
+extra-include-dirs: /home/jaga/.nix-profile/include/
+extra-lib-dirs: /home/jaga/.nix-profile/lib/
 -- tests: False
 -- library-coverage: False
 -- benchmarks: False

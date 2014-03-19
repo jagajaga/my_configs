@@ -17,6 +17,9 @@ in
       ./private.nix
     ];
 
+  /*boot.kernelPackages = pkgs.linuxPackages_3_13;*/
+  boot.loader.grub.timeout = 1;
+
   boot.initrd.kernelModules =
     [ # Specify all kernel modules that are necessary for mounting the root
       # filesystem.
@@ -39,7 +42,7 @@ in
 
   networking = {
     hostName = "nixos"; # Define your hostname.
-    networkmanager.enable = true;
+    connman.enable = true;
     /*interfaceMonitor.enable = false;*/
     /*wireless.enable = false; # Don't run wpa_supplicant (wicd will do it when necessary)*/
     /*useDHCP = false; # Don't run dhclient on wlan0*/
@@ -95,7 +98,7 @@ in
     createHome = true;
     home = "/home/jaga";
     group = "users";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "adb" ];
     shell = "${pkgs.zsh}/bin/zsh";
     uid = 1000;
   };
@@ -116,9 +119,6 @@ in
       autoLogin = true;
       defaultUser = "jaga"; 
       theme = mySlimTheme;      
-      package = pkgs.slim.override { 
-        theme = mySlimTheme; 
-      };
     };
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
@@ -133,10 +133,6 @@ in
    bash
    htop
    iotop
-   gnome.zenity
-   xfce.xfce4notifyd
-   xfce.xfce4terminal
-   libnotify
 
    pmutils
    wget
@@ -155,17 +151,14 @@ in
    python33
    python
    cmake
-   haskellPackages.cabalInstall_1_18_0_2 
 
    androidsdk_4_1 #todo
    stdenv
    dejavu_fonts
 
-   vimHugeX
-
    xsel
 
-   networkmanagerapplet
+   connmanui
 
   ];
   fonts = {

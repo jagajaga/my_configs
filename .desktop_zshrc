@@ -413,7 +413,10 @@ source ~/.zsh/git-prompt/zshrc.sh
 PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
 #if [[ $PWD == $HOME ]]; then
 PROMPT+=$' $(git_super_status)'
-#fi
+curshel=$(ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}')
+if [[ $curshel == "rc" ]]; then
+    PROMPT+=$' NIX-SHELL'
+fi
 
 if [[ $EUID == 0 ]] 
 then
@@ -459,9 +462,10 @@ fromBackup() {cp "$1.backup" "$1"}
 swapBackup() {cp "$1" "$1.backup.temp"; cp "$1.backup" "$1"; mv -f "$1.backup.temp" "$1.backup"}
 alias getstats="cat ~/.zhistory | grep -E '^:\s([0-9]+):([0-9]+);([a-zA-Z]+)(.*)' | sed -r -e 's/^: ([0-9]+):0;([a-zA-Z]+)(.*)/\2/g' | sort | uniq -c | sort -n"
 export NIXPKGS_ALL=/home/jaga/nixpkgs
+export NIX_PATH=$NIX_PATH:nixpkgs=$NIXPKGS_ALL
 query(){ nix-env -qa \* -P -f $NIXPKGS_ALL | grep -i "$1"; }
 export TERM=xterm-256color  
-
+alias nix-szsh="nix-shell --command zsh"
 
 function ghc-pkg-clean() {
     for p in `ghc-pkg check $* 2>&1  | grep problems | awk '{print $6}' | sed -e 's/:$//'`
