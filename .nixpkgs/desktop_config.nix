@@ -1,19 +1,20 @@
 pkgs : {
+  allowUnfree = true;
    packageOverrides = self : rec {
       vimEnv = self.buildEnv
       { 
         name = "vim-env";
         paths = with self.vimPlugins;
-          [ YouCompleteMe syntastic taglist tagbar vimproc ctags ];
+          [ YouCompleteMe syntastic taglist tagbar vimproc ];
       };
 
-      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall_1_18_0_3 cabal2nix xmonad xmobar xmonadContrib AgdaExecutable lushtags haddock stylishHaskell ghcMod ]);
+      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall_1_18_0_3 cabal2nix xmonad xmobar xmonadContrib AgdaExecutable lushtags haddock stylishHaskell ghcMod hlint ]);
 
       developmentEnv = self.buildEnv
       {
         name = "development-env";
         paths = with self;
-        [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils ];
+        [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils ctags astyle ];
       };
 
       hugeEnv = self.buildEnv

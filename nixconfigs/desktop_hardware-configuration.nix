@@ -5,7 +5,7 @@
 
 {
   imports =
-    [ <nixos/modules/installer/scan/not-detected.nix>
+    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_hcd" ];

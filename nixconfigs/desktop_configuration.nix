@@ -4,12 +4,6 @@
 
 { config, pkgs, ... }:
 
-let mySlimTheme = pkgs.fetchurl {
-      url = https://github.com/jagajaga/nixos-slim-theme/raw/master/nixos-slim-theme.tar.gz;
-      sha256 = "62da019ccf69be29cb1f75944628d01badb792807ff4f15da5d0f2aaeba8c72e";
-    }; 
-in
-
 {
   require =
     [ 
@@ -17,7 +11,7 @@ in
       ./private.nix
     ];
 
-  /*boot.kernelPackages = pkgs.linuxPackages_3_13;*/
+  boot.kernelPackages = pkgs.linuxPackages_3_13;
   boot.loader.grub.timeout = 1;
 
   boot.initrd.kernelModules =
@@ -30,6 +24,8 @@ in
     options snd slots=snd-hda-intel
   '';
     
+  nix.package = pkgs.nixUnstable;
+  nixpkgs.config.allowUnfree = true;
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -103,7 +99,7 @@ in
     uid = 1000;
   };
 
-  services.mesa = {
+  hardware.opengl = {
     videoDrivers = [ "nvidia" ];
     driSupport32Bit = true;
   };
@@ -116,10 +112,13 @@ in
     xkbVariant = "winkeys";
     displayManager.slim = {
       enable = true;
-      autoLogin = true;
+      autoLogin = false;
       defaultUser = "jaga"; 
-      theme = mySlimTheme;      
-    };
+      theme = pkgs.fetchurl {
+        url = https://github.com/jagajaga/nixos-slim-theme/raw/master/nixos-slim-theme.tar.gz;
+        sha256 = "62da019ccf69be29cb1f75944628d01badb792807ff4f15da5d0f2aaeba8c72e";
+      };
+    }; 
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
     windowManager.default = "xmonad";
