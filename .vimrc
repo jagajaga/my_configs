@@ -26,7 +26,7 @@ function! CppMake()
    if filereadable("Makefile")
        set makeprg=make\ -s
    else
-       set makeprg=clang++\ -Wall\ -g\ -std=c++0x\ -o\ %<\ %
+       set makeprg=clang++\ -Wall\ -g\ -std=c++11\ -o\ %<\ %
    endif
 endfunction
 autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
@@ -77,6 +77,7 @@ Bundle          'junegunn/vim-easy-align'
 Bundle           'airblade/vim-gitgutter'
 Bundle               'takac/vim-hardtime'
 Bundle             'vim-scripts/Tabmerge'
+Bundle       'powerman/vim-plugin-ruscmd'
 
 set nocp
 filetype plugin on
@@ -185,7 +186,7 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 " Set Russian key to understand
-"set keymap=russian-jcukenwin
+"set keymap=russian-cukenwin
 set iminsert=0
 set imsearch=0
 imap <F10> <Esc>:TagbarToggle<CR>
@@ -239,6 +240,12 @@ map cn <ESC>:cn<CR>
 map cb <ESC>:cp<CR>
 " yank to clipboard 
 map <leader>y "+y
+map <leader>y "+y
+map <leader>m :call SaveAndInsertType()<CR>
+    func! SaveAndInsertType()
+        exec ":w"
+        exec "GhcModTypeInsert"
+    endfunc
 imap <F8> <ESC>:w<CR><ESC>:!clear<CR><ESC>:make<CR>
 imap <F9> <ESC>:!clear<CR><ESC>:!./%<<CR>
 map <F8> <ESC>:w<CR><ESC>:!clear<CR><ESC>:make<CR>
