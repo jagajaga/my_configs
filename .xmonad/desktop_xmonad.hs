@@ -77,6 +77,7 @@ startup = do
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
     spawnOn "IM" "skype"
+    spawnOn "IRC" ("xfce4-terminal -e weechat")
 
 
 -------------------------------------------------------------------------------
@@ -90,6 +91,7 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
                          , title =? "cmatrix"             --> doIgnore
+                         , title =? "WeeChat 0.4.3"       --> doShift "IRC"
                          {-, isDialog                       --> doFloat-}
                          {-, isDialog                       --> insertPosition Above Older-}
                          {-, insertPosition Below Newer-}
@@ -157,7 +159,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = ["General", "Programming", "Work", "IM", "Media", "Steam", "Game", "8", "9"]
+workspaces' = ["General", "Programming", "Work", "IRC", "IM", "Media", "Steam", "Game", "8", "9"]
 
 myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
