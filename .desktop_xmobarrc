@@ -21,7 +21,7 @@ Config {
                                     "--low"    , "lightblue",
                                     "-t", "<core0>°C"] 50
                     , Run Kbd [("us", "us"), ("ru(winkeys)", "ru")]
-                    , Run Com "bash" ["/home/jaga/myscripts/getmocpinfo.sh"] "mocSong" 10
+                    , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 10
                     , Run Com "bash" ["/home/jaga/myscripts/getvolume.sh"] "volume" 10
                     , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M:%S" "date" 10
                     , Run DiskIO [("/home", "<fc=#C98F0A>Home</fc> » <read> <write>"), 

@@ -159,7 +159,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = ["General", "Programming", "Work", "IRC", "IM", "Media", "Steam", "Game", "8", "9"]
+workspaces' = ["General", "Programming", "Work", "IM", "IRC", "Media", "Steam", "Game", "8", "9"]
 
 myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
@@ -192,7 +192,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
     , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
-    , ((modMask                                                  , xK_a     ), safeSpawn "spacefm" [])
+    , ((modMask                                                  , xK_a     ), safeSpawn "xfe" [])
     , ((modMask                                                  , xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)
 
