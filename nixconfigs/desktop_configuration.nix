@@ -25,6 +25,8 @@
   '';
     
   nix.package = pkgs.nixUnstable;
+  nix.binaryCaches = [ http://cache.nixos.org ];
+  nix.trustedBinaryCaches = [ http://cache.nixos.org ];
   nixpkgs.config.allowUnfree = true;
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -43,6 +45,9 @@
     /*wireless.enable = false; # Don't run wpa_supplicant (wicd will do it when necessary)*/
     /*useDHCP = false; # Don't run dhclient on wlan0*/
     /*wicd.enable = true;*/
+    extraHosts = ''fc5d:baa5:61fc:6ffd:9554:67f0:e290:7535 nodeinfo.hype
+              fcbf:7bbc:32e4:716:bd00:e936:c927:fc14 socialno.de
+              fcd5:76e1:c1c2:e946:b266:8543:c1d5:67ac hypeoverflow.com'';
   };
 
 
@@ -87,6 +92,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.tor.client.enable = true;
+  services.cjdns.enable = true;
 
 
   users.extraUsers.jaga = {
@@ -115,8 +121,8 @@
       autoLogin = false;
       defaultUser = "jaga"; 
       theme = pkgs.fetchurl {
-        url = https://github.com/jagajaga/nixos-slim-theme/raw/master/nixos-slim-theme.tar.gz;
-        sha256 = "62da019ccf69be29cb1f75944628d01badb792807ff4f15da5d0f2aaeba8c72e";
+        url = https://github.com/jagajaga/nixos-slim-theme/archive/1.0.tar.gz;
+        sha256 = "08ygjn5vhn3iavh36pdcb15ij3z34qnxp20xh3s1hy2hrp63s6kn";
       };
     }; 
     desktopManager.default = "none";
@@ -158,6 +164,7 @@
    xsel
 
    connmanui
+   cjdns
 
   ];
   fonts = {
