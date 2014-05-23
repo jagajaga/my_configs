@@ -25,10 +25,13 @@ import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.SetWMName
 
 
 -- layouts
 import           XMonad.Layout.IM
+
+import XMonad.Layout.Grid   
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.NoBorders
@@ -71,6 +74,7 @@ myConfig = defaultConfig { workspaces         = workspaces'
 
 startup :: X ()
 startup = do
+    setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
     {-spawn "killall trayer || sleep 1 && trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 8 --transparent true --alpha 0 --tint 0x000000 --height 18" -}
     spawn "xmodmap -e \"keysym Menu = Super_L\""
@@ -85,6 +89,7 @@ startup = do
 manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          , className =? "Gimp"            --> doFloat
                          , className =? "Skype"           --> doShift "IM"
+                         , className =? "Gajim"           --> doShift "IM"
                          , className =? "Steam"           --> doShift "Steam"
                          , className =? "Vlc"             --> doCenterFloat
                          , className =? "Xfce4-notifyd"   --> doF W.focusDown
@@ -167,7 +172,7 @@ myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkCom
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
   where
     rt = ResizableTall 1 (2/100) (1/2) []
-    skypeLayout = renamed [Replace "[][]"] $ withIM (18/100) (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) (Tall 1 0.02 0.5)
+    skypeLayout = renamed [Replace "[][]"] $ withIM 0.18 (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) $ withIM 0.18 (ClassName "Gajim") Grid
     tile = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
     mtile = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
     tab = renamed [Replace "T"] $ noBorders $ tabbed shrinkText tabTheme1
@@ -192,6 +197,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
     , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
+    , ((modMask .|. shiftMask    , xK_w     ), safeSpawn "chromium" [])
     , ((modMask                                                  , xK_a     ), safeSpawn "xfe" [])
     , ((modMask                                                  , xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)
