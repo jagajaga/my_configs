@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ <nixos/modules/programs/virtualbox.nix> ];
   require =
     [ 
       ./desktop_hardware-configuration.nix
@@ -21,8 +22,11 @@
     ];
 
   boot.extraModprobeConfig = ''
-    options snd slots=snd-hda-intel
+    options snd slots=snd_usb_audio,snd-hda-intel
+
   '';
+    /*options snd_usb_audio index=0*/
+    /*options snd_hda_intel index=1*/
     
   nix.package = pkgs.nixUnstable;
   nix.binaryCaches = [ http://cache.nixos.org ];
@@ -85,6 +89,10 @@
   services.udisks.enable = true;
 
   /*hardware.pulseaudio.enable = true;*/
+  /*sound.enableOSSEmulation = false;*/
+  sound.extraConfig = ''
+    defaults.pcm.!card 3
+  '';
   
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -106,13 +114,13 @@
   };
 
   hardware.opengl = {
-    videoDrivers = [ "nvidia" ];
     driSupport32Bit = true;
   };
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+    videoDrivers = [ "nvidia" ];
     layout = "us,ru(winkeys)";
     xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";
@@ -146,8 +154,6 @@
    automake
    pkgconfig
    gnumake
-   qt5Full
-   boost
    jdk
    clang
    subversion
@@ -170,7 +176,7 @@
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
-    extraFonts = [
+    fonts = [
        pkgs.corefonts
        pkgs.clearlyU
        pkgs.cm_unicode

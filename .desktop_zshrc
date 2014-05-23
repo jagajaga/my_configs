@@ -445,6 +445,7 @@ alias connect='sudo netcfg -r Jaga-Jaga'
 alias showdisk='sudo fdisk -l'
 alias cp='cp'
 alias :q='exit'
+alias update='sudo nixos-rebuild switch --upgrade || nix-env -u --always'
 
 
 unsetopt correct_all
@@ -474,3 +475,5 @@ function ghc-pkg-clean() {
 export FPATH=~/.zsh/functions:$FPATH
 
 unset SSH_ASKPASS
+setopt interactivecomments
+alias tmux='tmux attach || tmux new'

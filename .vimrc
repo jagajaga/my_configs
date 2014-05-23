@@ -49,7 +49,6 @@ filetype plugin indent on
 "Bundle      'majutsushi/tagbar'
 "Bundle     'Valloric/YouCompleteMe'
 "Bundle       'scrooloose/syntastic'
-Bundle               'tpope/vim-surround'
 Bundle                 'travitch/hasksyn'
 Bundle               'tpope/vim-surround'
 Bundle                    'gmarik/vundle'
