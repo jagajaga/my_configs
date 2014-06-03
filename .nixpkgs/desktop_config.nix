@@ -28,7 +28,8 @@ pkgs : {
       {
         name = "de-env";
         paths = with self;
-        [ skype dropbox dmenu trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc darcs djview4 evince xfe steam steamChrootEnv file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt python33Packages.glances tightvnc xclip youtubeDL python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify vimHugeX weechat aspell aspellDicts.ru aspellDicts.en dwb ];
+        [ skype dmenu trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc darcs djview4 evince xfe steam steamChrootEnv file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt python33Packages.glances tightvnc xclip youtubeDL python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify vimHugeX weechat aspell aspellDicts.ru aspellDicts.en dwb ];
       };
+      /*dropbox-cli */
   };
 }

@@ -1,44 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=700
-set confirm
-set cindent
-set t_Co=256
-autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
-autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
-for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc"] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-"filetype on
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-command WQ wq
-command Wq wq
-command W w
-command Q q
-
-autocmd vimenter * cd %:p:h
-autocmd FileType cpp call CppMake()
-function! CppMake()
-   if filereadable("Makefile")
-       set makeprg=make\ -s
-   else
-       set makeprg=clang++\ -Wall\ -g\ -std=c++11\ -o\ %<\ %
-   endif
-endfunction
-autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
-autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ gcc\ -m32\ -g\ -o\ %<\ %<.o 
-
-autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-autocmd BufRead *.hs set makeprg=ghc\ -O3\ --make\ %
-"au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
-"au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-
-" To use vundle just `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 set nocompatible
 filetype off 
 set rtp+=~/.vim/bundle/vundle/
@@ -77,9 +39,53 @@ Bundle           'airblade/vim-gitgutter'
 Bundle               'takac/vim-hardtime'
 Bundle             'vim-scripts/Tabmerge'
 Bundle       'powerman/vim-plugin-ruscmd'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'wting/rust.vim'
 
 set nocp
 filetype plugin on
+
+
+set history=700
+set confirm
+set cindent
+set t_Co=256
+
+for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc"] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+"filetype on
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+command WQ wq
+command Wq wq
+command W w
+command Q q
+
+autocmd vimenter * cd %:p:h
+autocmd FileType cpp call CppMake()
+function! CppMake()
+   if filereadable("Makefile")
+       set makeprg=make\ -s
+   else
+       set makeprg=clang++\ -Wall\ -g\ -std=c++11\ -o\ %<\ %
+   endif
+endfunction
+autocmd FileType c set makeprg=clang\ -Wall\ -g\ -o\ %<\ %
+autocmd FileType asm set makeprg=yasm\ -g\ dwarf2\ -f\ elf32\ -o\ %<.o\ %\ &&\ gcc\ -m32\ -g\ -o\ %<\ %<.o 
+
+autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+autocmd BufRead *.hs set makeprg=ghc\ -O3\ --make\ %
+autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
+autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
+autocmd BufRead,BufNewFile *.rs set filetype=rust
+autocmd FileType rust set makeprg=rustc\ %
+"au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
+"au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+
+" To use vundle just `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 
 set nocompatible
 set hidden
@@ -92,7 +98,6 @@ fun ActivateAddons()
 endf
 call ActivateAddons()
 ""vim-surround", "hasksyn", "vim-surround", "a.vim", "nerdcommenter", "nerdtree", "neco-ghc", "ghcmod-vim"
-
 
 " Start interactive EasyAlign in visual mode
 vmap <Enter> <Plug>(EasyAlign)
@@ -109,10 +114,14 @@ let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
 let g:gist_use_password_in_gitconfig = 1
 
-
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 let g:necoghc_enable_detailed_browse = 1
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 let g:airline_enable_branch=1
 let g:airline_enable_syntastic=1
