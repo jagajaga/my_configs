@@ -1,64 +1,46 @@
--------------------------------------------------------------------------------
--- xmonad.hs for xmonad-darcs
--- Author: Øyvind 'Mr.Elendig' Heggstad <mrelendig AT har-ikkje DOT net>
--------------------------------------------------------------------------------
--- Compiler flags --
-{-# LANGUAGE NoMonomorphismRestriction #-}
-
--- Imports --
--- stuff
-import qualified Data.Map                        as M
+import qualified Data.Map                         as M
 import           Graphics.X11.ExtraTypes.XF86
 import           Graphics.X11.Types
 import           Prelude
 import           System.Exit
+import           System.Taffybar.Hooks.PagerHints (pagerHints)
 import           XMonad
-import qualified XMonad.StackSet                 as W
-import           XMonad.Util.Run                 (safeSpawn)
-
--- actions
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
-{-import XMonad.Actions.WindowGo (runOrRaise)-}
--- hooks
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.SetWMName
 import           XMonad.Hooks.UrgencyHook
-import XMonad.Hooks.SetWMName
-
-
--- layouts
+import           XMonad.Layout.Grid
 import           XMonad.Layout.IM
-
-import XMonad.Layout.Grid   
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
 import           XMonad.Layout.Renamed
+import XMonad.Layout.Reflect
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
-
-
-import           XMonad.Layout.LayoutCombinators (JumpToLayout (..))
 import           XMonad.Prompt
 import           XMonad.Prompt.Input
+import qualified XMonad.StackSet                  as W
+import           XMonad.Util.Run
 
--------------------------------------------------------------------------------
--- Main --
+
 main :: IO ()
-main = xmonad =<< statusBar cmd pp kb conf
+main = do
+    xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-        cmd   = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
-        pp    = customPP
+        cmd   = "taffybar"
+        pp    = defaultPP 
         kb    = toggleStrutsKey
-        conf  = uhook myConfig
+        conf  = ewmh $ pagerHints $ uhook $ myConfig
 
 -------------------------------------------------------------------------------
 -- Configs --
-myConfig = defaultConfig { workspaces         = workspaces'
+myConfig = defaultConfig { workspaces  = workspaces'
                          , modMask            = modMask'
                          , borderWidth        = borderWidth'
                          , normalBorderColor  = normalBorderColor'
@@ -67,8 +49,9 @@ myConfig = defaultConfig { workspaces         = workspaces'
                          , keys               = keys'
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
-                         , handleEventHook    = fullscreenEventHook
-                         , startupHook        = startup
+                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
+                         , logHook            = ewmhDesktopsLogHook
+                         , startupHook        = startup <+> ewmhDesktopsStartup
                          }
 
 
@@ -76,12 +59,13 @@ startup :: X ()
 startup = do
     setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
-    {-spawn "killall trayer || sleep 1 && trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 8 --transparent true --alpha 0 --tint 0x000000 --height 18" -}
+    spawn "killall taffybar-linux-x86_64 && taffybar"
     spawn "xmodmap -e \"keysym Menu = Super_L\""
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
-    {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
     spawnOn "IM" "skype"
-    spawnOn "IRC" ("xfce4-terminal -e weechat")
+    spawnOn "IM" "gajim"
+    spawnOn "IRC" ("xfce4-terminal --title=weechat -e weechat")
+    {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
 
 -------------------------------------------------------------------------------
@@ -96,26 +80,12 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
                          , title =? "cmatrix"             --> doIgnore
-                         , title =? "WeeChat 0.4.3"       --> doShift "IRC"
-                         {-, isDialog                       --> doFloat-}
-                         {-, isDialog                       --> insertPosition Above Older-}
-                         {-, insertPosition Below Newer-}
+                         , title =? "weechat"             --> doShift "IRC"
                          , transience'
+                         , isDialog                         --> doCenterFloat
+                         , role      =? "pop-up"            --> doCenterFloat
                          ]
-
-
--------------------------------------------------------------------------------
--- Looks --
--- bar
-customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "⎨" "⎬"
-                     , ppHidden = xmobarColor "#C98F0A" ""
-                     , ppHiddenNoWindows = xmobarColor "#003347" ""
-                     , ppUrgent = xmobarColor "#FFFF00" "" . wrap "[" "]"
-                     , ppLayout = xmobarColor "#003347" ""
-                     , ppTitle =  xmobarColor "#429942" "" . shorten 80
-                     , ppSep = xmobarColor "#429942" "" " | "
-                     }
-
+                             where role = stringProperty "WM_WINDOW_ROLE"
 
 myGSNavigation :: TwoD a (Maybe a)
 myGSNavigation = makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
@@ -172,7 +142,7 @@ myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkCom
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
   where
     rt = ResizableTall 1 (2/100) (1/2) []
-    skypeLayout = renamed [Replace "[][]"] $ withIM 0.18 (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) $ withIM 0.18 (ClassName "Gajim") Grid
+    skypeLayout = renamed [Replace "[][]"] $ withIM 0.18 (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) $ reflectHoriz $ withIM 0.18 (ClassName "Gajim") $ reflectHoriz $ Grid
     tile = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
     mtile = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
     tab = renamed [Replace "T"] $ noBorders $ tabbed shrinkText tabTheme1
@@ -277,3 +247,4 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     []
 
 -------------------------------------------------------------------------------
+
