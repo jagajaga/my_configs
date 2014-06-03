@@ -86,7 +86,7 @@
   services.locate.enable = true;
   
   # enable automount for media stuff
-  services.udisks.enable = true;
+  services.udisks2.enable = true;
 
   /*hardware.pulseaudio.enable = true;*/
   /*sound.enableOSSEmulation = false;*/
@@ -171,6 +171,8 @@
 
    connmanui
    cjdns
+
+   dropbox
 
   ];
   fonts = {
