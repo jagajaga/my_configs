@@ -111,7 +111,7 @@ main = do
                                   , graphLabel = Nothing
                                   }
       clock      = textClockNew Nothing "<span fgcolor='#C98F0A'>%a %b %d </span><span fgcolor='#429942'>%H:%M:%S</span>" 1
-      netMonitor = netMonitorNew 2.0 "wlp3s0" $ Just $ colorize colorOrange "" "WiFi: ⇣" ++ colorize colorLightGreen "" "%.0f" ++ colorize colorOrange "" " : ⇡" ++ colorize colorLightGreen "" "%.0f"
+      netMonitor = netMonitorNewWith 2.0 "wlp3s0" 0 $ colorize colorOrange "" "WiFi: ⇣" ++ colorize colorLightGreen "" "$inKB$" ++ colorize colorOrange "" " : ⇡" ++ colorize colorLightGreen "" "$outKB$" 
       wea        = weatherNew (defaultWeatherConfig "ULLI") { weatherTemplate = "<span fgcolor='#429942'>$tempC$°C</span>" } 100
       iohdd      = pollingGraphNew ioCfg 1 (diskIOCallback "sdd" "md126")
       mem        = pollingBarNew (defaultBarConfig colorFunc) {barWidth = 10} 3 memCallback
@@ -124,6 +124,7 @@ main = do
       tray       = systrayNew
       mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF" 
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
-                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [mocp], [netMonitor] ]
+                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp] ]
                                         , widgetSpacing = 5
+                                        , barHeight = 23
                                         }
