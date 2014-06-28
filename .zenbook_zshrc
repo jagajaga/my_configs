@@ -411,8 +411,11 @@ source ~/.zsh/git-prompt/zshrc.sh
 # команды при запуске zsh 
 # 
 PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
-if [[ $PWD == $HOME ]]; then
+#if [[ $PWD == $HOME ]]; then
 PROMPT+=$' $(git_super_status)'
+curshel=$(ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}')
+if [[ $curshel == "rc" ]]; then
+    PROMPT+=$' NIX-SHELL'
 fi
 
 if [[ $EUID == 0 ]] 
@@ -421,6 +424,7 @@ PROMPT+=$' #%{\e[0m%} ' # user dir %
 else
 PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
+RPROMPT=$'%{\e[1;36m%}{%D{%H:%M:%S}}%{\e[0m' 
 
 alias ls='ls -F --color=auto'
 alias l='ls -lhF --group-directories-first --color=auto'
@@ -434,20 +438,19 @@ alias h='htop'
 alias n='sudo nethogs wlan0'
 alias io='sudo iotop'
 alias editawesome='vim /etc/xdg/awesome/rc.lua'
-alias update='sudo yaourt -Syua'
 alias screenshot='sleep 10;import -window root myscreen.png'
 alias pacman='sudo pacman'
 alias open='xdg-open'
 alias connect='sudo netcfg -r Jaga-Jaga'
 alias showdisk='sudo fdisk -l'
-alias cp='pycp'
+alias cp='cp'
 alias :q='exit'
+alias update='sudo nixos-rebuild switch --upgrade || nix-env -u --always'
 
 
 unsetopt correct_all
 zstyle ':completion:*:processes' command 'ps -au$USER' 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;32'
-source /usr/share/doc/pkgfile/command-not-found.zsh
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 cat 2guys.txt
 alias show_random_file_or_directory='ls | sed -n "$((RANDOM%$(ls | wc -l)+1))p"'
@@ -457,3 +460,20 @@ toBackup() {cp "$1" "$1.backup"}
 fromBackup() {cp "$1.backup" "$1"}
 swapBackup() {cp "$1" "$1.backup.temp"; cp "$1.backup" "$1"; mv -f "$1.backup.temp" "$1.backup"}
 alias getstats="cat ~/.zhistory | grep -E '^:\s([0-9]+):([0-9]+);([a-zA-Z]+)(.*)' | sed -r -e 's/^: ([0-9]+):0;([a-zA-Z]+)(.*)/\2/g' | sort | uniq -c | sort -n"
+export NIXPKGS_ALL=/home/jaga/nixpkgs
+#export NIX_PATH=$NIX_PATH:nixpkgs=/nix/var/nix/profiles/per-user/jaga/channels/nixpkgs
+query(){ nix-env -qa \* -P -f $NIXPKGS_ALL | grep -i "$1"; }
+export TERM=xterm-256color  
+alias nix-szsh="nix-shell --command zsh"
+
+function ghc-pkg-clean() {
+    for p in `ghc-pkg check $* 2>&1  | grep problems | awk '{print $6}' | sed -e 's/:$//'`
+    do
+        echo unregistering $p; ghc-pkg $* unregister $p
+    done
+}
+export FPATH=~/.zsh/functions:$FPATH
+
+unset SSH_ASKPASS
+setopt interactivecomments
+alias tmux='tmux attach || tmux new'

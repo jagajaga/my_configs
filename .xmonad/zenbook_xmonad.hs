@@ -1,36 +1,16 @@
--------------------------------------------------------------------------------
--- xmonad.hs for xmonad-darcs
--- Author: Øyvind 'Mr.Elendig' Heggstad <mrelendig AT har-ikkje DOT net>
--------------------------------------------------------------------------------
--- Compiler flags --
-{-# LANGUAGE NoMonomorphismRestriction #-}
-
--- Imports --
--- stuff
-import qualified Data.Map                     as M
+import qualified Data.Map                         as M
 import           Graphics.X11.ExtraTypes.XF86
 import           Graphics.X11.Types
 import           Prelude
 import           System.Exit
 import           XMonad
-import qualified XMonad.StackSet              as W
-import           XMonad.Util.Run              (safeSpawn)
-
--- actions
-import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
-{-import XMonad.Actions.WindowGo (runOrRaise)-}
--- hooks
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
-import           XMonad.Hooks.InsertPosition
 import           XMonad.Hooks.ManageHelpers
-import           XMonad.Hooks.Place
+import           XMonad.Hooks.SetWMName
 import           XMonad.Hooks.UrgencyHook
-
-
--- layouts
 import           XMonad.Layout.Grid
 import           XMonad.Layout.IM
 import           XMonad.Layout.Maximize
@@ -38,23 +18,28 @@ import           XMonad.Layout.Minimize
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
 import           XMonad.Layout.Renamed
+import XMonad.Layout.Reflect
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
+import           XMonad.Prompt
+import           XMonad.Prompt.Input
+import qualified XMonad.StackSet                  as W
+import           XMonad.Util.Run
 
--------------------------------------------------------------------------------
--- Main --
+
 main :: IO ()
-main = xmonad =<< statusBar cmd pp kb conf
+main = do
+    xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
-        cmd   = "bash -c \"tee >(xmobar -x0) | xmobar -x1\""
-        pp    = customPP
+        cmd   = "taffybar"
+        pp    = defaultPP 
         kb    = toggleStrutsKey
-        conf  = uhook myConfig
+        conf  = ewmh $ uhook $ myConfig
 
 -------------------------------------------------------------------------------
 -- Configs --
-myConfig = defaultConfig { workspaces         = workspaces'
+myConfig = defaultConfig { workspaces  = workspaces'
                          , modMask            = modMask'
                          , borderWidth        = borderWidth'
                          , normalBorderColor  = normalBorderColor'
@@ -63,19 +48,23 @@ myConfig = defaultConfig { workspaces         = workspaces'
                          , keys               = keys'
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
-                         , handleEventHook    = fullscreenEventHook
-                         , startupHook        = startup
+                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
+                         , logHook            = ewmhDesktopsLogHook
+                         , startupHook        = startup <+> ewmhDesktopsStartup
                          }
 
 
 startup :: X ()
 startup = do
+    setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
+    spawn "killall taffybar-linux-x86_64 && taffybar"
     spawn "xmodmap -e \"keysym Menu = Super_L\""
-    spawn "lilyterm  --geometry 85x10+500+600 --title cmatrix -e bash"
-    {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
-    safeSpawn "autocpu" ["-s"]
+    spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     spawnOn "IM" "skype"
+    spawnOn "IM" "gajim"
+    spawnOn "IRC" ("xfce4-terminal --title=weechat -e weechat")
+    {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
 
 -------------------------------------------------------------------------------
@@ -83,36 +72,25 @@ startup = do
 manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          , className =? "Gimp"            --> doFloat
                          , className =? "Skype"           --> doShift "IM"
+                         , className =? "Gajim"           --> doShift "IM"
+                         , className =? "Steam"           --> doShift "Steam"
                          , className =? "Vlc"             --> doCenterFloat
-                         , className =? "Xfce4-notifyd"   --> doF W.focusDown 
+                         , className =? "Xfce4-notifyd"   --> doF W.focusDown
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
-                         , title =? "cmatrix"             --> doIgnore 
-                         , isDialog                       --> doFloat
-                         , isDialog                       --> insertPosition Above Older
-                         {-, insertPosition Below Newer-}
+                         , title =? "cmatrix"             --> doIgnore
+                         , title =? "weechat"             --> doShift "IRC"
                          , transience'
+                         , isDialog                         --> doCenterFloat
+                         , role      =? "pop-up"            --> doCenterFloat
                          ]
+                             where role = stringProperty "WM_WINDOW_ROLE"
 
-
--------------------------------------------------------------------------------
--- Looks --
--- bar
-customPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "⎨" "⎬"
-                     , ppHidden = xmobarColor "#C98F0A" ""
-                     , ppHiddenNoWindows = xmobarColor "#003347" ""
-                     , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]"
-                     , ppLayout = xmobarColor "#003347" ""
-                     , ppTitle =  xmobarColor "#429942" "" . shorten 80
-                     , ppSep = xmobarColor "#429942" "" " | "
-                     }
-
-
-myGSNavigation:: TwoD a (Maybe a)
-myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
+myGSNavigation :: TwoD a (Maybe a)
+myGSNavigation = makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
   where navKeyMap = M.fromList [
            ((0,xK_Escape), cancel)
-          ,((0,xK_space) , select)
+          ,((0,xK_Return) , select)
           ,((0,xK_slash) , substringSearch myGSNavigation)
           ,((0,xK_Left)  , move (-1,0)  >> myGSNavigation)
           ,((0,xK_h)     , move (-1,0)  >> myGSNavigation)
@@ -131,19 +109,22 @@ myGSNavigation= makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
         navDefaultHandler = const myGSNavigation
 
 -- GridSelect
+myGSConfig :: HasColorizer a => GSConfig a
 myGSConfig = defaultGSConfig { gs_cellwidth = 160
                             , gs_navigate = myGSNavigation
 }
 
 -- urgent notification
+urgentConfig :: UrgencyConfig
 urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
 
 -- borders
 borderWidth'        = 1
 normalBorderColor'  = "#333333"
-focusedBorderColor' = "#AFAF87"
+focusedBorderColor' = "#00FF00"
 
 -- tabs
+tabTheme1 :: Theme
 tabTheme1 = defaultTheme { decoHeight = 16
                          , activeColor = "lightgreen"
                          , activeBorderColor = "#a6c292"
@@ -152,13 +133,15 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = ["General", "Programming", "Work", "IM", "Media", "Etc", "7", "8", "9"]
+workspaces' = ["General", "Programming", "Work", "IM", "IRC", "Media", "Steam", "Game", "8", "9"]
+
+myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
 -- layouts
 layoutHook' = onWorkspace "IM" skypeLayout (tile ||| mtile ||| tab ||| full)
   where
     rt = ResizableTall 1 (2/100) (1/2) []
-    skypeLayout = renamed [Replace "[][]"] $ withIM (18/100) (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) (Tall 1 0.02 0.5)
+    skypeLayout = renamed [Replace "[][]"] $ withIM 0.18 (ClassName "Skype" `And` (Not (Role "ConversationsWindow"))) $ reflectHoriz $ withIM 0.18 (ClassName "Gajim") $ reflectHoriz $ Grid
     tile = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
     mtile = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
     tab = renamed [Replace "T"] $ noBorders $ tabbed shrinkText tabTheme1
@@ -181,69 +164,81 @@ keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
-    , ((modMask,               xK_r     ), safeSpawn "dmenu_run" [])
-    , ((modMask,               xK_w     ), safeSpawn "chromium" [])
+    , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
+    , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
+    , ((modMask .|. shiftMask    , xK_w     ), safeSpawn "chromium" [])
     , ((modMask,               xK_a     ), safeSpawn (XMonad.terminal conf) ["-x", "mc"])
-    , ((modMask,               xK_c     ), kill)
+    , ((modMask                                                  , xK_c     ), kill)
+    , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)
 
     -- multimedia
 -- Alsa mixer bindings
-    , ((0, xF86XK_AudioRaiseVolume      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
-    , ((0, xF86XK_AudioLowerVolume      ), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
-    , ((0, xF86XK_AudioMute             ), safeSpawn "amixer" ["-q", "set", "Master", "0"])
-    , ((modMask, xK_F12      ), spawn "amixer -q set Master 9+ && /home/jaga/myscripts/getvolume.sh -s")
-    , ((modMask, xK_F11), spawn "amixer -q set Master 9- && /home/jaga/myscripts/getvolume.sh -s")
-     , ((modMask, xK_F9), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
+    , ((0                                                        , xF86XK_AudioRaiseVolume ) , spawn "amixer -q set Master 3+ && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 3- && /home/jaga/myscripts/getvolume.sh -s")
+    , ((0                                                        , xF86XK_AudioMute        ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
+    , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && bash /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && bash \"/home/jaga/myscripts/getvolume.sh -s\"")
+    , ((modMask                                                  , xK_F9                   ) , spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
-    , ((modMask, xK_F10), safeSpawn "amixer" ["-q", "set", "Master", "0"])
+    , ((modMask                                                  , xK_F10                  ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
+--}
+    , ((0                                                        , xF86XK_AudioPlay        ) , safeSpawn "mocp" ["-G"])
+    , ((0                                                        , xF86XK_AudioNext        ) , safeSpawn "mocp" ["-f"])
+    , ((0                                                        , xF86XK_AudioPrev        ) , safeSpawn "mocp" ["-r"])
+    , ((0                                                        , xF86XK_AudioStop        ) , safeSpawn "mocp" ["-s"])
+    , ((0                                                        , xF86XK_AudioMedia       ) , spawn "xfce4-terminal -e mocp")
+    , ((0                                                        , xF86XK_Sleep            ) , spawn "bash /home/jaga/myscripts/lockandsuspend.sh")
+    , ((0                                                        , xK_Pause                ) , safeSpawn "bash /home/jaga/myscripts/autocpu.sh" [])
+    , ((0                                                        , xK_Print                ) , spawn "import -window root /home/jaga/Dropbox/screenshots/`date +%F_%T`.png" )
+    , ((modMask                                                  , xF86XK_Launch6          ) , safeSpawn "autocpu" ["-n"])
+    , ((modMask                                                  , xK_t                    ) , spawn "bash /home/jaga/myscripts/screen-translate.sh")
+
 --}
     , ((modMask, xK_F3             ), safeSpawn "mocp" ["-G"])
     , ((modMask, xK_F4             ), safeSpawn "mocp" ["-f"])
-    , ((0, xF86XK_Launch6             ), safeSpawn "autocpu" [])
-    , ((modMask, xF86XK_Launch6             ), safeSpawn "autocpu" ["-n"])
-    , ((modMask, xK_t), safeSpawn "screen-translate" [])
-
-    -- grid
-    , ((modMask,               xK_g     ), goToSelected myGSConfig)
-    , ((modMask,               xK_g     ), goToSelected myGSConfig)
+    , ((0, xF86XK_Launch6          ), safeSpawn "autocpu" [])
+    , ((modMask, xF86XK_Launch6    ), safeSpawn "autocpu" ["-n"])
+    , ((modMask                                                  , xK_t                    ) , spawn "bash /home/jaga/myscripts/screen-translate.sh")
+-- grid
+    , ((modMask                                                  , xK_s     ), goToSelected myGSConfig)
 
     -- layouts
-    , ((modMask,               xK_space ), sendMessage NextLayout)
-    , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
+    , ((modMask                                                  , xK_space ), sendMessage NextLayout)
+    , ((modMask .|. shiftMask                                    , xK_space ), setLayout $ XMonad.layoutHook conf)
 
     -- floating layer stuff
-    , ((modMask .|. shiftMask, xK_f     ), withFocused $ windows . W.sink)
-    , ((modMask,               xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
+    , ((modMask .|. shiftMask                                    , xK_f     ), withFocused $ windows . W.sink)
+    , ((modMask                                                  , xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
 
 
     -- focus
-    , ((modMask,               xK_Tab   ), windows W.focusDown)
-    , ((modMask,               xK_j     ), windows W.focusDown)
-    , ((modMask,               xK_k     ), windows W.focusUp)
-    , ((modMask,               xK_y     ), windows W.focusMaster)
-    , ((modMask,               xK_n     ), withFocused minimizeWindow)
-    , ((modMask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin)
-    , ((modMask, xK_m     ), withFocused $ sendMessage . maximizeRestore)
+    , ((modMask                                                  , xK_Tab   ), windows W.focusDown)
+    , ((modMask                                                  , xK_j     ), windows W.focusDown)
+    , ((modMask                                                  , xK_k     ), windows W.focusUp)
+    , ((modMask                                                  , xK_y     ), windows W.focusMaster)
+    , ((modMask                                                  , xK_n     ), withFocused minimizeWindow)
+    , ((modMask .|. shiftMask                                    , xK_n     ), sendMessage RestoreNextMinimizedWin)
+    , ((modMask                                                  , xK_m     ), withFocused $ sendMessage . maximizeRestore)
 
 
     -- swapping
-    , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
-    , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
+    , ((modMask .|. shiftMask                                    , xK_Return), windows W.swapMaster)
+    , ((modMask .|. shiftMask                                    , xK_j     ), windows W.swapDown  )
+    , ((modMask .|. shiftMask                                    , xK_k     ), windows W.swapUp    )
 
     -- increase or decrease number of windows in the master area
-    , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modMask                                                  , xK_comma ), sendMessage (IncMasterN 1))
+    , ((modMask                                                  , xK_period), sendMessage (IncMasterN (-1)))
 
     -- resizing
-    , ((modMask,               xK_h     ), sendMessage Shrink)
-    , ((modMask,               xK_l     ), sendMessage Expand)
-    , ((modMask .|. shiftMask, xK_h     ), sendMessage MirrorShrink)
-    , ((modMask .|. shiftMask, xK_l     ), sendMessage MirrorExpand)
+    , ((modMask                                                  , xK_h     ), sendMessage Shrink)
+    , ((modMask                                                  , xK_l     ), sendMessage Expand)
+    , ((modMask .|. shiftMask                                    , xK_h     ), sendMessage MirrorShrink)
+    , ((modMask .|. shiftMask                                    , xK_l     ), sendMessage MirrorExpand)
 
     -- quit, or restart
-    , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modMask              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modMask .|. shiftMask                                    , xK_q     ), io (exitWith ExitSuccess))
+    , ((modMask                                                  , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     ]
     ++
     -- mod-[1..9] %! Switch to workspace N
@@ -257,3 +252,4 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     []
 
 -------------------------------------------------------------------------------
+
