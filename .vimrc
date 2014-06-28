@@ -96,7 +96,7 @@ fun ActivateAddons()
     set runtimepath+=~/.vim/vim-addons/vim-addon-manager
     call vam#ActivateAddons(["vim-addon-nix"])
 endf
-call ActivateAddons()
+"call ActivateAddons()
 ""vim-surround", "hasksyn", "vim-surround", "a.vim", "nerdcommenter", "nerdtree", "neco-ghc", "ghcmod-vim"
 
 " Start interactive EasyAlign in visual mode
