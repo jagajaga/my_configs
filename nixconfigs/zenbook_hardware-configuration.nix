@@ -15,12 +15,13 @@
   nix.maxJobs = 4;
 
   fileSystems."/".device = "/dev/sda2";
+  fileSystems."/home".device = "/dev/sda3";
 
-  fileSystems."/media/Arch" =     # where you want to mount the device
-    { device = "/dev/sda4";  # the device
-      fsType = "ext4";      # the type of the partition
-      options = "data=journal,users,rw,user,auto,exec";
-    };
+  /*fileSystems."/media/Arch" =     # where you want to mount the device*/
+    /*{ device = "/dev/sda4";  # the device*/
+      /*fsType = "ext4";      # the type of the partition*/
+      /*options = "data=journal,users,rw,user,auto,exec";*/
+    /*};*/
 
   # List swap partitions activated at boot time.
   swapDevices =

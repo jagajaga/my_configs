@@ -477,3 +477,4 @@ export FPATH=~/.zsh/functions:$FPATH
 unset SSH_ASKPASS
 setopt interactivecomments
 alias tmux='tmux attach || tmux new'
+alias cp='cp -v'
