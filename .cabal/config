@@ -22,18 +22,19 @@ world-file: /home/jaga/.cabal/world
 -- program-suffix: 
 -- library-vanilla: True
 -- library-profiling: False
--- shared: False
+-- shared:
 -- executable-dynamic: False
 -- executable-profiling: False
 -- optimization: True
--- library-for-ghci: True
+-- library-for-ghci: False
 -- split-objs: False
 -- executable-stripping: True
 -- user-install: True
 -- package-db:
 -- flags:
-extra-include-dirs: /home/jaga/.nix-profile/include/
-extra-lib-dirs: /home/jaga/.nix-profile/lib/
+-- extra-include-dirs:
+-- extra-lib-dirs:
+extra-prog-path: /home/jaga/.cabal/bin
 -- tests: False
 -- library-coverage: False
 -- benchmarks: False
@@ -41,23 +42,22 @@ extra-lib-dirs: /home/jaga/.nix-profile/lib/
 -- constraint:
 -- preference:
 -- solver: choose
-documentation: True 
+-- documentation: False
 -- doc-index-file: $datadir/doc/index.html
 -- max-backjumps: 200
 -- reorder-goals: False
 -- shadow-installed-packages:
-reinstall: True 
+-- reinstall: False
 -- avoid-reinstalls: False
 -- force-reinstalls: False
 -- upgrade-dependencies: False
--- only-dependencies: False
 -- root-cmd:
 -- symlink-bindir:
 build-summary: /home/jaga/.cabal/logs/build.log
 -- build-log:
 remote-build-reporting: anonymous
 -- one-shot: False
--- jobs:
+jobs: $ncpus
 -- username:
 -- password:
 
@@ -65,22 +65,80 @@ install-dirs user
   -- prefix: /home/jaga/.cabal
   -- bindir: $prefix/bin
   -- libdir: $prefix/lib
-  -- libsubdir: $pkgid/$compiler
+  -- libsubdir: $arch-$os-$compiler/$pkgid
   -- libexecdir: $prefix/libexec
   -- datadir: $prefix/share
-  -- datasubdir: $pkgid
-  -- docdir: $datadir/doc/$pkgid
+  -- datasubdir: $arch-$os-$compiler/$pkgid
+  -- docdir: $datadir/doc/$arch-$os-$compiler/$pkgid
   -- htmldir: $docdir/html
   -- haddockdir: $htmldir
+  -- sysconfdir: $prefix/etc
 
 install-dirs global
   -- prefix: /usr/local
   -- bindir: $prefix/bin
   -- libdir: $prefix/lib
-  -- libsubdir: $pkgid/$compiler
+  -- libsubdir: $arch-$os-$compiler/$pkgid
   -- libexecdir: $prefix/libexec
   -- datadir: $prefix/share
-  -- datasubdir: $pkgid
-  -- docdir: $datadir/doc/$pkgid
+  -- datasubdir: $arch-$os-$compiler/$pkgid
+  -- docdir: $datadir/doc/$arch-$os-$compiler/$pkgid
   -- htmldir: $docdir/html
   -- haddockdir: $htmldir
+  -- sysconfdir: $prefix/etc
+
+program-locations 
+  -- alex-location:
+  -- ar-location:
+  -- c2hs-location:
+  -- cpphs-location:
+  -- ffihugs-location:
+  -- gcc-location:
+  -- ghc-location:
+  -- ghc-pkg-location:
+  -- greencard-location:
+  -- haddock-location:
+  -- happy-location:
+  -- hmake-location:
+  -- hpc-location:
+  -- hsc2hs-location:
+  -- hscolour-location:
+  -- hugs-location:
+  -- jhc-location:
+  -- ld-location:
+  -- lhc-location:
+  -- lhc-pkg-location:
+  -- nhc98-location:
+  -- pkg-config-location:
+  -- ranlib-location:
+  -- strip-location:
+  -- tar-location:
+  -- uhc-location:
+
+program-default-options 
+  -- alex-options:
+  -- ar-options:
+  -- c2hs-options:
+  -- cpphs-options:
+  -- ffihugs-options:
+  -- gcc-options:
+  -- ghc-options:
+  -- ghc-pkg-options:
+  -- greencard-options:
+  -- haddock-options:
+  -- happy-options:
+  -- hmake-options:
+  -- hpc-options:
+  -- hsc2hs-options:
+  -- hscolour-options:
+  -- hugs-options:
+  -- jhc-options:
+  -- ld-options:
+  -- lhc-options:
+  -- lhc-pkg-options:
+  -- nhc98-options:
+  -- pkg-config-options:
+  -- ranlib-options:
+  -- strip-options:
+  -- tar-options:
+  -- uhc-options:

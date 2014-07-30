@@ -28,7 +28,7 @@ pkgs : {
       {
         name = "de-env";
         paths = with self;
-        [ skype gajim steam steamChrootEnv dmenu trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc djview4 evince xfe file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt tightvnc xclip python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify vimHugeX weechat dwb dropbox psmisc ];
+        [ skype gajim steam steamChrootEnv dmenu trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc djview4 evince xfe file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt tightvnc xclip python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify weechat dwb dropbox psmisc ];
       };
       
   };

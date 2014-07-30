@@ -12,7 +12,7 @@
 #      ./private.nix
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_3_13;
+  boot.kernelPackages = pkgs.linuxPackages_3_15;
   boot.loader.grub.timeout = 1;
 
   boot.initrd.kernelModules =
@@ -28,9 +28,15 @@
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
+  boot.loader.grub.splashImage = ./background.png;
 
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
+
+  boot.extraModprobeConfig = ''
+    options snd slots=snd_usb_audio,snd-hda-intel
+
+  '';
 
   boot.loader.grub.extraEntries = "menuentry \"Arch Linux\" {\n set root=(hd0,4)\n linux /boot/vmlinuz-linux root=/dev/sda4 ro\n initrd /boot/initramfs-linux.img
     }";
@@ -58,6 +64,14 @@
     Cmnd_Alias SUSPEND = /var/run/current-system/sw/sbin/pm-suspend, /var/run/current-system/sw/bin/systemctl suspend
 
     %users      ALL=NOPASSWD: SUSPEND
+  '';
+
+  security.polkit.extraConfig = ''
+        polkit.addRule(function(action) {
+            if (action.id == "org.freedesktop.udisks2.filesystem-mount-system") {
+                return polkit.Result.YES;
+            }
+        });
   '';
 
   services.acpid.enable = true; 
@@ -88,9 +102,9 @@
 
   /*hardware.pulseaudio.enable = true;*/
   /*sound.enableOSSEmulation = false;*/
-  # sound.extraConfig = ''
-  #   defaults.pcm.!card 3
-  # '';
+   /*sound.extraConfig = ''*/
+     /*defaults.pcm.!card 3*/
+   /*'';*/
   
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -98,6 +112,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.tor.client.enable = true;
+  services.upower.enable = true;
 
   users.extraUsers.jaga = {
     description = "";
@@ -133,8 +148,21 @@
     windowManager.default = "xmonad";
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
-    multitouch.enable = true;
+    /*multitouch.enable = true;*/
     synaptics.enable = true;
+    config = ''
+        Section "InputClass"
+            Identifier   "Kensington Slimblade Trackball"
+            MatchProduct "Kensington Kensington Slimblade Trackball"
+            Option       "ButtonMapping" "1 8 3 4 5 6 7 2 9 10 11 12"
+            Option       "EmulateWheel"       "True"
+            Option       "EmulateWheelButton" "8"
+            Option       "XAxisMapping"       "6 7"
+            Option       "ZAxisMapping" "4 5"
+            Option       "EmulateWheelInertia" "75"
+        EndSection
+    '';
+
   };
 
   time.timeZone = "Europe/Moscow";
@@ -156,6 +184,7 @@
    clang
    subversion
    git
+   androidsdk_4_1
    python27
    python33
    python
