@@ -14,7 +14,7 @@ pkgs : {
       {
         name = "development-env";
         paths = with self;
-        [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils ctags astyle manpages ];
+        [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils astyle manpages emacs ];
       };
 
       hugeEnv = self.buildEnv

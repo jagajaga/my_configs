@@ -148,7 +148,7 @@
     windowManager.default = "xmonad";
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
-    /*multitouch.enable = true;*/
+    multitouch.enable = true;
     synaptics.enable = true;
     config = ''
         Section "InputClass"
