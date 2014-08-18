@@ -1,4 +1,4 @@
-import qualified Data.Map                         as M
+import qualified Data.Map                     as M
 import           Graphics.X11.ExtraTypes.XF86
 import           Graphics.X11.Types
 import           Prelude
@@ -17,15 +17,17 @@ import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
+import           XMonad.Layout.Reflect
 import           XMonad.Layout.Renamed
-import XMonad.Layout.Reflect
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
 import           XMonad.Prompt
 import           XMonad.Prompt.Input
-import qualified XMonad.StackSet                  as W
+import qualified XMonad.StackSet              as W
 import           XMonad.Util.Run
 
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
 
 main :: IO ()
 main = do
@@ -33,7 +35,7 @@ main = do
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
         cmd   = "taffybar"
-        pp    = defaultPP 
+        pp    = defaultPP
         kb    = toggleStrutsKey
         conf  = ewmh $ uhook $ myConfig
 
@@ -164,12 +166,12 @@ keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
-    , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
+    , ((modMask                                                  , xK_r     ), shellPrompt defaultXPConfig)
     , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
     , ((modMask .|. shiftMask    , xK_w     ), safeSpawn "chromium" [])
     , ((modMask,               xK_a     ), safeSpawn (XMonad.terminal conf) ["-x", "mc"])
     , ((modMask                                                  , xK_c     ), kill)
-    , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)
+    , ((modMask .|. controlMask, xK_space       ),  windowPromptGoto defaultXPConfig )
 
     -- multimedia
 -- Alsa mixer bindings
@@ -196,6 +198,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 --}
     , ((modMask, xK_F3             ), safeSpawn "mocp" ["-G"])
     , ((modMask, xK_F4             ), safeSpawn "mocp" ["-f"])
+    , ((modMask .|. shiftMask, xK_F4             ), safeSpawn "mocp" ["-r"])
     , ((0, xF86XK_Launch6          ), safeSpawn "autocpu" [])
     , ((modMask, xF86XK_Launch6    ), safeSpawn "autocpu" ["-n"])
     , ((modMask                                                  , xK_t                    ) , spawn "bash /home/jaga/myscripts/screen-translate.sh")
