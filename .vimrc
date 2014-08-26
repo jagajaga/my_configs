@@ -51,6 +51,8 @@ set confirm
 set cindent
 set t_Co=256
 
+"TODO disable in vimrc
+
 for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc"] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
 " Enable filetype plugins
 filetype plugin on

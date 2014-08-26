@@ -8,13 +8,13 @@ pkgs : {
           [ YouCompleteMe syntastic taglist tagbar vimproc ];
       };
 
-      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall_1_18_0_3 cabal2nix lushtags haddock stylishHaskell ghcMod hlint ]);
+      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall cabal2nix lushtags haddock stylishHaskell ghcMod hlint Agda ]);
 
       developmentEnv = self.buildEnv
       {
         name = "development-env";
         paths = with self;
-        [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils astyle manpages emacs ];
+        [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils astyle manpages emacs  ];
       };
 
       hugeEnv = self.buildEnv

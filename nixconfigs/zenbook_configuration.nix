@@ -132,7 +132,10 @@
   services.xserver = {
     enable = true;
     layout = "us,ru(winkeys)";
-    xkbOptions = "grp:caps_toggle";
+    xkbOptions = ''
+            grp:caps_toggle
+            compose:ralt
+            '';
     xkbVariant = "winkeys";
     displayManager.slim = {
       enable = true;
