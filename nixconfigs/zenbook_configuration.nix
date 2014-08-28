@@ -12,7 +12,7 @@
 #      ./private.nix
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_3_15;
+  boot.kernelPackages = pkgs.linuxPackages_3_16;
   boot.loader.grub.timeout = 1;
 
   boot.initrd.kernelModules =
@@ -33,10 +33,10 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
-  boot.extraModprobeConfig = ''
-    options snd slots=snd_usb_audio,snd-hda-intel
+  /*boot.extraModprobeConfig = ''*/
+    /*options snd slots=snd_usb_audio,snd-hda-intel*/
 
-  '';
+  /*'';*/
 
   boot.loader.grub.extraEntries = "menuentry \"Arch Linux\" {\n set root=(hd0,4)\n linux /boot/vmlinuz-linux root=/dev/sda4 ro\n initrd /boot/initramfs-linux.img
     }";
@@ -132,10 +132,7 @@
   services.xserver = {
     enable = true;
     layout = "us,ru(winkeys)";
-    xkbOptions = ''
-            grp:caps_toggle
-            compose:ralt
-            '';
+    xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";
     displayManager.slim = {
       enable = true;
