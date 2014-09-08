@@ -27,6 +27,8 @@ import           XMonad.Prompt.Input
 import qualified XMonad.StackSet                  as W
 import           XMonad.Util.Run
 
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
 
 main :: IO ()
 main = do
@@ -161,16 +163,22 @@ modMask' = mod4Mask
 toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
+interactiveRunInTerm c config = do
+    cmds <- io getCommands
+    mkXPrompt Shell config (getShellCompl cmds) run
+    where run a = unsafeSpawn $ c ++ " " ++ a
+
 keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
-    , ((modMask                                                  , xK_r     ), safeSpawn "dmenu_run" [])
+    , ((modMask                                                  , xK_r     ), shellPrompt defaultXPConfig)
+    , ((modMask .|. shiftMask                                                  , xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )
     , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
     , ((modMask .|. shiftMask    , xK_w     ), safeSpawn "chromium" [])
-    , ((modMask                                                  , xK_a     ), safeSpawn "xfe" [])
     , ((modMask                                                  , xK_c     ), kill)
-    , ((modMask .|. controlMask, xK_space       ), myLayoutPrompt)
+    , ((modMask .|. controlMask, xK_space       ),  windowPromptGoto defaultXPConfig )
+    , ((modMask                                                  , xK_a     ), safeSpawn "xfe" [])
 
     -- multimedia
 -- Alsa mixer bindings
