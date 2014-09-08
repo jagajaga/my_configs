@@ -41,6 +41,7 @@ Bundle             'vim-scripts/Tabmerge'
 Bundle       'powerman/vim-plugin-ruscmd'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'wting/rust.vim'
+Bundle 'idris-hackers/idris-vim'
 
 set nocp
 filetype plugin on
@@ -53,7 +54,7 @@ set t_Co=256
 
 "TODO disable in vimrc
 
-for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc"] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
+"for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc", 'vimshell'] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -84,6 +85,8 @@ autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=s
 autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
 autocmd BufRead,BufNewFile *.rs set filetype=rust
 autocmd FileType rust set makeprg=rustc\ %
+autocmd BufRead,BufNewFile *.idr set filetype=idris
+autocmd FileType idris set makeprg=idris\ %\ -o\ %<
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 

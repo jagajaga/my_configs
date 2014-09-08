@@ -5,7 +5,7 @@ pkgs : {
       { 
         name = "vim-env";
         paths = with self.vimPlugins;
-          [ YouCompleteMe syntastic taglist tagbar vimproc ];
+          [ YouCompleteMe syntastic taglist tagbar vimproc vimshell ];
       };
 
       hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall cabal2nix lushtags haddock stylishHaskell ghcMod hlint Agda ]);
@@ -21,7 +21,7 @@ pkgs : {
       {
         name = "huge-env";
         paths = with self;
-        [ chromiumWrapper ];
+        [ chromiumDev gimp libreoffice ];
       };
 
       deEnv = self.buildEnv
