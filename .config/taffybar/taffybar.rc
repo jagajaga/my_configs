@@ -1,0 +1,14 @@
+style "default" {
+  bg[NORMAL] = "#000000"
+  fg[NORMAL] = "#333355"
+  text[NORMAL] = "#333355"
+}
+
+style "notification-button" = "default" {
+  text[NORMAL] = "#FF0000"
+  fg[NORMAL] = "#FF0000"
+}
+
+widget "Taffybar*" style "default"
+widget "*NotificationCloseButton" style "notification-button"
+gtk-font-name = "Terminus 11"
