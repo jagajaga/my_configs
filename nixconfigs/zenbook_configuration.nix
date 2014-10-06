@@ -99,7 +99,11 @@
   
   # enable automount for media stuff
   services.udisks2.enable = true;
+  services.postgresql.enable = true;
+  services.postgresql.package = pkgs.postgresql;
 
+  services.mysql.enable = true;
+  services.mysql.package = pkgs.mysql;
   /*hardware.pulseaudio.enable = true;*/
   /*sound.enableOSSEmulation = false;*/
    /*sound.extraConfig = ''*/
@@ -184,7 +188,7 @@
    clang
    subversion
    git
-   androidsdk_4_1
+   androidsdk_4_4
    python27
    python33
    python
