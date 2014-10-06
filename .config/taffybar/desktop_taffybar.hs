@@ -32,7 +32,7 @@ tempCallback cpu = do
 
 mySep :: PagerConfig -> IO Label
 mySep cfg = do
-  sep <- labelNew Nothing
+  sep <- labelNew (Nothing :: Maybe String)
   labelSetMarkup sep (widgetSep cfg)
   return $ sep
 
@@ -79,7 +79,7 @@ separator = do
 simpleText :: String -> String -> IO Widget
 simpleText text' color = do
   let text = colorize color "" text'
-  sep <- labelNew Nothing
+  sep <- labelNew (Nothing :: Maybe String) 
   labelSetMarkup sep text
   box <- hBoxNew False 0
   boxPackStart box sep PackNatural 0

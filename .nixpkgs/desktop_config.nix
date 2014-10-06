@@ -8,7 +8,7 @@ pkgs : {
           [ YouCompleteMe syntastic taglist tagbar vimproc ];
       };
 
-      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall_1_18_0_3 cabal2nix xmonad xmobar xmonadContrib Agda lushtags haddock stylishHaskell ghcMod hlint ]);
+      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall_1_18_0_3 cabal2nix xmonad xmobar xmonadContrib Agda lushtags haddock stylishHaskell ghcMod hlint hoogle ]);
 
       developmentEnv = self.buildEnv
       {
@@ -21,14 +21,14 @@ pkgs : {
       {
         name = "huge-env";
         paths = with self;
-        [ gimp libreoffice chromiumWrapper inkscape ];
+        [ gimp libreoffice chromiumDev inkscape ];
       };
 
       deEnv = self.buildEnv
       {
         name = "de-env";
         paths = with self;
-        [ skype dmenu trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc darcs djview4 evince xfe steam steamChrootEnv file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt python33Packages.glances tightvnc xclip youtubeDL python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify vimHugeX weechat aspell aspellDicts.ru aspellDicts.en dwb ];
+        [ trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc darcs djview4 evince xfe steam steamChrootEnv file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt python33Packages.glances tightvnc xclip youtubeDL python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify vimHugeX weechat aspell aspellDicts.ru aspellDicts.en dwb ];
       };
       /*dropbox-cli */
   };

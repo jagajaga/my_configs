@@ -4,6 +4,7 @@ import           Graphics.X11.Types
 import           Prelude
 import           System.Exit
 import           XMonad
+import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
 import           XMonad.Hooks.DynamicLog
@@ -26,8 +27,8 @@ import           XMonad.Prompt.Input
 import qualified XMonad.StackSet              as W
 import           XMonad.Util.Run
 
-import XMonad.Prompt.Shell
-import XMonad.Prompt.Window
+import           XMonad.Prompt.Shell
+import           XMonad.Prompt.Window
 
 main :: IO ()
 main = do
@@ -136,7 +137,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
 
 -- workspaces
 workspaces' = wspaces ++ (map show $ drop (length wspaces) [1..9])
-    where 
+    where
         wspaces = ["General", "Programming", "Work", "IM", "IRC", "Media", "Steam", "Game"]
 
 myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
@@ -220,6 +221,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- floating layer stuff
     , ((modMask .|. shiftMask                                    , xK_f     ), withFocused $ windows . W.sink)
     , ((modMask                                                  , xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
+    , ((modMask                                                  , xK_z     ), toggleWS)
 
 
     -- focus
@@ -258,8 +260,6 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-    -- mod-[d,f] %! switch to twinview screen 1/2
-    -- mod-shift-[w,f] %! move window to screen 1/2
     []
 
 -------------------------------------------------------------------------------
