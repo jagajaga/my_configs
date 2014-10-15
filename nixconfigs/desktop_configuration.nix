@@ -3,6 +3,11 @@
 # or the NixOS manual available on virtual console 8 (Alt+F8).
 
 { config, pkgs, ... }:
+let 
+
+  priv = import (./private.nix);
+
+in
 
 {
   imports = [ <nixos/modules/programs/virtualbox.nix> ];
@@ -12,7 +17,8 @@
       ./private.nix
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_3_16;
+
+  boot.kernelPackages = pkgs.linuxPackages_3_17;
   boot.loader.grub.timeout = 1;
   boot.extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
@@ -62,9 +68,51 @@
   services.udisks2.enable = true;
   services.openssh.enable = true;
   services.printing.enable = true;
-  services.tor.client.enable = true;
+  /*services.tor.client.enable = true;*/
   services.mysql.enable = true;
   services.mysql.package = pkgs.mysql;
+
+
+  services.openvpn = {
+    enable = true;
+    servers = 
+    {
+        client = 
+            let 
+                ca = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
+                cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
+                key = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);
+            in
+            {
+                config = ''
+                    client
+                    nobind
+                    dev tun
+                    redirect-gateway def1
+                    ca ${ca}
+                    cert ${cert}
+                    key ${key}
+                    <dh>
+                    -----BEGIN DH PARAMETERS-----
+                    MEYCQQCQn3sGfqQWQtMH4GNWHeZG6210sE3cssDGitRfv9T9knp00zIquPI3tuRa
+                    xywN8CG+Ww/V8kBIgLBfqRqnThdzAgEC
+                    -----END DH PARAMETERS-----
+                    </dh>
+
+                    <connection>
+                    remote 178.62.202.50 1194 udp
+                    </connection>
+
+                    <connection>
+                    remote 178.62.202.50 443 tcp-client
+                    </connection>
+                '';
+            up = "echo nameserver $nameserver | ''${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
+            down = "''${pkgs.openresolv}/sbin/resolvconf -d $dev";
+          };
+    };
+  };
+
   /*services.cjdns.enable = true;*/
 
   sound.extraConfig = ''
@@ -156,6 +204,7 @@
    /*cjdns*/
 
    dropbox
+   xlibs.xf86inputjoystick
 
   ];
   fonts = {

@@ -1,61 +1,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 
-set nocompatible
-filetype off 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-filetype plugin indent on
-
-"Bundle         'Shougo/vimproc.vim'
-"Bundle      'majutsushi/tagbar'
-"Bundle     'Valloric/YouCompleteMe'
-"Bundle       'scrooloose/syntastic'
-Bundle                 'travitch/hasksyn'
-Bundle               'tpope/vim-surround'
-Bundle                    'gmarik/vundle'
-Bundle                'vim-scripts/a.vim'
-Bundle         'scrooloose/nerdcommenter'
-Bundle              'scrooloose/nerdtree'
-Bundle                'eagletmt/neco-ghc'
-Bundle              'eagletmt/ghcmod-vim'
-Bundle                  'mbbill/undotree'
-Bundle                'bling/vim-airline'
-Bundle               'tpope/vim-fugitive'
-Bundle          'Lokaltog/vim-easymotion'
-Bundle 'altercation/vim-colors-solarized'
-Bundle       'dhruvasagar/vim-table-mode'
-Bundle      'Twinside/vim-haskellConceal'
-Bundle              'Twinside/vim-hoogle'
-Bundle                   'mattn/gist-vim'
-Bundle                 'mattn/webapi-vim'
-Bundle                    'bitc/lushtags'
-Bundle             'itchyny/calendar.vim'
-Bundle            'itchyny/thumbnail.vim'
-Bundle    'xuhdev/vim-latex-live-preview'
-Bundle         'LaTeX-Box-Team/LaTeX-Box'
-Bundle          'junegunn/vim-easy-align'
-Bundle           'airblade/vim-gitgutter'
-Bundle               'takac/vim-hardtime'
-Bundle             'vim-scripts/Tabmerge'
-Bundle       'powerman/vim-plugin-ruscmd'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'wting/rust.vim'
-Bundle 'idris-hackers/idris-vim'
-
-set nocp
-filetype plugin on
-
-
 set history=700
 set confirm
 set cindent
 set t_Co=256
 
-"TODO disable in vimrc
-
-"for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc", 'vimshell'] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
-" Enable filetype plugins
 filetype plugin on
 filetype indent on
 "filetype on
@@ -89,8 +39,6 @@ autocmd BufRead,BufNewFile *.idr set filetype=idris
 autocmd FileType idris set makeprg=idris\ %\ -o\ %<
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-
-" To use vundle just `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 
 set nocompatible
 set hidden
