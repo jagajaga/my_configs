@@ -5,10 +5,10 @@ pkgs : {
       { 
         name = "vim-env";
         paths = with self.vimPlugins;
-          [ YouCompleteMe syntastic taglist tagbar vimproc ];
+          [ YouCompleteMe syntastic taglist tagbar Vundle fugitive nerdtree airline ghcmod-vim neco-ghc a nerdcommenter undotree easymotion colors-solarized table-mode vimproc tagbar syntastic haskellConceal hoogle gist-vim webapi-vim lushtags calendar thumbnail latex-live-preview LaTeX-Box easy-align gitgutter hardtime Tabmerge rainbow_parentheses rust idris-vim ];
       };
 
-      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall_1_18_0_3 cabal2nix xmonad xmobar xmonadContrib Agda lushtags haddock stylishHaskell ghcMod hlint hoogle ]);
+      hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall cabal2nix xmonad xmobar xmonadContrib Agda lushtags haddock stylishHaskell ghcMod hlint hoogle ]);
 
       developmentEnv = self.buildEnv
       {
