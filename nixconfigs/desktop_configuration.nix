@@ -35,6 +35,7 @@ in
   /*boot.loader.grub.extraEntries = "menuentry \"Arch Linux\" {\n set root=(hd0,1)\n linux /boot/vmlinuz-linux root=/dev/sdc1 ro\n initrd /boot/initramfs-linux.img}";*/
 
   networking = {
+    firewall.allowedUDPPorts = [ 7777 ];
     hostName = "nixos"; 
     connman.enable = true;
     extraHosts = ''
@@ -205,6 +206,7 @@ in
 
    dropbox
    xlibs.xf86inputjoystick
+
 
   ];
   fonts = {
