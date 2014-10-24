@@ -5,7 +5,7 @@ pkgs : {
       { 
         name = "vim-env";
         paths = with self.vimPlugins;
-          [ YouCompleteMe syntastic taglist tagbar Vundle fugitive nerdtree airline ghcmod-vim neco-ghc a nerdcommenter undotree easymotion colors-solarized table-mode vimproc tagbar syntastic haskellConceal hoogle gist-vim webapi-vim lushtags calendar thumbnail latex-live-preview LaTeX-Box easy-align gitgutter hardtime Tabmerge rainbow_parentheses rust idris-vim ];
+          [ youcompleteme taglist tagbar vundle fugitive nerdtree airline ghcmod-vim neco-ghc a nerdcommenter undotree easymotion colors-solarized table-mode vimproc tagbar haskellconceal hoogle gist-vim webapi-vim lushtags calendar thumbnail latex-live-preview latex-box easy-align gitgutter hardtime tabmerge rainbow_parentheses rust idris-vim quickfixstatus  hier shabadou quickrun watchdogs signature ];
       };
 
       hsEnv = self.haskellPackages.ghcWithPackagesOld (self : with self; [ cabalInstall cabal2nix xmonad xmobar xmonadContrib Agda lushtags haddock stylishHaskell ghcMod hlint hoogle hoogleLocal ]);
@@ -21,7 +21,7 @@ pkgs : {
       {
         name = "huge-env";
         paths = with self;
-        [ gimp libreoffice chromiumDev inkscape ];
+        [ gimp libreoffice chromiumDev inkscape firefoxWrapper ];
       };
 
       emacsEnv = self.buildEnv

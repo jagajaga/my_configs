@@ -115,7 +115,7 @@ let tagbar_autoclose=1
 
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-autocmd FileType c let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
+autocmd FileType c let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/c/ycm/.ycm_extra_conf.py'
 let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.'],
   \   'cpp' : ['->', '.', '::'],
