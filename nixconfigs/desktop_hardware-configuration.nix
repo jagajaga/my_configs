@@ -22,5 +22,5 @@
     [ { device = "/dev/md126p2"; }
     ];
 
-  nix.maxJobs = 8;
+  nix.maxJobs = 16;
 }
