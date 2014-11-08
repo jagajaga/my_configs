@@ -18,21 +18,27 @@ in
     ];
 
 
-  boot.kernelPackages = pkgs.linuxPackages_3_17;
-  boot.loader.grub.timeout = 1;
-  boot.extraModprobeConfig = ''
+  boot = { 
+    kernelPackages = pkgs.linuxPackages_3_17;
+    loader.grub.timeout = 1;
+    extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
-  '';
+    '';
+    loader.grub.enable = true;
+    loader.grub.version = 2;
+    loader.grub.device = "/dev/sdc";
+  };
 
-  nix.package = pkgs.nixUnstable;
-  nix.binaryCaches = [ http://cache.nixos.org ];
-  nix.trustedBinaryCaches = [ http://cache.nixos.org ];
+  nix = {
+    package = pkgs.nixUnstable;
+    binaryCaches = [ http://cache.nixos.org ];
+    trustedBinaryCaches = [ http://cache.nixos.org ];
+    gc = {
+      automatic = true;
+      dates = "2 weeks";
+    };
+  };
   nixpkgs.config.allowUnfree = true;
-
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sdc";
-  /*boot.loader.grub.extraEntries = "menuentry \"Arch Linux\" {\n set root=(hd0,1)\n linux /boot/vmlinuz-linux root=/dev/sdc1 ro\n initrd /boot/initramfs-linux.img}";*/
 
   networking = {
     firewall.allowedUDPPorts = [ 7777 ];
@@ -72,6 +78,7 @@ in
   /*services.tor.client.enable = true;*/
   services.mysql.enable = true;
   services.mysql.package = pkgs.mysql;
+  services.ntp.enable = true;
 
 
   services.openvpn = {
@@ -127,7 +134,7 @@ in
     createHome = true;
     home = "/home/jaga";
     group = "users";
-    extraGroups = [ "wheel" "networkmanager" "adb" ];
+    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" ];
     shell = "${pkgs.zsh}/bin/zsh";
     uid = 1000;
   };
@@ -139,20 +146,19 @@ in
   hardware.bluetooth.enable = true;
 
   services.xserver = {
+    exportConfiguration = true;
     enable = true;
     videoDrivers = [ "nvidia" ];
     layout = "us,ru(winkeys)";
     xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";
-    displayManager.slim = {
-      enable = true;
-      autoLogin = true;
-      defaultUser = "jaga"; 
-      theme = pkgs.fetchurl {
-        url = https://github.com/jagajaga/nixos-slim-theme/archive/1.1.tar.gz;
-        sha256 = "66c3020a6716130a20c3898567339b990fbd7888a3b7bbcb688f6544d1c05c31";
-      };
-    }; 
+    /*displayManager.slim = {*/
+      /*enable = true;*/
+      /*autoLogin = false;*/
+      /*defaultUser = "jaga"; */
+      /*theme = pkgs.slimThemes.nixosSlim;*/
+    /*}; */
+    displayManager.lightdm.enable = true;
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
     windowManager.default = "xmonad";
@@ -195,7 +201,7 @@ in
    python
    cmake
 
-   androidsdk_4_4 #todo
+   androidsdk_4_4
    stdenv
    dejavu_fonts
 
@@ -206,7 +212,6 @@ in
 
    dropbox
    xlibs.xf86inputjoystick
-
 
   ];
   fonts = {
@@ -222,7 +227,5 @@ in
        pkgs.ttf_bitstream_vera
     ];
   };
-
-
 
 }
