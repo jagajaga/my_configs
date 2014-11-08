@@ -152,13 +152,15 @@ in
     layout = "us,ru(winkeys)";
     xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";
-    /*displayManager.slim = {*/
-      /*enable = true;*/
-      /*autoLogin = false;*/
-      /*defaultUser = "jaga"; */
-      /*theme = pkgs.slimThemes.nixosSlim;*/
-    /*}; */
-    displayManager.lightdm.enable = true;
+    displayManager.slim = {
+      enable = true;
+      autoLogin = false;
+      defaultUser = "jaga"; 
+      theme = pkgs.fetchurl {
+          url = https://github.com/jagajaga/nixos-slim-theme/archive/1.1.tar.gz;
+          sha256 = "66c3020a6716130a20c3898567339b990fbd7888a3b7bbcb688f6544d1c05c31";
+        };
+    }; 
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
     windowManager.default = "xmonad";
