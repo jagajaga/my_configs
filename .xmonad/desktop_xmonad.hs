@@ -203,6 +203,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0                                                        , xK_Print                ) , spawn "import -window root /home/jaga/Dropbox/screenshots/`date +%F_%T`.png" )
     , ((modMask                                                  , xF86XK_Launch6          ) , safeSpawn "autocpu" ["-n"])
     , ((modMask                                                  , xK_t                    ) , spawn "bash /home/jaga/myscripts/screen-translate.sh")
+    , ((modMask .|. shiftMask                                    , xK_t                    ) , spawn "bash /home/jaga/myscripts/screen-translate.sh en")
 
     -- grid
     , ((modMask                                                  , xK_s     ), goToSelected myGSConfig)
