@@ -1,26 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
-
-"set nocompatible
-"filetype off 
-"filetype plugin indent on
-
-"set nocp
-"filetype plugin on
-
-
 set history=700
 set confirm
 set cindent
 set t_Co=256
 
-"TODO disable in vimrc
-
-"for p in ["syntastic", "YouCompleteMe", "tagbar", "taglist", "vimproc", 'vimshell'] | exec 'set rtp+=~/.nix-profile/vim-plugins/'.p | endfor
-" Enable filetype plugins
-"filetype plugin on
-"filetype indent on
-"filetype on
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 command WQ wq
@@ -52,8 +36,6 @@ autocmd FileType idris set makeprg=idris\ %\ -o\ %<
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
-" To use vundle just `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
-
 set nocompatible
 set hidden
 filetype indent plugin on | syn on
@@ -63,8 +45,6 @@ fun ActivateAddons()
     set runtimepath+=~/.vim/vim-addons/vim-addon-manager
     call vam#ActivateAddons(["vim-addon-nix"])
 endf
-"call ActivateAddons()
-""vim-surround", "hasksyn", "vim-surround", "a.vim", "nerdcommenter", "nerdtree", "neco-ghc", "ghcmod-vim"
 
 " Start interactive EasyAlign in visual mode
 vmap <Enter> <Plug>(EasyAlign)
