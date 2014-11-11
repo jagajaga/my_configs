@@ -19,23 +19,23 @@ in
 
 
   boot = { 
-    kernelPackages = pkgs.linuxPackages_3_17;
+    kernelPackages      = pkgs.linuxPackages_3_17;
     loader.grub.timeout = 1;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
     '';
-    loader.grub.enable = true;
+    loader.grub.enable  = true;
     loader.grub.version = 2;
-    loader.grub.device = "/dev/sdc";
+    loader.grub.device  = "/dev/sdc";
   };
 
   nix = {
-    package = pkgs.nixUnstable;
-    binaryCaches = [ http://cache.nixos.org ];
+    package             = pkgs.nixUnstable;
+    binaryCaches        = [ http://cache.nixos.org ];
     trustedBinaryCaches = [ http://cache.nixos.org ];
     gc = {
       automatic = true;
-      dates = "2 weeks";
+      dates     = "2 weeks";
     };
   };
   nixpkgs.config.allowUnfree = true;
@@ -51,14 +51,14 @@ in
     '';
   };
 
-  fileSystems."/home" =     # where you want to mount the device
-    { device = "/dev/sdc2";  # the device
-      fsType = "ext4";      # the type of the partition
-      options = "data=journal,users,rw,user,auto,exec";
+  fileSystems."/home" =
+    { device          = "/dev/sdc2";
+      fsType          = "ext4";
+      options         = "data=journal,users,rw,user,auto,exec";
     };
 
   i18n = {
-    consoleFont = "lat9w-16";
+    consoleFont   = "lat9w-16";
     consoleKeyMap = "ruwin_cplk-UTF-8";
     defaultLocale = "en_US.UTF-8";
   };
@@ -69,16 +69,16 @@ in
     %users      ALL=NOPASSWD: SUSPEND
   '';
 
-  services.dbus.enable = true;
+  services.dbus.enable            = true;
   services.nixosManual.showManual = true;
-  services.locate.enable = true;
-  services.udisks2.enable = true;
-  services.openssh.enable = true;
-  services.printing.enable = true;
+  services.locate.enable          = true;
+  services.udisks2.enable         = true;
+  services.openssh.enable         = true;
+  services.printing.enable        = true;
   /*services.tor.client.enable = true;*/
-  services.mysql.enable = true;
-  services.mysql.package = pkgs.mysql;
-  services.ntp.enable = true;
+  services.mysql.enable           = true;
+  services.mysql.package          = pkgs.mysql;
+  services.ntp.enable             = true;
 
 
   services.openvpn = {
