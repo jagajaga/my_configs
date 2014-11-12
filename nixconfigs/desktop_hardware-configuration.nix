@@ -18,9 +18,9 @@
       options = "rw,stripe=16,data=ordered,relatime";
     };
 
-  swapDevices =
-    [ { device = "/dev/md126p2"; }
-    ];
+ swapDevices =
+   [ { device = "/dev/md126p2"; }
+   ];
 
-  nix.maxJobs = 16;
+  nix.maxJobs = 8;
 }
