@@ -65,6 +65,8 @@ let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 let g:necoghc_enable_detailed_browse = 1
 
+let g:YUNOcommit_after = 20
+
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare

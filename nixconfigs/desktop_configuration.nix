@@ -33,6 +33,7 @@ in
     package             = pkgs.nixUnstable;
     binaryCaches        = [ http://cache.nixos.org ];
     trustedBinaryCaches = [ http://cache.nixos.org ];
+    useChroot = true;
     gc = {
       automatic = true;
       dates     = "2 weeks";
