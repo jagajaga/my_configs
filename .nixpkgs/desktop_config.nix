@@ -6,7 +6,7 @@
         vimrcConfig = {
         vam.knownPlugins = pkgs.vimPlugins; # optional
         vam.pluginDictionaries = [
-            {names = [ "youcompleteme" "taglist" "tagbar" "vundle" "fugitive" "nerdtree" "airline" "ghcmod" "neco-ghc" "a" "nerdcommenter" "undotree" "easymotion" "colors-solarized" "table-mode" "vimproc" "tagbar" "haskellconceal" "hoogle" "gist-vim" "webapi-vim" "lushtags" "calendar" "thumbnail" "latex-live-preview" "latex-box" "easy-align" "gitgutter" "hardtime" "tabmerge" "rainbow_parentheses" "rust" "idris-vim" "quickfixstatus" "hier" "shabadou" "quickrun" "watchdogs" "signature" "surround" ];}
+            {names = [ "youcompleteme" "taglist" "tagbar" "vundle" "fugitive" "nerdtree" "airline" "ghcmod" "neco-ghc" "a" "nerdcommenter" "undotree" "easymotion" "colors-solarized" "table-mode" "vimproc" "tagbar" "haskellconceal" "hoogle" "gist-vim" "webapi-vim" "lushtags" "calendar" "thumbnail" "latex-live-preview" "latex-box" "easy-align" "gitgutter" "hardtime" "tabmerge" "rainbow_parentheses" "rust" "idris-vim" "quickfixstatus" "hier" "shabadou" "quickrun" "watchdogs" "signature" "surround" "YUNOcommit"];}
         ];
 
         customRC = ''
@@ -14,7 +14,7 @@
             exec 'source '.fnameescape($HOME.'/.vimrc')
         '';
         };
-        my_vim = pkgs.vim_configurable.customize { name = "my-vim"; inherit vimrcConfig; };
+        my_vim = pkgs.vim_configurable.customize { name = "vim"; inherit vimrcConfig; };
       vimEnv = pkgs.buildEnv
       { 
         name = "vim-env";
