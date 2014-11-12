@@ -3,22 +3,23 @@
   allowBroken = true;
 
   packageOverrides = pkgs : with pkgs; rec {
-        /*vimrcConfig = {*/
-        /*vam.knownPlugins = pkgs.vimPlugins; # optional*/
-        /*vam.pluginDictionaries = [*/
-            /*{names = ["ghcmod" "syntastic" "youcompleteme" "Solarized" ];}*/
-        /*];*/
+        vimrcConfig = {
+        vam.knownPlugins = pkgs.vimPlugins; # optional
+        vam.pluginDictionaries = [
+            {names = [ "youcompleteme" "taglist" "tagbar" "vundle" "fugitive" "nerdtree" "airline" "ghcmod" "neco-ghc" "a" "nerdcommenter" "undotree" "easymotion" "colors-solarized" "table-mode" "vimproc" "tagbar" "haskellconceal" "hoogle" "gist-vim" "webapi-vim" "lushtags" "calendar" "thumbnail" "latex-live-preview" "latex-box" "easy-align" "gitgutter" "hardtime" "tabmerge" "rainbow_parentheses" "rust" "idris-vim" "quickfixstatus" "hier" "shabadou" "quickrun" "watchdogs" "signature" "surround" ];}
+        ];
 
-        /*customRC = ''*/
-            /*set hidden*/
-        /*'';*/
-        /*};*/
-    /*testing_vim = pkgs.vim_configurable.customize { name = "vim-with-plugins"; inherit vimrcConfig; }; */
+        customRC = ''
+            set hidden
+            exec 'source '.fnameescape($HOME.'/.vimrc')
+        '';
+        };
+        my_vim = pkgs.vim_configurable.customize { name = "my-vim"; inherit vimrcConfig; };
       vimEnv = pkgs.buildEnv
       { 
         name = "vim-env";
-        paths = with pkgs.vimPlugins;
-          [ youcompleteme taglist tagbar vundle fugitive nerdtree airline ghcmod-vim neco-ghc a nerdcommenter undotree easymotion colors-solarized table-mode vimproc tagbar haskellconceal hoogle gist-vim webapi-vim lushtags calendar thumbnail latex-live-preview latex-box easy-align gitgutter hardtime tabmerge rainbow_parentheses rust idris-vim quickfixstatus  hier shabadou quickrun watchdogs signature ];
+        paths = with pkgs;
+          [ my_vim ];
           #surround
       };
 
