@@ -1,6 +1,6 @@
 {
   allowUnfree = true;
-  allowBroken = true;
+  /*allowBroken = true;*/
 
   packageOverrides = pkgs : with pkgs; rec {
         vimrcConfig = {
@@ -23,7 +23,7 @@
           #surround
       };
 
-      hsEnv = pkgs.haskellPackages.ghcWithPackagesOld (pkgs: with pkgs; [ cabalInstall cabal2nix xmonad xmobar xmonadContrib Agda lushtags haddock stylishHaskell ghcMod hlint hoogle hoogleLocal ]);
+      hsEnv = pkgs.haskellPackages.ghcWithPackagesOld (pkgs: with pkgs; [ cabalInstall cabal2nix xmonad xmobar xmonadContrib Agda /*lushtags*/ haddock stylishHaskell ghcMod hlint hoogle hoogleLocal ]);
 
       developmentEnv = pkgs.buildEnv
       {
@@ -42,26 +42,6 @@
         name = "emacs-env";
         paths = [ emacs emacs24Packages.haskellMode emacs24Packages.colorThemeSolarized emacs24Packages.structuredHaskellMode ];
       };
-
-      /*vvEnv = pkgs.buildEnv */
-      /*{*/
-        /*name = "vv-env";*/
-        /*paths =  */
-        /*let */
-            /*vimrcConfig = {*/
-            /*vam.pluginDictionaries = [*/
-                /*# load always*/
-                /*{name = "youcompleteme";}*/
-            /*];*/
-
-                /*customRC = ''*/
-                    /*set hidden*/
-                /*'';*/
-                /*};*/
-            /*test_vim_with_vim_addon_nix_using_vam = vim_configurable.customize { name = "vim-with-plugins"; inherit vimrcConfig; }; */
-        /*in*/
-        /*[test_vim_with_vim_addon_nix_using_vam];*/
-      /*};*/
 
       deEnv = pkgs.buildEnv
       {
