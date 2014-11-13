@@ -6,7 +6,50 @@
         vimrcConfig = {
         vam.knownPlugins = pkgs.vimPlugins; # optional
         vam.pluginDictionaries = [
-            {names = [ "youcompleteme" "taglist" "tagbar" "vundle" "fugitive" "nerdtree" "airline" "ghcmod" "neco-ghc" "a" "nerdcommenter" "undotree" "easymotion" "colors-solarized" "table-mode" "vimproc" "tagbar" "haskellconceal" "hoogle" "gist-vim" "webapi-vim" "lushtags" "calendar" "thumbnail" "latex-live-preview" "latex-box" "easy-align" "gitgutter" "hardtime" "tabmerge" "rainbow_parentheses" "rust" "idris-vim" "quickfixstatus" "hier" "shabadou" "quickrun" "watchdogs" "signature" "surround" "YUNOcommit"];}
+            {names = [ 
+                "a"
+                "airline"
+                "calendar"
+                "colors-solarized"
+                "easy-align"
+                "easymotion"
+                "fugitive"
+                "ghcmod"
+                "gist-vim"
+                "gitgutter"
+                "hardtime"
+                "haskellconceal"
+                "hier"
+                "hoogle"
+                "idris-vim"
+                "latex-box"
+                "latex-live-preview"
+                "lushtags"
+                "neco-ghc"
+                "nerdcommenter"
+                "nerdtree"
+                "quickfixstatus"
+                "quickrun"
+                "rainbow_parentheses"
+                "rust"
+                "shabadou"
+                "signature"
+                "surround"
+                "table-mode"
+                "tabmerge"
+                "tagbar"
+                "tagbar"
+                "taglist"
+                "thumbnail"
+                "undotree"
+                "vimproc"
+                "vim-snippets"
+                "vundle"
+                "watchdogs"
+                "webapi-vim"
+                "YUNOcommit"
+                "youcompleteme"
+            ];}
         ];
 
         customRC = ''
@@ -19,34 +62,112 @@
       { 
         name = "vim-env";
         paths = with pkgs;
-          [ my_vim ];
-          #surround
+          [
+            my_vim
+          ];
       };
 
-      hsEnv = pkgs.haskellPackages.ghcWithPackagesOld (pkgs: with pkgs; [ cabalInstall cabal2nix xmonad xmobar xmonadContrib Agda /*lushtags*/ haddock stylishHaskell ghcMod hlint hoogle hoogleLocal ]);
+      hsEnv = pkgs.haskellPackages.ghcWithPackagesOld (pkgs: with pkgs; [ 
+            /*lushtags*/
+            Agda
+            cabal2nix
+            cabalInstall
+            ghcMod
+            haddock
+            hlint
+            hoogle
+            hoogleLocal
+            stylishHaskell
+            xmobar
+            xmonad
+            xmonadContrib
+        ]);
 
       developmentEnv = pkgs.buildEnv
       {
         name = "development-env";
-        paths = [ zlib freeglut bzip2 xlibs.libX11 mesa pciutils astyle manpages ctags ];
+        paths = [
+            astyle
+            bzip2
+            ctags
+            freeglut
+            manpages
+            mesa
+            pciutils
+            xlibs.libX11
+            zlib
+        ];
       };
 
       hugeEnv = pkgs.buildEnv
       {
         name = "huge-env";
-        paths = [ gimp libreoffice chromiumDev inkscape ];
+        paths = [
+            chromiumDev
+            gimp
+            inkscape
+            libreoffice
+        ];
       };
 
       emacsEnv = pkgs.buildEnv
       {
         name = "emacs-env";
-        paths = [ emacs emacs24Packages.haskellMode emacs24Packages.colorThemeSolarized emacs24Packages.structuredHaskellMode ];
+        paths = [
+            emacs
+            emacs24Packages.colorThemeSolarized
+            emacs24Packages.haskellMode
+            emacs24Packages.structuredHaskellMode
+        ];
       };
 
       deEnv = pkgs.buildEnv
       {
         name = "de-env";
-        paths = [ trayer moc transmission_gtk transmission_remote_gtk tor p7zip unrar mc vlc imagemagick bc darcs djview4 evince xfe steam steamChrootEnv file flac freetype gtkvnc hdparm iftop lastfmsubmitd mirage  unetbootin lm_sensors mutt python33Packages.glances tightvnc xclip youtubeDL python27Packages.turses gnome.zenity xfce.xfce4notifyd xfce.xfce4terminal libnotify weechat aspell aspellDicts.ru aspellDicts.en dwb ];
+        paths = [ 
+            aspell
+            aspellDicts.en
+            aspellDicts.ru
+            bc
+            darcs
+            djview4
+            dwb
+            evince
+            file
+            flac
+            freetype
+            gnome.zenity
+            gtkvnc
+            hdparm
+            iftop
+            imagemagick
+            lastfmsubmitd
+            libnotify
+            lm_sensors
+            mc
+            mirage
+            moc
+            mutt
+            p7zip
+            python27Packages.turses
+            python33Packages.glances
+            steam
+            steamChrootEnv
+            tightvnc
+            tor
+            transmission_gtk
+            transmission_remote_gtk
+            trayer
+            unetbootin
+            unrar
+            vlc
+            weechat
+            xclip
+            xfce.xfce4notifyd
+            xfce.xfce4terminal
+            xfe
+            youtubeDL
+        ];
       };
   };
 }
