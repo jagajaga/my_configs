@@ -1,11 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
-set history=700
-set confirm
-set cindent
-set t_Co=256
-
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command WQ wq
 command Wq wq
@@ -35,105 +30,6 @@ autocmd BufRead,BufNewFile *.idr set filetype=idris
 autocmd FileType idris set makeprg=idris\ %\ -o\ %<
 "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-
-set nocompatible
-set hidden
-filetype indent plugin on | syn on
-fun ActivateAddons()
-    let g:vim_addon_manager = {}
-    let g:vim_addon_manager.log_to_buf =1
-    set runtimepath+=~/.vim/vim-addons/vim-addon-manager
-    call vam#ActivateAddons(["vim-addon-nix"])
-endf
-
-" Start interactive EasyAlign in visual mode
-vmap <Enter> <Plug>(EasyAlign)
-nmap s <Plug>(easymotion-s2)
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
-let g:gist_clip_command = 'xclip -selection clipboard'
-let g:gist_detect_filetype = 1
-let g:gist_use_password_in_gitconfig = 1
-
-let NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen=1
-let g:necoghc_enable_detailed_browse = 1
-
-let g:YUNOcommit_after = 20
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-let g:airline_enable_branch=1
-let g:airline_enable_syntastic=1
-let g:airline_theme='dark'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_linecolumn_prefix = '¶ '
-let g:airline_branch_prefix = '⎇ '
-let g:airline_paste_symbol = 'ρ'
-let g:airline_detect_modified=1
-let g:airline_detect_paste=1
-
-" How many lines should be searched for context
-let g:hasksyn_indent_search_backward = 100
-
-" Should we try to de-indent after a return
-let g:hasksyn_dedent_after_return = 1
-
-" Should we try to de-indent after a catchall case in a case .. of
-let g:hasksyn_dedent_after_catchall_case = 1
-
-let tagbar_autofocus=1
-let tagbar_autoclose=1
-
-
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-autocmd FileType c let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/c/ycm/.ycm_extra_conf.py'
-let g:ycm_semantic_triggers =  {
-  \   'c' : ['->', '.'],
-  \   'cpp' : ['->', '.', '::'],
-  \   'objc' : ['->', '.'],
-  \   'ocaml' : ['.', '#'],
-  \   'cpp,objcpp' : ['->', '.', '::'],
-  \   'perl' : ['->'],
-  \   'php' : ['->', '::'],
-  \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
-  \   'ruby' : ['.', '::'],
-  \   'lua' : ['.', ':'],
-  \   'erlang' : [':'],
-  \ }
-nnoremap <C-E> <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-
-autocmd BufRead,BufNewFile ~/.xmonad/* call s:add_xmonad_path()
-function! s:add_xmonad_path()
-  if !exists('b:ghcmod_ghc_options')
-    let b:ghcmod_ghc_options = []
-  endif
-  call add(b:ghcmod_ghc_options, '-i' . expand('~/.xmonad/lib'))
-endfunction
-
-
-"autocmd FileType c set omnifunc=ccomplete#Complete
-
-" -- ctags --
-" map <ctrl>+F12 to generate ctags for current folder:
-"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
-" add current directory's generated tags file to available tags
-"set tags+=./tags
-"set tags+=/usr/include/tags
-"set tags+=/usr/include/stl/tags
-"set tags+=/usr/include/boost/tags
-
 
 "set listchars=tab:  
 "set list
@@ -197,9 +93,9 @@ nmap <leader>p "+p
 map cn <ESC>:cn<CR>
 map cb <ESC>:cp<CR>
 " yank to clipboard 
-map <leader>y "+y
-map <leader>y "+y
 map <leader>m :call SaveAndInsertType()<CR>
+map <leader>y "+y
+map <leader>x "+x
     func! SaveAndInsertType()
         exec ":w"
         exec "GhcModTypeInsert"
@@ -296,11 +192,6 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-let g:solarized_termcolors=256
-colorscheme solarized "desert
-"colorscheme desert
-set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
