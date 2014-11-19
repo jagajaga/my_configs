@@ -50,7 +50,7 @@
     %users      ALL=NOPASSWD: SUSPEND
   '';
   alsaConf = ''
-    defaults.pcm.!card 3
+    defaults.pcm.!card 0
   '';
 
 }
