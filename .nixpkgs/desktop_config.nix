@@ -6,27 +6,21 @@
         vimrcConfig = {
         vam.knownPlugins = pkgs.vimPlugins; # optional
         vam.pluginDictionaries = [
+#check ftdetect bug
             { names = [ 
                 "ghcmod" 
                 "haskellconceal"
                 "hoogle"
                 "lushtags"
                 "neco-ghc"
-              ]; ft_regex = "^hs\$"; 
-            }
-            { names = [ 
-                "rust"
-              ]; ft_regex = "^rs\$"; 
-            }
-            { names = [ 
-                "vim-addon-nix"
-              ]; ft_regex = "^nix\$"; 
-            }
-            { names = [ 
+
                 "idris-vim"
-              ]; ft_regex = "^idr\$"; 
-            }
-            { names = [ 
+
+                "vim-addon-nix"
+
+                "rust"
+                "racer"
+
                 "a"
                 "airline"
                 "calendar"
@@ -139,7 +133,7 @@
             \ }
             nnoremap <C-E> <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
             let g:ctrlp_map = '<c-p>'
-            let g:ctrlp_cmd = 'CtrlP'
+            let g:ctrlp_cmd = 'CtrlPMixed'
             let g:ctrlp_working_path_mode = 'ra'
             set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
@@ -155,6 +149,9 @@
             colorscheme solarized "desert
             "colorscheme desert
             set background=dark
+
+            let g:racer_cmd = "racer"
+            let g:racer_experimental_completer = 1
 
             exec 'source '.fnameescape($HOME.'/.vimrc')
         '';
@@ -191,7 +188,7 @@
         paths = [
             astyle
             bzip2
-            ctags
+            /*ctags*/
             freeglut
             manpages
             mesa
