@@ -1,4 +1,4 @@
-{pkgs, ca, cert, key}:
+{pkgs, ca ? null, cert ? null, key ? null}:
 {
   openVPNConf = { 
       config = ''

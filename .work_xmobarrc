@@ -1,0 +1,58 @@
+Config {
+        font = "xft:DejaVu Sans:size=10:antialias=true"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 90
+       , commands = [ Run Weather "ULLI"["-t"      , "SPB: <tempC>°C" ,
+                     "-L"       , "3"                     ,
+                     "-H"       , "20"                    ,
+                     "--high"   , "orange"                ,
+                     "--normal" , "lightgreen" ,
+                     "--low"    , "lightblue"] 1800
+                    , Run MultiCpu ["-L"       , "4"          ,
+                                    "-H"       , "65"         ,
+                                    "--normal" , "lightgreen" ,
+                                    "--low"    , "lightblue",
+                                    "--high"   , "red"] 20
+                    , Run CoreTemp ["-L"       , "40"          ,
+                                    "-H"       , "57"         ,
+                                    "--normal" , "lightgreen" ,
+                                    "--high"   , "red",
+                                    "--low"    , "lightblue",
+                                    "-t", "<core0>°C"] 50
+                    , Run Kbd [("us", "us"), ("ru(winkeys)", "ru")]
+                    , Run Com "/home/jaga/myscripts/getmocpinfo.sh" [] "mocSong" 10
+                    , Run Com "bash" ["/home/jaga/myscripts/getvolume.sh"] "volume" 10
+                    , Run Date "<fc=#C98F0A>%a %b %d</fc> %H:%M:%S" "date" 10
+                    , Run DiskIO [("/home", "<fc=#C98F0A>Home</fc> » <read> <write>"), 
+                                  ("/dev/md126p1",  "<fc=#C98F0A>SSD</fc> » <read> <write>|")] 
+                                  [  "-L"       , "400"          ,
+                                     "-H"       , "32768"       ,
+                                     "--normal" , "lightgreen" ,
+                                     "--high"   , "red"        ,
+                                     "--low"    , "lightblue"
+                                     ] 10
+
+                    , Run Locks
+                    , Run Network "wlp3s0" ["-L", "8", 
+                                           "-H", "150", 
+                                           "-n", "#429942" ,
+                                           "-h", "lightgreen", 
+                                           "-t", "WiFi: <rx> : <tx>"] 20
+                    , Run Memory ["-L","3",
+                                  "-H","85",
+                                  "--normal","lightgreen",
+                                  "--high","red",
+                                  "-t","Ram: <usedratio>%"] 20
+                    , Run Swap ["-L","3",
+                                  "-H","85",
+                                  "--normal","lightgreen",
+                                  "--high","red",
+                                  "-t","[<usedratio>%]"] 50
+                    , Run StdinReader
+                    , Run Volume "default" "Master" [ "-t", "<volume>", "-S", "On" ] 5
+                    ]
+       , alignSep = "}{"
+       , sepChar = "%"
+       , template = "%StdinReader% }{ %mocSong% <fc=red>%locks%</fc><fc=orange>%kbd% </fc>| <fc=#C98F0A>%multicpu% </fc><fc=#C98F0A>%coretemp% </fc><fc=#429942>| </fc><fc=#C98F0A>%memory% %swap% </fc><fc=#429942>| %diskio% | </fc><fc=#C98F0A>%wlp3s0% </fc><fc=#429942>| </fc><fc=#C98F0A>♫: </fc><fc=lightgreen>%volume% </fc><fc=#429942>| </fc><fc=#C98F0A>%ULLI% </fc><fc=#429942>|</fc> <fc=lightgreen>%date%</fc>"
+       }
