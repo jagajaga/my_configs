@@ -1,5 +1,5 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=~/.zhistory
 HISTSIZE=1000000000
 SAVEHIST=1000000000
 bindkey -e
@@ -51,11 +51,6 @@ zstyle ':completion:*' menu yes select
 # Позволяем разворачивать сокращенный ввод, к примеру cd /u/sh в /usr/share 
 autoload -U compinit && compinit
 
-# файл истории команд 
-HISTFILE=~/.zhistory
-
-# Число команд, сохраняемых в HISTFILE 
-SAVEHIST=5000
 
 # Дополнение файла истории 
 setopt  APPEND_HISTORY
