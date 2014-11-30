@@ -156,6 +156,9 @@ source ${ZDOTDIR:-$HOME}/.zkbd/xterm-:0.0
 [[ -n ${key[Left]}      ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Down]}      ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]}     ]] && bindkey "${key[Right]}" forward-char
+bindkey '\e[3~' delete-char # del
+bindkey ';5D' backward-word # ctrl+left 
+bindkey ';5C' forward-word #ctrl+right
 
 PATH=$PATH:~/.cabal/bin:~/.cabal-dev/bin;
 export PATH;
@@ -301,3 +304,39 @@ setopt interactivecomments
 alias tmux='tmux attach || tmux new'
 ssh-add ~/.ssh/git_rsa 2>/dev/null
 alias bump='git commit -am bump'
+
+function initGShell {
+    mkdir -p "./.gshell"
+    export GSHELL_FOLDER=$(realpath ./.gshell)
+    export GSHELL_REVISION=1
+    mkdir -p "./.gshell/g$GSHELL_REVISION"
+    mkdir work
+    unionfs -o cow -o relaxed_permissions .gshell/g$GSHELL_REVISION=RW work
+    cd work
+    export GSHELL_ON="trueF"
+}
+
+function offGSHELL {
+    export GSHELL_ON="false"
+}
+
+function precmd {
+    if [[ $GSHELL_ON == "true" ]]
+    then
+        fusermount -uz `pwd`
+        folders=$GSHELL_FOLDER/g$(($GSHELL_REVISION+1))=RW
+        for i in `seq $GSHELL_REVISION -1 1`
+        do
+            folders=$folders:$GSHELL_FOLDER/g$i=RO
+        done
+        export GSHELL_REVISION=$(($GSHELL_REVISION+1))
+        echo $folders 
+        mkdir "$GSHELL_FOLDER/g$GSHELL_REVISION"
+        unionfs -o cow -o relaxed_permissions $folders `pwd` 
+        cd `pwd`
+    elif [[ $GSHELL_ON == "trueF" ]] 
+        then
+            export GSHELL_ON="true"
+        else
+    fi
+}
