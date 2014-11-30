@@ -73,7 +73,6 @@ in
     opengl = {
       driSupport32Bit = true;
     };
-    bluetooth.enable = true;
   };
 
   security.sudo.configFile = literals.sudoConf;
@@ -107,7 +106,7 @@ in
     xkbVariant = "winkeys";
     displayManager.slim = {
       enable = true;
-      autoLogin = false;
+      autoLogin = true;
       defaultUser = "jaga";
       theme = pkgs.fetchurl {
           url    = https://github.com/jagajaga/nixos-slim-theme/archive/1.1.tar.gz;
@@ -120,7 +119,10 @@ in
     };
     windowManager = {
       default = "xmonad";
-      xmonad.enable = true;
+      xmonad = { 
+        enable                 = true;
+        enableContribAndExtras = true;
+      };
     };
     config = literals.trackBallConf;
   };
@@ -141,37 +143,17 @@ in
 
   environment.systemPackages = with pkgs; [
    bash
+   connmanui
+   git
    htop
    iotop
-   zsh
-
+   mc
    pmutils
-   wget
-
-   automake
-   clang
-   cmake
-   gcc
-   git
-   gnumake
-   jdk
-   pkgconfig
-   python
-   python27
-   python33
-   subversion
-   androidsdk_4_4
    stdenv
-   dejavu_fonts
-
+   wget
    xsel
-
-   connmanui
+   zsh
    /*cjdns*/
-
-   dropbox
-   xlibs.xf86inputjoystick
-
   ];
   fonts = {
     enableFontDir          = true;
