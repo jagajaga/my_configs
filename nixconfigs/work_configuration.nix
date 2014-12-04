@@ -78,6 +78,7 @@ in
   services.xserver = {
     exportConfiguration = true;
     enable = true;
+    videoDrivers = [ "ati_unfree" ];
     layout = "us,ru(winkeys)";
     xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";
@@ -144,6 +145,7 @@ in
 
    connmanui
    dropbox
+   ceph
 
   ];
   fonts = {
