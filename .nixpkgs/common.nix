@@ -19,7 +19,7 @@ with pkgs; rec {
                 "vim-addon-nix"
 
                 "rust"
-                "racer"
+#"racer"
 
                 "a"
                 "airline"
@@ -54,7 +54,7 @@ with pkgs; rec {
                 "vundle"
                 "watchdogs"
                 "webapi-vim"
-                "YUNOcommit"
+#                "YUNOcommit"
                 "youcompleteme"
             ];}
         ];
