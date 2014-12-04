@@ -36,7 +36,7 @@ in
     package             = pkgs.nixUnstable;
     binaryCaches        = [ http://cache.nixos.org ];
     trustedBinaryCaches = [ http://cache.nixos.org ];
-    useChroot           = true;
+    useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
       dates     = "2 weeks";

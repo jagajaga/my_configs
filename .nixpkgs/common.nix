@@ -19,7 +19,7 @@ with pkgs; rec {
                 "vim-addon-nix"
 
                 "rust"
-                "racer"
+                /*"racer"*/
 
                 "a"
                 "airline"
@@ -61,16 +61,18 @@ with pkgs; rec {
         customRC = vimrc.config;
       };
         my_vim = vim_configurable.customize { name = "vim"; inherit vimrcConfig; };
-      vimEnv = buildEnv { 
-        name = "vim-env";
-        ignoreCollisions = true;
-        paths = [
-            my_vim
-            racerRust
-            haskellPackages.stylishHaskell
-            astyle
-          ];
-      };
+      vimEnv = lib.lowPrio (
+        buildEnv { 
+          name = "vim-env";
+          ignoreCollisions = true;
+          paths = [
+              my_vim
+              /*racerRust*/
+              haskellPackages.stylishHaskell
+              astyle
+            ];
+        }
+      );
 
       emacsEnv = buildEnv {
         name = "emacs-env";
@@ -140,8 +142,10 @@ with pkgs; rec {
             traceroute
             tree
             unrar
+            unzip
             vlc
             weechat
+            which
             wine
             winetricks
             wmname
@@ -178,38 +182,41 @@ with pkgs; rec {
         ];
       };
 
-      develEnv = pkgs.buildEnv {
-        name = "development-env";
-        ignoreCollisions = true;
-        paths = [
-            /*ctags*/
-            /*zlib*/
-            androidsdk_4_4
-            automake
-            cargoSnapshot
-            clang
-            cmake
-            freeglut
-            gcc
-            gnumake
-            idea.idea-community
-            jdk
-            manpages
-            mercurial
-            mesa
-            mysql
-            mysqlWorkbench
-            pciutils
-            pkgconfig
-            python
-            python27
-            python33
-            rustc
-            smartmontools
-            sqlite
-            subversion
-            wireshark
-            xlibs.libX11
-        ];
-      };
+      develEnv = lib.lowPrio (
+        pkgs.buildEnv {
+          name = "development-env";
+          ignoreCollisions = true;
+          paths = [
+              /*ctags*/
+              /*zlib*/
+              androidsdk_4_4
+              automake
+              cargoSnapshot
+              clang
+              cmake
+              freeglut
+              gcc
+              gnumake
+              idea.idea-community
+              jdk
+              manpages
+              mercurial
+              mesa
+              mysql
+              mysqlWorkbench
+              pciutils
+              pkgconfig
+              python
+              python27
+              python33
+              ruby
+              rustc
+              smartmontools
+              sqlite
+              subversion
+              wireshark
+              xlibs.libX11
+          ];
+        }
+      );
 }
