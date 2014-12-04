@@ -18,6 +18,13 @@
       options = "rw,stripe=16,data=ordered,relatime";
     };
 
+  fileSystems."/ceph" = { 
+      device = "192.168.0.81:/";
+      fsType = "ceph";
+      options = "name=admin,secretfile=/root/admin.key";
+    };
+
+
  swapDevices = [ { 
       device = "/dev/sda2"; 
     } ];
