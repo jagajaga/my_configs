@@ -11,9 +11,6 @@ let
 in
 
 {
-  imports = [
-    <nixos/modules/programs/virtualbox.nix>
-  ];
   require = [
       ./desktop_hardware-configuration.nix
       ./private.nix
@@ -46,6 +43,7 @@ in
     allowUnfree             = true;
     virtualbox.enableExtensionPack = true;
   };
+
 
   networking = {
     firewall = {
@@ -93,6 +91,7 @@ in
       enable         = true;
       servers.client = literals.openVPNConf;
     };
+    virtualboxHost.enable = true;
   };
   /*services.tor.client.enable = true;*/
   /*services.cjdns.enable = true;*/
