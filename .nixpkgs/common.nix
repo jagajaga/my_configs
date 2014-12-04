@@ -19,7 +19,7 @@ with pkgs; rec {
                 "vim-addon-nix"
 
                 "rust"
-#"racer"
+                "racer"
 
                 "a"
                 "airline"
@@ -67,7 +67,7 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [
               my_vim
-              /*racerRust*/
+              racerRust
               haskellPackages.stylishHaskell
               astyle
             ];
@@ -136,6 +136,7 @@ with pkgs; rec {
             mutt
             p7zip
             pass
+            pinentry
             skype
             telnet
             termite
@@ -188,9 +189,8 @@ with pkgs; rec {
           name = "development-env";
           ignoreCollisions = true;
           paths = [
-              /*ctags*/
+              ctags
               /*zlib*/
-              androidsdk_4_4
               automake
               cargoSnapshot
               clang
