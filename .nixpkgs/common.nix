@@ -135,6 +135,7 @@ with pkgs; rec {
             moc
             mutt
             p7zip
+            pass
             skype
             telnet
             termite
