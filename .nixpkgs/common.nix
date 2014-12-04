@@ -16,8 +16,6 @@ with pkgs; rec {
 
                 "idris-vim"
 
-                "vim-addon-nix"
-
                 "rust"
                 "racer"
 
@@ -54,7 +52,7 @@ with pkgs; rec {
                 "vundle"
                 "watchdogs"
                 "webapi-vim"
-#                "YUNOcommit"
+                "YUNOcommit"
                 "youcompleteme"
             ];}
         ];
