@@ -131,7 +131,7 @@ with pkgs; rec {
             lm_sensors
             mirage
             moc
-            mutt
+            mutt-with-sidebar 
             p7zip
             pass
             pinentry
@@ -169,7 +169,6 @@ with pkgs; rec {
             hoogle
             hoogleLocal
             taffybar
-            xmobar
             xmonad
             xmonadContrib
         ]);
