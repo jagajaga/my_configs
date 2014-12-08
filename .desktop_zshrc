@@ -293,7 +293,7 @@ function ghc-pkg-clean() {
         echo unregistering $p; ghc-pkg $* unregister $p
     done
 }
-export FPATH=~/.zsh/functions:$FPATH
+export FPATH=.nix-profile/share/zsh/site-functions:~/.zsh/functions:$FPATH
 
 function calc() {
     echo "$@" | octave -q --silent
@@ -340,3 +340,5 @@ function precmd {
         else
     fi
 }
+
+autoload -U compinit && compinit
