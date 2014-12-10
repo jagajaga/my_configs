@@ -46,13 +46,14 @@ pkgs : {
             python33Packages.glances
             shared_mime_info
             teamviewer
+            texLiveFull
             /*tightvnc*/
             tor
             transmission_gtk
             transmission_remote_gtk
             unetbootin
             xfe
-            /*xlibs.xf86inputjoystick*/
+            xlibs.xf86inputjoystick
             youtubeDL
         ];
       };
