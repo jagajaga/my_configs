@@ -31,7 +31,7 @@ with pkgs; rec {
                 "gitgutter"
                 "hardtime"
                 "hier"
-                "latex-box"
+                /*"latex-box"*/
                 "latex-live-preview"
                 "nerdcommenter"
                 "nerdtree"
@@ -154,6 +154,7 @@ with pkgs; rec {
             xlibs.xprop
             xfce.xfce4notifyd
             xfce.xfce4terminal
+            zip
         ];
       };
 
@@ -168,6 +169,7 @@ with pkgs; rec {
             hlint
             hoogle
             hoogleLocal
+            pandoc
             taffybar
             xmonad
             xmonadContrib
@@ -187,7 +189,7 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [
               ctags
-              /*zlib*/
+              zlib
               automake
               cargoSnapshot
               clang
