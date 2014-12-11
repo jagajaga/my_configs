@@ -8,6 +8,7 @@ import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
 import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.DynamicBars
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.SetWMName
@@ -32,6 +33,7 @@ import           XMonad.Prompt.Window
 
 main :: IO ()
 main = do
+    spawnPipe "xrandr --output VGA-0 --auto --left-of DVI-0"
     xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
@@ -51,17 +53,22 @@ myConfig = defaultConfig { workspaces  = workspaces'
                          , keys               = keys'
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
-                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
+                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook <+> dynStatusBarEventHook myStatusBar myStatusBarCleanup
                          , logHook            = ewmhDesktopsLogHook
-                         , startupHook        = startup <+> ewmhDesktopsStartup
+                         , startupHook        = startup <+> ewmhDesktopsStartup <+> dynStatusBarStartup myStatusBar myStatusBarCleanup
                          }
 
+myStatusBar (S 0) = spawnPipe "taffybar -x 0"
+-- myStatusBar (S s) = spawnPipe $ "taffybar -x " ++ show s
+
+myStatusBarCleanup :: IO ()
+myStatusBarCleanup = return ()
 
 startup :: X ()
 startup = do
     setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
-    spawn "killall taffybar-linux-x86_64 && taffybar"
+    spawn "killall -9 taffybar-linux-x86_64"
     spawn "xmodmap -e \"keysym Menu = Super_L\""
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     spawnOn "IM" "skype"
