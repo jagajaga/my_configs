@@ -135,6 +135,7 @@ with pkgs; rec {
             p7zip
             pass
             pinentry
+            psmisc
             skype
             telnet
             termite
