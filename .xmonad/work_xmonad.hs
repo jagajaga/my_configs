@@ -195,6 +195,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 3- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0                                                        , xF86XK_AudioMute        ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
     , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && bash /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_p                  ) , spawn "xrandr --output DVI-0 --off --output VGA-0 --auto && slimlock && xrandr --output VGA-0 --auto --left-of DVI-0 --output DVI-0 --auto")
     , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && bash \"/home/jaga/myscripts/getvolume.sh -s\"")
     , ((modMask                                                  , xK_F9                   ) , spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
