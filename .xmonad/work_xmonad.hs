@@ -71,8 +71,8 @@ startup = do
     spawn "killall -9 taffybar-linux-x86_64"
     spawn "xmodmap -e \"keysym Menu = Super_L\""
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
-    spawnOn "IM" "skype"
-    spawnOn "IM" "gajim"
+    spawnOn "IM" "killall gajim; skype"
+    spawnOn "IM" "killall gajim; gajim"
     spawnOn "IRC" ("xfce4-terminal --title=weechat -e weechat")
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 

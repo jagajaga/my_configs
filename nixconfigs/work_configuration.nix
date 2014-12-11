@@ -58,6 +58,7 @@ in
     opengl = {
       driSupport32Bit = true;
     };
+    pulseaudio.enable      = true;
   };
 
   security.sudo.configFile = literals.sudoConf;
