@@ -8,9 +8,6 @@ let
 in
 
 {
-  imports = [
-    <nixos/modules/programs/virtualbox.nix>
-  ];
   require = [
       ./work_hardware-configuration.nix
 #      ./private.nix
@@ -31,7 +28,6 @@ in
     binaryCaches        = [ http://cache.nixos.org ];
     trustedBinaryCaches = [ http://cache.nixos.org ];
     useChroot           = true;
-    proxy               = "rain.ifmo.ru:3128";
     gc = {
       automatic = true;
       dates     = "2 weeks";
@@ -46,9 +42,10 @@ in
       allowedUDPPorts = [ 7777 ];
       allowedTCPPorts = [ 7777 ];
     };
-    hostName                 = "aseroka-nixos";
-    extraHosts               = literals.extraHosts;
-    connman.enable           = true;
+    hostName       = "aseroka-nixos";
+    extraHosts     = literals.extraHosts;
+    proxy.default  = "rain.ifmo.ru:3128";
+    connman.enable = true;
   };
 
   i18n = {
@@ -61,6 +58,7 @@ in
     opengl = {
       driSupport32Bit = true;
     };
+    pulseaudio.enable      = true;
   };
 
   security.sudo.configFile = literals.sudoConf;
@@ -78,7 +76,6 @@ in
   services.xserver = {
     exportConfiguration = true;
     enable = true;
-    videoDrivers = [ "ati_unfree" ];
     layout = "us,ru(winkeys)";
     xkbOptions = "grp:caps_toggle";
     xkbVariant = "winkeys";

@@ -8,6 +8,7 @@ import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
 import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.DynamicBars
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.SetWMName
@@ -32,6 +33,7 @@ import           XMonad.Prompt.Window
 
 main :: IO ()
 main = do
+    spawnPipe "xrandr --output VGA-0 --auto --left-of DVI-0"
     xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
@@ -51,21 +53,26 @@ myConfig = defaultConfig { workspaces  = workspaces'
                          , keys               = keys'
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
-                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
+                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook <+> dynStatusBarEventHook myStatusBar myStatusBarCleanup
                          , logHook            = ewmhDesktopsLogHook
-                         , startupHook        = startup <+> ewmhDesktopsStartup
+                         , startupHook        = startup <+> ewmhDesktopsStartup <+> dynStatusBarStartup myStatusBar myStatusBarCleanup
                          }
 
+myStatusBar (S 0) = spawnPipe "taffybar -x 0"
+-- myStatusBar (S s) = spawnPipe $ "taffybar -x " ++ show s
+
+myStatusBarCleanup :: IO ()
+myStatusBarCleanup = return ()
 
 startup :: X ()
 startup = do
     setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
-    spawn "killall taffybar-linux-x86_64 && taffybar"
+    spawn "killall -9 taffybar-linux-x86_64"
     spawn "xmodmap -e \"keysym Menu = Super_L\""
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
-    spawnOn "IM" "skype"
-    spawnOn "IM" "gajim"
+    spawnOn "IM" "killall gajim; skype"
+    spawnOn "IM" "killall gajim; gajim"
     spawnOn "IRC" ("xfce4-terminal --title=weechat -e weechat")
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
@@ -188,6 +195,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0                                                        , xF86XK_AudioLowerVolume ) , spawn "amixer -q set Master 3- && /home/jaga/myscripts/getvolume.sh -s")
     , ((0                                                        , xF86XK_AudioMute        ) , safeSpawn "amixer" ["-q", "set", "Master", "0"])
     , ((modMask                                                  , xK_F12                  ) , spawn "amixer -q set Master 9+ && bash /home/jaga/myscripts/getvolume.sh -s")
+    , ((modMask                                                  , xK_p                  ) , spawn "xrandr --output DVI-0 --off --output VGA-0 --auto && slimlock && xrandr --output VGA-0 --auto --left-of DVI-0 --output DVI-0 --auto")
     , ((modMask                                                  , xK_F11                  ) , spawn "amixer -q set Master 9- && bash \"/home/jaga/myscripts/getvolume.sh -s\"")
     , ((modMask                                                  , xK_F9                   ) , spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
 
