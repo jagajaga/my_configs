@@ -43,10 +43,10 @@
   networking = {
     hostName = "nixosZ"; # Define your hostname.
     connman.enable = true;
-    /*interfaceMonitor.enable = false;*/
-    /*wireless.enable = false; # Don't run wpa_supplicant (wicd will do it when necessary)*/
-    /*useDHCP = false; # Don't run dhclient on wlan0*/
-    /*wicd.enable = true;*/
+    firewall = {
+      allowedUDPPorts = [ 7777 ];
+      allowedTCPPorts = [ 7777 ];
+    };
     extraHosts = ''fc5d:baa5:61fc:6ffd:9554:67f0:e290:7535 nodeinfo.hype
               fcbf:7bbc:32e4:716:bd00:e936:c927:fc14 socialno.de
               fcd5:76e1:c1c2:e946:b266:8543:c1d5:67ac hypeoverflow.com'';
