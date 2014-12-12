@@ -5,7 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ <nixos/modules/programs/virtualbox.nix> ];
   require =
     [ 
       ./zenbook_hardware-configuration.nix
@@ -180,19 +179,8 @@
    pmutils
    wget
 
-   gcc
-   automake
-   pkgconfig
-   gnumake
-   jdk
-   clang
-   subversion
    git
-   androidsdk_4_4
-   python27
-   python33
-   python
-   cmake
+   mc
 
    stdenv
    dejavu_fonts
