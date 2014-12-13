@@ -44,6 +44,7 @@ pkgs : {
             python27Packages.pytz
             python27Packages.turses
             python33Packages.glances
+            qemu
             shared_mime_info
             teamviewer
             texLiveFull

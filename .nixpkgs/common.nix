@@ -90,7 +90,7 @@ with pkgs; rec {
             chromiumDev
             gimp
             inkscape
-            libreoffice
+            /*libreoffice*/
         ];
       };
 
