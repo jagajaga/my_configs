@@ -208,8 +208,7 @@ with pkgs; rec {
               pciutils
               pkgconfig
               python
-              python27
-              python33
+              python34
               ruby
               rustc
               smartmontools
