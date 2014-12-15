@@ -103,10 +103,11 @@ with pkgs; rec {
         ];
       };
 
-      baseEnv = buildEnv {
-        name = "base-env";
-        ignoreCollisions = true;
-        paths = [ 
+      baseEnv = lib.lowPrio (
+        buildEnv {
+          name = "base-env";
+          ignoreCollisions = true;
+          paths = [ 
             aspell
             aspellDicts.en
             aspellDicts.ru
@@ -156,16 +157,16 @@ with pkgs; rec {
             xfce.xfce4notifyd
             xfce.xfce4terminal
             zip
-        ];
-      };
+          ];
+        }
+      );
 
       myHs = haskellPackages.ghcWithPackagesOld (
         pkgs: with pkgs; [ 
             /*lushtags*/
             Agda
             cabal2nix
-            cabalInstall
-            ghcMod
+            cabalInstall ghcMod
             haddock
             hlint
             hoogle
@@ -199,6 +200,7 @@ with pkgs; rec {
               gcc
               gnumake
               idea.idea-community
+              haskellPackages.idris
               jdk
               manpages
               mercurial
