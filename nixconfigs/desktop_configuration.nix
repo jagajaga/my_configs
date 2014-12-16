@@ -21,6 +21,7 @@ in
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
     '';
+    tmpOnTmpfs = true;
     loader.grub = {
       timeout = 1;
       enable  = true;
