@@ -15,7 +15,7 @@
   fileSystems."/" =
     { device = "/dev/md126p1";
       fsType = "ext4";
-      options = "rw,stripe=16,data=ordered,relatime";
+      options = "rw,stripe=32,data=ordered,relatime,discard";
     };
 
  swapDevices =
