@@ -156,10 +156,10 @@ in
    /*cjdns*/
   ];
   fonts = {
-    /*fontconfig.enable = true;*/
+    fontconfig.enable = true;
     enableFontDir          = true;
     enableGhostscriptFonts = true;
-    /*fontconfig.defaultFonts.monospace = ["terminus"];*/
+    fontconfig.defaultFonts.monospace = ["terminus"];
     fonts = [
        pkgs.corefonts
        pkgs.clearlyU
