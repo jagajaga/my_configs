@@ -42,7 +42,7 @@ in
   };
   nixpkgs.config = {
     allowUnfree             = true;
-    virtualbox.enableExtensionPack = true;
+    /*virtualbox.enableExtensionPack = true;*/
   };
 
 
@@ -92,7 +92,10 @@ in
       enable         = true;
       servers.client = literals.openVPNConf;
     };
-    virtualboxHost.enable = true;
+    /*virtualboxHost = {*/
+      /*enable          = true;*/
+      /*enableHardening = true;*/
+    /*};*/
   };
   /*services.tor.client.enable = true;*/
   /*services.cjdns.enable = true;*/
@@ -159,7 +162,7 @@ in
     fontconfig.enable = true;
     enableFontDir          = true;
     enableGhostscriptFonts = true;
-    fontconfig.defaultFonts.monospace = ["terminus"];
+    fontconfig.defaultFonts.monospace = ["Terminus"];
     fonts = [
        pkgs.corefonts
        pkgs.clearlyU
