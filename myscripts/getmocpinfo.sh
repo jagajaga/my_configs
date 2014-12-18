@@ -18,6 +18,22 @@ then
         Song=`mocp --info | grep SongTitle | cut -f2 -d ":"`
         Album=`mocp --info | grep Album | cut -f2 -d ":"`
         STATE=`mocp -i | grep State | cut -f2 -d ":" | cut -f2 -d " "`
+        while getopts "asb" opt; do
+            case "$opt" in
+                a)     
+                        echo "${Artist:1}"
+                        exit 0
+                        ;;
+                s)
+                        echo "${Song:1}"
+                        exit 0
+                        ;;
+                b) 
+                        echo "${Album:1}"
+                        exit 0
+                        ;;
+            esac
+        done
 
         if [  "$STATE" == "PAUSE" ]
         then
