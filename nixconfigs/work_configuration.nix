@@ -10,7 +10,7 @@ in
 {
   require = [
       ./work_hardware-configuration.nix
-#      ./private.nix
+      ./private.nix
   ];
 
   boot = {
