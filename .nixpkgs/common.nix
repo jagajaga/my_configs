@@ -130,7 +130,6 @@ with pkgs; rec {
             lastfmsubmitd
             libnotify
             lm_sensors
-            mirage
             moc
             mutt-with-sidebar 
             p7zip
@@ -138,6 +137,7 @@ with pkgs; rec {
             pinentry
             psmisc
             skype
+            sxiv
             telnet
             termite
             tmux
