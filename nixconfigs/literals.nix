@@ -44,6 +44,21 @@
         fcbf:7bbc:32e4:716:bd00:e936:c927:fc14 socialno.de
         fcd5:76e1:c1c2:e946:b266:8543:c1d5:67ac hypeoverflow.com
     '';
+  workHosts = ''
+      192.168.0.9   godzilla
+      192.168.0.10  poni
+      192.168.0.81  sphinx
+      192.168.0.82  alserg
+      192.168.0.83  alant
+      192.168.0.84  svkazakov
+      192.168.0.85  svkazakov-win
+      192.168.0.86  melnikov2
+      192.168.0.87  tsarev
+      192.168.0.89  horse
+      192.168.0.108 owl
+      192.168.0.78  griffin
+      192.168.0.79  hydra
+    '';
   sudoConf = ''
     Cmnd_Alias SUSPEND = /var/run/current-system/sw/sbin/pm-suspend, /var/run/current-system/sw/bin/systemctl suspend
 
