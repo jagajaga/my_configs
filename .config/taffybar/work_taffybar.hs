@@ -15,10 +15,15 @@ import           System.Taffybar.Widgets.PollingGraph
 import           System.Information.CPU2
 import           System.Information.DiskIO
 import           System.Information.Memory
+import           System.Environment
 
 import           Graphics.UI.Gtk
 
 import           Data.List
+
+import Control.Applicative
+
+import Debug.Trace
 
 memCallback :: IO Double
 memCallback = do
@@ -94,6 +99,11 @@ simpleText text' color = do
 
 main :: IO ()
 main = do
+  args <- init <$> words <$> unlines <$> getArgs
+  let x = case args of
+        ["-x", a] -> read a :: Int
+        _ -> 0
+  traceShow x $ return ()
   let pager  = taffyPagerNew myTaffy
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
                                                       , (1, 0, 1, 0.9)
@@ -126,5 +136,6 @@ main = do
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
                                         , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp] ]
                                         , widgetSpacing = 5
+                                        , monitorNumber = x
                                         , barHeight = 23
                                         }
