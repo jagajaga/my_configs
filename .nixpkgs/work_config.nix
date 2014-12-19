@@ -9,6 +9,7 @@ pkgs : {
         name = "work-env";
         paths = [
           pavucontrol
+          unetbootin
         ];
       };
   };
