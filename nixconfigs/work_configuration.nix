@@ -10,7 +10,7 @@ in
 {
   require = [
       ./work_hardware-configuration.nix
-#      ./private.nix
+      ./private.nix
   ];
 
   boot = {
@@ -43,7 +43,7 @@ in
       allowedTCPPorts = [ 7777 ];
     };
     hostName       = "aseroka-nixos";
-    extraHosts     = literals.extraHosts;
+    extraHosts     = literals.workHosts;
     proxy.default  = "rain.ifmo.ru:3128";
     connman.enable = true;
   };
@@ -58,7 +58,7 @@ in
     opengl = {
       driSupport32Bit = true;
     };
-    pulseaudio.enable      = true;
+    /*pulseaudio.enable      = true;*/
   };
 
   security.sudo.configFile = literals.sudoConf;

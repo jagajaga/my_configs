@@ -59,7 +59,7 @@ myConfig = defaultConfig { workspaces  = workspaces'
                          }
 
 myStatusBar (S 0) = spawnPipe "taffybar -x 0"
--- myStatusBar (S s) = spawnPipe $ "taffybar -x " ++ show s
+myStatusBar (S s) = spawnPipe $ "taffybar -x " ++ show s
 
 myStatusBarCleanup :: IO ()
 myStatusBarCleanup = return ()
