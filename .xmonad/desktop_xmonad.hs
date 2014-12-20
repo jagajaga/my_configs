@@ -7,6 +7,7 @@ import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
+import           XMonad.Actions.DynamicWorkspaces
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
@@ -117,6 +118,19 @@ myGSConfig = defaultGSConfig { gs_cellwidth = 160
                             , gs_navigate = myGSNavigation
 }
 
+workspacesPrompt :: (String -> X ()) -> X ()
+workspacesPrompt action = do
+    ws <- allWorkspaces
+    let compl = mkComplFunFromList ws
+    inputPromptWithCompl defaultXPConfig "Workspace name" compl ?+ action
+
+allWorkspaces :: X [WorkspaceId]
+allWorkspaces = withWindowSet (return . map W.tag . W.workspaces)
+
+shiftFocused :: WorkspaceId -> X ()
+shiftFocused = windows . W.shift
+
+
 -- urgent notification
 urgentConfig :: UrgencyConfig
 urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Dont }
@@ -217,6 +231,11 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask                                                  , xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
     , ((modMask                                                  , xK_z     ), toggleWS)
 
+    , ((modMask                                                  , xK_backslash), workspacesPrompt addWorkspace)
+    , ((modMask .|. controlMask , xK_backslash), removeEmptyWorkspace)
+
+    , ((modMask .|. shiftMask                                    , xK_backslash), workspacesPrompt $ \wid -> addHiddenWorkspace wid >> shiftFocused wid)
+
 
     -- focus
     , ((modMask                                                  , xK_Tab   ), windows W.focusDown)
@@ -247,12 +266,12 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask                                    , xK_q     ), io (exitWith ExitSuccess))
     , ((modMask                                                  , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     ]
-    ++
     -- mod-[1..9] %! Switch to workspace N
     -- mod-shift-[1..9] %! Move client to workspace N
-    [((m .|. modMask, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+    ++
+    zip (zip (repeat (modMask)) [xK_1..xK_9]) (map (withNthWorkspace W.greedyView) [0..])
+    ++
+    zip (zip (repeat (modMask .|. shiftMask)) [xK_1..xK_9]) (map (withNthWorkspace W.shift) [0..])
     ++
     []
 
