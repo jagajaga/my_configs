@@ -44,8 +44,8 @@
     hostName = "nixosZ"; # Define your hostname.
     connman.enable = true;
     firewall = {
-      allowedUDPPorts = [ 7777 ];
       allowedTCPPorts = [ 7777 ];
+      allowedUDPPorts = [ 7777 ];
     };
     extraHosts = ''fc5d:baa5:61fc:6ffd:9554:67f0:e290:7535 nodeinfo.hype
               fcbf:7bbc:32e4:716:bd00:e936:c927:fc14 socialno.de
