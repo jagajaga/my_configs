@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-if [ "$(pidof mocp)" ] 
+if [ "$(pidof mpd)" ] 
 then
-    INFO=`mocp --info`
+    INFO=`mpc`
 
     if [ $? == 2 ]
     then
@@ -10,40 +10,35 @@ then
         exit
     fi
 
-    if [ "$INFO" == "State: STOP" ];
+    Artist=`mpc --format \"[%artist%]\" | head -n 1`
+    Song=`mpc --format \"[%title%]\" | head -n 1`
+    Album=`mpc --format \"[%album%]\" | head -n 1`
+    STATE=`mpc | head -n 2 | tail -n 1 | sed -e 's/\[\(.*\)\].*/\1/g'`
+    while getopts "asb" opt; do
+        case "$opt" in
+            a)     
+                    echo "${Artist:1}"
+                    exit 0
+                    ;;
+            s)
+                    echo "${Song:1}"
+                    exit 0
+                    ;;
+            b) 
+                    echo "${Album:1}"
+                    exit 0
+                    ;;
+        esac
+    done
+
+    if [ ! "$STATE" == "playing" ]
     then
-        echo -n "Stopped"
-    else
-        Artist=`mocp --info | grep Artist | cut -f2 -d ":"`
-        Song=`mocp --info | grep SongTitle | cut -f2 -d ":"`
-        Album=`mocp --info | grep Album | cut -f2 -d ":"`
-        STATE=`mocp -i | grep State | cut -f2 -d ":" | cut -f2 -d " "`
-        while getopts "asb" opt; do
-            case "$opt" in
-                a)     
-                        echo "${Artist:1}"
-                        exit 0
-                        ;;
-                s)
-                        echo "${Song:1}"
-                        exit 0
-                        ;;
-                b) 
-                        echo "${Album:1}"
-                        exit 0
-                        ;;
-            esac
-        done
-
-        if [  "$STATE" == "PAUSE" ]
-        then
-            echo -n `expr substr "◼ $Artist - $Song" 1 200`
-            exit
-        fi
-
-        echo -n `expr substr "\► $Artist - $Song" 2 200`
-
+        echo -n `expr substr "◼ Music paused" 1 200`
+        exit
     fi
+
+    echo -n `expr substr "\► $Artist - $Song" 2 200`
+
 else
     echo -n ""
     exit 1

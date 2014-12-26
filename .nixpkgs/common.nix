@@ -3,6 +3,7 @@ let
   vimrc = import ./vimrc.nix {};
 in
 with pkgs; rec {
+  mpdas = callPackage ./mpdas {};
   vimrcConfig = {
         vam.knownPlugins = vimPlugins; # optional
         vam.pluginDictionaries = [
@@ -130,7 +131,9 @@ with pkgs; rec {
             lastfmsubmitd
             libnotify
             lm_sensors
-            moc
+            mpc_cli
+            mpd
+            mpdas
             mutt-with-sidebar 
             p7zip
             pass
@@ -146,6 +149,7 @@ with pkgs; rec {
             unrar
             unzip
             vlc
+            vimpc
             weechat
             which
             wine

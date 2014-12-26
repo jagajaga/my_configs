@@ -42,7 +42,6 @@ in
   };
   nixpkgs.config = {
     allowUnfree             = true;
-    /*virtualbox.enableExtensionPack = true;*/
   };
 
 
@@ -72,6 +71,9 @@ in
     opengl = {
       driSupport32Bit = true;
     };
+    pulseaudio = {
+      enable = true;
+    };
   };
 
   security.sudo.configFile = literals.sudoConf;
@@ -92,13 +94,7 @@ in
       enable         = true;
       servers.client = literals.openVPNConf;
     };
-    /*virtualboxHost = {*/
-      /*enable          = true;*/
-      /*enableHardening = true;*/
-    /*};*/
   };
-  /*services.tor.client.enable = true;*/
-  /*services.cjdns.enable = true;*/
 
   services.xserver = {
     exportConfiguration = true;
@@ -130,7 +126,7 @@ in
     config = literals.trackBallConf;
   };
 
-  sound.extraConfig = literals.alsaConf;
+  /*sound.extraConfig = literals.alsaConf;*/
 
   users.extraUsers.jaga = {
     description = "Arseniy Seroka";
