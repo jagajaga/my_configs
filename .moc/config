@@ -114,7 +114,7 @@ Prebuffering= 64
 # debugging).
 # You can enter more than one driver as a colon-separated list.  The first
 # working driver will be used.
-SoundDriver= JACK:ALSA:OSS
+SoundDriver= PULSEAUDIO:JACK:ALSA:OSS
 
 # Jack output settings.
 JackOutLeft= "alsa_pcm:playback_1"
