@@ -1,4 +1,4 @@
-{ cabal, liblastfm, process, lensAeson, lens, libnotify, libmpd }:
+{ cabal, liblastfm, process, lensAeson, lens, libnotify }:
 
 cabal.mkDerivation (self: {
   pname = "lovemoc";
@@ -7,6 +7,6 @@ cabal.mkDerivation (self: {
   isLibrary = false;
   isExecutable = true;
   buildDepends = [
-    liblastfm process lensAeson lens libnotify libmpd
+    liblastfm process lensAeson lens libnotify
   ];
 })
