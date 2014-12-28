@@ -3,14 +3,13 @@ let
   vimrc = import ./vimrc.nix {};
 in
 with pkgs; rec {
-  mpdas = callPackage ./mpdas {};
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
       ./moc_patches/moc-r2758+pulse_audio-1.patch.gz 
       ./moc_patches/moc-r2758+pulse_audio-1.1.patch.gz 
     ]; 
     preConfigure = ''autoreconf -f -i''; 
-    nativeBuildInputs = old.nativeBuildInputs ++ [ pulseudio automake libtool autoconf gettext ]; 
+    nativeBuildInputs = old.nativeBuildInputs ++ [ pulseaudio automake libtool autoconf gettext ]; 
     makeFlags = ["pulse=yes"];
   });
 
@@ -142,8 +141,6 @@ with pkgs; rec {
             libnotify
             lm_sensors
             mpc_cli
-            mpd
-            mpdas
             mocPulse
             mutt-with-sidebar 
             p7zip
