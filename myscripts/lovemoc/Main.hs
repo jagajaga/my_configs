@@ -14,6 +14,8 @@ import           Libnotify
 import           Network.Lastfm
 import qualified Network.Lastfm.Track as Track
 import           System.Process
+import qualified Network.MPD as MPD
+import qualified Data.Map as M
 
 
 main :: IO ()
@@ -22,16 +24,23 @@ main = do
     [a, t] <- getSong
     correct a t ak >>= love a ak sk s
 
-{-getInfo :: MPD.Song -> [Text]-}
-{-getInfo s = map getTag [MPD.Artist, MPD.Title]-}
- {-where-}
-    {-getTag t = T.fromStrict . MPD.toText . head $ MPD.sgTags s M.! t-}
-
+getInfo :: MPD.Song -> [Text]
+getInfo s = map getTag [MPD.Artist, MPD.Title]
+ where
+  getTag t = MPD.toText . head $ MPD.sgTags s M.! t
+ 
+ 
 getSong :: IO [Text]
 getSong = do
-    artist <- readProcess "/home/jaga/myscripts/getmocpinfo.sh" ["-a"] []
-    title <- readProcess "/home/jaga/myscripts/getmocpinfo.sh" ["-s"] []
-    return [pack artist, pack title]
+  Right (Just song) <- MPD.withMPD MPD.currentSong
+  return (getInfo song)
+ 
+
+{-getSong :: IO [Text]-}
+{-getSong = do-}
+    {-artist <- readProcess "/home/jaga/myscripts/getmocpinfo.sh" ["-a"] []-}
+    {-title <- readProcess "/home/jaga/myscripts/getmocpinfo.sh" ["-s"] []-}
+    {-return [pack artist, pack title]-}
 
 
 correct :: Text -> Text -> Text -> IO Text
