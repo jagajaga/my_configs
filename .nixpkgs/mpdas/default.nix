@@ -2,15 +2,13 @@
 
 stdenv.mkDerivation rec {
   name = "mpdas-${version}";
-  version = "0.3.2";
+  version = "0.4-alpha";
 
   src = fetchgit {
     url = "https://github.com/hrkfdn/mpdas";
-    rev = "4b2f62187ad41c4a4d0abf5ff06475c02473df65";
-    sha256 = "1gc2xgx74cd5h6zjpzwin7z8v98krrkdf3ny8kz5qnxpafw2cxly";
+    rev = "8900f5b437109ac8fd27b95330938abec47aa246";
+    sha256 = "1l4hfmcp1l0a08cjf3lmvnlksagrkpvnvfbhdlzziva5dddprs31";
   };
-
-  patches = [ (fetchurl { url = "https://github.com/hrkfdn/mpdas/pull/14.diff"; md5 = "66065dfe0e8290c8955de822c6f4a37a"; }) ];
 
   buildInputs = [ curl mpd_clientlib pkgconfig ];
 
