@@ -140,7 +140,6 @@ with pkgs; rec {
             lastfmsubmitd
             libnotify
             lm_sensors
-            mpc_cli
             mocPulse
             mutt-with-sidebar 
             p7zip
@@ -157,7 +156,6 @@ with pkgs; rec {
             unrar
             unzip
             vlc
-            vimpc
             weechat
             which
             wine
