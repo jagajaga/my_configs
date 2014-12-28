@@ -122,7 +122,7 @@ main = do
       cpu        = pollingGraphNew cpuCfg 0.5 $ getCPULoad "cpu"
       temp       = pollingBarNew (defaultBarConfig colorFuncTemp) {barWidth = 10} 2 $ tempCallback ["cpu0"]
       tray       = systrayNew
-      mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "MPD: OFF" "#FFFFFF" 
+      mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF" 
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
                                         , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp] ]
                                         , widgetSpacing = 5

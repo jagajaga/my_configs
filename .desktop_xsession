@@ -24,6 +24,4 @@ else
 fi
 export GPG_AGENT_INFO 
 export SSH_AUTH_SOCK 
-mpd &
-(while true; do mpdas -c ~/.mpdasrc; done) &
 exec dbus-launch xmonad
