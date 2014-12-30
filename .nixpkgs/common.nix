@@ -10,7 +10,6 @@ with pkgs; rec {
     ]; 
     preConfigure = ''autoreconf -f -i''; 
     nativeBuildInputs = old.nativeBuildInputs ++ [ pulseaudio automake libtool autoconf gettext ]; 
-    makeFlags = ["pulse=yes"];
   });
 
   vimrcConfig = {
