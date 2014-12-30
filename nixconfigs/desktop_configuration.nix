@@ -17,9 +17,11 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_3_17;
+    kernelPackages      = pkgs.linuxPackages_3_18;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
+      options kvm-amd nested=1
+      options kvm-intel nested=1
     '';
     tmpOnTmpfs = true;
     loader.grub = {
@@ -68,6 +70,7 @@ in
   };
 
   hardware = {
+    cpu.intel.updateMicrocode = true;
     opengl = {
       driSupport32Bit = true;
     };
@@ -81,6 +84,7 @@ in
   services = {
     dbus.enable            = true;
     nixosManual.showManual = true;
+    journald.extraConfig   = "SystemMaxUse=50M";
     locate.enable          = true;
     udisks2.enable         = true;
     openssh.enable         = true;
@@ -98,14 +102,14 @@ in
 
   services.xserver = {
     exportConfiguration = true;
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-    layout = "us,ru(winkeys)";
-    xkbOptions = "grp:caps_toggle";
-    xkbVariant = "winkeys";
+    enable              = true;
+    videoDrivers        = [ "nvidia" ];
+    layout              = "us,ru(winkeys)";
+    xkbOptions          = "grp:caps_toggle";
+    xkbVariant          = "winkeys";
     displayManager.slim = {
-      enable = true;
-      autoLogin = true;
+      enable      = true;
+      autoLogin   = true;
       defaultUser = "jaga";
       theme = pkgs.fetchurl {
           url    = https://github.com/jagajaga/nixos-slim-theme/archive/1.1.tar.gz;
@@ -113,7 +117,7 @@ in
         };
     };
     desktopManager = {
-      default = "none";
+      default      = "none";
       xterm.enable = false;
     };
     windowManager = {
