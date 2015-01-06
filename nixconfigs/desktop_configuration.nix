@@ -90,9 +90,17 @@ in
     openssh.enable         = true;
     printing.enable        = true;
     openntpd.enable        = true;
-    mysql = {
+    postgresql = {
       enable  = true;
-      package = pkgs.mysql;
+      package = pkgs.postgresql;
+      enableTCPIP = true;
+      authentication = ''
+        # Generated file; do not edit!
+        local all all                trust
+        host  all all 127.0.0.1/32   trust
+        host  all all ::1/128        trust
+        host  all all 192.168.1.0/24 trust
+      '';
     };
     openvpn = {
       enable         = true;
@@ -128,7 +136,10 @@ in
       };
     };
     config = literals.trackBallConf;
+    startGnuPGAgent = true;
   };
+
+  programs.ssh.startAgent = false;
 
   /*sound.extraConfig = literals.alsaConf;*/
 

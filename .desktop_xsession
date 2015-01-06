@@ -1,27 +1,8 @@
 #!/bin/sh
 xsetroot -cursor_name left_ptr
-
 sleep 30 && dropbox &
 connman-ui-gtk &
-#~/myscripts/wallpaper.sh &
-#autocpu -s
-#sh /home/jaga/myscripts/brightness.sh
-#smbnetfs /media/samba &
-#devmon &
-#trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 9 --transparent true --alpha 0 --tint 0x000000 --height 19 &
 feh --bg-scale ~/Dropbox/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg
-#pulseaudio --start
-#devilspie &
-#xfce4-terminal --title=cmatrix -e cmatrix --maximize &
-#xmodmap -e keysym Menu = Super_L
 lastfmsubmitd --no-daemon &
 export BROWSER="dwb"
-envfile="$HOME/.gnupg/gpg-agent.env"
-if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
-    eval "$(cat "$envfile")"
-else
-    eval "$(gpg-agent --daemon --write-env-file "$envfile")"
-fi
-export GPG_AGENT_INFO 
-export SSH_AUTH_SOCK 
 exec dbus-launch xmonad
