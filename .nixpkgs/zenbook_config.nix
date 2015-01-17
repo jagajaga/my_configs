@@ -8,7 +8,8 @@ pkgs : {
       {
         name = "zenbook-env";
         paths = [
-          
+          qemu
+          rsync
         ];
       };
   };

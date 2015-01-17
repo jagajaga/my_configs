@@ -11,7 +11,6 @@
 #      ./private.nix
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_3_16;
   boot.loader.grub.timeout = 1;
 
   boot.initrd.kernelModules =
@@ -19,6 +18,12 @@
       # filesystem.
       # "xfs" "ata_piix"
     ];
+
+  boot.kernelPackages      = pkgs.linuxPackages_3_18;
+  boot.extraModprobeConfig = ''
+      options kvm-amd nested=1
+      options kvm-intel nested=1
+    '';
 
   nix.package = pkgs.nixUnstable;
   nix.binaryCaches = [ http://cache.nixos.org ];
@@ -31,11 +36,6 @@
 
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
-
-  /*boot.extraModprobeConfig = ''*/
-    /*options snd slots=snd_usb_audio,snd-hda-intel*/
-
-  /*'';*/
 
   boot.loader.grub.extraEntries = "menuentry \"Arch Linux\" {\n set root=(hd0,4)\n linux /boot/vmlinuz-linux root=/dev/sda4 ro\n initrd /boot/initramfs-linux.img
     }";
@@ -110,7 +110,7 @@
    /*'';*/
   
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
