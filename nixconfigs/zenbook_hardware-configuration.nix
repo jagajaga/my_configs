@@ -17,11 +17,11 @@
   fileSystems."/".device = "/dev/sda2";
   fileSystems."/home".device = "/dev/sda3";
 
-  /*fileSystems."/media/Arch" =     # where you want to mount the device*/
-    /*{ device = "/dev/sda4";  # the device*/
-      /*fsType = "ext4";      # the type of the partition*/
-      /*options = "data=journal,users,rw,user,auto,exec";*/
-    /*};*/
+  fileSystems."/samba" =
+    { device = "//192.168.1.116/Data";
+      fsType = "cifs";
+      options = "users,nofail";
+    };
 
   # List swap partitions activated at boot time.
   swapDevices =
