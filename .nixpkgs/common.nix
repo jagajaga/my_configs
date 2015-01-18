@@ -214,8 +214,6 @@ with pkgs; rec {
               manpages
               mercurial
               mesa
-              mysql
-              mysqlWorkbench
               pciutils
               pkgconfig
               python
