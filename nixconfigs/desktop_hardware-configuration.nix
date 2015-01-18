@@ -4,23 +4,31 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
+  imports = [ 
+    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+  ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_hcd" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_hcd" ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
 
-  fileSystems."/" =
-    { device = "/dev/md126p1";
-      fsType = "ext4";
-      options = "rw,stripe=32,data=ordered,relatime,discard";
+  fileSystems."/" = { 
+    device = "/dev/md126p1";
+    fsType = "ext4";
+    options = "rw,stripe=32,data=ordered,relatime,discard";
     };
 
- swapDevices =
-   [ { device = "/dev/md126p2"; }
-   ];
+  fileSystems."/samba" = {
+    device = "//192.168.1.116/Data";
+    fsType = "cifs";
+    options = "users,nofail";
+    };
+
+  swapDevices = [ 
+    { device = "/dev/md126p2"; }
+  ];
 
   nix.maxJobs = 8;
 }
