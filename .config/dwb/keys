@@ -173,5 +173,5 @@ mark= '
 repeat= .
 tabgrep= 
 visual_mode= v
-reload_searchengines=
-restart=
+reload_searchengines= 
+restart= 
