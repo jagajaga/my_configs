@@ -170,20 +170,19 @@ with pkgs; rec {
         }
       );
 
-      myHs = haskellPackages.ghcWithPackagesOld (
+      myHs = haskellngPackages.ghcWithPackages (
         pkgs: with pkgs; [ 
-            /*lushtags*/
             Agda
             cabal2nix
-            cabalInstall ghcMod
-            haddock
+            cabal-install
+            ghc-mod
             hlint
             hoogle
-            hoogleLocal
+            /*lushtags*/
             pandoc
             taffybar
             xmonad
-            xmonadContrib
+            xmonad-contrib
         ]);
 
       hsEnv = buildEnv {
