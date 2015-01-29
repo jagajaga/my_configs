@@ -172,7 +172,6 @@ with pkgs; rec {
 
       myHs = haskellngPackages.ghcWithPackages (
         pkgs: with pkgs; [ 
-            Agda
             cabal2nix
             cabal-install
             ghc-mod
