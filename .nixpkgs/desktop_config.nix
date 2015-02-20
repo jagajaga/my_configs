@@ -17,7 +17,6 @@ pkgs : {
             dvdplusrwtools
             e2fsprogs
             ffmpeg
-            fish
             fpc
             google-musicmanager
             graphviz
@@ -48,14 +47,13 @@ pkgs : {
             shared_mime_info
             teamviewer
             texLiveFull
-            /*tightvnc*/
+            tightvnc
             tor
             transmission_gtk
             transmission_remote_gtk
             unetbootin
             xfe
             xlibs.xf86inputjoystick
-            youtubeDL
         ];
       };
   };
