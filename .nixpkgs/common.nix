@@ -61,6 +61,7 @@ with pkgs; rec {
                 "vundle"
                 "watchdogs"
                 "webapi-vim"
+                "xkbswitch"
                 "YUNOcommit"
                 "youcompleteme"
             ];}
@@ -108,7 +109,6 @@ with pkgs; rec {
         ignoreCollisions = true;
         paths = [
             steam
-            steamChrootEnv
         ];
       };
 
@@ -149,6 +149,7 @@ with pkgs; rec {
             sxiv
             telnet
             termite
+            tightvnc
             tmux
             traceroute
             tree
