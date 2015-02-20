@@ -67,6 +67,7 @@ startup = do
     spawn "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     spawnOn "IM" "skype"
     spawnOn "IM" "gajim"
+    spawnOn "Steam" "steam"
     spawnOn "IRC" ("xfce4-terminal --title=weechat -e weechat")
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
@@ -74,7 +75,7 @@ startup = do
 -------------------------------------------------------------------------------
 -- Window Management --
 manageHook' = composeAll [ isFullscreen                   --> doFullFloat
-                         , className =? "Gimp"            --> doFloat
+                         {-, className =? "Gimp"            --> doFloat-}
                          , className =? "Skype"           --> doShift "IM"
                          , className =? "Gajim"           --> doShift "IM"
                          , className =? "Steam"           --> doShift "Steam"
