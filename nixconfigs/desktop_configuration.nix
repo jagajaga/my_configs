@@ -42,10 +42,10 @@ in
       dates     = "2 weeks";
     };
   };
+
   nixpkgs.config = {
     allowUnfree             = true;
   };
-
 
   networking = {
     firewall = {
