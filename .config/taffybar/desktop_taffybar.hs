@@ -125,7 +125,7 @@ main = do
       mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF" 
       layout     = commandRunnerNew 2 "/home/jaga/myscripts/currentlayout.sh" [] "No xkblayout-state" colorOrange 
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
-                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp], [layout] ]
+                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [layout], [mocp] ]
                                         , widgetSpacing = 5
                                         , barHeight = 23
                                         }
