@@ -3,6 +3,25 @@ let
   vimrc = import ./vimrc.nix {};
 in
 with pkgs; rec {
+  dyreFork = pkgs.haskellngPackages.mkDerivation {
+    pname = "dyre";
+    version = "0.8.12";
+    src = pkgs.fetchgit {
+      url = "https://github.com/jagajaga/dyre";
+      rev = "6d8653d5ab808c0f5f85ec5bf89d2de7c03738a3";
+      sha256 = "111p6x34pi7hcvsxc7cpafmw2cjw2vq8xj7nhnxbs7fl6s8jpicx";
+    };
+    isLibrary = true;
+    buildDepends = with pkgs.haskellngPackages; [
+      base binary directory executable-path filepath ghc-paths io-storage
+      process time unix xdg-basedir
+    ];
+    doCheck = false;
+    license = null;
+  };
+  my_taffybar = haskellngPackages.taffybar.override {
+    dyre = dyreFork;
+  };
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
       ./moc_patches/moc-r2758+pulse_audio-1.patch.gz 
@@ -98,6 +117,7 @@ with pkgs; rec {
         ignoreCollisions = true;
         paths = [
             chromiumDev
+            firefoxWrapper
             gimp
             inkscape
             /*libreoffice*/
@@ -180,7 +200,7 @@ with pkgs; rec {
             hoogle
             /*lushtags*/
             pandoc
-            taffybar
+            my_taffybar
             xmonad
             xmonad-contrib
         ]);
