@@ -123,8 +123,9 @@ main = do
       temp       = pollingBarNew (defaultBarConfig colorFuncTemp) {barWidth = 10} 2 $ tempCallback ["cpu0"]
       tray       = systrayNew
       mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF" 
+      layout     = commandRunnerNew 2 "/home/jaga/myscripts/currentlayout.sh" [] "No xkblayout-state" colorOrange 
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
-                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp] ]
+                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp], [layout] ]
                                         , widgetSpacing = 5
                                         , barHeight = 23
                                         }
