@@ -63,6 +63,8 @@ in
 
   security.sudo.configFile = literals.sudoConf;
 
+  programs.ssh.startAgent = false;
+
   services = {
     dbus.enable            = true;
     nixosManual.showManual = true;
@@ -99,6 +101,7 @@ in
         enableContribAndExtras = true;
       };
     };
+    startGnuPGAgent = true;
   };
 
   virtualisation.libvirtd.enable = true;
