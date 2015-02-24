@@ -102,12 +102,14 @@ in
     config = literals.trackBallConf;
   };
 
+  virtualisation.libvirtd.enable = true;
+
   users.extraUsers.jaga = {
     description = "Arseniy Seroka";
     createHome  = true;
     home        = "/home/jaga";
     group       = "users";
-    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" "vboxusers" "libvirtd" ];
     shell       = "${pkgs.zsh}/bin/zsh";
     uid         = 1000;
   };
