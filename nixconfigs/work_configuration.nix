@@ -14,7 +14,7 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_3_17;
+    kernelPackages      = pkgs.linuxPackages_latest;
     loader.grub = {
       timeout = 1;
       enable  = true;
@@ -34,7 +34,7 @@ in
     };
   };
   nixpkgs.config = {
-    allowUnfree             = true;
+    allowUnfree = true;
   };
 
   networking = {
@@ -58,10 +58,12 @@ in
     opengl = {
       driSupport32Bit = true;
     };
-    /*pulseaudio.enable      = true;*/
+    pulseaudio.enable      = true;
   };
 
   security.sudo.configFile = literals.sudoConf;
+
+  programs.ssh.startAgent = false;
 
   services = {
     dbus.enable            = true;
@@ -93,21 +95,23 @@ in
       xterm.enable = false;
     };
     windowManager = {
-      default                       = "xmonad";
+      default = "xmonad";
       xmonad = {
         enable                 = true;
         enableContribAndExtras = true;
       };
     };
-    config = literals.trackBallConf;
+    startGnuPGAgent = true;
   };
+
+  virtualisation.libvirtd.enable = true;
 
   users.extraUsers.jaga = {
     description = "Arseniy Seroka";
     createHome  = true;
     home        = "/home/jaga";
     group       = "users";
-    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" "vboxusers" "libvirtd" ];
     shell       = "${pkgs.zsh}/bin/zsh";
     uid         = 1000;
   };
@@ -116,34 +120,18 @@ in
 
   environment.systemPackages = with pkgs; [
    bash
+   connmanui
+   git
    htop
    iotop
-   zsh
    mc
-
    pmutils
-   wget
-
-   automake
-   clang
-   cmake
-   gcc
-   git
-   gnumake
-   pkgconfig
-   python
-   python27
-   python33
-   subversion
    stdenv
-   dejavu_fonts
-
+   wget
    xsel
-
-   connmanui
-   dropbox
+   zsh
    ceph
-
+   /*cjdns*/
   ];
   fonts = {
     enableFontDir          = true;
