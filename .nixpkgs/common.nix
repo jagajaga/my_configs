@@ -7,14 +7,14 @@ with pkgs; rec {
     pname = "dyre";
     version = "0.8.12";
     src = pkgs.fetchgit {
-      url = "https://github.com/jagajaga/dyre";
-      rev = "6d8653d5ab808c0f5f85ec5bf89d2de7c03738a3";
-      sha256 = "111p6x34pi7hcvsxc7cpafmw2cjw2vq8xj7nhnxbs7fl6s8jpicx";
+      url = "https://github.com/willdonnelly/dyre";
+      rev = "6b371272536469cd269e1de6a0a2c0b136bbcb87";
+      sha256 = "1c5m32knjy91lkyji8fz94cxwpjjrqfs7lwh4468n5yr72pvp8yv";
     };
     isLibrary = true;
     buildDepends = with pkgs.haskellngPackages; [
       base binary directory executable-path filepath ghc-paths io-storage
-      process time unix xdg-basedir
+      process time unix xdg-basedir time-compat
     ];
     doCheck = false;
     license = null;
