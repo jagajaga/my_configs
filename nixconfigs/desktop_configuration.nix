@@ -23,7 +23,7 @@ in
       options kvm-amd nested=1
       options kvm-intel nested=1
     '';
-    tmpOnTmpfs = true;
+    cleanTmpDir = true;
     loader.grub = {
       timeout = 1;
       enable  = true;

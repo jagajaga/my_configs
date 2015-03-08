@@ -155,6 +155,7 @@ with pkgs; rec {
             gnome.zenity
             gnupg
             gparted
+            hstr
             iftop
             lastfmsubmitd
             libnotify
