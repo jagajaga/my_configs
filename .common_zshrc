@@ -342,3 +342,5 @@ function precmd {
 }
 
 autoload -U compinit && compinit
+fpath=(~/nixos-zsh-completion $fpath)
+autoload -U compinit && compinit
