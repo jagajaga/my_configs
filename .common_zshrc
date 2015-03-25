@@ -267,7 +267,7 @@ alias connect='sudo netcfg -r Jaga-Jaga'
 alias showdisk='sudo fdisk -l'
 alias cp='cp'
 alias :q='exit'
-alias update='sudo nixos-rebuild switch --upgrade; nix-env -q | xargs nix-env -i'
+alias update='sudo bash -c "NIX_PATH=$NIX_PATH nixos-rebuild switch --upgrade"; nix-channel --update; nix-env -q | xargs nix-env -i' #WTF
 
 
 unsetopt correct_all
@@ -344,3 +344,10 @@ function precmd {
 autoload -U compinit && compinit
 fpath=(~/nixos-zsh-completion $fpath)
 autoload -U compinit && compinit
+
+# add this configuration to ~/.zshrc
+export HISTFILE=~/.zhistory  # ensure history file visibility
+export HH_CONFIG=hicolor,rawhistory        # get more colors
+export HH_PROMPT="search $"
+bindkey -s "\C-r" "\eqhh\n"     # bind hh to Ctrl-r (for Vi mode check doc)
+

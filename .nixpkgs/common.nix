@@ -45,7 +45,7 @@ with pkgs; rec {
                 "idris-vim"
 
                 "rust"
-                "racer"
+                /*"racer"*/
 
                 "a"
                 "airline"
@@ -94,7 +94,7 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [
               my_vim
-              racerRust
+              /*racerRust*/
               haskellPackages.stylishHaskell
               astyle
             ];
@@ -119,7 +119,7 @@ with pkgs; rec {
             chromiumDev
             firefoxWrapper
             gimp
-            inkscape
+            /*inkscape*/
             /*libreoffice*/
         ];
       };
@@ -183,6 +183,7 @@ with pkgs; rec {
             winetricks
             wmname
             xclip
+            xkblayout-state
             xlibs.xev
             xlibs.xprop
             xfce.xfce4notifyd
@@ -219,17 +220,16 @@ with pkgs; rec {
           name = "development-env";
           ignoreCollisions = true;
           paths = [
-              ctags
-              zlib
               automake
               cargoSnapshot
               clang
               cmake
+              ctags
               freeglut
               gcc
               gnumake
-              idea.idea-community
               haskellPackages.idris
+              idea.idea-community
               jdk
               manpages
               mercurial
@@ -239,12 +239,14 @@ with pkgs; rec {
               python
               python34
               ruby
-              rustc
+              /*rustc*/
               smartmontools
               sqlite
               subversion
+              swiProlog
               wireshark
               xlibs.libX11
+              zlib
           ];
         }
       );
