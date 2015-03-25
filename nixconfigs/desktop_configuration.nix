@@ -33,13 +33,13 @@ in
   };
 
   nix = {
-    package             = pkgs.nixUnstable;
+    /*package             = pkgs.nixUnstable;*/
     binaryCaches = [ https://cache.nixos.org http://hydra.cryp.to https://hydra.nixos.org ];
     trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org https://hydra.cryp.to ];
     useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
-      dates     = "2 weeks";
+      dates     = "0 0 */2 * *";
     };
   };
 
@@ -55,12 +55,6 @@ in
     hostName                 = "nixos";
     extraHosts               = literals.extraHosts;
     connman.enable           = true;
-  };
-
-  fileSystems."/home" = {
-    device          = "/dev/sdc2";
-    fsType          = "ext4";
-    options         = "data=journal,users,rw,user,auto,exec";
   };
 
   i18n = {
@@ -142,6 +136,16 @@ in
   };
 
   time.timeZone = "Europe/Moscow";
+
+  #TODO NIX_PATH=$NIX_PATH:nixos-config=${dir}/computers/${hostname}/configuration.nix
+  environment.shellInit =
+    let dir = "/nix/var/nix/profiles/per-user/root/channels/nixpkgs";
+    in ''
+        NIX_PATH=nixos=${dir}/nixos
+        NIX_PATH=$NIX_PATH:nixpkgs=${dir}
+        NIX_PATH=$NIX_PATH:nixos-config=/etc/nixos/configuration.nix
+        export NIX_PATH
+  '';
 
   environment.systemPackages = with pkgs; [
    bash
