@@ -19,9 +19,7 @@
     let g:calendar_google_calendar = 1
     let g:calendar_google_task = 1
 
-    let g:gist_clip_command = 'xclip -selection clipboard'
-    let g:gist_detect_filetype = 1
-    let g:gist_use_password_in_gitconfig = 1
+    let g:gista#interactive_description = 0
 
     let NERDTreeShowHidden=1
     let NERDTreeQuitOnOpen=1
@@ -34,16 +32,23 @@
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
 
-    let g:airline_enable_branch=1
-    let g:airline_enable_syntastic=1
+    let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#syntastic#enabled = 1
+    let g:airline#extensions#ctrlp#enabled = 1
+    let g:airline#extensions#hunks#enabled = 1
+    let g:airline#extensions#undotree#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
     let g:airline_theme='dark'
+    let g:airline_symbols = {}
+    let g:airline_symbols.whitespace = 'Ξ'
     let g:airline_left_sep = '▶'
     let g:airline_right_sep = '◀'
-    let g:airline_linecolumn_prefix = '¶ '
-    let g:airline_branch_prefix = '⎇ '
-    let g:airline_paste_symbol = 'ρ'
+    let g:airline_symbols.linenr = '¶ '
+    let g:airline_symbols.branch = '⎇ '
+    let g:airline_symbols.paste = 'ρ'
     let g:airline_detect_modified=1
     let g:airline_detect_paste=1
+
 
     " How many lines should be searched for context
     let g:hasksyn_indent_search_backward = 100

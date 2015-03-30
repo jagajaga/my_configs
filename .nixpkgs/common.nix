@@ -55,7 +55,6 @@ with pkgs; rec {
                 "easy-align"
                 "easymotion"
                 "fugitive"
-                "gist-vim"
                 "gitgutter"
                 "hardtime"
                 "hier"
@@ -78,6 +77,7 @@ with pkgs; rec {
                 "vimproc"
                 "vim-snippets"
                 "vundle"
+                "vim-gista"
                 "watchdogs"
                 "webapi-vim"
                 "xkbswitch"
@@ -155,7 +155,6 @@ with pkgs; rec {
             gnome.zenity
             gnupg
             gparted
-            hstr
             iftop
             lastfmsubmitd
             libnotify
@@ -179,7 +178,7 @@ with pkgs; rec {
             vlc
             weechat
             which
-            wine
+            wineUnstable
             winetricks
             wmname
             xclip
