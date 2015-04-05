@@ -31,7 +31,7 @@
   fileSystems."/samba" = {
     device = "//192.168.1.116/Data";
     fsType = "cifs";
-    options = "users,nofail";
+    options = "users";
   };
 
   nix.maxJobs = 8;

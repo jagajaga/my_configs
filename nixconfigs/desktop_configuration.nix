@@ -49,12 +49,13 @@ in
 
   networking = {
     firewall = {
-      allowedUDPPorts = [ 7777 ];
-      allowedTCPPorts = [ 7777 ];
+      allowedUDPPorts = [ 7777 137 138 ];
+      allowedTCPPorts = [ 7777 445 139 ];
+      allowPing = true;
     };
     hostName                 = "nixos";
     extraHosts               = literals.extraHosts;
-    connman.enable           = true;
+    networkmanager.enable    = true;
   };
 
   i18n = {
@@ -88,6 +89,7 @@ in
       enable         = true;
       servers.client = literals.openVPNConf;
     };
+    teamviewer.enable = true;
   };
 
   services.xserver = {
@@ -117,6 +119,15 @@ in
         enableContribAndExtras = true;
       };
     };
+    displayManager.sessionCommands = with pkgs; ''
+      ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
+      ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
+      ${networkmanagerapplet}/bin/nm-applet &
+      ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/Dropbox/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
+      ${lastfmsubmitd}/bin/lastfmsubmitd --no-daemon &
+      export BROWSER="dwb";
+      exec ${haskellngPackages.xmonad}/bin/xmonad
+    '';
     config = literals.trackBallConf;
     startGnuPGAgent = true;
   };
@@ -149,11 +160,13 @@ in
 
   environment.systemPackages = with pkgs; [
    bash
-   connmanui
+   dropbox
    git
    htop
    iotop
    mc
+   networkmanager
+   networkmanagerapplet
    pmutils
    stdenv
    wget
@@ -176,4 +189,5 @@ in
        pkgs.ttf_bitstream_vera
     ];
   };
+
 }
