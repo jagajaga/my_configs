@@ -69,6 +69,7 @@ startup = do
     spawnOn   "IM"     "viber"
     spawnOn   "Steam"  "steam"
     spawnOn   "IRC"    ("xfce4-terminal --title=weechat -e weechat")
+    spawnOn   "Media"  ("xfce4-terminal --title=mocp -e mocp")
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
 manageHook' = composeAll [ isFullscreen                   --> doFullFloat
@@ -83,6 +84,7 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
                          , title =? "cmatrix"             --> doIgnore
                          , title =? "weechat"             --> doShift "IRC"
+                         , title =? "mocp"                --> doShift "Media"
                          , transience'
                          , isDialog                         --> doCenterFloat
                          , role      =? "pop-up"            --> doCenterFloat
