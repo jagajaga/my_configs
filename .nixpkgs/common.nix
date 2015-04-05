@@ -143,7 +143,6 @@ with pkgs; rec {
             bc
             defaultStdenv
             djview4
-            dropbox
             dwb
             evince
             file
