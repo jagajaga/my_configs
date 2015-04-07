@@ -9,3 +9,5 @@
 	default = simple
 [github]
 	user = JagaJaga
+[core]
+	excludesfile = ~/.gitignore_global
