@@ -77,6 +77,9 @@ in
   security.sudo.configFile = literals.sudoConf;
 
   services = {
+    cron.systemCronJobs = [
+       "59 * * * * jaga rsync --remove-source-files  -rauz ${config.users.extraUsers.jaga.home}/{Dropbox/Camera\ Uploads,yandex-disk/}"
+    ];
     dbus.enable            = true;
     nixosManual.showManual = true;
     journald.extraConfig   = "SystemMaxUse=50M";
