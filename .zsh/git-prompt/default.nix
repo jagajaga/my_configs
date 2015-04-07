@@ -1,2 +1,2 @@
 { pkgs ? import <nixpkgs> {} }:
-pkgs.haskellPackages.callPackage ./git-prompt.nix {}
+pkgs.haskellngPackages.callPackage ./git-prompt.nix {}

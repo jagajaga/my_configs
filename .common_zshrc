@@ -232,8 +232,8 @@ alias dirf='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/
 alias psgrep='ps aux | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
 
 alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
-GIT_PROMPT_EXECUTABLE="haskell"
 source ~/.zsh/git-prompt/zshrc.sh
+GIT_PROMPT_EXECUTABLE="haskell"
 
 PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
 #if [[ $PWD == $HOME ]]; then
