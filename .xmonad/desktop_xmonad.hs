@@ -68,7 +68,8 @@ startup = do
     spawnOn   "IM"     "gajim"
     spawnOn   "IM"     "viber"
     spawnOn   "Steam"  "steam"
-    spawnOn   "IRC"    ("xfce4-terminal --title=weechat -e weechat")
+    spawnOn   "Social"    ("xfce4-terminal --title=twitter -e rainbowstream")
+    spawnOn   "Social"    ("xfce4-terminal --title=weechat -e weechat")
     spawnOn   "Media"  ("xfce4-terminal --title=mocp -e mocp")
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
@@ -83,7 +84,8 @@ manageHook' = composeAll [ isFullscreen                   --> doFullFloat
                          {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
                          {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
                          , title =? "cmatrix"             --> doIgnore
-                         , title =? "weechat"             --> doShift "IRC"
+                         , title =? "weechat"             --> doShift "Social"
+                         , title =? "twitter"             --> doShift "Social"
                          , title =? "mocp"                --> doShift "Media"
                          , transience'
                          , isDialog                         --> doCenterFloat
@@ -152,7 +154,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
 -- workspaces
 workspaces' = wspaces ++ (map show $ drop (length wspaces) [1..9])
     where
-        wspaces = ["General", "Programming", "Work", "IM", "IRC", "Media", "Steam", "Game"]
+        wspaces = ["General", "Programming", "Work", "IM", "Social", "Media", "Steam", "Game"]
 
 myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
@@ -202,7 +204,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                 xK_r     ), shellPrompt defaultXPConfig)
     , ((modMask .|. shiftMask,   xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )
     , ((modMask,                 xK_w     ), safeSpawn "dwb" [])
-    , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "chromium" [])
+    , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space ),  windowPromptGoto defaultXPConfig )
     , ((modMask,                 xK_a     ), safeSpawn "xfe" [])

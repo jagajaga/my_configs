@@ -30,8 +30,6 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 zstyle ':completion:*' menu yes select
 
-autoload -U compinit && compinit
-
 setopt  APPEND_HISTORY
 
 setopt  HIST_IGNORE_ALL_DUPS
