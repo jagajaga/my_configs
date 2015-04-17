@@ -78,7 +78,8 @@ in
 
   services = {
     cron.systemCronJobs = [
-       "59 * * * * jaga rsync --remove-source-files  -rauz ${config.users.extraUsers.jaga.home}/{Dropbox/Camera\ Uploads,yandex-disk/}"
+       "20 * * * * jaga rsync --remove-source-files -rauz ${config.users.extraUsers.jaga.home}/{Dropbox/\"Camera Uploads\",yandex-disk/}"
+       "22 * * * * root systemctl restart yandex-disk.service"
     ];
     dbus.enable            = true;
     nixosManual.showManual = true;
@@ -126,7 +127,7 @@ in
       ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
       ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
-      ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/Dropbox/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
+      ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
       ${lastfmsubmitd}/bin/lastfmsubmitd --no-daemon &
       export BROWSER="dwb";
       exec ${haskellngPackages.xmonad}/bin/xmonad
@@ -152,14 +153,14 @@ in
   time.timeZone = "Europe/Moscow";
 
   #TODO NIX_PATH=$NIX_PATH:nixos-config=${dir}/computers/${hostname}/configuration.nix
-  environment.shellInit =
-    let dir = "/nix/var/nix/profiles/per-user/root/channels/nixpkgs";
-    in ''
-        NIX_PATH=nixos=${dir}/nixos
-        NIX_PATH=$NIX_PATH:nixpkgs=${dir}
-        NIX_PATH=$NIX_PATH:nixos-config=/etc/nixos/configuration.nix
-        export NIX_PATH
-  '';
+  /*environment.shellInit =*/
+    /*let dir = "/nix/var/nix/profiles/per-user/root/channels/nixpkgs";*/
+    /*in ''*/
+        /*NIX_PATH=nixos=${dir}/nixos*/
+        /*NIX_PATH=$NIX_PATH:nixpkgs=${dir}*/
+        /*NIX_PATH=$NIX_PATH:nixos-config=/etc/nixos/configuration.nix*/
+        /*export NIX_PATH*/
+  /*'';*/
 
   environment.systemPackages = with pkgs; [
    bash

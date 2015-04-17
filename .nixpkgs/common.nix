@@ -137,6 +137,7 @@ with pkgs; rec {
           name = "base-env";
           ignoreCollisions = true;
           paths = [ 
+            perlPackages.ack
             aspell
             aspellDicts.en
             aspellDicts.ru
@@ -174,6 +175,7 @@ with pkgs; rec {
             tree
             unrar
             unzip
+            viber
             vlc
             weechat
             which
@@ -224,6 +226,7 @@ with pkgs; rec {
               cmake
               ctags
               freeglut
+              gdb
               gcc
               gnumake
               haskellPackages.idris
