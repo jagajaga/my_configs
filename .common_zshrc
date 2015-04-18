@@ -306,3 +306,8 @@ alias bump='git commit -am bump'
 fpath=(~/nix-zsh-completions $fpath)
 autoload -U compinit && compinit
 source ~/nix-zsh-completions/nix.plugin.zsh
+NIX_GHC_VERSION=$(ghc --numeric-version)
+export NIX_GHC="$HOME/.nix-profile/bin/ghc"
+export NIX_GHCPKG="$HOME/.nix-profile/bin/ghc-pkg"
+export NIX_GHC_DOCDIR="$HOME/.nix-profile/share/doc/ghc/html"
+export NIX_GHC_LIBDIR="$HOME/.nix-profile/lib/ghc-${NIX_GHC_VERSION}"
