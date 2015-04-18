@@ -61,7 +61,6 @@ startup :: X ()
 startup = do
     setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
-    spawn     "killall taffybar-linux-x86_64 && taffybar"
     spawn     "xmodmap -e \"keysym Menu = Super_L\""
     spawn     "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     spawnOn   "IM"     "skype"
@@ -161,9 +160,14 @@ myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkCom
 -- layouts
 layoutHook' = onWorkspace "Steam" steamLayout
     $ onWorkspace "IM" skypeLayout
-        $ tile ||| mtile ||| tab ||| full ||| oneBig
+    $ onWorkspace "Social" socialLayout
+    $ tile ||| mtile ||| tab ||| full ||| oneBig
   where
     rt          = ResizableTall 1 (2/100) (1/2) []
+    socialLayout = renamed [Replace "₪"]
+        $ reflectHoriz
+            $ withIM 0.28 (Title "twitter")
+                    $ multiCol [1] 4 0.01 (0.25)
     skypeLayout = renamed [Replace "[][]"]
         $ withIM 0.18 (ClassName "Skype" `And` (Not (Role "ConversationsWindow")))
             $ reflectHoriz
