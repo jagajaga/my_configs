@@ -102,7 +102,7 @@ in
     videoDrivers        = [ "nvidia" ];
     layout              = "us,ru(winkeys)";
     xkbOptions          = "grp:caps_toggle";
-    xkbVariant          = "winkeys";
+    xkbVariant          = "colemak";
     displayManager.slim = {
       enable      = true;
       autoLogin   = true;
