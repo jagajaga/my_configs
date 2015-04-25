@@ -148,6 +148,7 @@
     nmap <F10> <Esc>:TagbarToggle<CR>
     imap <F11> <Esc>:NERDTreeToggle<CR>
     nmap <F11> <Esc>:NERDTreeToggle<CR>
+    map <F12> <Esc>:read !/home/jaga/myscripts/getmocpinfo.sh<CR>$x0<leader>cc
     " Num strings
     set nu!
     set ai!
