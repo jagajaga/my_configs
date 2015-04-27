@@ -3,6 +3,29 @@ let
   vimrc = import ./vimrc.nix {};
 in
 with pkgs; rec {
+  setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
+  ghc-mod = pkgs.haskellngPackages.mkDerivation {
+    pname = "ghc-mod";
+    version = "5.2.1.2";
+    src = pkgs.fetchgit {
+      url = "https://github.com/kazu-yamamoto/ghc-mod";
+      rev = "247e4e0e7616fe1fecc68fdcf80d6249ac4cee4f";
+      sha256 = "0x2llppisw4d6ca8m86by5msphqqp90502bg4hd3a1v91qfjf8ra";
+    };
+    isLibrary = false;
+    isExecutable = true;
+    buildDepends = with haskellngPackages; [
+      async base Cabal containers data-default deepseq directory
+      djinn-ghc filepath ghc ghc-paths ghc-syb-utils haskell-src-exts
+      hlint io-choice monad-control monad-journal mtl old-time pretty
+      process split syb temporary text time transformers
+      transformers-base cabal-helper cereal
+    ];
+    doCheck = false;
+    homepage = "http://www.mew.org/~kazu/proj/ghc-mod/";
+    description = "Happy Haskell Programming";
+    license = stdenv.lib.licenses.bsd3;
+  };
   dyreFork = pkgs.haskellngPackages.mkDerivation {
     pname = "dyre";
     version = "0.8.12";
@@ -94,23 +117,37 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [
               my_vim
-              /*racerRust*/
+              racerRust
               haskellPackages.stylishHaskell
               astyle
             ];
         }
       );
 
-      emacsEnv = buildEnv {
-        name = "emacs-env";
-        ignoreCollisions = true;
-        paths = [
-            emacs
-            emacs24Packages.colorThemeSolarized
-            emacs24Packages.haskellMode
-            emacs24Packages.structuredHaskellMode
-        ];
-      };
+      emacsEnv = setPrio "9" (
+        buildEnv {
+          name = "emacs-env";
+          ignoreCollisions = true;
+          paths = [
+          (emacsWithPackages (with emacsPackages; with emacsPackagesNg; [
+              company
+              company-ghc
+              evil
+              evil-leader
+              #evil-surround
+              flycheck
+              haskell-mode
+              helm
+              markdown-mode
+              monokai-theme
+              org
+              rainbow-delimiters
+              undo-tree
+              use-package
+            ]))
+          ];
+        }
+      );
 
       hugeEnv = buildEnv {
         name = "huge-env";
@@ -175,7 +212,6 @@ with pkgs; rec {
             tree
             unrar
             unzip
-            viber
             vlc
             weechat
             which
@@ -240,7 +276,7 @@ with pkgs; rec {
               python
               python34
               ruby
-              /*rustc*/
+              rustc
               smartmontools
               sqlite
               subversion
