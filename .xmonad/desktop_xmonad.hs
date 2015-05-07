@@ -15,6 +15,7 @@ import           XMonad.Hooks.SetWMName
 import           XMonad.Hooks.UrgencyHook
 import           XMonad.Layout.Grid
 import           XMonad.Layout.IM
+import           XMonad.Layout.IndependentScreens
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.MultiColumns
@@ -35,15 +36,16 @@ import           XMonad.Prompt.Window
 
 main :: IO ()
 main = do
+    spawnPipe "xrandr --output DVI-I-0 --auto --left-of HDMI-0 --output HDMI-0 --auto"
     xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
         cmd   = "taffybar"
         pp    = defaultPP
         kb    = toggleStrutsKey
-        conf  = ewmh $ uhook $ myConfig
+        conf  = ewmh $ uhook myConfig
 
-myConfig = defaultConfig { workspaces  = workspaces'
+myConfig = defaultConfig { workspaces         = myWorkspaces
                          , modMask            = modMask'
                          , borderWidth        = borderWidth'
                          , normalBorderColor  = normalBorderColor'
@@ -67,9 +69,9 @@ startup = do
     spawnOn   "IM"     "gajim"
     spawnOn   "IM"     "viber"
     spawnOn   "Steam"  "steam"
-    spawnOn   "Social"    ("xfce4-terminal --title=twitter -e rainbowstream")
-    spawnOn   "Social"    ("xfce4-terminal --title=weechat -e weechat")
-    spawnOn   "Media"  ("xfce4-terminal --title=mocp -e mocp")
+    spawnOn   "Social"    "xfce4-terminal --title=twitter -e rainbowstream"
+    spawnOn   "Social"    "xfce4-terminal --title=weechat -e weechat"
+    spawnOn   "Media"  "xfce4-terminal --title=mocp -e mocp"
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
 manageHook' = composeAll [ isFullscreen                   --> doFullFloat
@@ -151,7 +153,7 @@ tabTheme1 = defaultTheme { decoHeight = 16
                          }
 
 -- workspaces
-workspaces' = wspaces ++ (map show $ drop (length wspaces) [1..9])
+myWorkspaces = wspaces ++ (map show $ drop (length wspaces) [1..9])
     where
         wspaces = ["General", "Programming", "Work", "IM", "Social", "Media", "Steam", "Game"]
 
@@ -167,16 +169,16 @@ layoutHook' = onWorkspace "Steam" steamLayout
     socialLayout = renamed [Replace "₪"]
         $ reflectHoriz
             $ withIM 0.28 (Title "twitter")
-                    $ multiCol [1] 4 0.01 (0.25)
+                    $ multiCol [1] 4 0.01 0.25
     skypeLayout = renamed [Replace "[][]"]
-        $ withIM 0.18 (ClassName "Skype" `And` (Not (Role "ConversationsWindow")))
+        $ withIM 0.18 (ClassName "Skype" `And` Not (Role "ConversationsWindow"))
             $ reflectHoriz
-                $ withIM 0.18 (ClassName "Gajim" `And` (Role "roster"))
+                $ withIM 0.18 (ClassName "Gajim" `And` Role "roster")
                     $ reflectHoriz
                         $ multiCol [2] 4 0.01 0.5
     steamLayout = renamed [Replace "λ"]
         $ withIM 0.18 (ClassName "Steam" `And` Title "Friends")
-            $ multiCol [1] 4 0.01 (0.25)
+            $ multiCol [1] 4 0.01 0.25
     tile        = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
     mtile       = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
     oneBig      = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ OneBig (3/4) (3/4)
@@ -211,7 +213,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space ),  windowPromptGoto defaultXPConfig )
-    , ((modMask,                 xK_a     ), safeSpawn "xfe" [])
+    , ((modMask,                 xK_a     ), safeSpawn "spacefm" [])
 
     -- multimedia
 -- Alsa mixer bindings
@@ -245,7 +247,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- floating layer stuff
     , ((modMask .|. shiftMask,   xK_f     ), withFocused $ windows . W.sink)
-    , ((modMask,                 xK_f     ), withFocused $ windows . (flip W.float) (W.RationalRect (0) (1/50) (1/1) (1/1))) --TODO
+    , ((modMask,                 xK_f     ), withFocused $ windows . flip W.float (W.RationalRect 0 (1/50) 1 1))
     , ((modMask,                 xK_z     ), toggleWS)
 
     , ((modMask,                 xK_backslash), workspacesPrompt addWorkspace)
@@ -286,7 +288,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- mod-[1..9] %! Switch to workspace N
     -- mod-shift-[1..9] %! Move client to workspace N
     ++
-    zip (zip (repeat (modMask)) [xK_1..xK_9]) (map (withNthWorkspace W.greedyView) [0..])
+    zip (zip (repeat modMask) [xK_1..xK_9]) (map (withNthWorkspace W.view) [0..])
     ++
     zip (zip (repeat (modMask .|. shiftMask)) [xK_1..xK_9]) (map (withNthWorkspace W.shift) [0..])
     ++

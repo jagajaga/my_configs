@@ -1,13 +1,13 @@
 import           System.Taffybar
 
 {-import           System.Taffybar.FreedesktopNotifications-}
+import           System.Taffybar.CommandRunner
 import           System.Taffybar.NetMonitor
 import           System.Taffybar.Pager
 import           System.Taffybar.SimpleClock
 import           System.Taffybar.Systray
 import           System.Taffybar.TaffyPager
 import           System.Taffybar.Weather
-import           System.Taffybar.CommandRunner
 
 import           System.Taffybar.Widgets.PollingBar
 import           System.Taffybar.Widgets.PollingGraph
@@ -15,10 +15,13 @@ import           System.Taffybar.Widgets.PollingGraph
 import           System.Information.CPU2
 import           System.Information.DiskIO
 import           System.Information.Memory
+import           System.Environment
 
 import           Graphics.UI.Gtk
 
 import           Data.List
+
+import           Control.Applicative
 
 memCallback :: IO Double
 memCallback = do
@@ -79,7 +82,7 @@ separator = do
 simpleText :: String -> String -> IO Widget
 simpleText text' color = do
   let text = colorize color "" text'
-  sep <- labelNew (Nothing :: Maybe String) 
+  sep <- labelNew (Nothing :: Maybe String)
   labelSetMarkup sep text
   box <- hBoxNew False 0
   boxPackStart box sep PackNatural 0
@@ -88,12 +91,16 @@ simpleText text' color = do
 
 {-
     TODO (to implement)
-    cpu freq, moc song, keyboard layout, swap, uptime, essid, locks... 
+    cpu freq, moc song, keyboard layout, swap, uptime, essid, locks...
     https://github.com/jaor/xmobar/tree/master/src/Plugins
 -}
 
 main :: IO ()
 main = do
+  args <- init <$> words <$> unlines <$> getArgs
+  let x = case args of
+        ["-x", a] -> read a :: Int
+        _ -> 0
   let pager  = taffyPagerNew myTaffy
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
                                                       , (1, 0, 1, 0.9)
@@ -111,21 +118,22 @@ main = do
                                   , graphLabel = Nothing
                                   }
       clock      = textClockNew Nothing "<span fgcolor='#C98F0A'>%a %b %d </span><span fgcolor='#429942'>%H:%M:%S</span>" 1
-      netMonitor = netMonitorNewWith 2.0 "wlp3s0" 0 $ colorize colorOrange "" "WiFi: ⇣" ++ colorize colorLightGreen "" "$inKB$" ++ colorize colorOrange "" " : ⇡" ++ colorize colorLightGreen "" "$outKB$" 
+      netMonitor = netMonitorNewWith 2.0 "wlp3s0" 0 $ colorize colorOrange "" "WiFi: ⇣" ++ colorize colorLightGreen "" "$inKB$" ++ colorize colorOrange "" " : ⇡" ++ colorize colorLightGreen "" "$outKB$"
       wea        = weatherNew (defaultWeatherConfig "ULLI") { weatherTemplate = "<span fgcolor='#429942'>$tempC$°C</span>" } 100
       iohdd      = pollingGraphNew ioCfg 1 (diskIOCallback "sdd" "md126")
       mem        = pollingBarNew (defaultBarConfig colorFunc) {barWidth = 10} 3 memCallback
       ---TODO notification note = notifyAreaNew defaultNotificationConfig
-      cpuText    = simpleText "Cpu"colorOrange 
-      diskText   = simpleText "IO »"colorOrange 
-      ramText    = simpleText "Ram"colorOrange 
+      cpuText    = simpleText "Cpu"colorOrange
+      diskText   = simpleText "IO »"colorOrange
+      ramText    = simpleText "Ram"colorOrange
       cpu        = pollingGraphNew cpuCfg 0.5 $ getCPULoad "cpu"
       temp       = pollingBarNew (defaultBarConfig colorFuncTemp) {barWidth = 10} 2 $ tempCallback ["cpu0"]
       tray       = systrayNew
-      mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF" 
-      layout     = commandRunnerNew 2 "/home/jaga/myscripts/currentlayout.sh" [] "No xkblayout-state" colorOrange 
+      mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF"
+      layout     = commandRunnerNew 2 "/home/jaga/myscripts/currentlayout.sh" [] "No xkblayout-state" colorOrange
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
                                         , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [layout], [mocp] ]
                                         , widgetSpacing = 5
                                         , barHeight = 23
+                                        , monitorNumber = x
                                         }

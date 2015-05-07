@@ -68,7 +68,7 @@ with pkgs; rec {
                 "idris-vim"
 
                 "rust"
-                /*"racer"*/
+                "racer"
 
                 "a"
                 "airline"
@@ -101,6 +101,7 @@ with pkgs; rec {
                 "vim-snippets"
                 "vundle"
                 "vim-gista"
+                "wakatime"
                 "watchdogs"
                 "webapi-vim"
                 "xkbswitch"
@@ -205,7 +206,6 @@ with pkgs; rec {
             skype
             sxiv
             telnet
-            termite
             tightvnc
             tmux
             traceroute

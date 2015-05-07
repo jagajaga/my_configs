@@ -45,17 +45,17 @@ pkgs : {
             python33Packages.glances
             python34Packages.rainbowstream
             qemu
+            spaceFM
             shared_mime_info
             t
             teamviewer
-#            texLiveFull
+            texLiveFull
             tightvnc
             tor
             transmission_gtk
             transmission_remote_gtk
             unetbootin
             viber
-            xfe
             xlibs.xf86inputjoystick
         ];
       };
