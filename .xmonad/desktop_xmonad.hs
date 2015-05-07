@@ -292,4 +292,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     zip (zip (repeat (modMask .|. shiftMask)) [xK_1..xK_9]) (map (withNthWorkspace W.shift) [0..])
     ++
+    [((m .|. modMask .|. controlMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    ++
     []
