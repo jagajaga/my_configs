@@ -7,7 +7,8 @@ let
   literals = import ./literals.nix {pkgs = pkgs;
                 ca   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
                 cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
-                key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  };
+                key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  
+  };
 in
 
 {
@@ -17,7 +18,7 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_latest;
+    kernelPackages      = pkgs.linuxPackages_3_18;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
       options kvm-amd nested=1
@@ -34,8 +35,8 @@ in
 
   nix = {
     /*package             = pkgs.nixUnstable;*/
-    binaryCaches = [ https://cache.nixos.org http://hydra.cryp.to https://hydra.nixos.org ];
-    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org https://hydra.cryp.to ];
+    binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
+    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to ];
     useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
@@ -134,6 +135,7 @@ in
     '';
     config = literals.trackBallConf;
     startGnuPGAgent = true;
+
   };
 
   programs.ssh.startAgent = false;
@@ -176,7 +178,6 @@ in
    wget
    xsel
    zsh
-   /*cjdns*/
   ];
   fonts = {
     fontconfig.enable = true;

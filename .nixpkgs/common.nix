@@ -6,7 +6,7 @@ with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
   ghc-mod = pkgs.haskellngPackages.mkDerivation {
     pname = "ghc-mod";
-    version = "5.2.1.2";
+    version = "5.2.1.3";
     src = pkgs.fetchgit {
       url = "https://github.com/kazu-yamamoto/ghc-mod";
       rev = "247e4e0e7616fe1fecc68fdcf80d6249ac4cee4f";
@@ -25,25 +25,6 @@ with pkgs; rec {
     homepage = "http://www.mew.org/~kazu/proj/ghc-mod/";
     description = "Happy Haskell Programming";
     license = stdenv.lib.licenses.bsd3;
-  };
-  dyreFork = pkgs.haskellngPackages.mkDerivation {
-    pname = "dyre";
-    version = "0.8.12";
-    src = pkgs.fetchgit {
-      url = "https://github.com/willdonnelly/dyre";
-      rev = "6b371272536469cd269e1de6a0a2c0b136bbcb87";
-      sha256 = "1c5m32knjy91lkyji8fz94cxwpjjrqfs7lwh4468n5yr72pvp8yv";
-    };
-    isLibrary = true;
-    buildDepends = with pkgs.haskellngPackages; [
-      base binary directory executable-path filepath ghc-paths io-storage
-      process time unix xdg-basedir time-compat
-    ];
-    doCheck = false;
-    license = null;
-  };
-  my_taffybar = haskellngPackages.taffybar.override {
-    dyre = dyreFork;
   };
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
@@ -68,11 +49,10 @@ with pkgs; rec {
                 "idris-vim"
 
                 "rust"
-                "racer"
+                /*"racer"*/
 
                 "a"
                 "airline"
-                "calendar"
                 "colors-solarized"
                 "ctrlp"
                 "easy-align"
@@ -118,8 +98,8 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [
               my_vim
-              racerRust
-              haskellPackages.stylishHaskell
+              /*racerRust*/
+              haskellngPackages.stylish-haskell
               astyle
             ];
         }
@@ -233,12 +213,12 @@ with pkgs; rec {
         pkgs: with pkgs; [ 
             cabal2nix
             cabal-install
-            ghc-mod
+            /*ghc-mod*/
             hlint
             hoogle
             /*lushtags*/
             pandoc
-            my_taffybar
+            taffybar
             xmonad
             xmonad-contrib
         ]);
@@ -265,7 +245,7 @@ with pkgs; rec {
               gdb
               gcc
               gnumake
-              haskellPackages.idris
+              /*haskellngPackages.idris*/
               idea.idea-community
               jdk
               manpages
@@ -276,7 +256,7 @@ with pkgs; rec {
               python
               python34
               ruby
-              rustc
+              /*rustc*/
               smartmontools
               sqlite
               subversion

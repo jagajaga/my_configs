@@ -3,7 +3,7 @@ pkgs : {
   /*allowBroken = true;*/
   packageOverrides = pkgs : with pkgs; rec {
       common = import ./common.nix { pkgs = pkgs; }; 
-      inherit (common) vimEnv hsEnv hugeEnv emacsEnv baseEnv develEnv steamEnv;
+      inherit (common) vimEnv hsEnv hugeEnv emacsEnv baseEnv develEnv steamEnv mocPulse;
       desktopEnv = pkgs.buildEnv
       {
         name = "desktop-env";
@@ -18,7 +18,7 @@ pkgs : {
             e2fsprogs
             ffmpeg
             fpc
-            google-musicmanager
+            /*google-musicmanager*/
             graphviz
             gtkvnc
             guvcview
@@ -49,7 +49,7 @@ pkgs : {
             shared_mime_info
             t
             teamviewer
-            texLiveFull
+            /*texLiveFull*/
             tightvnc
             tor
             transmission_gtk
