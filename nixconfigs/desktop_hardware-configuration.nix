@@ -8,31 +8,24 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "usbhid" "usb_storage" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/65ad4080-8290-492d-b9cd-54284c1df33b";
-      fsType = "ext4";
-      options = "rw,stripe=32,data=ordered,relatime,discard";
+    { device = "/dev/disk/by-uuid/43d43a41-883a-48da-91c8-4ba4091771be";
+      fsType = "xfs";
+      options = "discard";
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/af2d1e7d-cec8-4077-9097-279a7c5e758c";
       fsType = "ext4";
-      options = "data=journal,users,rw,user,auto,exec";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/650f9b63-68e4-45fc-97c7-00e73ec5470d"; }
+    [ { device = "/dev/disk/by-uuid/e5710195-ddc7-4b6f-a5b5-7de0eac17893"; }
     ];
-
-  fileSystems."/samba" = {
-    device = "//192.168.1.116/Data";
-    fsType = "cifs";
-    options = "users";
-  };
 
   nix.maxJobs = 8;
 }
