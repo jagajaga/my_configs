@@ -230,7 +230,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0,                       xF86XK_AudioNext        ) , safeSpawn "mocp" ["-f"])
     , ((0,                       xF86XK_AudioPrev        ) , safeSpawn "mocp" ["-r"])
     , ((0,                       xF86XK_AudioStop        ) , safeSpawn "mocp" ["-s"])
-    , ((0,                       xF86XK_AudioMedia       ) , spawn "/home/jaga/myscripts/lovemoc/result/bin/lovemoc")
+    , ((0,                       xF86XK_Tools       ) , spawn "/home/jaga/myscripts/lovemoc/result/bin/lovemoc")
     , ((0,                       xF86XK_Sleep            ) , spawn "bash /home/jaga/myscripts/lockandsuspend.sh")
     , ((0,                       xK_Pause                ) , safeSpawn "bash /home/jaga/myscripts/autocpu.sh" [])
     , ((0,                       xK_Print                ) , spawn "import -window root /home/jaga/Dropbox/screenshots/`date +%F_%T`.png" )
