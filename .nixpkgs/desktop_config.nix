@@ -10,7 +10,7 @@ pkgs : {
         ignoreCollisions = true;
         paths = [
             bittorrentSync
-            calibre
+            /*calibre*/
             darcs
             desktop_file_utils
             dmg2img
@@ -20,7 +20,7 @@ pkgs : {
             fpc
             /*google-musicmanager*/
             graphviz
-            gtkvnc
+            /*gtkvnc*/
             guvcview
             hdparm
             imagemagick
@@ -49,13 +49,13 @@ pkgs : {
             shared_mime_info
             t
             teamviewer
-            /*texLiveFull*/
+            texLiveFull
             tightvnc
             tor
             transmission_gtk
             transmission_remote_gtk
             unetbootin
-            viber
+            /*viber*/
             xlibs.xf86inputjoystick
         ];
       };

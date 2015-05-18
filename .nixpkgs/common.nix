@@ -4,13 +4,14 @@ let
 in
 with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
+
   ghc-mod = pkgs.haskellngPackages.mkDerivation {
     pname = "ghc-mod";
     version = "5.2.1.3";
     src = pkgs.fetchgit {
       url = "https://github.com/kazu-yamamoto/ghc-mod";
-      rev = "247e4e0e7616fe1fecc68fdcf80d6249ac4cee4f";
-      sha256 = "0x2llppisw4d6ca8m86by5msphqqp90502bg4hd3a1v91qfjf8ra";
+      rev = "ea03f8a935d82cfd4a5af58dd5be5ef6e4741dcc";
+      sha256 = "1anx871dib9gykzf7xfpksywn4qqdkxfzmklxk11ggjhxgapbwaq";
     };
     isLibrary = false;
     isExecutable = true;
@@ -26,6 +27,7 @@ with pkgs; rec {
     description = "Happy Haskell Programming";
     license = stdenv.lib.licenses.bsd3;
   };
+
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
       ./moc_patches/moc-r2758+pulse_audio-1.patch.gz 
@@ -34,6 +36,8 @@ with pkgs; rec {
     preConfigure = ''autoreconf -f -i''; 
     nativeBuildInputs = old.nativeBuildInputs ++ [ pulseaudio automake libtool autoconf gettext ]; 
   });
+
+  loveMoc = pkgs.haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
 
   vimrcConfig = {
         vam.knownPlugins = vimPlugins; # optional
@@ -228,6 +232,7 @@ with pkgs; rec {
         ignoreCollisions = true;
         paths = [
             myHs
+            loveMoc
         ];
       };
 
