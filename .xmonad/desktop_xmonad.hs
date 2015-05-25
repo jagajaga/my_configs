@@ -7,12 +7,11 @@ import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.DynamicWorkspaces
 import           XMonad.Actions.GridSelect
-import           XMonad.Actions.SpawnOn
-import           XMonad.Hooks.DynamicLog
-
 import           XMonad.Actions.NoBorders
 import           XMonad.Actions.PerWorkspaceKeys
+import           XMonad.Actions.SpawnOn
 import           XMonad.Actions.UpdatePointer
+import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.SetWMName
@@ -58,7 +57,7 @@ myConfig = defaultConfig { workspaces         = myWorkspaces
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
                          , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
-                         , logHook            = ewmhDesktopsLogHook >> updatePointer Nearest
+                         , logHook            = ewmhDesktopsLogHook >> updatePointer (Relative 0.9 0.9) 
                          , startupHook        = startup <+> ewmhDesktopsStartup
                          }
 
