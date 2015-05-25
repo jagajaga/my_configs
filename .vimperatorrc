@@ -1,0 +1,4 @@
+noremap K :tabprevious<CR>
+noremap J :tabnext<CR>
+
+noremap <F10> :vimperatortoggle<CR>
