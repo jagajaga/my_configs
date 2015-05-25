@@ -2,3 +2,9 @@ noremap K :tabprevious<CR>
 noremap J :tabnext<CR>
 
 noremap <F10> :vimperatortoggle<CR>
+
+autocmd LocationChange .*                             js modes.passAllKeys = false
+autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
+autocmd LocationChange www\\.google\\.com/calendar    js modes.passAllKeys = true
+autocmd LocationChange www\\.google\\.com/reader      js modes.passAllKeys = true
+autocmd LocationChange mail\\.google\\.com/tasks      js modes.passAllKeys = false
