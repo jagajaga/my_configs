@@ -9,6 +9,10 @@ import           XMonad.Actions.DynamicWorkspaces
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
 import           XMonad.Hooks.DynamicLog
+
+import           XMonad.Actions.NoBorders
+import           XMonad.Actions.PerWorkspaceKeys
+import           XMonad.Actions.UpdatePointer
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.SetWMName
@@ -36,7 +40,6 @@ import           XMonad.Prompt.Window
 
 main :: IO ()
 main = do
-    spawnPipe "xrandr --output DVI-I-0 --auto --left-of HDMI-0 --output HDMI-0 --auto"
     xmonad =<< statusBar cmd pp kb conf
     where
         uhook = withUrgencyHookC NoUrgencyHook urgentConfig
@@ -55,7 +58,7 @@ myConfig = defaultConfig { workspaces         = myWorkspaces
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
                          , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
-                         , logHook            = ewmhDesktopsLogHook
+                         , logHook            = ewmhDesktopsLogHook >> updatePointer Nearest
                          , startupHook        = startup <+> ewmhDesktopsStartup
                          }
 
@@ -209,7 +212,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                 xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask,                 xK_r     ), shellPrompt defaultXPConfig)
     , ((modMask .|. shiftMask,   xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )
-    , ((modMask,                 xK_w     ), safeSpawn "dwb" [])
+    , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "dwb")])
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space ),  windowPromptGoto defaultXPConfig )
@@ -249,6 +252,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,   xK_f     ), withFocused $ windows . W.sink)
     , ((modMask,                 xK_f     ), withFocused $ windows . flip W.float (W.RationalRect 0 (1/50) 1 1))
     , ((modMask,                 xK_z     ), toggleWS)
+    , ((modMask .|. shiftMask,   xK_b     ), withFocused toggleBorder)
 
     , ((modMask,                 xK_backslash), workspacesPrompt addWorkspace)
     , ((modMask .|. controlMask, xK_backslash), removeEmptyWorkspace)
