@@ -40,7 +40,7 @@ in
     useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
-      dates     = "0 0 */2 * *";
+      dates     = "0 0 * * *";
     };
   };
 
@@ -135,6 +135,7 @@ in
     '';
     config = literals.trackBallConf;
     startGnuPGAgent = true;
+    xrandrHeads = [ "DVI-I-0" "HDMI-0" ];
 
   };
 
