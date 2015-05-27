@@ -26,8 +26,8 @@
     '';
 
   nix.package = pkgs.nixUnstable;
-  nix.binaryCaches = [ http://cache.nixos.org ];
-  nix.trustedBinaryCaches = [ http://cache.nixos.org ];
+  nix.binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
+  nix.trustedBinaryCaches = [ http://cache.nixos.org https://hydra.nixos.org ];
   nixpkgs.config.allowUnfree = true;
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
