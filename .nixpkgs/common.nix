@@ -4,29 +4,20 @@ let
 in
 with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
+  haskellngPackages = pkgs.haskellngPackages;
 
-  ghc-mod = pkgs.haskellngPackages.mkDerivation {
-    pname = "ghc-mod";
-    version = "5.2.1.3";
+  ghc-mod-git = pkgs.haskell-ng.lib.overrideCabal haskellngPackages.ghc-mod (oldAttrs: {
     src = pkgs.fetchgit {
-      url = "https://github.com/kazu-yamamoto/ghc-mod";
-      rev = "ea03f8a935d82cfd4a5af58dd5be5ef6e4741dcc";
-      sha256 = "1anx871dib9gykzf7xfpksywn4qqdkxfzmklxk11ggjhxgapbwaq";
-    };
-    isLibrary = false;
-    isExecutable = true;
-    buildDepends = with haskellngPackages; [
-      async base Cabal containers data-default deepseq directory
-      djinn-ghc filepath ghc ghc-paths ghc-syb-utils haskell-src-exts
-      hlint io-choice monad-control monad-journal mtl old-time pretty
-      process split syb temporary text time transformers
-      transformers-base cabal-helper cereal
-    ];
-    doCheck = false;
-    homepage = "http://www.mew.org/~kazu/proj/ghc-mod/";
-    description = "Happy Haskell Programming";
-    license = stdenv.lib.licenses.bsd3;
-  };
+      url = https://github.com/kazu-yamamoto/ghc-mod;
+      rev = "247e4e0e7616fe1fecc68fdcf80d6249ac4cee4f";
+      sha256 = "2a23271d0e6907351a246f095040ba18c3ab6bf1cba08a14338d701defa55474";
+     };
+    buildDepends = oldAttrs.buildDepends ++ [ cabal-helper-new haskellngPackages.cereal ];
+  });
+  cabal-helper-new = pkgs.haskell-ng.lib.overrideCabal haskellngPackages.cabal-helper (oldAttrs: {
+    version = "0.3.2.0";
+    sha256 = "06igjmr0n8418wid1pr74cgvlsmwni7ar72g9bddivlbxax1pfli";
+  });
 
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
@@ -37,7 +28,7 @@ with pkgs; rec {
     nativeBuildInputs = old.nativeBuildInputs ++ [ pulseaudio automake libtool autoconf gettext ]; 
   });
 
-  loveMoc = pkgs.haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
+  loveMoc = haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
 
   vimrcConfig = {
         vam.knownPlugins = vimPlugins; # optional
@@ -141,6 +132,7 @@ with pkgs; rec {
             chromiumDev
             firefoxWrapper
             gimp
+            libreoffice
             /*inkscape*/
             /*libreoffice*/
         ];
@@ -196,6 +188,7 @@ with pkgs; rec {
             tree
             unrar
             unzip
+            usbutils
             vlc
             weechat
             which
@@ -217,7 +210,7 @@ with pkgs; rec {
         pkgs: with pkgs; [ 
             cabal2nix
             cabal-install
-            /*ghc-mod*/
+            ghc-mod-git
             hlint
             hoogle
             /*lushtags*/

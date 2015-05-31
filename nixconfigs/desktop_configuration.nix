@@ -45,7 +45,8 @@ in
   };
 
   nixpkgs.config = {
-    allowUnfree             = true;
+    virtualbox.enableExtensionPack = true;
+    allowUnfree                    = true;
   };
 
   networking = {
@@ -84,12 +85,14 @@ in
     ];
     dbus.enable            = true;
     nixosManual.showManual = true;
+    nix-serve.enable       = true;
     journald.extraConfig   = "SystemMaxUse=50M";
     locate.enable          = true;
     udisks2.enable         = true;
     openssh.enable         = true;
     printing.enable        = true;
     openntpd.enable        = true;
+    virtualboxHost.enable  = true;
     openvpn = {
       enable         = true;
       servers.client = literals.openVPNConf;
