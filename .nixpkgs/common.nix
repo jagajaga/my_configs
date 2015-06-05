@@ -25,7 +25,7 @@ with pkgs; rec {
       ./moc_patches/moc-r2758+pulse_audio-1.1.patch.gz 
     ]; 
     preConfigure = ''autoreconf -f -i''; 
-    nativeBuildInputs = old.nativeBuildInputs ++ [ pulseaudio automake libtool autoconf gettext ]; 
+    nativeBuildInputs = old.nativeBuildInputs ++ [ libpulseaudio automake libtool autoconf gettext ]; 
   });
 
   loveMoc = haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
@@ -128,9 +128,7 @@ with pkgs; rec {
             chromiumDev
             firefoxWrapper
             gimp
-            libreoffice
             /*inkscape*/
-            /*libreoffice*/
         ];
       };
 

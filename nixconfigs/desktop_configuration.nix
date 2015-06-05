@@ -18,7 +18,7 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_3_18;
+    kernelPackages      = pkgs.linuxPackages_3_19;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
       options kvm-amd nested=1
@@ -45,7 +45,7 @@ in
   };
 
   nixpkgs.config = {
-    virtualbox.enableExtensionPack = true;
+    #virtualbox.enableExtensionPack = true;
     allowUnfree                    = true;
   };
 
@@ -92,11 +92,11 @@ in
     openssh.enable         = true;
     printing.enable        = true;
     openntpd.enable        = true;
-    virtualboxHost.enable  = true;
-    openvpn = {
-      enable         = true;
-      servers.client = literals.openVPNConf;
-    };
+    #virtualboxHost.enable  = true;
+ #   openvpn = {
+ #     enable         = true;
+ #     servers.client = literals.openVPNConf;
+ #   };
     teamviewer.enable = true;
   };
 

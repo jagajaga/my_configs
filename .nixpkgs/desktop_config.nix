@@ -48,9 +48,8 @@ pkgs : {
             qemu
             spaceFM
             shared_mime_info
-            t
             teamviewer
-            texLiveFull
+            #texLiveFull
             tightvnc
             tor
             transmission_gtk
