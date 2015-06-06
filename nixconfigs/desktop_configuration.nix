@@ -45,7 +45,7 @@ in
   };
 
   nixpkgs.config = {
-    #virtualbox.enableExtensionPack = true;
+    virtualbox.enableExtensionPack = true;
     allowUnfree                    = true;
   };
 
@@ -92,11 +92,11 @@ in
     openssh.enable         = true;
     printing.enable        = true;
     openntpd.enable        = true;
-    #virtualboxHost.enable  = true;
- #   openvpn = {
- #     enable         = true;
- #     servers.client = literals.openVPNConf;
- #   };
+    virtualboxHost.enable  = true;
+    openvpn = {
+      enable         = true;
+      servers.client = literals.openVPNConf;
+    };
     teamviewer.enable = true;
   };
 

@@ -19,7 +19,7 @@ pkgs : {
             e2fsprogs
             ffmpeg
             fpc
-            /*google-musicmanager*/
+            google-musicmanager
             graphviz
             /*gtkvnc*/
             guvcview
@@ -49,7 +49,7 @@ pkgs : {
             spaceFM
             shared_mime_info
             teamviewer
-            #texLiveFull
+            texLiveFull
             tightvnc
             tor
             transmission_gtk

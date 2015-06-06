@@ -15,6 +15,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/9bfda93b-b88b-42c7-a8d2-ba3a6a95ce52";
       fsType = "f2fs";
+      options = "defaults,noatime,discard,background_gc=on";
     };
 
   fileSystems."/home" =
