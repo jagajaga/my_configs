@@ -40,7 +40,7 @@ in
     useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
-      dates     = "0 0 * * *";
+      dates     = "00:00";
     };
   };
 
@@ -132,7 +132,6 @@ in
       ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
       ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
-      ${lastfmsubmitd}/bin/lastfmsubmitd --no-daemon &
       export BROWSER="dwb";
       exec ${haskellngPackages.xmonad}/bin/xmonad
     '';
@@ -140,6 +139,16 @@ in
     startGnuPGAgent = true;
     xrandrHeads = [ "DVI-I-0" "HDMI-0" ];
 
+  };
+
+  systemd.services.lastfmsubmitd = {
+    wantedBy = [ "multi-user.target" ]; 
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "forking";
+      ExecStart = ''${pkgs.screen}/bin/screen -dmS lastfsubmit ${pkgs.lastfmsubmitd}/bin/lastfmsubmitd --no-daemon'';
+      ExecReload = ''${pkgs.screen}/bin/screen -S lastfsubmit -X quit'';
+    };
   };
 
   programs.ssh.startAgent = false;
