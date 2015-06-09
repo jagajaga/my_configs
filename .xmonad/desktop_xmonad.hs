@@ -214,7 +214,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "dwb")])
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
-    , ((modMask .|. controlMask, xK_space ),  windowPromptGoto defaultXPConfig )
+    , ((modMask .|. controlMask, xK_space ), windowPromptGoto defaultXPConfig )
     , ((modMask,                 xK_a     ), safeSpawn "spacefm" [])
 
     -- multimedia

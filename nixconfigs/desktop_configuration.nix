@@ -36,7 +36,7 @@ in
   nix = {
     /*package             = pkgs.nixUnstable;*/
     binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
-    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to ];
+    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to http://localhost:8888 ];
     useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
