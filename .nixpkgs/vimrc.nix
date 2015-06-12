@@ -6,6 +6,7 @@
     set cindent
     set t_Co=256
     set tabpagemax=1000
+    set colorcolumn=80
 
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
