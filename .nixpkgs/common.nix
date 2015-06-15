@@ -29,6 +29,7 @@ with pkgs; rec {
   });
 
   loveMoc = haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
+  taffybar = haskellngPackages.callPackage ../Dropbox/Programming/Haskell/taffybar/project.nix { }; # until temp fix is not accepted upstream
 
   vimrcConfig = {
         vam.knownPlugins = vimPlugins; # optional
