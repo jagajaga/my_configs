@@ -12,6 +12,7 @@ import           XMonad.Actions.PerWorkspaceKeys
 import           XMonad.Actions.SpawnOn
 import           XMonad.Actions.UpdatePointer
 import           XMonad.Hooks.DynamicLog
+import XMonad.Prompt.Pass
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.SetWMName
@@ -215,6 +216,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space ), windowPromptGoto defaultXPConfig )
+    , ((modMask .|. controlMask, xK_p ), passPrompt defaultXPConfig )
     , ((modMask,                 xK_a     ), safeSpawn "spacefm" [])
 
     -- multimedia
