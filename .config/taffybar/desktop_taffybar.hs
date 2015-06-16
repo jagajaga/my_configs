@@ -8,6 +8,8 @@ import           System.Taffybar.SimpleClock
 import           System.Taffybar.Systray
 import           System.Taffybar.TaffyPager
 import           System.Taffybar.Weather
+import System.Taffybar.WorkspaceSwitcher
+import System.Taffybar.LayoutSwitcher
 
 import           System.Taffybar.Widgets.PollingBar
 import           System.Taffybar.Widgets.PollingGraph
@@ -101,7 +103,9 @@ main = do
   let x = case args of
         ["-x", a] -> read a :: Int
         _ -> 0
-  let pager  = taffyPagerNew myTaffy
+  pager  <- pagerNew myTaffy
+  let 
+      wss = wspaceSwitcherNew pager
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
                                                       , (1, 0, 1, 0.9)
                                                       , (0, 0, 1, 0.9)
@@ -131,8 +135,12 @@ main = do
       tray       = systrayNew
       mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF"
       layout     = commandRunnerNew 2 "/home/jaga/myscripts/currentlayout.sh" [] "No xkblayout-state" colorOrange
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
-                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [layout], [mocp] ]
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [ wss ]
+                                        , endWidgets = intercalate [separator] [
+                                            [clock], [tray], [wea], [mem,
+                                            ramText], [temp, cpu, cpuText],
+                                            [iohdd, diskText], [netMonitor],
+                                            [layout], [mocp] ]
                                         , widgetSpacing = 5
                                         , barHeight = 23
                                         , monitorNumber = x
