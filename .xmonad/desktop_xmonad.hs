@@ -12,7 +12,6 @@ import           XMonad.Actions.PerWorkspaceKeys
 import           XMonad.Actions.SpawnOn
 import           XMonad.Actions.UpdatePointer
 import           XMonad.Hooks.DynamicLog
-import XMonad.Prompt.Pass
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.SetWMName
@@ -32,6 +31,7 @@ import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
 import           XMonad.Prompt
 import           XMonad.Prompt.Input
+import           XMonad.Prompt.Pass
 import qualified XMonad.StackSet                  as W
 import           XMonad.Util.Run
 
@@ -58,7 +58,7 @@ myConfig = defaultConfig { workspaces         = myWorkspaces
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
                          , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
-                         , logHook            = ewmhDesktopsLogHook >> updatePointer (Relative 0.9 0.9) 
+                         , logHook            = ewmhDesktopsLogHook >> updatePointer (Relative 0.9 0.9)
                          , startupHook        = startup <+> ewmhDesktopsStartup
                          }
 
