@@ -50,11 +50,7 @@ in
   };
 
   networking = {
-    firewall = {
-      allowedUDPPorts = [ 7777 137 138 ];
-      allowedTCPPorts = [ 7777 445 139 ];
-      allowPing = true;
-    };
+    firewall.enable = false;
     hostName                 = "nixos";
     extraHosts               = literals.extraHosts;
     networkmanager.enable    = true;
