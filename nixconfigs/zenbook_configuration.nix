@@ -8,7 +8,7 @@
   require =
     [ 
       ./zenbook_hardware-configuration.nix
-#      ./private.nix
+      ./private.nix
     ];
 
   boot.loader.grub.timeout = 1;
