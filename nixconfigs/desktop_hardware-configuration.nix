@@ -13,9 +13,9 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/43d43a41-883a-48da-91c8-4ba4091771be";
-      fsType = "xfs";
-      options = "discard";
+    { device = "/dev/disk/by-uuid/9bfda93b-b88b-42c7-a8d2-ba3a6a95ce52";
+      fsType = "f2fs";
+      options = "defaults,noatime,discard,background_gc=on";
     };
 
   fileSystems."/home" =
@@ -23,8 +23,13 @@
       fsType = "ext4";
     };
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/4cecd5bb-d4bb-498a-8712-f790ee7a748a";
+      fsType = "ext4";
+    };
+
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/e5710195-ddc7-4b6f-a5b5-7de0eac17893"; }
+    [ { device = "/dev/disk/by-uuid/9a383600-809c-4ee9-b611-00a150e36533"; }
     ];
 
   nix.maxJobs = 8;

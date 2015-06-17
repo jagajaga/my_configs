@@ -31,6 +31,7 @@ import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.Tabbed
 import           XMonad.Prompt
 import           XMonad.Prompt.Input
+import           XMonad.Prompt.Pass
 import qualified XMonad.StackSet                  as W
 import           XMonad.Util.Run
 
@@ -57,7 +58,7 @@ myConfig = defaultConfig { workspaces         = myWorkspaces
                          , layoutHook         = layoutHook'
                          , manageHook         = manageHook'
                          , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
-                         , logHook            = ewmhDesktopsLogHook >> updatePointer (Relative 0.9 0.9) 
+                         , logHook            = ewmhDesktopsLogHook >> updatePointer (Relative 0.9 0.9)
                          , startupHook        = startup <+> ewmhDesktopsStartup
                          }
 
@@ -214,7 +215,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "dwb")])
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
-    , ((modMask .|. controlMask, xK_space ),  windowPromptGoto defaultXPConfig )
+    , ((modMask .|. controlMask, xK_space ), windowPromptGoto defaultXPConfig )
+    , ((modMask .|. controlMask, xK_p ), passPrompt defaultXPConfig )
     , ((modMask,                 xK_a     ), safeSpawn "spacefm" [])
 
     -- multimedia

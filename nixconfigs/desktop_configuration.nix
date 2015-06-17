@@ -18,7 +18,7 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_3_18;
+    kernelPackages      = pkgs.linuxPackages_3_19;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
       options kvm-amd nested=1
@@ -36,16 +36,17 @@ in
   nix = {
     /*package             = pkgs.nixUnstable;*/
     binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
-    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to ];
+    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to http://localhost:8888 ];
     useChroot           = builtins.trace (if config.networking.hostName == "nixos" then "1" else "2") true;
     gc = {
       automatic = true;
-      dates     = "0 0 * * *";
+      dates     = "00:00";
     };
   };
 
   nixpkgs.config = {
-    allowUnfree             = true;
+    virtualbox.enableExtensionPack = true;
+    allowUnfree                    = true;
   };
 
   networking = {
@@ -84,12 +85,14 @@ in
     ];
     dbus.enable            = true;
     nixosManual.showManual = true;
+    nix-serve.enable       = true;
     journald.extraConfig   = "SystemMaxUse=50M";
     locate.enable          = true;
     udisks2.enable         = true;
     openssh.enable         = true;
     printing.enable        = true;
     openntpd.enable        = true;
+    virtualboxHost.enable  = true;
     openvpn = {
       enable         = true;
       servers.client = literals.openVPNConf;
@@ -129,7 +132,6 @@ in
       ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
       ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
-      ${lastfmsubmitd}/bin/lastfmsubmitd --no-daemon &
       export BROWSER="dwb";
       exec ${haskellngPackages.xmonad}/bin/xmonad
     '';
@@ -137,6 +139,16 @@ in
     startGnuPGAgent = true;
     xrandrHeads = [ "DVI-I-0" "HDMI-0" ];
 
+  };
+
+  systemd.services.lastfmsubmitd = {
+    wantedBy = [ "multi-user.target" ]; 
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "forking";
+      ExecStart = ''${pkgs.screen}/bin/screen -dmS lastfsubmit ${pkgs.lastfmsubmitd}/bin/lastfmsubmitd --no-daemon'';
+      ExecReload = ''${pkgs.screen}/bin/screen -S lastfsubmit -X quit'';
+    };
   };
 
   programs.ssh.startAgent = false;

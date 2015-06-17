@@ -5,6 +5,8 @@
     set confirm
     set cindent
     set t_Co=256
+    set tabpagemax=1000
+    set colorcolumn=80
 
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -26,6 +28,9 @@
     let g:necoghc_enable_detailed_browse = 1
 
     let g:YUNOcommit_after = 20
+
+    let g:XkbSwitchEnabled = 1
+    let g:XkbSwitchIMappings = ['ru']
 
     au VimEnter * RainbowParenthesesToggle
     au Syntax * RainbowParenthesesLoadRound
