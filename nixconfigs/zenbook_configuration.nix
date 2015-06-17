@@ -26,8 +26,8 @@
     '';
 
   nix.package = pkgs.nixUnstable;
-  nix.binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
-  nix.trustedBinaryCaches = [ http://cache.nixos.org https://hydra.nixos.org ];
+  nix.binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://192.168.1.29 ];
+  nix.trustedBinaryCaches = [ http://cache.nixos.org https://hydra.nixos.org http://192.168.1.29 ];
   nixpkgs.config.allowUnfree = true;
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -42,7 +42,7 @@
 
   networking = {
     hostName = "nixosZ"; # Define your hostname.
-    connman.enable = true;
+    connman.enable    = true;
     firewall = {
       allowedTCPPorts = [ 7777 ];
       allowedUDPPorts = [ 7777 ];
@@ -110,7 +110,7 @@
    /*'';*/
   
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh.enable = false;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -131,42 +131,44 @@
     driSupport32Bit = true;
   };
 
-  # Enable the X11 windowing system.
   services.xserver = {
-    enable = true;
-    layout = "us,ru(winkeys)";
-    xkbOptions = "grp:caps_toggle";
-    xkbVariant = "winkeys";
+    exportConfiguration = true;
+    enable              = true;
+    layout              = "us,ru(winkeys)";
+    xkbOptions          = "grp:caps_toggle";
+    xkbVariant          = "winkeys";
     displayManager.slim = {
-      enable = true;
-      autoLogin = false;
-      defaultUser = "jaga"; 
+      enable      = true;
+      autoLogin   = true;
+      defaultUser = "jaga";
       theme = pkgs.fetchurl {
-        url = https://github.com/jagajaga/nixos-slim-theme/archive/1.0.tar.gz;
-        sha256 = "08ygjn5vhn3iavh36pdcb15ij3z34qnxp20xh3s1hy2hrp63s6kn";
+          url    = https://github.com/jagajaga/nixos-slim-theme/archive/1.1.tar.gz;
+          sha256 = "66c3020a6716130a20c3898567339b990fbd7888a3b7bbcb688f6544d1c05c31";
+        };
+    };
+    desktopManager = {
+      default      = "none";
+      xterm.enable = false;
+    };
+    windowManager = {
+      default = "xmonad";
+      xmonad = { 
+        enable                 = true;
+        enableContribAndExtras = true;
       };
-    }; 
-    desktopManager.default = "none";
-    desktopManager.xterm.enable = false;
-    windowManager.default = "xmonad";
-    windowManager.xmonad.enable = true;
-    windowManager.xmonad.enableContribAndExtras = true;
-    multitouch.enable = true;
-    synaptics.enable = true;
-    config = ''
-        Section "InputClass"
-            Identifier   "Kensington Slimblade Trackball"
-            MatchProduct "Kensington Kensington Slimblade Trackball"
-            Option       "ButtonMapping" "1 8 3 4 5 6 7 2 9 10 11 12"
-            Option       "EmulateWheel"       "True"
-            Option       "EmulateWheelButton" "8"
-            Option       "XAxisMapping"       "6 7"
-            Option       "ZAxisMapping" "4 5"
-            Option       "EmulateWheelInertia" "75"
-        EndSection
+    };
+    displayManager.sessionCommands = with pkgs; ''
+      ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
+      ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
+      ${networkmanagerapplet}/bin/nm-applet &
+      ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
+      ${lastfmsubmitd}/bin/lastfmsubmitd --no-daemon &
+      export BROWSER="dwb";
+      exec ${haskellngPackages.xmonad}/bin/xmonad
     '';
-
+    startGnuPGAgent = true;
   };
+  programs.ssh.startAgent = false;
 
   time.timeZone = "Europe/Moscow";
 
@@ -175,21 +177,13 @@
    bash
    htop
    iotop
-
    pmutils
    wget
-
    git
    mc
-
    stdenv
-   dejavu_fonts
-
    xsel
-
    connmanui
-   cjdns
-
   ];
 
   fonts = {

@@ -17,12 +17,6 @@
   fileSystems."/".device = "/dev/sda2";
   fileSystems."/home".device = "/dev/sda3";
 
-  fileSystems."/samba" =
-    { device = "//192.168.1.116/Data";
-      fsType = "cifs";
-      options = "users,nofail";
-    };
-
   # List swap partitions activated at boot time.
   swapDevices =
     [ { device = "/dev/sda1"; }
