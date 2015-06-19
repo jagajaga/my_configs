@@ -26,27 +26,20 @@
     '';
 
   nix.package = pkgs.nixUnstable;
-  nix.binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://192.168.1.29 ];
-  nix.trustedBinaryCaches = [ http://cache.nixos.org https://hydra.nixos.org http://192.168.1.29 ];
+  nix.binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://192.168.1.29:5000 ];
+  nix.trustedBinaryCaches = [ http://cache.nixos.org https://hydra.nixos.org http://192.168.1.29:5000 ];
   nixpkgs.config.allowUnfree = true;
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.splashImage = ./background.png;
 
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
 
-  boot.loader.grub.extraEntries = "menuentry \"Arch Linux\" {\n set root=(hd0,4)\n linux /boot/vmlinuz-linux root=/dev/sda4 ro\n initrd /boot/initramfs-linux.img
-    }";
-
   networking = {
     hostName = "nixosZ"; # Define your hostname.
     connman.enable    = true;
-    firewall = {
-      allowedTCPPorts = [ 7777 ];
-      allowedUDPPorts = [ 7777 ];
-    };
+    firewall.enable = false;
     extraHosts = ''fc5d:baa5:61fc:6ffd:9554:67f0:e290:7535 nodeinfo.hype
               fcbf:7bbc:32e4:716:bd00:e936:c927:fc14 socialno.de
               fcd5:76e1:c1c2:e946:b266:8543:c1d5:67ac hypeoverflow.com'';
@@ -110,7 +103,7 @@
    /*'';*/
   
   # Enable the OpenSSH daemon.
-  services.openssh.enable = false;
+  services.openssh.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
