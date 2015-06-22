@@ -1,14 +1,16 @@
 import           System.Taffybar
 
 {-import           System.Taffybar.FreedesktopNotifications-}
+import           System.Taffybar.Battery
+import           System.Taffybar.CommandRunner
 import           System.Taffybar.NetMonitor
 import           System.Taffybar.Pager
 import           System.Taffybar.SimpleClock
 import           System.Taffybar.Systray
 import           System.Taffybar.TaffyPager
 import           System.Taffybar.Weather
-import           System.Taffybar.Battery
-import           System.Taffybar.CommandRunner
+import           System.Taffybar.LayoutSwitcher
+import           System.Taffybar.WorkspaceSwitcher
 
 import           System.Taffybar.Widgets.PollingBar
 import           System.Taffybar.Widgets.PollingGraph
@@ -60,7 +62,7 @@ myTaffy = defaultPagerConfig {
 }
 
 colorFunc :: (Num t, Num t1) => t -> (t, t, t1)
-colorFunc pct = (pct, 1 - pct, 0) 
+colorFunc pct = (pct, 1 - pct, 0)
 colorFuncTemp :: (Fractional a, Num t, Ord a) => a -> (a, a, t)
 colorFuncTemp pct
     | pct <= 0.47 = (0, 1 - pct, 0)
@@ -88,13 +90,15 @@ simpleText text' color = do
 
 {-
     TODO (to implement)
-    cpu freq, moc song, keyboard layout, swap, uptime, essid, locks... 
+    cpu freq, moc song, keyboard layout, swap, uptime, essid, locks...
     https://github.com/jaor/xmobar/tree/master/src/Plugins
 -}
 
 main :: IO ()
 main = do
-  let pager  = taffyPagerNew myTaffy
+  pager  <- pagerNew myTaffy
+  let
+      wss = wspaceSwitcherNew pager
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
                                                       , (1, 0, 1, 0.9)
                                                       , (0, 0, 1, 0.9)
@@ -110,22 +114,34 @@ main = do
                                   , graphWidth = 35
                                   , graphLabel = Nothing
                                   }
-      clock      = textClockNew Nothing "<span fgcolor='#C98F0A'>%a %b %d </span><span fgcolor='#429942'>%H:%M:%S</span>" 1
-      battery    = textBatteryNew (colorize colorOrange "" "$percentage$% ⌛ " ++ colorize colorLightGreen "" "$time$") 60
-      netMonitor = netMonitorNewWith 2.0 "wlp2s0" 0 $ colorize colorOrange "" "WiFi: ⇣" ++ colorize colorLightGreen "" "$inKB$" ++ colorize colorOrange "" " : ⇡" ++ colorize colorLightGreen "" "$outKB$" 
-      wea        = weatherNew (defaultWeatherConfig "ULLI") { weatherTemplate = "<span fgcolor='#429942'>$tempC$°C</span>" } 100
+      clock      = textClockNew Nothing ("<span fgcolor='#C98F0A'>%a %b %d " 
+        ++"</span><span fgcolor='#429942'>%H:%M:%S</span>") 1
+      battery    = textBatteryNew (colorize colorOrange "" "$percentage$% ⌛ " ++
+        colorize colorLightGreen "" "$time$") 60
+      netMonitor = netMonitorNewWith 2.0 "wlp2s0" 0 $
+        colorize colorOrange "" "WiFi: ⇣"
+        ++ colorize colorLightGreen "" "$inKB$"
+        ++ colorize colorOrange "" " : ⇡"
+        ++ colorize colorLightGreen "" "$outKB$"
+      wea        = weatherNew (defaultWeatherConfig "ULLI") {
+        weatherTemplate = "<span fgcolor='#429942'>$tempC$°C</span>" } 100
       iohdd      = pollingGraphNew ioCfg 1 (diskIOCallback "sda" "2")
-      mem        = pollingBarNew (defaultBarConfig colorFunc) {barWidth = 10} 3 memCallback
+      mem        = pollingBarNew (defaultBarConfig colorFunc) {barWidth = 10} 3
+        memCallback
       ---TODO notification note = notifyAreaNew defaultNotificationConfig
-      cpuText    = simpleText "Cpu"colorOrange 
-      diskText   = simpleText "IO »"colorOrange 
-      ramText    = simpleText "Ram"colorOrange 
+      cpuText    = simpleText "Cpu"colorOrange
+      diskText   = simpleText "IO »"colorOrange
+      ramText    = simpleText "Ram"colorOrange
       cpu        = pollingGraphNew cpuCfg 0.5 $ getCPULoad "cpu"
-      temp       = pollingBarNew (defaultBarConfig colorFuncTemp) {barWidth = 10} 2 $ tempCallback ["cpu0"]
+      temp       = pollingBarNew (defaultBarConfig colorFuncTemp) {barWidth =
+        10} 2 $ tempCallback ["cpu0"]
       tray       = systrayNew
-      mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF" 
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
-                                        , endWidgets = intercalate [separator] [ [clock], [tray], [wea], [battery], [mem, ramText], [temp, cpu, cpuText], [iohdd, diskText], [netMonitor], [mocp] ]
+      mocp       = commandRunnerNew 1 "/home/jaga/myscripts/getmocpinfo.sh" [] "Moc: OFF" "#FFFFFF"
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [ wss ]
+                                        , endWidgets = intercalate [separator] [
+                                        [clock], [tray], [wea], [battery], [mem,
+                                        ramText], [temp, cpu, cpuText], [iohdd,
+                                        diskText], [netMonitor], [mocp] ]
                                         , widgetSpacing = 5
                                         , barHeight = 23
                                         }

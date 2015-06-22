@@ -2,22 +2,22 @@ import           System.Taffybar
 
 {-import           System.Taffybar.FreedesktopNotifications-}
 import           System.Taffybar.CommandRunner
+import           System.Taffybar.LayoutSwitcher
 import           System.Taffybar.NetMonitor
 import           System.Taffybar.Pager
 import           System.Taffybar.SimpleClock
 import           System.Taffybar.Systray
 import           System.Taffybar.TaffyPager
 import           System.Taffybar.Weather
-import System.Taffybar.WorkspaceSwitcher
-import System.Taffybar.LayoutSwitcher
+import           System.Taffybar.WorkspaceSwitcher
 
 import           System.Taffybar.Widgets.PollingBar
 import           System.Taffybar.Widgets.PollingGraph
 
+import           System.Environment
 import           System.Information.CPU2
 import           System.Information.DiskIO
 import           System.Information.Memory
-import           System.Environment
 
 import           Graphics.UI.Gtk
 
@@ -104,7 +104,7 @@ main = do
         ["-x", a] -> read a :: Int
         _ -> 0
   pager  <- pagerNew myTaffy
-  let 
+  let
       wss = wspaceSwitcherNew pager
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
                                                       , (1, 0, 1, 0.9)
