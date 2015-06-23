@@ -303,9 +303,9 @@ alias tmux='tmux attach || tmux new'
 ssh-add ~/.ssh/git_rsa 2>/dev/null
 alias bump='git commit -am bump'
 
-fpath=(~/nix-zsh-completions $fpath)
-autoload -U compinit && compinit
-source ~/nix-zsh-completions/nix.plugin.zsh
+#fpath=(~/nix-zsh-completions $fpath)
+#autoload -U compinit && compinit
+#source ~/nix-zsh-completions/nix.plugin.zsh
 NIX_GHC_VERSION=$(ghc --numeric-version)
 export NIX_GHC="$HOME/.nix-profile/bin/ghc"
 export NIX_GHCPKG="$HOME/.nix-profile/bin/ghc-pkg"
