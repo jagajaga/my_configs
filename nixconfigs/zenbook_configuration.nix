@@ -17,8 +17,6 @@
 
   networking = {
     hostName             = "nixosZ";
-    connman.enable       = true;
-    networkmanager.enable = lib.mkForce false;
   };
 
   security.polkit.extraConfig = ''
@@ -44,6 +42,7 @@
         '';
   
   services.upower.enable = true;
+  services.teamviewer.enable = true;
 
   services.xserver = {
     multitouch.enable   = true;

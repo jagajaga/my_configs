@@ -91,9 +91,9 @@ in
   services.xserver = {
     exportConfiguration = true;
     enable              = true;
-    layout              = "us,ru(winkeys)";
+    layout              = "us,ru";
     xkbOptions          = "grp:caps_toggle";
-    xkbVariant          = "winkeys";
+    xkbVariant          = "colemak,winkeys";
     displayManager.slim = {
       enable      = true;
       autoLogin   = true;

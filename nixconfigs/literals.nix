@@ -11,8 +11,9 @@
             key ${key}
             <dh>
             -----BEGIN DH PARAMETERS-----
-            MEYCQQCQn3sGfqQWQtMH4GNWHeZG6210sE3cssDGitRfv9T9knp00zIquPI3tuRa
-            xywN8CG+Ww/V8kBIgLBfqRqnThdzAgEC
+            MIGHAoGBAPC5Q5G3PflAC9fppe9FIPAEjpSZAm2akzO+ttm4VrVxXvImnRkVuf6p
+            hoSculyBwuetGrecwE9Kv2jAgYOtLi9iyBe3bjwmixhsp53dYLElNFeoer40JkAB
+            tisxLxJbvkMMm/VpNGNedTeOoGy65Njmr+Sx29zA7Dzd9CcgYrDzAgEC
             -----END DH PARAMETERS-----
             </dh>
 
