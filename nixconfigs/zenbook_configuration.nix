@@ -45,6 +45,7 @@
   services.teamviewer.enable = true;
 
   services.xserver = {
+    videoDrivers = [ "intel" ];
     multitouch.enable   = true;
     synaptics           = {
       enable          = true;

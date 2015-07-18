@@ -93,18 +93,16 @@ in
     enable              = true;
     layout              = "us,ru";
     xkbOptions          = "grp:caps_toggle";
-    xkbVariant          = "colemak,winkeys";
+    xkbVariant          = "winkeys";
     displayManager.slim = {
-      enable      = true;
+      enable      = false;
       autoLogin   = true;
       defaultUser = "jaga";
-      theme = pkgs.fetchurl {
-          url    = https://github.com/jagajaga/nixos-slim-theme/archive/1.1.tar.gz;
-          sha256 = "66c3020a6716130a20c3898567339b990fbd7888a3b7bbcb688f6544d1c05c31";
-        };
+    };
+    displayManager.lightdm = {
+      enable      = true;
     };
     desktopManager = {
-      default      = "none";
       xterm.enable = false;
     };
     windowManager = {
@@ -119,7 +117,6 @@ in
       ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
       ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
-      export BROWSER="dwb";
       exec ${haskellngPackages.xmonad}/bin/xmonad
     '';
     config = literals.trackBallConf;
