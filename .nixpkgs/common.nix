@@ -146,6 +146,7 @@ with pkgs; rec {
           name = "base-env";
           ignoreCollisions = true;
           paths = [ 
+            androidenv.platformTools
             perlPackages.ack
             aspell
             aspellDicts.en
