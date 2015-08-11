@@ -34,7 +34,7 @@
         case "$state" in
             *open*) echo $(whoami) > /home/jaga/whoami ;;
             *close*) 
-                ${pkgs.su}/bin/su jaga -c ${pkgs.slim}/bin/slimlock &
+                # ${pkgs.su}/bin/su jaga -c ${pkgs.slim}/bin/slimlock &
                 systemctl suspend 
                 ;;
             *) logger -t lid-handler "Failed to detect lid state ($state)" ;;

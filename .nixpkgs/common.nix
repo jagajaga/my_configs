@@ -70,7 +70,7 @@ with pkgs; rec {
                 "thumbnail-vim"
                 "undotree"
                 "vimproc-vim"
-                "vim-snippets"
+                "vim-addon-nix"
                 "vundle"
                 "vim-gista"
                 "vim-wakatime"
