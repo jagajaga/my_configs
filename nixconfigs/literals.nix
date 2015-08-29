@@ -44,6 +44,7 @@
         fc5d:baa5:61fc:6ffd:9554:67f0:e290:7535 nodeinfo.hype
         fcbf:7bbc:32e4:716:bd00:e936:c927:fc14 socialno.de
         fcd5:76e1:c1c2:e946:b266:8543:c1d5:67ac hypeoverflow.com
+        127.0.0.1 local.host
     '';
   workHosts = ''
       192.168.0.9   godzilla

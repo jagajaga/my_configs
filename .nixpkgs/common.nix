@@ -6,19 +6,6 @@ with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
   haskellngPackages = pkgs.haskellngPackages;
 
-  ghc-mod-git = pkgs.haskell-ng.lib.overrideCabal haskellngPackages.ghc-mod (oldAttrs: {
-    src = pkgs.fetchgit {
-      url = https://github.com/kazu-yamamoto/ghc-mod;
-      rev = "247e4e0e7616fe1fecc68fdcf80d6249ac4cee4f";
-      sha256 = "2a23271d0e6907351a246f095040ba18c3ab6bf1cba08a14338d701defa55474";
-     };
-    buildDepends = oldAttrs.buildDepends ++ [ cabal-helper-new haskellngPackages.cereal ];
-  });
-  cabal-helper-new = pkgs.haskell-ng.lib.overrideCabal haskellngPackages.cabal-helper (oldAttrs: {
-    version = "0.3.2.0";
-    sha256 = "06igjmr0n8418wid1pr74cgvlsmwni7ar72g9bddivlbxax1pfli";
-  });
-
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
       ./moc_patches/moc-r2758+pulse_audio-1.patch.gz 
@@ -206,7 +193,7 @@ with pkgs; rec {
         pkgs: with pkgs; [ 
             cabal2nix
             cabal-install
-            ghc-mod-git
+            ghc-mod
             hlint
             hoogle
             /*lushtags*/
