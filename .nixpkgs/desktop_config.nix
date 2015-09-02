@@ -52,7 +52,7 @@ pkgs : {
             spaceFM
             shared_mime_info
             teamviewer
-            texLiveFull
+            /*texLiveFull*/
             tightvnc
             tor
             transmission_gtk

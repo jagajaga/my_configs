@@ -35,6 +35,8 @@ in
     /*package             = pkgs.nixUnstable;*/
     binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
     trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to ];
+    binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+
     useChroot           = true;
     gc = {
       automatic = true;

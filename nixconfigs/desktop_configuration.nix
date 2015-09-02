@@ -15,10 +15,11 @@
 
   boot.loader.grub.device  = "/dev/sdc";
 
-  nixpkgs.config.virtualbox.enableExtensionPack = true;
+  nixpkgs.config.virtualbox.enableExtensionPack = false;
+
+  virtualisation.virtualbox.host.enable = false;
 
   services = {
-    virtualboxHost.enable  = true;
     teamviewer.enable = true;
   };
 
