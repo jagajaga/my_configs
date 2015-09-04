@@ -42,7 +42,7 @@
         '';
   
   services.upower.enable = true;
-  services.teamviewer.enable = true;
+  services.teamviewer.enable = false;
 
   services.xserver = {
     videoDrivers = [ "intel" ];
