@@ -50,6 +50,7 @@ pkgs : {
             python34Packages.rainbowstream
             qemu
             spaceFM
+            spotify
             shared_mime_info
             teamviewer
             /*texLiveFull*/

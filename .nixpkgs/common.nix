@@ -141,7 +141,6 @@ with pkgs; rec {
             bc
             defaultStdenv
             djview4
-            dwb
             evince
             file
             flac
@@ -162,6 +161,7 @@ with pkgs; rec {
             pass
             pinentry
             psmisc
+            qutebrowser
             skype
             sxiv
             telnet
