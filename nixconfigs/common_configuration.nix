@@ -8,6 +8,9 @@ let
                 ca   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
                 cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
                 key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  
+                caSerokell   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
+                certSerokell = pkgs.writeText "alice" (builtins.readFile /root/.vpn/serokell/senia.crt);
+                keySerokell  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
   };
 in
 
@@ -85,7 +88,8 @@ in
     openssh.enable         = true;
     openntpd.enable        = true;
     openvpn = {
-      servers.client = literals.openVPNConf;
+      servers.JJ = literals.openVPNConf.configJJ;
+      servers.Serokell = literals.openVPNConf.configSerokell;
     };
   };
 
