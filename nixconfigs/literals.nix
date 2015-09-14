@@ -36,7 +36,7 @@
         client
         dev tun
         proto udp
-        remote memorici.de 1194
+        remote memorici.de 10044
         resolv-retry infinite
         nobind
         persist-key

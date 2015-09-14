@@ -8,9 +8,9 @@ let
                 ca   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
                 cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
                 key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  
-                caSerokell   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
-                certSerokell = pkgs.writeText "alice" (builtins.readFile /root/.vpn/serokell/senia.crt);
-                keySerokell  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
+                caSerokell   = pkgs.writeText "caSerokell.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
+                certSerokell = pkgs.writeText "seniaSerokell.crt" (builtins.readFile /root/.vpn/serokell/senia.crt);
+                keySerokell  = pkgs.writeText "seniaSerokell.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
   };
 in
 
@@ -52,8 +52,9 @@ in
   };
 
   networking = {
-    extraHosts               = literals.extraHosts;
-    networkmanager.enable    = true;
+    extraHosts            = literals.extraHosts;
+    networkmanager.enable = true;
+    firewall.enable       = false;
   };
 
   i18n = {
