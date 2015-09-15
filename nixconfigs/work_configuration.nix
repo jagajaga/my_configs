@@ -39,6 +39,7 @@ in
 
   networking = {
     firewall = {
+      enable = false;
       allowedUDPPorts = [ 7777 ];
       allowedTCPPorts = [ 7777 ];
     };
