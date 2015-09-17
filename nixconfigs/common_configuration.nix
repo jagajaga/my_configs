@@ -49,6 +49,7 @@ in
   };
 
   networking = {
+    firewall.enable = false;
     extraHosts               = literals.extraHosts;
     networkmanager.enable    = true;
   };
