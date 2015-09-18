@@ -1,32 +1,55 @@
-{pkgs, ca ? null, cert ? null, key ? null}:
+{ pkgs, ca ? null, cert ? null, key ? null
+, caSerokell ? null, certSerokell ? null, keySerokell ? null
+}:
 {
   openVPNConf = { 
+    configJJ = { 
       config = ''
-            client
-            nobind
-            dev tun
-            redirect-gateway def1
-            ca ${ca}
-            cert ${cert}
-            key ${key}
-            <dh>
-            -----BEGIN DH PARAMETERS-----
-            MIGHAoGBAPC5Q5G3PflAC9fppe9FIPAEjpSZAm2akzO+ttm4VrVxXvImnRkVuf6p
-            hoSculyBwuetGrecwE9Kv2jAgYOtLi9iyBe3bjwmixhsp53dYLElNFeoer40JkAB
-            tisxLxJbvkMMm/VpNGNedTeOoGy65Njmr+Sx29zA7Dzd9CcgYrDzAgEC
-            -----END DH PARAMETERS-----
-            </dh>
+        client
+        nobind
+        dev tun
+        redirect-gateway def1
+        ca ${ca}
+        cert ${cert}
+        key ${key}
+        <dh>
+        -----BEGIN DH PARAMETERS-----
+        MIGHAoGBAPC5Q5G3PflAC9fppe9FIPAEjpSZAm2akzO+ttm4VrVxXvImnRkVuf6p
+        hoSculyBwuetGrecwE9Kv2jAgYOtLi9iyBe3bjwmixhsp53dYLElNFeoer40JkAB
+        tisxLxJbvkMMm/VpNGNedTeOoGy65Njmr+Sx29zA7Dzd9CcgYrDzAgEC
+        -----END DH PARAMETERS-----
+        </dh>
 
-            <connection>
-            remote 178.62.202.50 1194 udp
-            </connection>
+        <connection>
+        remote 178.62.202.50 1194 udp
+        </connection>
 
-            <connection>
-            remote 178.62.202.50 443 tcp-client
-            </connection>
-    '';
-    up = "echo nameserver $nameserver | ''${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
-    down = "''${pkgs.openresolv}/sbin/resolvconf -d $dev";
+        <connection>
+        remote 178.62.202.50 443 tcp-client
+        </connection>
+      '';
+      up = "echo nameserver $nameserver | ''${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
+      down = "''${pkgs.openresolv}/sbin/resolvconf -d $dev";
+    };
+    configSerokell = {
+      config = ''
+        client
+        dev tun
+        proto udp
+        remote memorici.de 10044
+        resolv-retry infinite
+        nobind
+        persist-key
+        persist-tun
+        ca ${caSerokell}
+        cert ${certSerokell}
+        key ${keySerokell}
+        comp-lzo
+        verb 3
+      '';
+      up = "echo nameserver $nameserver | ''${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
+      down = "''${pkgs.openresolv}/sbin/resolvconf -d $dev";
+    };
   };
   trackBallConf = ''
         Section "InputClass"

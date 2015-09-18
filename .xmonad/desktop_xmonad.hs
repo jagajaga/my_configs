@@ -160,7 +160,7 @@ myWorkspaces = wspaces ++ (map show $ drop (length wspaces) [1..9])
     where
         wspaces = ["General", "Programming", "Work", "IM", "Social", "Media", "Steam", "Game"]
 
-myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "dwb"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
+myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "qutebrowser"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
 -- layouts
 layoutHook' = onWorkspace "Steam" steamLayout
@@ -212,7 +212,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                 xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask,                 xK_r     ), shellPrompt defaultXPConfig)
     , ((modMask .|. shiftMask,   xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )
-    , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "dwb")])
+    , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "qutebrowser")])
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space ), windowPromptGoto defaultXPConfig )

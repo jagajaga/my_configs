@@ -15,9 +15,9 @@
 
   boot.loader.grub.device  = "/dev/sdc";
 
-  nixpkgs.config.virtualbox.enableExtensionPack = false;
+  nixpkgs.config.virtualbox.enableExtensionPack = true;
 
-  virtualisation.virtualbox.host.enable = false;
+  virtualisation.virtualbox.host.enable = true;
 
   services = {
     teamviewer.enable = true;

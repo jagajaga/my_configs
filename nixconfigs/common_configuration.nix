@@ -8,6 +8,9 @@ let
                 ca   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
                 cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
                 key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  
+                caSerokell   = pkgs.writeText "caSerokell.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
+                certSerokell = pkgs.writeText "seniaSerokell.crt" (builtins.readFile /root/.vpn/serokell/senia.crt);
+                keySerokell  = pkgs.writeText "seniaSerokell.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
   };
 in
 
@@ -17,7 +20,7 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_latest;
+    kernelPackages      = pkgs.linuxPackages_3_18;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
       options kvm-amd nested=1
@@ -49,9 +52,9 @@ in
   };
 
   networking = {
-    firewall.enable = false;
-    extraHosts               = literals.extraHosts;
-    networkmanager.enable    = true;
+    extraHosts            = literals.extraHosts;
+    networkmanager.enable = true;
+    firewall.enable       = false;
   };
 
   i18n = {
@@ -86,8 +89,8 @@ in
     openssh.enable         = true;
     openntpd.enable        = true;
     openvpn = {
-      enable         = true;
-      servers.client = literals.openVPNConf;
+      servers.JJ = literals.openVPNConf.configJJ;
+      servers.Serokell = literals.openVPNConf.configSerokell;
     };
   };
 
