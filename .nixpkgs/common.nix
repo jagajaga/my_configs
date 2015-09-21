@@ -5,6 +5,13 @@ in
 with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
   haskellngPackages = pkgs.haskellngPackages;
+  lushtags = pkgs.haskell.lib.overrideCabal haskellPackages.lushtags (oldAttrs: {
+    src = pkgs.fetchgit {
+      url = https://github.com/mkasa/lushtags;
+      rev = "3d7229b07b47ab2fc188d7db63b33dfcd63a1802";
+      sha256 = "1f87zjs9d03h3g4r93ad4asdyx5jsx7nyzf5al72s855adxypdpm";
+    };
+  });
 
   mocPulse = moc.overrideDerivation (old: { 
     patches = [ 
@@ -16,7 +23,7 @@ with pkgs; rec {
   });
 
   loveMoc = haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
-  taffybar = haskellngPackages.callPackage ../Dropbox/Programming/Haskell/taffybar/project.nix { }; # until temp fix is not accepted upstream
+  /*taffybar = haskellngPackages.callPackage ../Dropbox/Programming/Haskell/taffybar/project.nix { }; # until temp fix is not accepted upstream*/
 
   vimrcConfig = {
         vam.knownPlugins = vimPlugins; # optional
@@ -196,7 +203,7 @@ with pkgs; rec {
             ghc-mod
             hlint
             hoogle
-            /*lushtags*/
+            lushtags
             pandoc
             taffybar
             xmonad
