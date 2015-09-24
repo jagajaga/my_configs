@@ -20,11 +20,11 @@
   };
 
   security.polkit.extraConfig = ''
-        polkit.addRule(function(action) {
-            if (action.id == "org.freedesktop.udisks2.filesystem-mount-system") {
-                return polkit.Result.YES;
-            }
-        });
+    polkit.addRule(function(action) {
+      if (action.id == "org.freedesktop.udisks2.filesystem-mount-system") {
+          return polkit.Result.YES;
+      }
+    });
   '';
 
   services.acpid.enable = true; 
