@@ -3,7 +3,13 @@
 # or the NixOS manual available on virtual console 8 (Alt+F8).
 
 { config, pkgs, ... }:
-
+let
+  literals = import ./literals.nix {pkgs = pkgs;
+                caSerokell   = pkgs.writeText "caSerokell.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
+                certSerokell = pkgs.writeText "seniaSerokell.crt" (builtins.readFile /root/.vpn/serokell/senia.crt);
+                keySerokell  = pkgs.writeText "seniaSerokell.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
+  };
+in
 {
   require = [
       ./desktop_hardware-configuration.nix
@@ -21,6 +27,9 @@
 
   services = {
     teamviewer.enable = true;
+    openvpn = {
+      servers.Serokell = literals.openVPNConf.configSerokell;
+    };
   };
 
   services.xserver = {

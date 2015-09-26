@@ -90,7 +90,6 @@ in
     openntpd.enable        = true;
     openvpn = {
       servers.JJ = literals.openVPNConf.configJJ;
-      servers.Serokell = literals.openVPNConf.configSerokell;
     };
   };
 
