@@ -40,6 +40,7 @@ pkgs : {
             octave
             openvpn
             pastebinit
+            parted
             pavucontrol
             perlPackages.FileMimeInfo
             psmisc
