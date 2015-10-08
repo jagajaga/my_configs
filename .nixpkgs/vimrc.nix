@@ -25,7 +25,10 @@
 
     let NERDTreeShowHidden=1
     let NERDTreeQuitOnOpen=1
+
     let g:necoghc_enable_detailed_browse = 1
+    let g:haskellmode_completion_ghc = 0
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
     let g:YUNOcommit_after = 20
 
@@ -81,12 +84,22 @@
     \   'ruby' : ['.', '::'],
     \   'lua' : ['.', ':'],
     \   'erlang' : [':'],
+    \   'haskell' : ['.']
     \ }
     nnoremap <C-E> <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlPMixed'
     let g:ctrlp_working_path_mode = 'ra'
     set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+    "set statusline+=%#warningmsg#
+    "set statusline+=%{SyntasticStatuslineFlag()}
+    "set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
 
     autocmd BufRead,BufNewFile ~/.xmonad/* call s:add_xmonad_path()
     function! s:add_xmonad_path()

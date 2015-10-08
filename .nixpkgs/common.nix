@@ -69,6 +69,7 @@ with pkgs; rec {
                 "vim-gista"
                 "vim-wakatime"
                 "watchdogs"
+                "syntastic"
                 "webapi-vim"
                 "vim-xkbswitch"
                 "YUNOcommit-vim"
