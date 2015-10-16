@@ -150,6 +150,9 @@
     "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
     "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
+    autocmd FileType mail set nosi textwidth=80 expandtab comments+=nb:> formatoptions+=aw
+    autocmd FileType mail setlocal spell spelllang=en_us,ru_ru
+
     "set listchars=tab:  
     "set list
     set fencs=utf-8,cp1251,koi8-r,ucs-2,cp866

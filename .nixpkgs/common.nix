@@ -164,7 +164,7 @@ with pkgs; rec {
             libnotify
             lm_sensors
             mocPulse
-            mutt-with-sidebar 
+            mutt
             p7zip
             pass
             pinentry
