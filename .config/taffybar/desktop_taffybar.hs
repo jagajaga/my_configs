@@ -124,7 +124,7 @@ main = do
       clock      = textClockNew Nothing "<span fgcolor='#C98F0A'>%a %b %d </span><span fgcolor='#429942'>%H:%M:%S</span>" 1
       netMonitor = netMonitorNewWith 2.0 "wlp3s0" 0 $ colorize colorOrange "" "WiFi: ⇣" ++ colorize colorLightGreen "" "$inKB$" ++ colorize colorOrange "" " : ⇡" ++ colorize colorLightGreen "" "$outKB$"
       wea        = weatherNew (defaultWeatherConfig "ULLI") { weatherTemplate = "<span fgcolor='#429942'>$tempC$°C</span>" } 100
-      iohdd      = pollingGraphNew ioCfg 1 (diskIOCallback "sdc" "md127")
+      iohdd      = pollingGraphNew ioCfg 1 (diskIOCallback "sdd" "md127")
       mem        = pollingBarNew (defaultBarConfig colorFunc) {barWidth = 10} 3 memCallback
       ---TODO notification note = notifyAreaNew defaultNotificationConfig
       cpuText    = simpleText "Cpu"colorOrange
