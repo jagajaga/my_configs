@@ -42,7 +42,7 @@ setopt AUTO_CD
 
 setopt CORRECT_ALL
 
-setopt SH_WORD_SPLIT
+#setopt SH_WORD_SPLIT
 
 setopt histexpiredupsfirst histfindnodups
 
@@ -303,8 +303,8 @@ alias tmux='tmux attach || tmux new'
 ssh-add ~/.ssh/git_rsa 2>/dev/null
 alias bump='git commit -am bump'
 
-#fpath=(~/nix-zsh-completions $fpath)
-#source ~/nix-zsh-completions/nix.plugin.zsh
+fpath=(~/nix-zsh-completions $fpath)
+source ~/nix-zsh-completions/nix.plugin.zsh
 autoload -U compinit && compinit
 NIX_GHC_VERSION=$(ghc --numeric-version)
 export NIX_GHC="$HOME/.nix-profile/bin/ghc"

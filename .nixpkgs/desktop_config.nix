@@ -3,9 +3,6 @@ pkgs : {
   allowBroken = true; 
   /*allowBroken = true;*/
   packageOverrides = pkgs : with pkgs; rec {
-      teamviewer = pkgs.teamviewer.override {
-        acceptLicense = true;
-      };
       common = import ./common.nix { pkgs = pkgs; }; 
       inherit (common) vimEnv hsEnv hugeEnv emacsEnv baseEnv develEnv steamEnv mocPulse;
       desktopEnv = pkgs.buildEnv
