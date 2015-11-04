@@ -255,7 +255,7 @@ alias grep='grep --colour=auto'
 
 
 alias h='htop'
-alias n='sudo nethogs wlp3s0'
+alias n='sudo nethogs'
 alias io='sudo iotop'
 alias editawesome='vim /etc/xdg/awesome/rc.lua'
 alias screenshot='sleep 10;import -window root myscreen.png'
