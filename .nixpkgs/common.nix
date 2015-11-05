@@ -165,6 +165,7 @@ with pkgs; rec {
             lm_sensors
             mocPulse
             mutt
+            nethogs
             p7zip
             pass
             pinentry
