@@ -165,7 +165,7 @@ in
    zsh
   ];
   fonts = {
-    fontconfig.enable = true;
+    fontconfig.enable      = true;
     enableFontDir          = true;
     enableGhostscriptFonts = true;
     fontconfig.defaultFonts.monospace = ["Terminus"];
