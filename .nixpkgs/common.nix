@@ -173,6 +173,7 @@ with pkgs; rec {
             qutebrowser
             skype
             sxiv
+            imv #?
             telnet
             tightvnc
             tmux
