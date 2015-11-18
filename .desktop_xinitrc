@@ -17,5 +17,3 @@ feh --bg-scale ~/Pictures/5408x3464.png_\#000000_1_1920x1080.png
 xmodmap -e keysym Menu = Super_L
 #setxkbmap -layout usρu\(winkeys\) -option grp:caps_toggle
 exec xmonad 
-#!/bin/bash
-en,ru -option grp:alt_shift_toggle
