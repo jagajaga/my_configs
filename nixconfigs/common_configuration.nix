@@ -97,12 +97,12 @@ in
     xkbOptions          = "grp:caps_toggle";
     xkbVariant          = "winkeys";
     displayManager.slim = {
-      enable      = false;
-      autoLogin   = true;
+      enable      = true;
+      autoLogin   = false;
       defaultUser = "jaga";
     };
     displayManager.lightdm = {
-      enable      = true;
+      enable      = false;
     };
     desktopManager = {
       xterm.enable = false;
@@ -114,12 +114,12 @@ in
         enableContribAndExtras = true;
       };
     };
-    displayManager.sessionCommands = with pkgs; ''
+    displayManager.sessionCommands = with pkgs; lib.mkAfter ''
       ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
       ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
       ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
-      exec ${haskellngPackages.xmonad}/bin/xmonad
+      exec ${haskellPackages.xmonad}/bin/xmonad
     '';
     config = literals.trackBallConf;
     startGnuPGAgent = true;
