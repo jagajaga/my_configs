@@ -158,10 +158,16 @@ source ${ZDOTDIR:-$HOME}/.zkbd/xterm-:0.0
 [[ -n ${key[PageUp]}    ]] && bindkey "${key[PageUp]}" up-line-or-history
 [[ -n ${key[Delete]}    ]] && bindkey "${key[Delete]}" delete-char
 [[ -n ${key[PageDown]}  ]] && bindkey "${key[PageDown]}" down-line-or-history
-[[ -n ${key[Up]}        ]] && bindkey "${key[Up]}" up-line-or-search
 [[ -n ${key[Left]}      ]] && bindkey "${key[Left]}" backward-char
-[[ -n ${key[Down]}      ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]}     ]] && bindkey "${key[Right]}" forward-char
+#[[ -n ${key[Up]}        ]] && bindkey "${key[Up]}" up-line-or-search
+#[[ -n ${key[Down]}      ]] && bindkey "${key[Down]}" down-line-or-search
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey '\e[3~' delete-char # del
 bindkey ';5D' backward-word # ctrl+left 
 bindkey ';5C' forward-word #ctrl+right
