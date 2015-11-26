@@ -73,7 +73,15 @@ zle -N predict-off
 bindkey -M emacs "^X^Z" predict-on
 bindkey -M emacs "^Z" predict-off
 
-bindkey -e
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+export KEYTIMEOUT=1
 
 autoload -U edit-command-line
 
@@ -248,6 +256,13 @@ else
 PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
 RPROMPT=$'%{\e[1;36m%}{%D{%H:%M:%S}}%{\e[0m' 
+function zle-line-init zle-keymap-select {
+    RPROMPT="${${KEYMAP/vicmd/%{$fg_bold[red]%\}N}/(main|viins)/%{$fg_bold[blue]%\}I}%{$reset_color%}"
+    RPROMPT+=$'%{\e[1;36m%}{%D{%H:%M:%S}}%{\e[0m' 
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 alias ls='ls -F --color=auto'
 alias l='ls -lhF --group-directories-first --color=auto'
