@@ -289,7 +289,7 @@ alias :q='exit'
 alias update='sudo bash -c "NIX_PATH=$NIX_PATH nixos-rebuild switch --upgrade"; nix-env -q | sed -e "s/-[0-9\.]\+//g" | xargs nix-env -i' #WTF
 
 
-unsetopt correct_all
+unsetopt correct_all ignoreeof
 zstyle ':completion:*:processes' command 'ps -au$USER' 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;32'
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'

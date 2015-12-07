@@ -4,7 +4,7 @@ let
 in
 with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
-  haskellngPackages = pkgs.haskellngPackages;
+  haskellPackages = pkgs.haskellPackages;
   lushtags = pkgs.haskell.lib.overrideCabal haskellPackages.lushtags (oldAttrs: {
     src = pkgs.fetchgit {
       url = https://github.com/mkasa/lushtags;
@@ -22,8 +22,8 @@ with pkgs; rec {
     nativeBuildInputs = old.nativeBuildInputs ++ [ libpulseaudio automake libtool autoconf gettext ]; 
   });
 
-  loveMoc = haskellngPackages.callPackage ../myscripts/lovemoc/project.nix { };
-  /*taffybar = haskellngPackages.callPackage ../Dropbox/Programming/Haskell/taffybar/project.nix { }; # until temp fix is not accepted upstream*/
+  loveMoc = haskellPackages.callPackage ../myscripts/lovemoc/project.nix { };
+  /*taffybar = haskellPackages.callPackage ../Dropbox/Programming/Haskell/taffybar/project.nix { }; # until temp fix is not accepted upstream*/
 
   vimrcConfig = {
         vam.knownPlugins = vimPlugins; # optional
@@ -86,7 +86,7 @@ with pkgs; rec {
           paths = [
               my_vim
               /*racerRust*/
-              haskellngPackages.stylish-haskell
+              haskellPackages.stylish-haskell
               astyle
             ];
         }
@@ -170,10 +170,10 @@ with pkgs; rec {
             pass
             pinentry
             psmisc
+            python27Packages.goobook
             qutebrowser
             skype
             sxiv
-            imv #?
             telnet
             tightvnc
             tmux
@@ -199,7 +199,7 @@ with pkgs; rec {
         }
       );
 
-      myHs = haskellngPackages.ghcWithPackages (
+      myHs = haskellPackages.ghcWithPackages (
         pkgs: with pkgs; [ 
             cabal2nix
             cabal-install
@@ -228,7 +228,6 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [
               automake
-              cargoSnapshot
               clang
               cmake
               ctags
@@ -236,23 +235,16 @@ with pkgs; rec {
               gdb
               gcc
               gnumake
-              /*haskellngPackages.idris*/
-              idea.idea-community
               jdk
               manpages
-              mercurial
               mesa
               pciutils
               pkgconfig
               python
               python34
-              ruby
-              /*rustc*/
               smartmontools
-              sqlite
               subversion
               swiProlog
-              wireshark
               xlibs.libX11
               zlib
           ];

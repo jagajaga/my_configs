@@ -10,21 +10,20 @@ pkgs : {
         name = "desktop-env";
         ignoreCollisions = true;
         paths = [
-            bittorrentSync
             /*calibre*/
-            darcs
             desktop_file_utils
-            dmg2img
-            dvdplusrwtools
             e2fsprogs
             ffmpeg
+            gnome3.cheese
+            gnome3.gnome-video-effects
             fpc
-            /*google-musicmanager*/
+            google-musicmanager
             graphviz
             /*gtkvnc*/
             guvcview
             hdparm
             imagemagick
+            inkscape
             jmtpfs
             lshw
             lsof
@@ -40,6 +39,7 @@ pkgs : {
             parted
             pavucontrol
             perlPackages.FileMimeInfo
+            pdftk
             psmisc
             pwgen
             python27Packages.pytz
@@ -50,7 +50,7 @@ pkgs : {
             spaceFM
             spotify
             shared_mime_info
-            teamviewer
+            /*teamviewer*/
             /*texLiveFull*/
             tightvnc
             tor
