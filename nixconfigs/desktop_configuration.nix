@@ -19,11 +19,11 @@ in
       ./common_configuration.nix
   ];
 
-  boot.loader.grub.device  = "/dev/sdc";
+  boot.loader.grub.device  = "/dev/sdd";
 
-  nixpkgs.config.virtualbox.enableExtensionPack = true;
+ # nixpkgs.config.virtualbox.enableExtensionPack = true;
 
-  virtualisation.virtualbox.host.enable = true;
+#  virtualisation.virtualbox.host.enable = true;
 
   services = {
     teamviewer.enable = false;
