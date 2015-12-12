@@ -8,23 +8,24 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "usbhid" "usb_storage" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ata_piix" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/9bfda93b-b88b-42c7-a8d2-ba3a6a95ce52";
-      fsType = "f2fs";
-      options = "defaults,noatime,discard,background_gc=off";
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/af2d1e7d-cec8-4077-9097-279a7c5e758c";
+    { device = "/dev/disk/by-uuid/4a1989d0-e3ba-473d-95b2-e15ce999c3f5";
       fsType = "ext4";
+      options = "defaults,discard,noatime";
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/4cecd5bb-d4bb-498a-8712-f790ee7a748a";
+      fsType = "ext4";
+      options = "defaults,discard,noatime";
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/af2d1e7d-cec8-4077-9097-279a7c5e758c";
       fsType = "ext4";
     };
 

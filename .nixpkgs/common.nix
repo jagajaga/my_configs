@@ -152,7 +152,6 @@ with pkgs; rec {
             evince
             file
             flac
-            flashplayer
             freetype
             gajim
             dejavu_fonts

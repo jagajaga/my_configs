@@ -17,7 +17,7 @@ pkgs : {
             gnome3.cheese
             gnome3.gnome-video-effects
             fpc
-            google-musicmanager
+            /*google-musicmanager*/
             graphviz
             /*gtkvnc*/
             guvcview

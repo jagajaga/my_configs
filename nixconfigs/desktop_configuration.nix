@@ -23,12 +23,12 @@ in
 
  # nixpkgs.config.virtualbox.enableExtensionPack = true;
 
-#  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 
   services = {
     teamviewer.enable = false;
     openvpn = {
-      servers.Serokell = literals.openVPNConf.configSerokell;
+      # servers.Serokell = literals.openVPNConf.configSerokell;
     };
   };
 

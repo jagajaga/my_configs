@@ -2,12 +2,10 @@ import           System.Taffybar
 
 {-import           System.Taffybar.FreedesktopNotifications-}
 import           System.Taffybar.CommandRunner
-import           System.Taffybar.LayoutSwitcher
 import           System.Taffybar.NetMonitor
 import           System.Taffybar.Pager
 import           System.Taffybar.SimpleClock
 import           System.Taffybar.Systray
-import           System.Taffybar.TaffyPager
 import           System.Taffybar.Weather
 import           System.Taffybar.WorkspaceSwitcher
 
@@ -23,7 +21,6 @@ import           Graphics.UI.Gtk
 
 import           Data.List
 
-import           Control.Applicative
 
 memCallback :: IO Double
 memCallback = do
