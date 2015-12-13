@@ -1,2 +1,2 @@
 { pkgs ? import <nixpkgs> {} }:
-pkgs.haskellngPackages.callPackage ./project.nix {}
+pkgs.haskellPackages.callPackage ./project.nix {}
