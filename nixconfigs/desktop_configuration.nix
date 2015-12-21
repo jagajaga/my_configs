@@ -28,7 +28,7 @@ in
   services = {
     teamviewer.enable = false;
     openvpn = {
-      # servers.Serokell = literals.openVPNConf.configSerokell;
+      /*servers.Serokell = literals.openVPNConf.configSerokell;*/
     };
   };
 
