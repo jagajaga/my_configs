@@ -11,8 +11,8 @@ import           Data.Text            (Text, pack)
 import qualified Data.Text            as T
 import qualified Keys                 as K
 import           Libnotify
-import           Network.Lastfm
-import qualified Network.Lastfm.Track as Track
+import           Lastfm
+import qualified Lastfm.Track as Track
 import           System.Process
 
 

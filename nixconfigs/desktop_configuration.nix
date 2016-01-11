@@ -21,12 +21,12 @@ in
 
   boot.loader.grub.device  = "/dev/sdd";
 
- # nixpkgs.config.virtualbox.enableExtensionPack = true;
+ nixpkgs.config.virtualbox.enableExtensionPack = true;
 
   virtualisation.virtualbox.host.enable = true;
 
   services = {
-    teamviewer.enable = false;
+    teamviewer.enable = true;
     openvpn = {
       /*servers.Serokell = literals.openVPNConf.configSerokell;*/
     };

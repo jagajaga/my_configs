@@ -7,9 +7,9 @@ with pkgs; rec {
   haskellPackages = pkgs.haskellPackages;
   lushtags = pkgs.haskell.lib.overrideCabal haskellPackages.lushtags (oldAttrs: {
     src = pkgs.fetchgit {
-      url = https://github.com/mkasa/lushtags;
-      rev = "3d7229b07b47ab2fc188d7db63b33dfcd63a1802";
-      sha256 = "1f87zjs9d03h3g4r93ad4asdyx5jsx7nyzf5al72s855adxypdpm";
+      url = https://github.com/jagajaga/lushtags;
+      rev = "8ec95ca0ffad0f0f8b2e228b2d7d79fc2c7e4a7e";
+      sha256 = "15v2f58i1z3421rgxh1i5rbd6cgc4s3vljv1bdjx19b2x9fq237f";
     };
   });
 
