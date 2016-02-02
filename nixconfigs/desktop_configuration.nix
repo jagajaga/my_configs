@@ -5,9 +5,9 @@
 { config, pkgs, ... }:
 let
   literals = import ./literals.nix {pkgs = pkgs;
-                caSerokell   = pkgs.writeText "caSerokell.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
-                certSerokell = pkgs.writeText "seniaSerokell.crt" (builtins.readFile /root/.vpn/serokell/senia.crt);
-                keySerokell  = pkgs.writeText "seniaSerokell.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
+    caSerokell   = pkgs.writeText "caSerokell.crt" (builtins.readFile /root/.vpn/serokell/ca.crt);
+    certSerokell = pkgs.writeText "seniaSerokell.crt" (builtins.readFile /root/.vpn/serokell/senia.crt);
+    keySerokell  = pkgs.writeText "seniaSerokell.key" (builtins.readFile /root/.vpn/serokell/senia.key);  
   };
 in
 {
