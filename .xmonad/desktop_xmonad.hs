@@ -49,18 +49,19 @@ main = do
         conf  = ewmh $ uhook myConfig
 
 myConfig = defaultConfig { workspaces         = myWorkspaces
-                         , modMask            = modMask'
-                         , borderWidth        = borderWidth'
-                         , normalBorderColor  = normalBorderColor'
-                         , focusedBorderColor = focusedBorderColor'
-                         , terminal           = terminal'
-                         , keys               = keys'
-                         , layoutHook         = layoutHook'
-                         , manageHook         = manageHook'
-                         , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
-                         , logHook            = ewmhDesktopsLogHook >> updatePointer (Relative 0.9 0.9)
-                         , startupHook        = startup <+> ewmhDesktopsStartup
-                         }
+    , modMask            = modMask'
+    , borderWidth        = borderWidth'
+    , normalBorderColor  = normalBorderColor'
+    , focusedBorderColor = focusedBorderColor'
+    , terminal           = terminal'
+    , keys               = keys'
+    , layoutHook         = layoutHook'
+    , manageHook         = manageHook'
+    , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
+    , logHook            = ewmhDesktopsLogHook
+        >> updatePointer (0.9, 0.9) (1,1)
+    , startupHook        = startup <+> ewmhDesktopsStartup
+    }
 
 startup :: X ()
 startup = do
@@ -77,25 +78,25 @@ startup = do
     spawnOn   "Media"  "xfce4-terminal --title=mocp -e mocp"
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
-manageHook' = composeAll [ isFullscreen                   --> doFullFloat
-                         {-, className =? "Gimp"            --> doFloat-}
-                         , className =? "Skype"           --> doShift "IM"
-                         , className =? "ViberPC"         --> doShift "IM"
-                         , className =? "Gajim"           --> doShift "IM"
-                         , className =? "Steam"           --> doShift "Steam"
-                         , className =? "Vlc"             --> doCenterFloat
-                         , className =? "Xfce4-notifyd"   --> doF W.focusDown
-                         {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
-                         {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
-                         , title =? "cmatrix"             --> doIgnore
-                         , title =? "weechat"             --> doShift "Social"
-                         , title =? "twitter"             --> doShift "Social"
-                         , title =? "mocp"                --> doShift "Media"
-                         , transience'
-                         , isDialog                         --> doCenterFloat
-                         , role      =? "pop-up"            --> doCenterFloat
-                         ]
-                             where role = stringProperty "WM_WINDOW_ROLE"
+manageHook' = composeAll [ 
+      isFullscreen                   --> doFullFloat
+    , className =? "Skype"           --> doShift "IM"
+    , className =? "ViberPC"         --> doShift "IM"
+    , className =? "Gajim"           --> doShift "IM"
+    , className =? "Steam"           --> doShift "Steam"
+    , className =? "Vlc"             --> doCenterFloat
+    , className =? "Xfce4-notifyd"   --> doF W.focusDown
+    {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
+    {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
+    , title =? "cmatrix"             --> doIgnore
+    , title =? "weechat"             --> doShift "Social"
+    , title =? "twitter"             --> doShift "Social"
+    , title =? "mocp"                --> doShift "Media"
+    , transience'
+    , isDialog                         --> doCenterFloat
+    , role      =? "pop-up"            --> doCenterFloat
+    ]
+        where role = stringProperty "WM_WINDOW_ROLE"
 
 myGSNavigation :: TwoD a (Maybe a)
 myGSNavigation = makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
@@ -201,17 +202,11 @@ modMask' = mod4Mask
 toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
-interactiveRunInTerm c config = do
-    cmds <- io getCommands
-    mkXPrompt Shell config (getShellCompl cmds) run
-    where run a = unsafeSpawn $ c ++ " " ++ a
-
 keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,                 xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask,                 xK_r     ), shellPrompt defaultXPConfig)
-    , ((modMask .|. shiftMask,   xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )
     , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "qutebrowser")])
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)

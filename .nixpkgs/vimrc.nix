@@ -1,4 +1,4 @@
-{}:
+{pkgs}:
 {
   config = ''
     set history=700
@@ -143,10 +143,18 @@
     autocmd BufRead *.hs set makeprg=ghc\ -O3\ --make\ %
     autocmd FileType cpp map <C-D> <Esc>:%!astyle --mode=c --style=allman --indent=spaces=4 --indent-namespaces --break-blocks --add-brackets --align-pointer=middle --align-reference=type --suffix=none<CR><CR>
     autocmd BufRead *.hs map <C-D> <Esc>:%!stylish-haskell<CR><CR>
+
     autocmd BufRead,BufNewFile *.rs set filetype=rust
     autocmd FileType rust set makeprg=rustc\ %
+    "au BufWrite * :Autoformat
+    let g:formatdef_rustfmt = '"rustfmt"'
+    let g:formatters_rust = ['rustfmt']
+    let g:racer_cmd = "${pkgs.racerRust}/bin/racer"
+    let $RUST_SRC_PATH="${pkgs.rustc.src}/src"
+
     autocmd BufRead,BufNewFile *.idr set filetype=idris
     autocmd FileType idris set makeprg=idris\ %\ -o\ %<
+
     "au FileType haskell nnoremap <buffer> <F7> :HdevtoolsType<CR>
     "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 

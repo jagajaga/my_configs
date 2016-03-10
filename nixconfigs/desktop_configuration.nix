@@ -26,7 +26,7 @@ in
   virtualisation.virtualbox.host.enable = true;
 
   services = {
-    teamviewer.enable = false;
+    # teamviewer.enable = true;
     openvpn = {
       /*servers.Serokell = literals.openVPNConf.configSerokell;*/
     };

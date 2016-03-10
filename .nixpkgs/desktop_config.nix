@@ -11,20 +11,25 @@ pkgs : {
         ignoreCollisions = true;
         paths = [
             /*calibre*/
+            /*google-musicmanager*/
+            /*gtkvnc*/
+            /*teamviewer*/
+            /*texLiveFull*/
+            /*viber*/
             desktop_file_utils
             e2fsprogs
+            electrum
             ffmpeg
+            fpc
             gnome3.cheese
             gnome3.gnome-video-effects
-            fpc
-            /*google-musicmanager*/
             graphviz
-            /*gtkvnc*/
             guvcview
             hdparm
             imagemagick
             inkscape
             jmtpfs
+            kde4.k3b
             lshw
             lsof
             mbox
@@ -35,11 +40,11 @@ pkgs : {
             nox
             octave
             openvpn
-            pastebinit
             parted
+            pastebinit
             pavucontrol
-            perlPackages.FileMimeInfo
             pdftk
+            perlPackages.FileMimeInfo
             psmisc
             pwgen
             python27Packages.pytz
@@ -47,17 +52,14 @@ pkgs : {
             python33Packages.glances
             python34Packages.rainbowstream
             qemu
+            shared_mime_info
             spaceFM
             spotify
-            shared_mime_info
-            /*teamviewer*/
-            /*texLiveFull*/
             tightvnc
             tor
             transmission_gtk
             transmission_remote_gtk
             unetbootin
-            /*viber*/
             xlibs.xf86inputjoystick
         ];
       };

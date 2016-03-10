@@ -1,6 +1,6 @@
 {pkgs}:
 let 
-  vimrc = import ./vimrc.nix {};
+  vimrc = import ./vimrc.nix { pkgs = pkgs; };
 in
 with pkgs; rec {
   setPrio = num: drv: lib.addMetaAttrs { priority = num; } drv;
@@ -30,50 +30,51 @@ with pkgs; rec {
         vam.pluginDictionaries = [
 #check ftdetect bug
             { names = [ 
-                "ghcmod" 
-                "haskellconceal"
-                "hoogle"
-                "lushtags"
-                "neco-ghc"
-                "idris-vim"
-                "rust"
-                /*"racer"*/
+                "YUNOcommit-vim"
                 "airline"
                 "colors-solarized"
                 "ctrlp"
                 "easy-align"
                 "easymotion"
                 "fugitive"
+                "ghcmod" 
                 "gitgutter"
-                "vim-hardtime"
-                "vim-hier"
-                /*"latex-box"*/
+                "haskellconceal"
+                "hoogle"
+                "idris-vim"
                 "latex-live-preview"
+                "lushtags"
+                "neco-ghc"
                 "nerdcommenter"
                 "nerdtree"
                 "quickfixstatus"
                 "quickrun"
                 "rainbow_parentheses"
+                "rust"
                 "shabadou-vim"
                 "signature"
                 "surround"
+                "syntastic"
                 "table-mode"
                 "tabmerge"
                 "tagbar"
                 "taglist"
                 "thumbnail-vim"
                 "undotree"
-                "vimproc-vim"
                 "vim-addon-nix"
-                "vundle"
+                "vim-autoformat"
                 "vim-gista"
+                "vim-hardtime"
+                "vim-hier"
+                "vim-racer"
                 "vim-wakatime"
-                "watchdogs"
-                "syntastic"
-                "webapi-vim"
                 "vim-xkbswitch"
-                "YUNOcommit-vim"
+                "vimproc-vim"
+                "vundle"
+                "watchdogs"
+                "webapi-vim"
                 "youcompleteme"
+                /*"latex-box"*/
             ];}
         ];
         customRC = vimrc.config;
@@ -84,10 +85,11 @@ with pkgs; rec {
           name = "vim-env";
           ignoreCollisions = true;
           paths = [
-              my_vim
-              /*racerRust*/
-              haskellPackages.stylish-haskell
               astyle
+              haskellPackages.stylish-haskell
+              my_vim
+              racerRust
+              rustfmt
             ];
         }
       );
@@ -121,8 +123,8 @@ with pkgs; rec {
         name = "huge-env";
         ignoreCollisions = true;
         paths = [
-            chromiumDev
-            firefoxWrapper
+            chromium
+            firefox-bin
             gimp
             /*inkscape*/
         ];
@@ -235,12 +237,15 @@ with pkgs; rec {
               gcc
               gnumake
               jdk
+              llvm
               manpages
               mesa
               pciutils
               pkgconfig
               python
               python34
+              rustUnstable.rustc
+              cargo
               smartmontools
               subversion
               swiProlog

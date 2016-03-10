@@ -333,3 +333,4 @@ export NIX_GHCPKG="$HOME/.nix-profile/bin/ghc-pkg"
 export NIX_GHC_DOCDIR="$HOME/.nix-profile/share/doc/ghc/html"
 export NIX_GHC_LIBDIR="$HOME/.nix-profile/lib/ghc-${NIX_GHC_VERSION}"
 alias xclip='xclip -selection clipboard'
+alias weather="curl -4 http://wttr\.in/Saint-Petersburg"

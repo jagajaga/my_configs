@@ -4,25 +4,25 @@
 
 { config, pkgs, ... }:
 let
-  literals = import ./literals.nix {pkgs = pkgs;
-                ca   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
-                cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
-                key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  
-  };
+literals = import ./literals.nix {pkgs = pkgs;
+  ca   = pkgs.writeText "ca.crt" (builtins.readFile /root/.vpn/ca.crt);
+  cert = pkgs.writeText "alice" (builtins.readFile /root/.vpn/alice.crt);
+  key  = pkgs.writeText "alice.key" (builtins.readFile /root/.vpn/alice.key);  
+};
 in
 
 {
   require = [
-      ./private.nix
+    ./private.nix
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_latest;
+    kernelPackages      = pkgs.linuxPackages_4_1;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
       options kvm-amd nested=1
       options kvm-intel nested=1
-    '';
+      '';
     cleanTmpDir = true;
     loader.grub = {
       timeout = 1;
@@ -30,11 +30,11 @@ in
       version = 2;
     };
   };
-
+  /*https://hydra.nixos.org */
   nix = {
     /*package             = pkgs.nixUnstable;*/
-    binaryCaches = [ https://cache.nixos.org https://hydra.nixos.org ];
-    trustedBinaryCaches = [ https://cache.nixos.org https://hydra.nixos.org http://hydra.cryp.to ];
+    binaryCaches = [ https://cache.nixos.org ];
+    trustedBinaryCaches = [ https://cache.nixos.org http://hydra.cryp.to ];
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
 
     useChroot           = true;
@@ -74,8 +74,8 @@ in
 
   services = {
     cron.systemCronJobs = [
-       "20 * * * * jaga rsync --remove-source-files -rauz ${config.users.extraUsers.jaga.home}/{Dropbox/\"Camera Uploads\",yandex-disk/}"
-       "22 * * * * root systemctl restart yandex-disk.service"
+      "20 * * * * jaga rsync --remove-source-files -rauz ${config.users.extraUsers.jaga.home}/{Dropbox/\"Camera Uploads\",yandex-disk/}"
+        "22 * * * * root systemctl restart yandex-disk.service"
     ];
     dbus.enable            = true;
     nixosManual.showManual = true;
@@ -116,11 +116,11 @@ in
     };
     displayManager.sessionCommands = with pkgs; lib.mkAfter ''
       ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
-      ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
+    ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
       ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
-      exec ${haskellPackages.xmonad}/bin/xmonad
-    '';
+    exec ${haskellPackages.xmonad}/bin/xmonad
+      '';
     config = literals.trackBallConf;
     startGnuPGAgent = false;
   };
@@ -153,19 +153,19 @@ in
   time.timeZone = "Europe/Moscow";
 
   environment.systemPackages = with pkgs; [
-   bash
-   dropbox
-   git
-   htop
-   iotop
-   mc
-   networkmanager
-   networkmanagerapplet
-   pmutils
-   stdenv
-   wget
-   xsel
-   zsh
+    bash
+      dropbox
+      git
+      htop
+      iotop
+      mc
+      networkmanager
+      networkmanagerapplet
+      pmutils
+      stdenv
+      wget
+      xsel
+      zsh
   ];
   fonts = {
     fontconfig.enable      = true;
@@ -173,13 +173,13 @@ in
     enableGhostscriptFonts = true;
     fontconfig.defaultFonts.monospace = ["Terminus"];
     fonts = [
-       pkgs.corefonts
-       pkgs.clearlyU
-       pkgs.cm_unicode
-       pkgs.dejavu_fonts
-       pkgs.freefont_ttf
-       pkgs.terminus_font
-       pkgs.ttf_bitstream_vera
+      pkgs.corefonts
+        pkgs.clearlyU
+        pkgs.cm_unicode
+        pkgs.dejavu_fonts
+        pkgs.freefont_ttf
+        pkgs.terminus_font
+        pkgs.ttf_bitstream_vera
     ];
   };
 
