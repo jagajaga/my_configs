@@ -23,6 +23,21 @@ with pkgs; rec {
   });
 
   loveMoc = haskellPackages.callPackage ../myscripts/lovemoc/project.nix { };
+  antigen-hs = haskellPackages.callPackage ({ mkDerivation, base, directory, filepath, process, stdenv, text
+      }:
+      mkDerivation {
+        pname = "antigen-hs";
+        version = "0.1.0.0";
+        src = fetchgit {
+          url = https://github.com/Tarrasch/antigen-hs;
+          rev = "c089a2b8b394af3c6766808693bd4b6f53167f38";
+          sha256 = "0whnf8hqgnmpw4ql7b26j57p5ljw9fs8b15jmqfzgpl5m7jp9clp";
+        };
+        libraryHaskellDepends = [ base directory filepath process text ];
+        homepage = "https://github.com/Tarrasch/antigen-hs";
+        description = "A fast zsh plugin manager";
+        license = stdenv.lib.licenses.mit;
+      }) {};
   /*taffybar = haskellPackages.callPackage ../Dropbox/Programming/Haskell/taffybar/project.nix { }; # until temp fix is not accepted upstream*/
 
   vimrcConfig = {
@@ -220,6 +235,7 @@ with pkgs; rec {
         paths = [
             myHs
             loveMoc
+            antigen-hs
         ];
       };
 

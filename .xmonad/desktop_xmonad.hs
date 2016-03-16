@@ -58,8 +58,7 @@ myConfig = defaultConfig { workspaces         = myWorkspaces
     , layoutHook         = layoutHook'
     , manageHook         = manageHook'
     , handleEventHook    = fullscreenEventHook <+> ewmhDesktopsEventHook
-    , logHook            = ewmhDesktopsLogHook
-        >> updatePointer (0.9, 0.9) (1,1)
+    , logHook            = ewmhDesktopsLogHook >> updatePointer (0.5, 0.5) (0.25, 0.25)
     , startupHook        = startup <+> ewmhDesktopsStartup
     }
 
