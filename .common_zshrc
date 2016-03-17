@@ -247,7 +247,7 @@ alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
 source ~/.zsh/git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
-PROMPT=$'%{\e[1;32m%}%n %{\e[1;36m%}{%?} %{\e[1;37m%}%~'
+PROMPT=$'\n%{\e[1;31m%}⎧%{\e[1;37m%}%~ \n%{\e[1;31m%}⎩%{\e[1;32m%}%n %{\e[1;36m%}｢%?｣'
 #if [[ $PWD == $HOME ]]; then
 PROMPT+=$' $(git_super_status)'
 curshel=$(ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}')
@@ -263,8 +263,8 @@ PROMPT+=$' %#%{\e[0m%} ' # root dir #
 fi
 RPROMPT=$'%{\e[1;36m%}{%D{%H:%M:%S}}%{\e[0m' 
 function zle-line-init zle-keymap-select {
-    RPROMPT="${${KEYMAP/vicmd/%{$fg_bold[red]%\}N}/(main|viins)/%{$fg_bold[blue]%\}I}%{$reset_color%}"
-    RPROMPT+=$'%{\e[1;36m%}{%D{%H:%M:%S}}%{\e[0m' 
+    RPROMPT="${${KEYMAP/vicmd/%{$fg_bold[red]%\}༽}/(main|viins)/%{$fg_bold[blue]%\}༼}%{$reset_color%}"
+    RPROMPT+=$'%{\e[1;36m%}᚜%D{%H:%M:%S}᚛%{\e[0m' 
     zle reset-prompt
 }
 zle -N zle-line-init
