@@ -69,10 +69,9 @@ startup = do
     spawn     "xmodmap -e \"keysym Menu = Super_L\""
     spawn     "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
     spawnOn   "IM"     "skype"
-    spawnOn   "IM"     "gajim"
-    spawnOn   "IM"     "viber"
+    spawnOn   "IM"     "pidgin"
+    spawnOn   "IM"     "slack"
     spawnOn   "Steam"  "steam"
-    spawnOn   "Social"    "xfce4-terminal --title=twitter -e rainbowstream"
     spawnOn   "Social"    "xfce4-terminal --title=weechat -e weechat"
     spawnOn   "Media"  "xfce4-terminal --title=mocp -e mocp"
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
@@ -80,8 +79,8 @@ startup = do
 manageHook' = composeAll [ 
       isFullscreen                   --> doFullFloat
     , className =? "Skype"           --> doShift "IM"
-    , className =? "ViberPC"         --> doShift "IM"
-    , className =? "Gajim"           --> doShift "IM"
+    , className =? "Slack"         --> doShift "IM"
+    , className =? "Pidgin"           --> doShift "IM"
     , className =? "Steam"           --> doShift "Steam"
     , className =? "Vlc"             --> doCenterFloat
     , className =? "Xfce4-notifyd"   --> doF W.focusDown
@@ -165,20 +164,16 @@ myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkCom
 -- layouts
 layoutHook' = onWorkspace "Steam" steamLayout
     $ onWorkspace "IM" skypeLayout
-    $ onWorkspace "Social" socialLayout
     $ tile ||| mtile ||| tab ||| full ||| oneBig
   where
     rt          = ResizableTall 1 (2/100) (1/2) []
-    socialLayout = renamed [Replace "₪"]
-        $ reflectHoriz
-            $ withIM 0.28 (Title "twitter")
-                    $ multiCol [1] 4 0.01 0.25
     skypeLayout = renamed [Replace "[][]"]
         $ withIM 0.18 (ClassName "Skype" `And` Not (Role "ConversationsWindow"))
             $ reflectHoriz
-                $ withIM 0.18 (ClassName "Gajim" `And` Role "roster")
+                $ withIM 0.18 (ClassName "Pidgin" `And` Role "buddy_list")
                     $ reflectHoriz
-                        $ multiCol [2] 4 0.01 0.5
+                        $ smartBorders
+                            $ multiCol [2] 4 0.01 0.5
     steamLayout = renamed [Replace "λ"]
         $ withIM 0.18 (ClassName "Steam" `And` Title "Friends")
             $ multiCol [1] 4 0.01 0.25

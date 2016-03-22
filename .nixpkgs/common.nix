@@ -22,6 +22,10 @@ with pkgs; rec {
     nativeBuildInputs = old.nativeBuildInputs ++ [ libpulseaudio automake libtool autoconf gettext ]; 
   });
 
+  my-pidgin-with-plugins = pkgs.pidgin-with-plugins.override {
+    plugins = [ telegram-purple ];
+  };
+
   loveMoc = haskellPackages.callPackage ../myscripts/lovemoc/project.nix { };
   antigen-hs = haskellPackages.callPackage ({ mkDerivation, base, directory, filepath, process, stdenv, text
       }:
@@ -158,6 +162,7 @@ with pkgs; rec {
           name = "base-env";
           ignoreCollisions = true;
           paths = [ 
+            my-pidgin-with-plugins
             androidenv.platformTools
             perlPackages.ack
             aspell
@@ -170,7 +175,6 @@ with pkgs; rec {
             file
             flac
             freetype
-            gajim
             dejavu_fonts
             gnome.zenity
             gnupg
