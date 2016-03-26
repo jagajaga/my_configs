@@ -115,14 +115,18 @@ in
       };
     };
     displayManager.sessionCommands = with pkgs; lib.mkAfter ''
+      gpg-connect-agent /bye
+      GPG_TTY=$(tty)
+      export GPG_TTY
+      unset SSH_AGENT_PID
+      export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
       ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
-    ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
+      ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &
       ${feh}/bin/feh --bg-scale ${config.users.extraUsers.jaga.home}/yandex-disk/Camera\ Uploads/etc/fairy_forest_by_arsenixc-d6pqaej.jpg;
     exec ${haskellPackages.xmonad}/bin/xmonad
       '';
     config = literals.trackBallConf;
-    startGnuPGAgent = false;
   };
 
   systemd.services.lastfmsubmitd = {
