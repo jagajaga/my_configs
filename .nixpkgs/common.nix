@@ -228,7 +228,6 @@ with pkgs; rec {
             hoogle
             lushtags
             pandoc
-            stack
             taffybar
             xmonad
             xmonad-contrib

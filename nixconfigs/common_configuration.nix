@@ -75,7 +75,7 @@ in
   services = {
     cron.systemCronJobs = [
       "20 * * * * jaga rsync --remove-source-files -rauz ${config.users.extraUsers.jaga.home}/{Dropbox/\"Camera Uploads\",yandex-disk/}"
-        "22 * * * * root systemctl restart yandex-disk.service"
+      #"22 * * * * root systemctl restart yandex-disk.service"
     ];
     dbus.enable            = true;
     nixosManual.showManual = true;
@@ -119,7 +119,7 @@ in
       GPG_TTY=$(tty)
       export GPG_TTY
       unset SSH_AGENT_PID
-      export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
+      export SSH_AUTH_SOCK="${config.users.extraUsers.jaga.home}/.gnupg/S.gpg-agent.ssh"
       ${xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr;
       ${coreutils}/bin/sleep 30 && ${dropbox}/bin/dropbox &
       ${networkmanagerapplet}/bin/nm-applet &

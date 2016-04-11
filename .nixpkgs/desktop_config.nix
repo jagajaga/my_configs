@@ -38,7 +38,7 @@ pkgs : {
             nix-prefetch-scripts
             nix-repl
             nox
-            octave
+            /*octave*/
             openvpn
             parted
             pastebinit
