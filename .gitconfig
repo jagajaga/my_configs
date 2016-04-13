@@ -12,3 +12,5 @@
 	user = JagaJaga
 [core]
 	excludesfile = ~/.gitignore_global
+[gpg]
+	program = gpg2
