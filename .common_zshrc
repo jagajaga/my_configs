@@ -322,7 +322,7 @@ unset SSH_ASKPASS
 setopt interactivecomments
 alias tmux='tmux attach || tmux new'
 ssh-add ~/.ssh/git_rsa 2>/dev/null
-alias bump='git commit -am bump'
+alias bump='git commit -aSm bump'
 
 fpath=(~/nix-zsh-completions $fpath)
 source ~/nix-zsh-completions/nix.plugin.zsh
