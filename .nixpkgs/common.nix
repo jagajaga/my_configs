@@ -22,6 +22,14 @@ with pkgs; rec {
     nativeBuildInputs = old.nativeBuildInputs ++ [ libpulseaudio automake libtool autoconf gettext ]; 
   });
 
+  myAndroidSdk = pkgs.androidenv.androidsdk {
+      platformVersions = [ "23" ];
+      abiVersions = [ "armeabi-v7a" ];
+      useGoogleAPIs = true;
+      useExtraSupportLibs = true;
+      useGooglePlayServices = true;
+  };
+
   my-pidgin-with-plugins = pkgs.pidgin-with-plugins.override {
     plugins = [ telegram-purple ];
   };
@@ -93,6 +101,7 @@ with pkgs; rec {
                 "watchdogs"
                 "webapi-vim"
                 "youcompleteme"
+                "vim-orgmode"
                 /*"latex-box"*/
             ];}
         ];
@@ -163,7 +172,7 @@ with pkgs; rec {
           ignoreCollisions = true;
           paths = [ 
             my-pidgin-with-plugins
-            androidenv.platformTools
+            /*androidenv.platformTools*/
             perlPackages.ack
             aspell
             aspellDicts.en
@@ -248,6 +257,10 @@ with pkgs; rec {
           name = "development-env";
           ignoreCollisions = true;
           paths = [
+              myAndroidSdk
+              idea.android-studio
+              gradle
+              #====
               automake
               clang
               cmake
