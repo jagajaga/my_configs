@@ -152,7 +152,7 @@ with pkgs; rec {
         ignoreCollisions = true;
         paths = [
             chromium
-            firefox-bin
+            firefoxWrapper
             gimp
             /*inkscape*/
         ];

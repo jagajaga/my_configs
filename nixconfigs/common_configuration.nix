@@ -78,6 +78,7 @@ in
       #"22 * * * * root systemctl restart yandex-disk.service"
     ];
     dbus.enable            = true;
+    pcscd.enable           = true;
     nixosManual.showManual = true;
     nix-serve.enable       = true;
     journald.extraConfig   = "SystemMaxUse=50M";
