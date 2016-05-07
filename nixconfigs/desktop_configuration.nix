@@ -23,7 +23,15 @@ in
 
   # nixpkgs.config.virtualbox.enableExtensionPack = true;
 
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation = {
+
+    virtualbox.host.enable = true;
+
+    docker = {
+      enable = true;
+      storageDriver = "devicemapper";
+    };  
+  };
 
   services = {
     # teamviewer.enable = true;
