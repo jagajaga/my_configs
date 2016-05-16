@@ -46,14 +46,24 @@
 
   services.xserver = {
     videoDrivers = [ "intel" ];
-    multitouch.enable   = true;
-    synaptics           = {
-      enable          = true;
+    /*multitouch.enable   = true;*/
+    synaptics = {
+      enable = true;
+      minSpeed = "0.4";
+      maxSpeed = "1.2";
+      accelFactor = "0.035";
+      palmDetect = true;
+      horizontalScroll = false;
       twoFingerScroll = true;
-    };
-    startGnuPGAgent = true;
+#     buttonsMap = [ 1 3 2 ]; # Some bug, default settings doesn't recognize right touchpad button as it is, now it's two-finger-tap to call menu
+      additionalOptions = ''
+        Option "TapButton3"           "2"
+        Option "ClickPad"             "true"
+        Option "SoftButtonAreas"      "50% 0 82% 0 0 0 0 0"
+#       Option "PalmMinWidth"         "6"
+#       Option "PalmMinZ"             "100"
+       '';
+     };
   };
-
-  programs.ssh.startAgent = false;
 
 }
