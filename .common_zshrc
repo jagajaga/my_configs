@@ -286,7 +286,7 @@ alias connect='sudo netcfg -r Jaga-Jaga'
 alias showdisk='sudo fdisk -l'
 alias cp='cp'
 alias :q='exit'
-alias update='sudo bash -c "NIX_PATH=$NIX_PATH nixos-rebuild switch --upgrade"; nix-env -q | sed -e "s/-[0-9\.]\+//g" | xargs nix-env -i' #WTF
+alias update='sudo bash -c "NIX_PATH=$NIX_PATH nixos-rebuild switch --upgrade"; nix-env -u --leq' #WTF
 
 
 unsetopt correct_all ignoreeof

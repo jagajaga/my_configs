@@ -15,13 +15,13 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4a1989d0-e3ba-473d-95b2-e15ce999c3f5";
       fsType = "ext4";
-      options = "defaults,discard,noatime";
+      options = [ "defaults" "discard" "noatime" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/4cecd5bb-d4bb-498a-8712-f790ee7a748a";
       fsType = "ext4";
-      options = "defaults,discard,noatime";
+      options = [ "defaults" "discard" "noatime" ];
     };
 
   fileSystems."/home" =

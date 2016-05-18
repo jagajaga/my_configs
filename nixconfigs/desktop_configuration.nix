@@ -21,7 +21,7 @@ in
 
   boot.loader.grub.device  = "/dev/sdd";
 
-  # nixpkgs.config.virtualbox.enableExtensionPack = true;
+  /*nixpkgs.config.virtualbox.enableExtensionPack = true;*/
 
   virtualisation = {
 

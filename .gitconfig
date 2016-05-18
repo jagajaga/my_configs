@@ -1,18 +1,20 @@
 [user]
-	name = Arseniy Seroka
-	email = ars.seroka@gmail.com
-	signingkey = 7F7B40E3
+    name = Arseniy Seroka
+    email = ars.seroka@gmail.com
+    signingkey = 7F7B40E3
 [alias]
     lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
     lg = !"git lg1"
 [push]
-	default = simple
+    default = simple
 [github]
-	user = JagaJaga
+    user = JagaJaga
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [gpg]
-	program = gpg2
+    program = gpg2
 [commit]
-	gpgsign = true
+    gpgsign = true
+[http]
+    sslverify = false

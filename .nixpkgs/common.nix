@@ -257,9 +257,9 @@ with pkgs; rec {
           name = "development-env";
           ignoreCollisions = true;
           paths = [
-              myAndroidSdk
-              idea.android-studio
-              gradle
+              /*myAndroidSdk*/
+              /*idea.android-studio*/
+              /*gradle*/
               #====
               automake
               clang
