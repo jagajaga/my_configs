@@ -318,6 +318,35 @@ function calc() {
     echo "$@" | octave -q --silent
 }
 
+countFiles () {
+    # call the recursive function, throw away stdout and send stderr to stdout
+    # then sort numerically
+    countFiles_rec "$1" 2>&1 >/dev/null | sort -nr
+}
+
+countFiles_rec () {
+    local -i nfiles 
+    dir="$1"
+
+    # count the number of files in this directory only
+    nfiles=$(find "$dir" -mindepth 1 -maxdepth 1 -type f -print | wc -l)
+
+    # loop over the subdirectories of this directory
+    while IFS= read -r subdir; do
+
+        # invoke the recursive function for each one 
+        # save the output in the positional parameters
+        set -- $(countFiles_rec "$subdir")
+
+        # accumulate the number of files found under the subdirectory
+        (( nfiles += $1 ))
+
+    done < <(find "$dir" -mindepth 1 -maxdepth 1 -type d -print)
+
+    # print the number of files here, to both stdout and stderr
+    printf "%d %s\n" $nfiles "$dir" | tee /dev/stderr
+}
+
 unset SSH_ASKPASS
 setopt interactivecomments
 alias tmux='tmux attach || tmux new'
