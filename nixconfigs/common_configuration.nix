@@ -34,8 +34,12 @@ in
   nix = {
     /*package             = pkgs.nixUnstable;*/
     binaryCaches = [ https://cache.nixos.org ];
-    trustedBinaryCaches = [ https://cache.nixos.org http://hydra.cryp.to ];
-    binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+    trustedBinaryCaches = [ https://cache.nixos.org http://hydra.cryp.to https://hydra.serokell.io ];
+    binaryCachePublicKeys = [
+      "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hydra.serokell.io-1:he7AKwJKKiOiy8Sau9sPcso9T/PmlVNxcnNpRgcFsps="
+    ];
 
     useChroot           = true;
     gc = {

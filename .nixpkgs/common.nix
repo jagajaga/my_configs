@@ -9,7 +9,7 @@ with pkgs; rec {
     src = pkgs.fetchgit {
       url = https://github.com/jagajaga/lushtags;
       rev = "8ec95ca0ffad0f0f8b2e228b2d7d79fc2c7e4a7e";
-      sha256 = "15v2f58i1z3421rgxh1i5rbd6cgc4s3vljv1bdjx19b2x9fq237f";
+      sha256 = "1q5lqwrdrkbv18kmpc19y37xwhjqnvzq9cj4v1pc79wir10fcsnw";
     };
   });
 
@@ -43,7 +43,7 @@ with pkgs; rec {
         src = fetchgit {
           url = https://github.com/Tarrasch/antigen-hs;
           rev = "c089a2b8b394af3c6766808693bd4b6f53167f38";
-          sha256 = "0whnf8hqgnmpw4ql7b26j57p5ljw9fs8b15jmqfzgpl5m7jp9clp";
+          sha256 = "0kaxa7d9bhn22fic1qam98chbxylwps155sd6qlis9jgs2z7n074";
         };
         libraryHaskellDepends = [ base directory filepath process text ];
         homepage = "https://github.com/Tarrasch/antigen-hs";
@@ -77,7 +77,7 @@ with pkgs; rec {
                 "quickfixstatus"
                 "quickrun"
                 "rainbow_parentheses"
-                "rust"
+                "rust-vim"
                 "shabadou-vim"
                 "signature"
                 "surround"
