@@ -1,6 +1,5 @@
 pkgs : {
   allowUnfree = true;
-  /*allowBroken = true;*/
   packageOverrides = pkgs : with pkgs; rec {
       common = import ./common.nix { pkgs = pkgs; }; 
       workEnv = pkgs.buildEnv
