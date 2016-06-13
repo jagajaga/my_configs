@@ -17,7 +17,7 @@ in
   ];
 
   boot = {
-    kernelPackages      = pkgs.linuxPackages_4_1;
+    kernelPackages      = pkgs.linuxPackages_latest;
     extraModprobeConfig = ''
       options snd slots=snd_usb_audio,snd-hda-intel
       options kvm-amd nested=1

@@ -230,13 +230,13 @@ with pkgs; rec {
 
       myHs = haskellPackages.ghcWithPackages (
         pkgs: with pkgs; [ 
-            cabal2nix
-            cabal-install
-            ghc-mod
-            hlint
-            hoogle
+           # cabal2nix
+            /*cabal-install*/
+            /*ghc-mod*/
+           # hlint
+           # hoogle
             lushtags
-            pandoc
+            /*pandoc*/
             taffybar
             xmonad
             xmonad-contrib

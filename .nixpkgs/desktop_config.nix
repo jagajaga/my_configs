@@ -13,7 +13,7 @@ pkgs : {
         ignoreCollisions = true;
         paths = [
             /*calibre*/
-            /*google-musicmanager*/
+            google-musicmanager
             /*gtkvnc*/
             /*teamviewer*/
             /*texLiveFull*/
