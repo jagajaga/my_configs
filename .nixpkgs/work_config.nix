@@ -5,7 +5,6 @@ pkgs : {
       {
         name = "work-env";
         paths = [
-          unetbootin
         ];
       };
   };
