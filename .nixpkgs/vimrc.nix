@@ -149,7 +149,7 @@
     "au BufWrite * :Autoformat
     let g:formatdef_rustfmt = '"rustfmt"'
     let g:formatters_rust = ['rustfmt']
-    let g:racer_cmd = "${pkgs.racerRust}/bin/racer"
+    let g:racer_cmd = "${pkgs.rustracer}/bin/racer"
     let $RUST_SRC_PATH="${pkgs.rustc.src}/src"
 
     autocmd BufRead,BufNewFile *.idr set filetype=idris
