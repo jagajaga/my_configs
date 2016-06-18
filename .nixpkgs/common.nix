@@ -116,7 +116,7 @@ with pkgs; rec {
               astyle
               haskellPackages.stylish-haskell
               my_vim
-              racerRust
+              rustracer
               rustfmt
             ];
         }
