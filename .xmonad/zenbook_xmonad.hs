@@ -165,17 +165,17 @@ modMask' = mod4Mask
 toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
-interactiveRunInTerm c config = do
-    cmds <- io getCommands
-    mkXPrompt Shell config (getShellCompl cmds) run
-    where run a = unsafeSpawn $ c ++ " " ++ a
+{-interactiveRunInTerm c config = do-}
+    {-cmds <- io getCommands-}
+    {-mkXPrompt Shell config (getShellCompl cmds) run-}
+    {-where run a = unsafeSpawn $ c ++ " " ++ a-}
 
 keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask                                                  , xK_r     ), shellPrompt defaultXPConfig)
-    , ((modMask .|. shiftMask                                                  , xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )
+    {-, ((modMask .|. shiftMask                                                  , xK_r     ), interactiveRunInTerm (XMonad.terminal conf ++ " -e") defaultXPConfig )-}
     , ((modMask                                                  , xK_w     ), safeSpawn "dwb" [])
     , ((modMask .|. shiftMask    , xK_w     ), safeSpawn "chromium" [])
     , ((modMask,               xK_a     ), safeSpawn (XMonad.terminal conf) ["-x", "mc"])
