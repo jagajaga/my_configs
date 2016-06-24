@@ -142,7 +142,6 @@ in
        pkgs.clearlyU
        pkgs.cm_unicode
        pkgs.dejavu_fonts
-       pkgs.terminus_font
        pkgs.ttf_bitstream_vera
     ];
   };
