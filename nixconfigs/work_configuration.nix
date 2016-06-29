@@ -140,7 +140,6 @@ in
     fonts = [
        pkgs.corefonts
        pkgs.clearlyU
-       pkgs.cm_unicode
        pkgs.dejavu_fonts
        pkgs.ttf_bitstream_vera
     ];
