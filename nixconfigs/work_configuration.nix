@@ -141,7 +141,6 @@ in
        pkgs.corefonts
        pkgs.clearlyU
        pkgs.dejavu_fonts
-       pkgs.ttf_bitstream_vera
     ];
   };
 }
