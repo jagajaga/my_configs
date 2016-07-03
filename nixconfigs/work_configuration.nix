@@ -140,7 +140,6 @@ in
     fonts = [
        pkgs.corefonts
        pkgs.clearlyU
-       pkgs.dejavu_fonts
     ];
   };
 }
