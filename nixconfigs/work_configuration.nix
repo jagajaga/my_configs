@@ -138,7 +138,6 @@ in
     enableFontDir          = true;
     enableGhostscriptFonts = true;
     fonts = [
-       pkgs.clearlyU
     ];
   };
 }
