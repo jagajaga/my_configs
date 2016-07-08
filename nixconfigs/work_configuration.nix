@@ -128,7 +128,6 @@ in
    mc
    pmutils
    stdenv
-   wget
    xsel
    zsh
    ceph
