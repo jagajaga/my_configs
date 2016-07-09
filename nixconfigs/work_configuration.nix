@@ -125,7 +125,6 @@ in
    git
    htop
    iotop
-   mc
    pmutils
    stdenv
    xsel
