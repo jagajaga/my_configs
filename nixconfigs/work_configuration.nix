@@ -122,7 +122,6 @@ in
   environment.systemPackages = with pkgs; [
    bash
    connmanui
-   git
    htop
    iotop
    pmutils
