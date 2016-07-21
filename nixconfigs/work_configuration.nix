@@ -120,7 +120,6 @@ in
   time.timeZone = "Europe/Moscow";
 
   environment.systemPackages = with pkgs; [
-   zsh
    ceph
    /*cjdns*/
   ];
