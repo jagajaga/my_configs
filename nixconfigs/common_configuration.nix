@@ -154,7 +154,7 @@ in
     createHome  = true;
     home        = "/home/jaga";
     group       = "users";
-    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "adb" "video" "power" "vboxusers" "cdrom" ];
     shell       = "${pkgs.zsh}/bin/zsh";
     uid         = 1000;
   };

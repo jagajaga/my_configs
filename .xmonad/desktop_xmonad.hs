@@ -68,28 +68,28 @@ startup = do
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
     spawn     "xmodmap -e \"keysym Menu = Super_L\""
     spawn     "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
-    spawnOn   "IM"     "skype"
-    spawnOn   "IM"     "pidgin"
-    spawnOn   "IM"     "slack"
-    spawnOn   "Steam"  "steam"
-    spawnOn   "Social"    "xfce4-terminal --title=weechat -e weechat"
-    spawnOn   "Media"  "xfce4-terminal --title=mocp -e mocp"
+    spawnOn   "ς"     "skype"
+    spawnOn   "ς"     "pidgin"
+    spawnOn   "ς"     "slack"
+    spawnOn   "ζ"  "steam"
+    spawnOn   "ψ"    "xfce4-terminal --title=weechat -e weechat"
+    spawnOn   "μ"  "xfce4-terminal --title=mocp -e mocp"
     {-spawn "killall cmatrix || xfce4-terminal --title=cmatrix -e \"cmatrix -bxu 5\" --maximize --geometry=200x100+0+17"-}
 
 manageHook' = composeAll [ 
       isFullscreen                   --> doFullFloat
-    , className =? "Skype"           --> doShift "IM"
-    , className =? "Slack"         --> doShift "IM"
-    , className =? "Pidgin"           --> doShift "IM"
-    , className =? "Steam"           --> doShift "Steam"
+    , className =? "Skype"           --> doShift "ς"
+    , className =? "Slack"         --> doShift "ς"
+    , className =? "Pidgin"           --> doShift "ς"
+    , className =? "Steam"           --> doShift "ζ"
     , className =? "Vlc"             --> doCenterFloat
     , className =? "Xfce4-notifyd"   --> doF W.focusDown
     {-, title =? "cmatrix"             --> [>doIgnore <+><] (doRectFloat $ W.RationalRect 0 (17/900) 1 1) <+> doF W.focusDown <+> doF copyToAll-}
     {-, title =? "cmatrix"             --> placeHook placeOnBottom-}
     , title =? "cmatrix"             --> doIgnore
-    , title =? "weechat"             --> doShift "Social"
-    , title =? "twitter"             --> doShift "Social"
-    , title =? "mocp"                --> doShift "Media"
+    , title =? "weechat"             --> doShift "ψ"
+    , title =? "twitter"             --> doShift "ψ"
+    , title =? "mocp"                --> doShift "μ"
     , transience'
     , isDialog                         --> doCenterFloat
     , role      =? "pop-up"            --> doCenterFloat
@@ -157,13 +157,13 @@ tabTheme1 = defaultTheme { decoHeight = 16
 -- workspaces
 myWorkspaces = wspaces ++ (map show $ drop (length wspaces) [1..9])
     where
-        wspaces = ["General", "Programming", "Work", "IM", "Social", "Media", "Steam", "Game"]
+        wspaces = ["α", "λ", "ξ", "ς", "ψ", "μ", "ζ", "ο"]
 
 myLayoutPrompt = inputPromptWithCompl defaultXPConfig "name of processes" (mkComplFunFromList' ["emacs", "qutebrowser"]) ?+ (\r -> spawn $ "pkill -x " ++ r)
 
 -- layouts
-layoutHook' = onWorkspace "Steam" steamLayout
-    $ onWorkspace "IM" skypeLayout
+layoutHook' = onWorkspace "ζ" steamLayout
+    $ onWorkspace "ς" skypeLayout
     $ tile ||| mtile ||| tab ||| full ||| oneBig
   where
     rt          = ResizableTall 1 (2/100) (1/2) []
@@ -175,7 +175,7 @@ layoutHook' = onWorkspace "Steam" steamLayout
                         $ smartBorders
                             $ multiCol [2] 4 0.01 0.5
     steamLayout = renamed [Replace "λ"]
-        $ withIM 0.18 (ClassName "Steam" `And` Title "Friends")
+        $ withIM 0.18 (ClassName "ζ" `And` Title "Friends")
             $ multiCol [1] 4 0.01 0.25
     tile        = renamed [Replace "[]="] $ maximize $ minimize $ smartBorders rt
     mtile       = renamed [Replace "M[]="] $ maximize $ minimize $ smartBorders $ Mirror rt
@@ -201,7 +201,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,                 xK_e     ), safeSpawn (XMonad.terminal conf) [])
     , ((modMask,                 xK_r     ), shellPrompt defaultXPConfig)
-    , ((modMask,                 xK_w     ), bindOn [("Steam", spawn "steam"), ("", spawn "qutebrowser")])
+    , ((modMask,                 xK_w     ), bindOn [("ζ", spawn "steam"), ("", spawn "qutebrowser")])
     , ((modMask .|. shiftMask,   xK_w     ), safeSpawn "firefox" [])
     , ((modMask,                 xK_c     ), kill)
     , ((modMask .|. controlMask, xK_space ), windowPromptGoto defaultXPConfig )

@@ -185,7 +185,7 @@ with pkgs; rec {
             flac
             freetype
             dejavu_fonts
-            gnome.zenity
+            gnome3.zenity
             gnupg
             gparted
             iftop
@@ -277,7 +277,7 @@ with pkgs; rec {
               pkgconfig
               python
               python34
-              rustUnstable.rustc
+              rustc
               cargo
               smartmontools
               subversion

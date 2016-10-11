@@ -56,7 +56,7 @@ pkgs : {
             qemu
             shared_mime_info
             spaceFM
-            spotify
+            /*spotify*/
             tightvnc
             tor
             transmission_gtk

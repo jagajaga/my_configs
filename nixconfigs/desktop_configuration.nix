@@ -28,7 +28,7 @@ in
     virtualbox.host.enable = true;
 
     docker = {
-      enable = true;
+      enable = false;
       storageDriver = "devicemapper";
     };  
   };
