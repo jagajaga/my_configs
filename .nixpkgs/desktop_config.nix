@@ -31,7 +31,7 @@ pkgs : {
             imagemagick
             inkscape
             jmtpfs
-            kde4.k3b
+            k3b
             lshw
             lsof
             mbox
@@ -50,9 +50,6 @@ pkgs : {
             psmisc
             pwgen
             python27Packages.pytz
-            python27Packages.turses
-            python33Packages.glances
-            python34Packages.rainbowstream
             qemu
             shared_mime_info
             spaceFM

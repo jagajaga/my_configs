@@ -67,7 +67,7 @@ startup = do
     setWMName "LG3D"
     safeSpawn "amixer" ["-q", "set", "Master", "on"]
     spawn     "xmodmap -e \"keysym Menu = Super_L\""
-    spawn     "xfce4-terminal -e \"setxkbmap -layout us,ru(winkeys) -option grp:caps_toggle && exit\""
+    spawn     "xfce4-terminal -e \"setxkbmap -layout us,ru -variant colemak, -option grp:caps_toggle && exit\""
     spawnOn   "ς"     "skype"
     spawnOn   "ς"     "pidgin"
     spawnOn   "ς"     "slack"

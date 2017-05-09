@@ -41,7 +41,7 @@ in
       "hydra.serokell.io-1:he7AKwJKKiOiy8Sau9sPcso9T/PmlVNxcnNpRgcFsps="
     ];
 
-    useChroot           = true;
+    useSandbox          = true;
     gc = {
       automatic = true;
       dates     = "00:00";
@@ -100,7 +100,7 @@ in
     enable              = true;
     layout              = "us,ru";
     xkbOptions          = "grp:caps_toggle";
-    xkbVariant          = "winkeys";
+    xkbVariant          = "colemak";
     displayManager.slim = {
       enable      = true;
       autoLogin   = false;
@@ -163,18 +163,20 @@ in
 
   environment.systemPackages = with pkgs; [
     bash
-      dropbox
-      git
-      htop
-      iotop
-      mc
-      networkmanager
-      networkmanagerapplet
-      pmutils
-      stdenv
-      wget
-      xsel
-      zsh
+    dropbox
+    exfat-utils
+    fuse_exfat
+    git
+    htop
+    iotop
+    mc
+    networkmanager
+    networkmanagerapplet
+    pmutils
+    stdenv
+    wget
+    xsel
+    zsh
   ];
   fonts = {
     fontconfig.enable      = true;
