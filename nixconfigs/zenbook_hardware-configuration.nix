@@ -4,9 +4,9 @@
 { config, pkgs, ... }:
 
 {
-  require = [
-    <nixos/modules/installer/scan/not-detected.nix>
-  ];
+  imports =
+    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    ];
 
   boot.initrd.kernelModules = [ "ehci_hcd" "ahci" "xhci_hcd" "usb_storage" ];
   boot.kernelModules = [ "kvm-intel" ];
