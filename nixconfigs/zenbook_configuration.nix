@@ -19,6 +19,17 @@
     hostName             = "nixosZ";
   };
 
+  hardware = {
+    bluetooth.enable = true;
+  };
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      bluez = pkgs.bluez5;
+    };
+  };
+
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
   security.polkit.extraConfig = ''
     polkit.addRule(function(action) {
       if (action.id == "org.freedesktop.udisks2.filesystem-mount-system") {

@@ -117,7 +117,7 @@ main = do
       clock      = textClockNew Nothing ("<span fgcolor='#C98F0A'>%a %b %d " 
         ++"</span><span fgcolor='#429942'>%H:%M:%S</span>") 1
       battery    = textBatteryNew (colorize colorOrange "" "$percentage$% ⌛ " ++
-        colorize colorLightGreen "" "$time$") 60
+        colorize colorLightGreen "" "$time$") 20 
       netMonitor = netMonitorNewWith 2.0 "wlp2s0" 0 $
         colorize colorOrange "" "WiFi: ⇣"
         ++ colorize colorLightGreen "" "$inKB$"
