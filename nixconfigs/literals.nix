@@ -5,28 +5,33 @@
   openVPNConf = { 
     configJJ = { 
       config = ''
-        client
-        nobind
-        dev tun
-        redirect-gateway def1
-        ca ${ca}
-        cert ${cert}
-        key ${key}
-        <dh>
-        -----BEGIN DH PARAMETERS-----
-        MIGHAoGBAPC5Q5G3PflAC9fppe9FIPAEjpSZAm2akzO+ttm4VrVxXvImnRkVuf6p
-        hoSculyBwuetGrecwE9Kv2jAgYOtLi9iyBe3bjwmixhsp53dYLElNFeoer40JkAB
-        tisxLxJbvkMMm/VpNGNedTeOoGy65Njmr+Sx29zA7Dzd9CcgYrDzAgEC
-        -----END DH PARAMETERS-----
-        </dh>
-
-        <connection>
-        remote 178.62.202.50 1194 udp
-        </connection>
-
-        <connection>
-        remote 178.62.202.50 443 tcp-client
-        </connection>
+          client
+          nobind
+          dev tun
+          proto udp
+          remote us-east.privateinternetaccess.com 1197
+          remote germany.privateinternetaccess.com 1197
+          remote nl.privateinternetaccess.com 1197
+          remote fi.privateinternetaccess.com 1197
+          remote us-siliconvalley.privateinternetaccess.com 1197
+          remote france.privateinternetaccess.com 1197
+          remote-random
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          cipher aes-256-cbc
+          auth sha256
+          tls-client
+          remote-cert-tls server
+          auth-user-pass
+          comp-lzo
+          verb 1
+          reneg-sec 0
+          crl-verify /root/.vpn/pia/crl.rsa.4096.pem
+          ca /root/.vpn/pia/ca.rsa.4096.crt
+          disable-occ
+          auth-user-pass /root/.vpn/pia/pia-login.conf
       '';
       up = "echo nameserver $nameserver | ''${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
       down = "''${pkgs.openresolv}/sbin/resolvconf -d $dev";

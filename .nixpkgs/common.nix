@@ -7,9 +7,9 @@ with pkgs; rec {
   haskellPackages = pkgs.haskellPackages;
   lushtags = pkgs.haskell.lib.overrideCabal haskellPackages.lushtags (oldAttrs: {
     src = pkgs.fetchgit {
-      url = https://github.com/jagajaga/lushtags;
-      rev = "8ec95ca0ffad0f0f8b2e228b2d7d79fc2c7e4a7e";
-      sha256 = "1q5lqwrdrkbv18kmpc19y37xwhjqnvzq9cj4v1pc79wir10fcsnw";
+      url = https://github.com/mkasa/lushtags;
+      rev = "ef6410cd66c6729e6f4795222bdc0e406251f27a";
+      sha256 = "094cl57zfqjq7gpv4151zxipb6kd1czwx4nv6x8wsl3n0z4p3jkx";
     };
   });
 
@@ -70,7 +70,7 @@ with pkgs; rec {
                 "hoogle"
                 "idris-vim"
                 "latex-live-preview"
-                "lushtags"
+                /*"lushtags"*/
                 "neco-ghc"
                 "nerdcommenter"
                 "nerdtree"
@@ -178,14 +178,13 @@ with pkgs; rec {
             aspellDicts.en
             aspellDicts.ru
             bc
-            defaultStdenv
             djview4
             evince
             file
             flac
             freetype
             dejavu_fonts
-            gnome.zenity
+            gnome3.zenity
             gnupg
             gparted
             iftop
@@ -235,7 +234,7 @@ with pkgs; rec {
             /*ghc-mod*/
            # hlint
            # hoogle
-            lushtags
+            /*lushtags*/
             /*pandoc*/
             taffybar
             xmonad
@@ -247,7 +246,7 @@ with pkgs; rec {
         ignoreCollisions = true;
         paths = [
             myHs
-            loveMoc
+            /*loveMoc*/
             antigen-hs
         ];
       };
@@ -277,7 +276,7 @@ with pkgs; rec {
               pkgconfig
               python
               python34
-              rustUnstable.rustc
+              rustc
               cargo
               smartmontools
               subversion

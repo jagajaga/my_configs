@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zhistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
 bindkey -e
 
 autoload -U compinit
