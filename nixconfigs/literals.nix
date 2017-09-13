@@ -9,14 +9,8 @@
           nobind
           dev tun
           proto udp
-          remote us-east.privateinternetaccess.com 1197
           remote germany.privateinternetaccess.com 1197
-          remote nl.privateinternetaccess.com 1197
-          remote fi.privateinternetaccess.com 1197
-          remote us-siliconvalley.privateinternetaccess.com 1197
-          remote france.privateinternetaccess.com 1197
           remote-random
-          resolv-retry infinite
           nobind
           persist-key
           persist-tun

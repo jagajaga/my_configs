@@ -172,6 +172,7 @@ in
     mc
     networkmanager
     networkmanagerapplet
+    shared_mime_info
     pmutils
     stdenv
     wget
