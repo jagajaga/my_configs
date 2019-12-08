@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# needs xsel to read from clipboard
+# translate clipboard contents
+# usage: screen-translate.sh [desination language]
+# default transtation is to russian
+# requeries pbpaste to read from clipboard
+# requeries wget, grep
 export PATH=/usr/local/bin:$PATH
 
 query=$(pbpaste)
