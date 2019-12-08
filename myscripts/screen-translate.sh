@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # needs xsel to read from clipboard
+export PATH=/usr/local/bin:$PATH
 
-query=$(xsel)
+query=$(pbpaste)
+if [[ $? -ne 0 ]]; then
+    query="NULL"
+fi
+
 rawurlencode() {
   local string="${1}"
   local strlen=${#string}
@@ -16,6 +21,10 @@ rawurlencode() {
   done
   REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
 }
+
+show-translation-notification() {
+  osascript -e 'tell app "System Events" to display alert "Translation" message "'"$1"'"'
+}
 rawurlencode "$query"
 LANG="ru"
 if [ "$1" == "en" ]
@@ -23,7 +32,17 @@ then
     LANG="$1"
 fi
 trans=$(wget -qO- https://translate.yandex.net/api/v1.5/tr/translate\?key\=trnsl.1.1.20131216T210116Z.376bb5a521f8f30a.41d2cf22821568e6d931091bb5fe6aaaac979c7e\&text\=$REPLY\&lang\=$LANG)
+if [[ $? -ne 0 ]]; then
+    show-translation-notification "Failed to translate clipboard contents."'"'
+fi
 tag="text"
-trans=$(echo $trans | grep -oPm1 "(?<=<text>)[^<]+") 
-notify-send "$query → $trans"
+langfrom=$(echo $trans | ggrep -Poe '(?<=lang=").*?(?=-)')
+echo $langfrom
+trans=$(echo $trans | ggrep -oPm1 "(?<=<text>)[^<]+")
+echo $trans
+
+show-translation-notification "$langfrom → ru\n\n$query\n→\n$trans"
+if [[ $? -ne 0 ]]; then
+    show-translation-notification "Failed to translate clipboard contents."
+fi
 exit
