@@ -27,7 +27,8 @@ rawurlencode() {
 }
 
 show-translation-notification() {
-  osascript -e 'tell app "System Events" to display alert "Translation" message "'"$1"'"'
+  resu=`echo $1 | tr -d '"'`
+  osascript -e 'tell app "System Events" to display alert "Translation" message "'"$resu"'"'
 }
 rawurlencode "$query"
 LANG="ru"
